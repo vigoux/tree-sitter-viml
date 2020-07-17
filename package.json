@@ -1,0 +1,17 @@
+{
+  "name": "tree-sitter-viml",
+  "version": "0.1.0",
+  "description": "A Tree-sitter VimL parser !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Vigouroux",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.8"
+  }
+}
