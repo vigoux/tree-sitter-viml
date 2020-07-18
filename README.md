@@ -9,6 +9,14 @@ Any contribution is greatly appreciated !
 
 TODO:
  - [ ] Literals
+   - [x] Integers
+   - [x] Floats
+ - Expressions
+   - [x] Lists
+     - [x] Creation
+     - [x] Index
+   - [ ] Multiline expressions
+   - [x] Closures
  - [ ] Conditionnals and loops
  - [ ] Try block
  - [ ] Builtin commands
