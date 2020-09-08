@@ -1,14 +1,14 @@
-const PREC = {
-  call: 20,
+PREC = {
+  CALL: 20,
 
   OR: 1, //=> or
   AND: 2, //=> and
-  COMPARE: 3, //=> < <= == ~= >= >
+  COMPARE: 3, //=> < <= == ~= >= > and all
   BIT_OR: 4, //=> |
   BIT_NOT: 5, //=> ~
   BIT_AND: 6, //=> &
   SHIFT: 7, //=> << >>
-  CONCAT: 8, //=> ..
+  CONCAT: 9, //=> .. .
   PLUS: 9, //=> + -
   MULTI: 10, //=> * / // %
   UNARY: 11, //=> not # - ~
@@ -19,6 +19,11 @@ module.exports = grammar({
   name: 'vim',
 
   word: ($) => $.identifier,
+
+  conflicts: ($) => [
+    [$.binary_operation, $.unary_operation, $.field_expression],
+    [$.binary_operation, $.field_expression]
+  ],
 
   rules: {
     script_file: ($) => repeat($._statement),
@@ -132,12 +137,20 @@ module.exports = grammar({
       ),
 
     _expression: ($) =>
-      choice($._variable, $.index_expression, $.binary_expression),
+      choice(
+        $._variable,
+        $.index_expression,
+        $.slice_expression,
+        $.binary_operation,
+        seq('(', $._expression, ')'),
+        $.unary_operation,
+        $.field_expression
+      ),
 
     // Shamelessly stolen from tree-sitter-lua
     match_case: ($) => choice('#', '?'),
 
-    binary_expression: ($) =>
+    binary_operation: ($) =>
       choice(
         ...[
           ['||', PREC.OR],
@@ -151,7 +164,6 @@ module.exports = grammar({
           ['-', PREC.PLUS],
           ['*', PREC.MULTI],
           ['/', PREC.MULTI],
-          ['//', PREC.MULTI],
           ['%', PREC.MULTI],
         ].map(([operator, precedence]) =>
           prec.left(precedence, seq($._expression, operator, $._expression)),
@@ -169,11 +181,15 @@ module.exports = grammar({
         ),
         ...[
           ['..', PREC.CONCAT],
+          ['.', PREC.CONCAT],
           ['^', PREC.POWER],
         ].map(([operator, precedence]) =>
           prec.right(precedence, seq($._expression, operator, $._expression)),
         ),
       ),
+
+    unary_operation: ($) =>
+      prec.left(PREC.UNARY, seq(choice('-', '!', '+'), $._expression)),
 
     string_literal: ($) => choice(/".*"/, /'.*'/),
 
@@ -204,12 +220,35 @@ module.exports = grammar({
 
     index_expression: ($) =>
       prec(
-        PREC.call,
+        PREC.CALL,
         seq(
           field('value', $._expression),
           '[',
           field('index', $._expression),
           ']',
+        ),
+      ),
+
+    slice_expression: ($) =>
+      prec(
+        PREC.CALL,
+        seq(
+          field('value', $._expression),
+          '[',
+          field('start', $._expression),
+          ':',
+          field('stop', $._expression),
+          ']',
+        ),
+      ),
+
+    field_expression: ($) =>
+      prec.left(
+        PREC.CALL,
+        seq(
+          field('value', $._expression),
+          '.',
+          field('field', $._expression),
         ),
       ),
 
