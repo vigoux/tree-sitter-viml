@@ -56,6 +56,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "set_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call_statement"
         },
         {
@@ -207,6 +211,183 @@
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
+        }
+      ]
+    },
+    "option_name": {
+      "type": "PATTERN",
+      "value": "[a-z]+"
+    },
+    "no_option": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_no"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "option_name"
+        }
+      ]
+    },
+    "inv_option": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_inv"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "option_name"
+        }
+      ]
+    },
+    "default_option": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "option_name"
+        },
+        {
+          "type": "STRING",
+          "value": "&"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "vi"
+                },
+                {
+                  "type": "STRING",
+                  "value": "vim"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_set_option": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "all"
+        },
+        {
+          "type": "STRING",
+          "value": "all&"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "option_name"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "option_name"
+            },
+            {
+              "type": "STRING",
+              "value": "?"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "no_option"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inv_option"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "default_option"
+        }
+      ]
+    },
+    "_set_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": "+="
+        },
+        {
+          "type": "STRING",
+          "value": "^="
+        },
+        {
+          "type": "STRING",
+          "value": "-="
+        }
+      ]
+    },
+    "_set_rhs": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_set_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "set_value"
+        }
+      ]
+    },
+    "set_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "set"
+        },
+        {
+          "type": "FIELD",
+          "name": "option",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_set_option"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_set_rhs"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -1614,7 +1795,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_ident"
+          "name": "option_name"
         }
       ]
     },
@@ -1761,7 +1942,20 @@
       "field_expression"
     ]
   ],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_no"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_inv"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "set_value"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

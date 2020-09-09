@@ -22,8 +22,10 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.binary_operation, $.unary_operation, $.field_expression],
-    [$.binary_operation, $.field_expression]
+    [$.binary_operation, $.field_expression],
   ],
+
+  externals: ($) => [$._no, $._inv, $.set_value],
 
   rules: {
     script_file: ($) => repeat($._statement),
@@ -41,7 +43,7 @@ module.exports = grammar({
         $.function_definition,
         $.let_statement,
         $.unlet_statement,
-        // $.set_statement,
+        $.set_statement,
         // $.return_statement,
         // $.while_loop,
         // $.for_loop,
@@ -77,6 +79,37 @@ module.exports = grammar({
         $._let_operator,
         $._expression,
         $._cmd_separator,
+      ),
+
+    option_name: ($) => /[a-z]+/,
+
+    no_option: ($) => seq($._no, $.option_name),
+
+    inv_option: ($) => seq($._inv, $.option_name),
+
+    default_option: ($) =>
+      seq($.option_name, '&', optional(choice('vi', 'vim'))),
+
+    _set_option: ($) =>
+      choice(
+        'all',
+        'all&',
+        $.option_name,
+        seq($.option_name, '?'),
+        $.no_option,
+        $.inv_option,
+        $.default_option,
+      ),
+
+    _set_operator: ($) => choice('=', ':', '+=', '^=', '-='),
+
+    _set_rhs: ($) => seq($._set_operator, $.set_value),
+
+    set_statement: ($) =>
+      seq(
+        'set',
+        field('option', $._set_option),
+        optional(field('value', $._set_rhs)),
       ),
 
     unlet_statement: ($) =>
@@ -144,7 +177,7 @@ module.exports = grammar({
         $.binary_operation,
         seq('(', $._expression, ')'),
         $.unary_operation,
-        $.field_expression
+        $.field_expression,
       ),
 
     // Shamelessly stolen from tree-sitter-lua
@@ -245,16 +278,12 @@ module.exports = grammar({
     field_expression: ($) =>
       prec.left(
         PREC.CALL,
-        seq(
-          field('value', $._expression),
-          '.',
-          field('field', $._expression),
-        ),
+        seq(field('value', $._expression), '.', field('field', $._expression)),
       ),
 
     env_variable: ($) => seq('$', $._ident),
     register: ($) => seq('@', $._ident),
-    option: ($) => seq('&', $._ident),
+    option: ($) => seq('&', $.option_name),
 
     dictionnary_entry: ($) =>
       seq(field('key', $._expression), ':', field('value', $._expression)),

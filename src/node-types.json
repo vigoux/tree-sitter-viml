@@ -315,6 +315,21 @@
     "fields": {}
   },
   {
+    "type": "default_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "option_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "dictionnary",
     "named": true,
     "fields": {},
@@ -852,6 +867,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         }
@@ -1026,6 +1045,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "inv_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "option_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1275,6 +1309,21 @@
     "fields": {}
   },
   {
+    "type": "no_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "option_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "option",
     "named": true,
     "fields": {},
@@ -1283,11 +1332,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "scoped_identifier",
+          "type": "option_name",
           "named": true
         }
       ]
@@ -1380,10 +1425,84 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "set_statement",
+    "named": true,
+    "fields": {
+      "option": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "?",
+            "named": false
+          },
+          {
+            "type": "all",
+            "named": false
+          },
+          {
+            "type": "all&",
+            "named": false
+          },
+          {
+            "type": "default_option",
+            "named": true
+          },
+          {
+            "type": "inv_option",
+            "named": true
+          },
+          {
+            "type": "no_option",
+            "named": true
+          },
+          {
+            "type": "option_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "+=",
+            "named": false
+          },
+          {
+            "type": "-=",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "^=",
+            "named": false
+          },
+          {
+            "type": "set_value",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1914,7 +2033,19 @@
     "named": false
   },
   {
+    "type": "^=",
+    "named": false
+  },
+  {
     "type": "a",
+    "named": false
+  },
+  {
+    "type": "all",
+    "named": false
+  },
+  {
+    "type": "all&",
     "named": false
   },
   {
@@ -1962,12 +2093,24 @@
     "named": false
   },
   {
+    "type": "option_name",
+    "named": true
+  },
+  {
     "type": "return",
     "named": false
   },
   {
     "type": "s",
     "named": false
+  },
+  {
+    "type": "set",
+    "named": false
+  },
+  {
+    "type": "set_value",
+    "named": true
   },
   {
     "type": "t",
@@ -1979,6 +2122,14 @@
   },
   {
     "type": "v",
+    "named": false
+  },
+  {
+    "type": "vi",
+    "named": false
+  },
+  {
+    "type": "vim",
     "named": false
   },
   {
