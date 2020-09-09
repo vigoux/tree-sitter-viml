@@ -25,18 +25,18 @@ module.exports = grammar({
     [$.binary_operation, $.field_expression],
   ],
 
-  externals: ($) => [$._no, $._inv, $.set_value],
+  externals: ($) => [$._no, $._inv],
 
   rules: {
     script_file: ($) => repeat($._statement),
-
-    _cmd_separator: ($) => choice('\n', '|', $.comment),
 
     comment: ($) =>
       seq(
         '"', // I don't want to include that " so that we can easily parse the comment content
         /.*/,
       ),
+
+    _cmd_separator: ($) => choice('\n', '|', $.comment),
 
     _statement: ($) =>
       choice(
@@ -102,6 +102,8 @@ module.exports = grammar({
       ),
 
     _set_operator: ($) => choice('=', ':', '+=', '^=', '-='),
+
+    set_value: ($) => /(\S|\\\s)*/,
 
     _set_rhs: ($) => seq($._set_operator, $.set_value),
 

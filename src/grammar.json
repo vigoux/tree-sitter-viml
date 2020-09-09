@@ -9,6 +9,19 @@
         "name": "_statement"
       }
     },
+    "comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "PATTERN",
+          "value": ".*"
+        }
+      ]
+    },
     "_cmd_separator": {
       "type": "CHOICE",
       "members": [
@@ -23,19 +36,6 @@
         {
           "type": "SYMBOL",
           "name": "comment"
-        }
-      ]
-    },
-    "comment": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "\""
-        },
-        {
-          "type": "PATTERN",
-          "value": ".*"
         }
       ]
     },
@@ -344,6 +344,10 @@
           "value": "-="
         }
       ]
+    },
+    "set_value": {
+      "type": "PATTERN",
+      "value": "(\\S|\\\\\\s)*"
     },
     "_set_rhs": {
       "type": "SEQ",
@@ -1950,10 +1954,6 @@
     {
       "type": "SYMBOL",
       "name": "_inv"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "set_value"
     }
   ],
   "inline": [],

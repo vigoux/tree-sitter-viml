@@ -24,7 +24,7 @@
     "named": true,
     "fields": {
       "left": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -106,7 +106,7 @@
         ]
       },
       "right": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -349,7 +349,7 @@
     "named": true,
     "fields": {
       "key": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -431,7 +431,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -601,7 +601,7 @@
     "named": true,
     "fields": {
       "field": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -683,7 +683,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -882,7 +882,7 @@
     "named": true,
     "fields": {
       "index": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -964,7 +964,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1440,7 +1440,7 @@
     "named": true,
     "fields": {
       "option": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1474,7 +1474,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -1510,7 +1510,7 @@
     "named": true,
     "fields": {
       "start": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1592,7 +1592,7 @@
         ]
       },
       "stop": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1674,7 +1674,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {

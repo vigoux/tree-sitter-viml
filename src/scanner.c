@@ -2,7 +2,7 @@
 #include "stdlib.h"
 #include <tree_sitter/parser.h>
 
-enum TokenType { NO, INV, SET_ARGUMENT };
+enum TokenType { NO, INV };
 
 struct state {
   bool maybe_no;
@@ -21,16 +21,19 @@ void tree_sitter_vim_external_scanner_deserialize(void *payload,
                                                   const char *buffer,
                                                   unsigned length) {}
 
-void skip_whitespace(TSLexer *lexer) {
+static void advance(TSLexer *lexer, bool skip) { lexer->advance(lexer, skip); }
+
+void skip_space_tabs(TSLexer *lexer) {
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
-    lexer->advance(lexer, true);
+    advance(lexer, true);
   }
 }
 
-bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len, enum TokenType token) {
+bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
+                  enum TokenType token) {
   for (unsigned int i = 0; i < preffix_len; i++) {
     if (lexer->lookahead == preffix[i]) {
-      lexer->advance(lexer, false);
+      advance(lexer, false);
     } else {
       return false;
     }
@@ -40,31 +43,20 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len, enum 
   return true;
 }
 
-bool is_whitespace(char c) {
-  return c == ' ' || c == '\n' || c == '\t';
-}
-
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
   (void)payload;
 
-  skip_whitespace(lexer);
+  skip_space_tabs(lexer);
 
-  // options can be inverted by prepending a 'no'
   if (valid_symbols[NO] && lexer->lookahead == 'n') {
+    // options can be inverted by prepending a 'no' or 'inv'
     return check_prefix(lexer, "no", 2, NO);
   } else if (valid_symbols[INV] && lexer->lookahead == 'i') {
     return check_prefix(lexer, "inv", 3, INV);
-  } else if (valid_symbols[SET_ARGUMENT]) {
-    while (!is_whitespace(lexer->lookahead)) {
-      if (lexer->lookahead == '\\') {
-        lexer->advance(lexer, false);
-      }
-      lexer->advance(lexer, false);
-    }
-    lexer->result_symbol = SET_ARGUMENT;
-    return true;
   }
 
   return false;
 }
+
+// vim: tabstop=2

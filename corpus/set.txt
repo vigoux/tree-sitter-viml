@@ -6,7 +6,7 @@ set number
 
 ---
 
-(script_file (set_statement (option_name)))
+(script_file (set_statement option: (option_name)))
 
 =============================
 Set noopt
@@ -16,7 +16,7 @@ set nofoo
 
 ---
 
-(script_file (set_statement (no_option (option_name))))
+(script_file (set_statement option: (no_option (option_name))))
 
 =============================
 Set opt?
@@ -26,7 +26,7 @@ set foo?
 
 ---
 
-(script_file (set_statement (option_name)))
+(script_file (set_statement option: (option_name)))
 
 =============================
 Set invopt
@@ -36,7 +36,7 @@ set invfoo
 
 ---
 
-(script_file (set_statement (inv_option (option_name))))
+(script_file (set_statement option: (inv_option (option_name))))
 
 =============================
 Set default
@@ -49,9 +49,9 @@ set foo&vim
 ---
 
 (script_file
- (set_statement (default_option (option_name)))
- (set_statement (default_option (option_name)))
- (set_statement (default_option (option_name))))
+ (set_statement option: (default_option (option_name)))
+ (set_statement option: (default_option (option_name)))
+ (set_statement option: (default_option (option_name))))
 
 
 =============================
