@@ -1,0 +1,47 @@
+=============================
+Simple command with args
+=============================
+
+test foo
+
+---
+
+(script_file (command (command_name) (arguments (identifier))))
+
+=============================
+Simple command without args
+=============================
+
+test
+
+---
+
+(script_file (command (command_name)))
+
+=============================
+Function definition without body
+=============================
+
+function foo()
+end
+
+---
+
+(script_file
+  (function_definition (function_declaration (identifier) (parameters))))
+
+
+=============================
+Function definition with body
+=============================
+
+function foo()
+	let bar = 31
+end
+
+---
+
+(script_file
+	(function_definition
+		(function_declaration (identifier) (parameters))
+		(body (let_statement (identifier) (integer_literal)))))

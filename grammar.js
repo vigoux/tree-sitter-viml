@@ -44,9 +44,9 @@ module.exports = grammar({
         $.let_statement,
         $.unlet_statement,
         $.set_statement,
-        // $.return_statement,
+        $.return_statement,
         // $.while_loop,
-        // $.for_loop,
+        $.for_loop,
         // $.if_statement,
         // $.execute_statement,
         $.call_statement,
@@ -54,6 +54,20 @@ module.exports = grammar({
         // $.try_statement,
         $.command,
       ),
+
+    return_statement: ($) => seq(
+      'return',
+      $._expression
+    ),
+
+    for_loop: ($) => seq(
+      "for",
+      field("variable", choice($._ident, $.list)),
+      "in",
+      field("iter", $._expression),
+      alias(repeat($._statement), $.body),
+      end("for")
+    ),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),
 
@@ -136,7 +150,7 @@ module.exports = grammar({
         $.function_declaration,
         $._cmd_separator,
 
-        repeat($._statement),
+        alias(repeat($._statement), $.body),
 
         end('function'),
         $._cmd_separator,
