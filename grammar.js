@@ -70,21 +70,21 @@ module.exports = grammar({
     if_statement: ($) => seq(
       "if",
       field("condition", $._expression),
-      repeat(field("if_block", $._statement)),
-      repeat(
-        seq(
-          "elseif",
-          field("condition", $._expression),
-          repeat(field("elseif_block", $._statement))
-        )
-      ),
-      optional(
-        seq(
-          "else",
-          repeat(field("else_block", $._statement))
-        )
-      ),
+      alias(repeat($._statement), $.body),
+      repeat($.elseif_statement),
+      optional($.else_statement),
       end("if")
+    ),
+
+    elseif_statement: ($) => seq(
+      "elseif",
+      field("condition", $._expression),
+      alias(repeat($._statement), $.body)
+    ),
+
+    else_statement: ($) => seq(
+      "else",
+      alias(repeat($._statement), $.body)
     ),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),

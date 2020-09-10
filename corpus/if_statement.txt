@@ -3,67 +3,71 @@
 Single if statement
 =============================
 
-if 1
-  echo "if"
+if foo
+  bar
 end
 
 ---
 
 (script_file
-  (if_statement condition: (integer_literal) if_block: (echo_statement (string_literal))))
+  (if_statement condition: (identifier)
+    (body (command (command_name)))))
 
 =============================
 If - else statement
 =============================
 
-if 2 > 3
-  echo "if"
+if foo
+  bar
 else
-  echo "else"
+  baz
 end
 
 ---
 
 (script_file
-  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
-    if_block: (echo_statement (string_literal))
-    else_block: (echo_statement (string_literal))))
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (else_statement
+    (body (command (command_name))))))
 
 =============================
 If - elseif - else statement
 =============================
 
-if 2 > 3
-  echo "if"
-elseif "string"
-  echo "elseif"
+if foo
+  bar
+elseif baz
+  qux
 else
-  echo "else"
+  quux
 end
 
 ---
 
 (script_file
-  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
-    if_block: (echo_statement (string_literal))
-    condition: (string_literal)
-    elseif_block: (echo_statement (string_literal))
-    else_block: (echo_statement (string_literal))))
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (elseif_statement condition: (identifier)
+    (body (command (command_name))))
+  (else_statement
+    (body (command (command_name))))))
 
 =============================
 If - elseif - else statement
 =============================
 
-if 2 > 3
-  echo "if"
-elseif "string"
-  echo "elseif"
+if foo
+  bar
+elseif bar
+  baz
+  qux
 end
 
 ---
 
 (script_file
-  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
-    if_block: (echo_statement (string_literal))
-    condition: (string_literal)
-    elseif_block: (echo_statement (string_literal))))
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (elseif_statement condition: (identifier)
+    (body (command (command_name)) (command (command_name))))))
