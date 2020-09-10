@@ -1,0 +1,69 @@
+
+=============================
+Single if statement
+=============================
+
+if 1
+  echo "if"
+end
+
+---
+
+(script_file
+  (if_statement condition: (integer_literal) if_block: (echo_statement (string_literal))))
+
+=============================
+If - else statement
+=============================
+
+if 2 > 3
+  echo "if"
+else
+  echo "else"
+end
+
+---
+
+(script_file
+  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
+    if_block: (echo_statement (string_literal))
+    else_block: (echo_statement (string_literal))))
+
+=============================
+If - elseif - else statement
+=============================
+
+if 2 > 3
+  echo "if"
+elseif "string"
+  echo "elseif"
+else
+  echo "else"
+end
+
+---
+
+(script_file
+  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
+    if_block: (echo_statement (string_literal))
+    condition: (string_literal)
+    elseif_block: (echo_statement (string_literal))
+    else_block: (echo_statement (string_literal))))
+
+=============================
+If - elseif - else statement
+=============================
+
+if 2 > 3
+  echo "if"
+elseif "string"
+  echo "elseif"
+end
+
+---
+
+(script_file
+  (if_statement condition: (binary_operation left: (integer_literal) right: (integer_literal))
+    if_block: (echo_statement (string_literal))
+    condition: (string_literal)
+    elseif_block: (echo_statement (string_literal))))
