@@ -22,23 +22,6 @@
         }
       ]
     },
-    "_cmd_separator": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
-          "type": "STRING",
-          "value": "|"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "comment"
-        }
-      ]
-    },
     "_statement": {
       "type": "CHOICE",
       "members": [
@@ -151,6 +134,14 @@
             {
               "type": "STRING",
               "value": "end"
+            },
+            {
+              "type": "STRING",
+              "value": "endf"
+            },
+            {
+              "type": "STRING",
+              "value": "endfo"
             },
             {
               "type": "STRING",
@@ -634,6 +625,34 @@
             {
               "type": "STRING",
               "value": "end"
+            },
+            {
+              "type": "STRING",
+              "value": "endf"
+            },
+            {
+              "type": "STRING",
+              "value": "endfu"
+            },
+            {
+              "type": "STRING",
+              "value": "endfun"
+            },
+            {
+              "type": "STRING",
+              "value": "endfunc"
+            },
+            {
+              "type": "STRING",
+              "value": "endfunct"
+            },
+            {
+              "type": "STRING",
+              "value": "endfuncti"
+            },
+            {
+              "type": "STRING",
+              "value": "endfunctio"
             },
             {
               "type": "STRING",
@@ -2007,8 +2026,20 @@
   },
   "extras": [
     {
+      "type": "SYMBOL",
+      "name": "_cmd_separator"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_line_continuation"
+    },
+    {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[\\t ]"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [
@@ -2030,6 +2061,14 @@
     {
       "type": "SYMBOL",
       "name": "_inv"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cmd_separator"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_line_continuation"
     }
   ],
   "inline": [],

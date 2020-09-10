@@ -1,12 +1,9 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include <tree_sitter/parser.h>
+#include <wctype.h>
 
-enum TokenType { NO, INV };
-
-struct state {
-  bool maybe_no;
-};
+enum TokenType { NO, INV, CMD_SEPARATOR, LINE_CONTINUATION };
 
 void *tree_sitter_vim_external_scanner_create() { return NULL; }
 
@@ -54,6 +51,24 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return check_prefix(lexer, "no", 2, NO);
   } else if (valid_symbols[INV] && lexer->lookahead == 'i') {
     return check_prefix(lexer, "inv", 3, INV);
+  } else if (valid_symbols[CMD_SEPARATOR] && valid_symbols[LINE_CONTINUATION]) {
+    if (lexer->lookahead == '\n') {
+      advance(lexer, false);
+      skip_space_tabs(lexer);
+
+      if (lexer->lookahead == '\\') {
+        advance(lexer, false);
+        lexer->result_symbol = LINE_CONTINUATION;
+        return true;
+      } else {
+        lexer->result_symbol = CMD_SEPARATOR;
+        return true;
+      }
+    } else if (lexer->lookahead == '|') {
+      advance(lexer, false);
+      lexer->result_symbol = CMD_SEPARATOR;
+      return true;
+    }
   }
 
   return false;

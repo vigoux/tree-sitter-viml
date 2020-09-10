@@ -319,13 +319,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
         {
           "type": "function_call",
           "named": true
@@ -348,18 +344,9 @@
         {
           "type": "command_name",
           "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "comment",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "default_option",
@@ -569,10 +556,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
         {
           "type": "dictionnary",
           "named": true
@@ -1006,10 +989,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "function_declaration",
           "named": true
         }
@@ -1293,10 +1272,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "dictionnary",
           "named": true
         },
@@ -1516,13 +1491,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
         {
           "type": "dictionnary",
           "named": true
@@ -2064,10 +2035,6 @@
           "named": true
         },
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -2077,10 +2044,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "\n",
-    "named": false
   },
   {
     "type": "!",
@@ -2279,7 +2242,39 @@
     "named": false
   },
   {
+    "type": "endf",
+    "named": false
+  },
+  {
+    "type": "endfo",
+    "named": false
+  },
+  {
     "type": "endfor",
+    "named": false
+  },
+  {
+    "type": "endfu",
+    "named": false
+  },
+  {
+    "type": "endfun",
+    "named": false
+  },
+  {
+    "type": "endfunc",
+    "named": false
+  },
+  {
+    "type": "endfunct",
+    "named": false
+  },
+  {
+    "type": "endfuncti",
+    "named": false
+  },
+  {
+    "type": "endfunctio",
     "named": false
   },
   {

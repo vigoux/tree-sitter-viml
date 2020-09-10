@@ -19,29 +19,23 @@ test
 (script_file (command (command_name)))
 
 =============================
-Function definition without body
+Simple command multiline
 =============================
 
-function foo()
-end
+test foo
+	\ foo
 
 ---
 
 (script_file
-  (function_definition (function_declaration (identifier) (parameters))))
-
+	(command (command_name) (arguments (identifier) (identifier))))
 
 =============================
-Function definition with body
+Multiple commands pipe
 =============================
 
-function foo()
-	let bar = 31
-end
+test | test
 
 ---
 
-(script_file
-	(function_definition
-		(function_declaration (identifier) (parameters))
-		(body (let_statement (identifier) (integer_literal)))))
+(script_file (command (command_name)) (command (command_name)))

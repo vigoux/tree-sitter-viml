@@ -25,7 +25,9 @@ module.exports = grammar({
     [$.binary_operation, $.field_expression],
   ],
 
-  externals: ($) => [$._no, $._inv],
+  externals: ($) => [$._no, $._inv, $._cmd_separator, $._line_continuation],
+
+  extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
 
   rules: {
     script_file: ($) => repeat($._statement),
@@ -35,8 +37,6 @@ module.exports = grammar({
         '"', // I don't want to include that " so that we can easily parse the comment content
         /.*/,
       ),
-
-    _cmd_separator: ($) => choice('\n', '|', $.comment),
 
     _statement: ($) =>
       choice(
@@ -55,19 +55,17 @@ module.exports = grammar({
         $.command,
       ),
 
-    return_statement: ($) => seq(
-      'return',
-      $._expression
-    ),
+    return_statement: ($) => seq('return', $._expression),
 
-    for_loop: ($) => seq(
-      "for",
-      field("variable", choice($._ident, $.list)),
-      "in",
-      field("iter", $._expression),
-      alias(repeat($._statement), $.body),
-      end("for")
-    ),
+    for_loop: ($) =>
+      seq(
+        'for',
+        field('variable', choice($._ident, $.list)),
+        'in',
+        field('iter', $._expression),
+        alias(repeat($._statement), $.body),
+        end('for'),
+      ),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),
 
@@ -317,7 +315,18 @@ function maybe_bang($, cmd_name) {
 }
 
 function end(cmd_name) {
-  return choice('end', 'end' + cmd_name);
+  // choice('end', 'endf', 'endfu', ..)
+  var list = [];
+  var current_preffix = 'end';
+
+  list.push(current_preffix);
+
+  for (const c of cmd_name) {
+    current_preffix += c;
+    list.push(current_preffix);
+  }
+
+  return choice(...list);
 }
 
 function commaSep(rule) {
