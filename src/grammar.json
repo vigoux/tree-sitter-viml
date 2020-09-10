@@ -47,6 +47,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "while_loop"
+        },
+        {
+          "type": "SYMBOL",
           "name": "for_loop"
         },
         {
@@ -150,6 +154,64 @@
             {
               "type": "STRING",
               "value": "endfor"
+            }
+          ]
+        }
+      ]
+    },
+    "while_loop": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "while"
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_statement"
+            }
+          },
+          "named": true,
+          "value": "body"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "end"
+            },
+            {
+              "type": "STRING",
+              "value": "endw"
+            },
+            {
+              "type": "STRING",
+              "value": "endwh"
+            },
+            {
+              "type": "STRING",
+              "value": "endwhi"
+            },
+            {
+              "type": "STRING",
+              "value": "endwhil"
+            },
+            {
+              "type": "STRING",
+              "value": "endwhile"
             }
           ]
         }

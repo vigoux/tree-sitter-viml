@@ -1,0 +1,28 @@
+
+
+=============================
+While loop without a body
+=============================
+
+while foo
+end
+
+---
+
+(script_file
+  (while_loop condition: (identifier)))
+
+=============================
+While loop with a body
+=============================
+
+while foo
+  bar
+  baz
+end
+
+---
+
+(script_file
+  (while_loop condition: (identifier)
+    (body (command (command_name)) (command (command_name)))))

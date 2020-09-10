@@ -40,7 +40,7 @@ module.exports = grammar({
         $.unlet_statement,
         $.set_statement,
         $.return_statement,
-        // $.while_loop,
+        $.while_loop,
         $.for_loop,
         $.if_statement,
         // $.execute_statement,
@@ -62,24 +62,32 @@ module.exports = grammar({
         end('for'),
       ),
 
-    if_statement: ($) =>
-      seq(
-        'if',
-        field('condition', $._expression),
-        alias(repeat($._statement), $.body),
-        repeat($.elseif_statement),
-        optional($.else_statement),
-        end('if'),
-      ),
+    while_loop: ($) => seq(
+      "while",
+      field("condition", $._expression),
+      alias(repeat($._statement), $.body),
+      end("while")
+    ),
 
-    elseif_statement: ($) =>
-      seq(
-        'elseif',
-        field('condition', $._expression),
-        alias(repeat($._statement), $.body),
-      ),
+    if_statement: ($) => seq(
+      "if",
+      field("condition", $._expression),
+      alias(repeat($._statement), $.body),
+      repeat($.elseif_statement),
+      optional($.else_statement),
+      end("if")
+    ),
 
-    else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
+    elseif_statement: ($) => seq(
+      "elseif",
+      field("condition", $._expression),
+      alias(repeat($._statement), $.body)
+    ),
+
+    else_statement: ($) => seq(
+      "else",
+      alias(repeat($._statement), $.body)
+    ),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),
 
