@@ -212,17 +212,21 @@ module.exports = grammar({
           ['*', PREC.MULTI],
           ['/', PREC.MULTI],
           ['%', PREC.MULTI],
+          ['is', PREC.COMPARE],
+          ['isnot', PREC.COMPARE],
         ].map(([operator, precedence]) =>
-          prec.left(precedence, seq($._expression, operator, $._expression)),
+          prec.left(
+            precedence,
+            bin_left_right($._expression, operator, $._expression),
+          ),
         ),
         ...['==', '!=', '>', '>=', '<', '<=', '=~', '!~'].map((operator) =>
           prec.left(
             PREC.COMPARE,
-            seq(
-              field('left', $._expression),
-              operator,
-              optional($.match_case),
-              field('right', $._expression),
+            bin_left_right(
+              $._expression,
+              seq(operator, optional($.match_case)),
+              $._expression,
             ),
           ),
         ),
@@ -231,7 +235,10 @@ module.exports = grammar({
           ['.', PREC.CONCAT],
           ['^', PREC.POWER],
         ].map(([operator, precedence]) =>
-          prec.right(precedence, seq($._expression, operator, $._expression)),
+          prec.right(
+            precedence,
+            bin_left_right($._expression, operator, $._expression),
+          ),
         ),
       ),
 
@@ -339,4 +346,8 @@ function commaSep1(rule) {
 
 function sep1(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)));
+}
+
+function bin_left_right(left, operator, right) {
+  return seq(field('left', left), operator, field('right', right));
 }
