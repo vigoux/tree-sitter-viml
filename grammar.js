@@ -1,18 +1,13 @@
 PREC = {
-  CALL: 20,
-
-  OR: 1, //=> or
-  AND: 2, //=> and
-  COMPARE: 3, //=> < <= == ~= >= > and all
-  BIT_OR: 4, //=> |
-  BIT_NOT: 5, //=> ~
-  BIT_AND: 6, //=> &
-  SHIFT: 7, //=> << >>
-  CONCAT: 9, //=> .. .
-  PLUS: 9, //=> + -
-  MULTI: 10, //=> * / // %
-  UNARY: 11, //=> not # - ~
-  POWER: 12, //=> ^
+  TERNARY: 1, //=> expr ? expr : expr
+  OR: 2, //=> or
+  AND: 3, //=> and
+  COMPARE: 4, //=> < <= == ~= >= > and all
+  PLUS: 5, //=> + -
+  CONCAT: 5, //=> .. .
+  MULTI: 6, //=> * / %
+  UNARY: 7, //=> ! - +
+  CALL: 8, //expr[n] expr[n:m] expr.name expr(...)
 };
 
 module.exports = grammar({
@@ -67,25 +62,24 @@ module.exports = grammar({
         end('for'),
       ),
 
-    if_statement: ($) => seq(
-      "if",
-      field("condition", $._expression),
-      alias(repeat($._statement), $.body),
-      repeat($.elseif_statement),
-      optional($.else_statement),
-      end("if")
-    ),
+    if_statement: ($) =>
+      seq(
+        'if',
+        field('condition', $._expression),
+        alias(repeat($._statement), $.body),
+        repeat($.elseif_statement),
+        optional($.else_statement),
+        end('if'),
+      ),
 
-    elseif_statement: ($) => seq(
-      "elseif",
-      field("condition", $._expression),
-      alias(repeat($._statement), $.body)
-    ),
+    elseif_statement: ($) =>
+      seq(
+        'elseif',
+        field('condition', $._expression),
+        alias(repeat($._statement), $.body),
+      ),
 
-    else_statement: ($) => seq(
-      "else",
-      alias(repeat($._statement), $.body)
-    ),
+    else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),
 
@@ -189,29 +183,47 @@ module.exports = grammar({
 
     // :h variable
     _variable: ($) =>
-      choice(
-        $._ident,
-        $.string_literal,
-        $.float_literal,
-        $.integer_literal,
-        $.list,
-        $.function_call,
-        $.env_variable,
-        $.register,
-        $.option,
-        $.lambda_expression,
-        $.dictionnary,
+      prec.left(
+        0,
+        choice(
+          $._ident,
+          $.string_literal,
+          $.float_literal,
+          $.integer_literal,
+          $.list,
+          $.function_call,
+          $.env_variable,
+          $.register,
+          $.option,
+          $.lambda_expression,
+          $.dictionnary,
+        ),
       ),
 
+    //:h expression-syntax
     _expression: ($) =>
       choice(
         $._variable,
+        $.ternary_expression,
         $.index_expression,
         $.slice_expression,
         $.binary_operation,
         seq('(', $._expression, ')'),
         $.unary_operation,
         $.field_expression,
+        $.call_expression,
+      ),
+
+    ternary_expression: ($) =>
+      prec.left(
+        PREC.TERNARY,
+        seq(
+          field('condition', $._expression),
+          '?',
+          field('left', $._expression),
+          ':',
+          field('right', $._expression),
+        ),
       ),
 
     // Shamelessly stolen from tree-sitter-lua
@@ -222,16 +234,13 @@ module.exports = grammar({
         ...[
           ['||', PREC.OR],
           ['&&', PREC.AND],
-          ['|', PREC.BIT_OR],
-          ['~', PREC.BIT_NOT],
-          ['&', PREC.BIT_AND],
-          ['<<', PREC.SHIFT],
-          ['>>', PREC.SHIFT],
           ['+', PREC.PLUS],
           ['-', PREC.PLUS],
           ['*', PREC.MULTI],
           ['/', PREC.MULTI],
           ['%', PREC.MULTI],
+          ['..', PREC.CONCAT],
+          ['.', PREC.CONCAT],
           ['is', PREC.COMPARE],
           ['isnot', PREC.COMPARE],
         ].map(([operator, precedence]) =>
@@ -248,16 +257,6 @@ module.exports = grammar({
               seq(operator, optional($.match_case)),
               $._expression,
             ),
-          ),
-        ),
-        ...[
-          ['..', PREC.CONCAT],
-          ['.', PREC.CONCAT],
-          ['^', PREC.POWER],
-        ].map(([operator, precedence]) =>
-          prec.right(
-            precedence,
-            bin_left_right($._expression, operator, $._expression),
           ),
         ),
       ),
@@ -320,6 +319,17 @@ module.exports = grammar({
       prec.left(
         PREC.CALL,
         seq(field('value', $._expression), '.', field('field', $._expression)),
+      ),
+
+    call_expression: ($) =>
+      prec(
+        PREC.CALL,
+        seq(
+          field('function', $._expression),
+          '(',
+          alias(commaSep($._expression), $.arguments),
+          ')',
+        ),
       ),
 
     env_variable: ($) => seq('$', $._ident),
