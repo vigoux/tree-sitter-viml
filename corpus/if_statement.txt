@@ -1,0 +1,73 @@
+
+=============================
+Single if statement
+=============================
+
+if foo
+  bar
+end
+
+---
+
+(script_file
+  (if_statement condition: (identifier)
+    (body (command (command_name)))))
+
+=============================
+If - else statement
+=============================
+
+if foo
+  bar
+else
+  baz
+end
+
+---
+
+(script_file
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (else_statement
+    (body (command (command_name))))))
+
+=============================
+If - elseif - else statement
+=============================
+
+if foo
+  bar
+elseif baz
+  qux
+else
+  quux
+end
+
+---
+
+(script_file
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (elseif_statement condition: (identifier)
+    (body (command (command_name))))
+  (else_statement
+    (body (command (command_name))))))
+
+=============================
+If - elseif - else statement
+=============================
+
+if foo
+  bar
+elseif bar
+  baz
+  qux
+end
+
+---
+
+(script_file
+  (if_statement condition: (identifier)
+    (body (command (command_name)))
+  (elseif_statement condition: (identifier)
+    (body (command (command_name)) (command (command_name))))))
