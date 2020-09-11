@@ -8,16 +8,19 @@ better as we go.
 Any contribution is greatly appreciated !
 
 TODO:
- - [ ] Literals
+ - [x] Literals
    - [x] Integers
    - [x] Floats
  - Expressions
    - [x] Lists
      - [x] Creation
      - [x] Index
-   - [ ] Multiline expressions
+   - [x] Multiline expressions
    - [x] Closures
- - [ ] Conditionnals and loops
+ - [x] Conditionnals and loops
+   - [x] if
+   - [x] for
+   - [x] while
  - [ ] Try block
  - [ ] Builtin commands
  - [ ] Tests and example queries
