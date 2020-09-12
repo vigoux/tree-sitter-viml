@@ -332,6 +332,10 @@
           "named": true
         },
         {
+          "type": "try_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         },
@@ -458,6 +462,25 @@
       "types": [
         {
           "type": "function_call",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "catch_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "pattern",
           "named": true
         }
       ]
@@ -1081,6 +1104,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "finally_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2063,6 +2101,10 @@
           "named": true
         },
         {
+          "type": "try_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         },
@@ -2701,6 +2743,29 @@
     }
   },
   {
+    "type": "try_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "catch_statement",
+          "named": true
+        },
+        {
+          "type": "finally_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unary_operation",
     "named": true,
     "fields": {},
@@ -3089,6 +3154,10 @@
     "named": false
   },
   {
+    "type": "catch",
+    "named": false
+  },
+  {
     "type": "command_name",
     "named": true
   },
@@ -3157,6 +3226,18 @@
     "named": false
   },
   {
+    "type": "endt",
+    "named": false
+  },
+  {
+    "type": "endtr",
+    "named": false
+  },
+  {
+    "type": "endtry",
+    "named": false
+  },
+  {
     "type": "endw",
     "named": false
   },
@@ -3174,6 +3255,10 @@
   },
   {
     "type": "endwhile",
+    "named": false
+  },
+  {
+    "type": "finally",
     "named": false
   },
   {
@@ -3221,6 +3306,10 @@
     "named": true
   },
   {
+    "type": "pattern",
+    "named": true
+  },
+  {
     "type": "return",
     "named": false
   },
@@ -3238,6 +3327,10 @@
   },
   {
     "type": "t",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {
