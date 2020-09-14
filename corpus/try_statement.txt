@@ -1,0 +1,78 @@
+
+
+=============================
+Try without catch
+=============================
+
+try
+  foo
+end
+
+---
+
+(script_file 
+  (try_statement 
+    (body (command (command_name))))) 
+
+
+=============================
+Try with catch 
+=============================
+
+try
+  foo
+catch /bar/
+  baz
+end
+
+---
+
+(script_file 
+  (try_statement 
+    (body (command (command_name))) 
+  (catch_statement (pattern) 
+    (body (command (command_name))))))
+
+=============================
+Try with finally
+=============================
+
+try
+  foo
+finally
+  bar
+end
+
+---
+
+(script_file 
+  (try_statement 
+    (body (command (command_name))) 
+  (finally_statement 
+    (body (command (command_name))))))
+
+=============================
+Try with catch and finally
+=============================
+
+try
+  foo
+catch /bar/
+  baz
+catch /qux/
+  quux
+finally
+  quuz
+end
+
+---
+
+(script_file 
+  (try_statement 
+    (body (command (command_name))) 
+  (catch_statement (pattern) 
+    (body (command (command_name)))) 
+  (catch_statement (pattern) 
+    (body (command (command_name)))) 
+  (finally_statement 
+    (body (command (command_name))))))

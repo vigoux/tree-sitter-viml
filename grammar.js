@@ -46,7 +46,7 @@ module.exports = grammar({
         // $.execute_statement,
         $.call_statement,
         $.echo_statement,
-        // $.try_statement,
+        $.try_statement,
         $.command,
       ),
 
@@ -86,6 +86,27 @@ module.exports = grammar({
 
     else_statement: ($) => seq(
       "else",
+      alias(repeat($._statement), $.body)
+    ),
+
+    pattern: ($) => /\/.*\//,
+
+    try_statement: ($) => seq(
+      "try",
+      alias(repeat($._statement), $.body),
+      repeat($.catch_statement),
+      optional($.finally_statement),
+      end("try")
+    ),
+
+    catch_statement: ($) => seq(
+      "catch",
+      optional($.pattern),
+      alias(repeat($._statement), $.body)
+    ),
+
+    finally_statement: ($) => seq(
+      "finally",
       alias(repeat($._statement), $.body)
     ),
 
