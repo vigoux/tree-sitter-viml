@@ -21,6 +21,6 @@ TODO:
    - [x] if
    - [x] for
    - [x] while
- - [ ] Try block
+ - [x] Try block
  - [ ] Builtin commands
  - [ ] Tests and example queries
