@@ -1,0 +1,49 @@
+=============================
+Simple normal
+=============================
+normal abc
+
+---
+
+(script_file (normal_statement))
+
+=============================
+Normal with spaces
+=============================
+
+normal abc defg
+
+---
+
+(script_file (normal_statement))
+
+=============================
+Normal with pipe
+=============================
+
+normal abc|def
+
+---
+
+(script_file (normal_statement))
+
+=============================
+Normal backslash
+=============================
+
+normal abc\
+
+---
+
+(script_file (normal_statement))
+
+=============================
+Multiple normals
+=============================
+
+normal abc
+normal def
+
+---
+
+(script_file (normal_statement) (normal_statement))

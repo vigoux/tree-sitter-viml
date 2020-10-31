@@ -40,6 +40,7 @@ module.exports = grammar({
         $.unlet_statement,
         $.set_statement,
         $.return_statement,
+        $.normal_statement,
         $.while_loop,
         $.for_loop,
         $.if_statement,
@@ -51,6 +52,8 @@ module.exports = grammar({
       ),
 
     return_statement: ($) => seq('return', $._expression),
+
+    normal_statement: ($) => seq('normal', /.*/),
 
     for_loop: ($) =>
       seq(

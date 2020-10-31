@@ -47,6 +47,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "normal_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "while_loop"
         },
         {
@@ -89,6 +93,19 @@
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
+        }
+      ]
+    },
+    "normal_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "normal"
+        },
+        {
+          "type": "PATTERN",
+          "value": ".*"
         }
       ]
     },

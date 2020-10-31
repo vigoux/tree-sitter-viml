@@ -324,6 +324,10 @@
           "named": true
         },
         {
+          "type": "normal_statement",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         },
@@ -1925,6 +1929,11 @@
     }
   },
   {
+    "type": "normal_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "option",
     "named": true,
     "fields": {},
@@ -2090,6 +2099,10 @@
         },
         {
           "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "normal_statement",
           "named": true
         },
         {
@@ -3299,6 +3312,10 @@
   },
   {
     "type": "let",
+    "named": false
+  },
+  {
+    "type": "normal",
     "named": false
   },
   {
