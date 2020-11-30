@@ -1,3 +1,5 @@
+/// <reference types="tree-sitter-cli/dsl" />
+
 PREC = {
   TERNARY: 1, //=> expr ? expr : expr
   OR: 2, //=> or
@@ -20,7 +22,14 @@ module.exports = grammar({
     [$.binary_operation, $.field_expression],
   ],
 
-  externals: ($) => [$._no, $._inv, $._cmd_separator, $._line_continuation],
+  externals: ($) => [
+    $._no,
+    $._inv,
+    $._cmd_separator,
+    $._line_continuation,
+    $._embedded_script_start,
+    $._embedded_script_end,
+  ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
 
@@ -45,6 +54,7 @@ module.exports = grammar({
         $.for_loop,
         $.if_statement,
         // $.execute_statement,
+        $.lua_statement,
         $.call_statement,
         $.echo_statement,
         $.try_statement,
@@ -54,6 +64,19 @@ module.exports = grammar({
     return_statement: ($) => seq('return', $._expression),
 
     normal_statement: ($) => seq('normal', /.*/),
+
+    lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
+
+    chunk: ($) => seq(/[^\n]*/, $._cmd_separator),
+
+    script: ($) =>
+      seq(
+        $._embedded_script_start,
+        $._cmd_separator,
+        repeat(alias($.chunk, $.line)),
+        $._embedded_script_end,
+        $._cmd_separator,
+      ),
 
     for_loop: ($) =>
       seq(
@@ -65,53 +88,49 @@ module.exports = grammar({
         end('for'),
       ),
 
-    while_loop: ($) => seq(
-      "while",
-      field("condition", $._expression),
-      alias(repeat($._statement), $.body),
-      end("while")
-    ),
+    while_loop: ($) =>
+      seq(
+        'while',
+        field('condition', $._expression),
+        alias(repeat($._statement), $.body),
+        end('while'),
+      ),
 
-    if_statement: ($) => seq(
-      "if",
-      field("condition", $._expression),
-      alias(repeat($._statement), $.body),
-      repeat($.elseif_statement),
-      optional($.else_statement),
-      end("if")
-    ),
+    if_statement: ($) =>
+      seq(
+        'if',
+        field('condition', $._expression),
+        alias(repeat($._statement), $.body),
+        repeat($.elseif_statement),
+        optional($.else_statement),
+        end('if'),
+      ),
 
-    elseif_statement: ($) => seq(
-      "elseif",
-      field("condition", $._expression),
-      alias(repeat($._statement), $.body)
-    ),
+    elseif_statement: ($) =>
+      seq(
+        'elseif',
+        field('condition', $._expression),
+        alias(repeat($._statement), $.body),
+      ),
 
-    else_statement: ($) => seq(
-      "else",
-      alias(repeat($._statement), $.body)
-    ),
+    else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
 
     pattern: ($) => /\/.*\//,
 
-    try_statement: ($) => seq(
-      "try",
-      alias(repeat($._statement), $.body),
-      repeat($.catch_statement),
-      optional($.finally_statement),
-      end("try")
-    ),
+    try_statement: ($) =>
+      seq(
+        'try',
+        alias(repeat($._statement), $.body),
+        repeat($.catch_statement),
+        optional($.finally_statement),
+        end('try'),
+      ),
 
-    catch_statement: ($) => seq(
-      "catch",
-      optional($.pattern),
-      alias(repeat($._statement), $.body)
-    ),
+    catch_statement: ($) =>
+      seq('catch', optional($.pattern), alias(repeat($._statement), $.body)),
 
-    finally_statement: ($) => seq(
-      "finally",
-      alias(repeat($._statement), $.body)
-    ),
+    finally_statement: ($) =>
+      seq('finally', alias(repeat($._statement), $.body)),
 
     scoped_identifier: ($) => seq($.scope, ':', $.identifier),
 

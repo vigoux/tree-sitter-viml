@@ -324,6 +324,10 @@
           "named": true
         },
         {
+          "type": "lua_statement",
+          "named": true
+        },
+        {
           "type": "normal_statement",
           "named": true
         },
@@ -491,6 +495,11 @@
     }
   },
   {
+    "type": "chunk",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "command",
     "named": true,
     "fields": {},
@@ -508,6 +517,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "default_option",
@@ -1822,6 +1836,11 @@
     }
   },
   {
+    "type": "line",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "list",
     "named": true,
     "fields": {},
@@ -1903,6 +1922,25 @@
         },
         {
           "type": "unary_operation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lua_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "chunk",
+          "named": true
+        },
+        {
+          "type": "script",
           "named": true
         }
       ]
@@ -2066,6 +2104,21 @@
     }
   },
   {
+    "type": "script",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "script_file",
     "named": true,
     "fields": {},
@@ -2099,6 +2152,10 @@
         },
         {
           "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "lua_statement",
           "named": true
         },
         {
@@ -3312,6 +3369,10 @@
   },
   {
     "type": "let",
+    "named": false
+  },
+  {
+    "type": "lua",
     "named": false
   },
   {

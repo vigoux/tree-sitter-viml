@@ -1,27 +1,76 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include <tree_sitter/parser.h>
+#include <string.h>
 #include <wctype.h>
+#include <assert.h>
 
-enum TokenType { NO, INV, CMD_SEPARATOR, LINE_CONTINUATION };
+#define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
 
-void *tree_sitter_vim_external_scanner_create() { return NULL; }
+typedef struct {
+  char *script_marker;
+  uint8_t marker_len;
+} Scanner;
 
-void tree_sitter_vim_external_scanner_destroy(void *payload) {}
+enum TokenType {
+  NO,
+  INV,
+  CMD_SEPARATOR,
+  LINE_CONTINUATION,
+  EMBEDDED_SCRIPT_START,
+  EMDEDDED_SCRIPT_END
+};
+
+void *tree_sitter_vim_external_scanner_create() {
+  Scanner *s = (Scanner *)malloc(sizeof(Scanner));
+  s->marker_len = 0;
+  s->script_marker = NULL;
+
+  return (void *)s;
+}
+
+void tree_sitter_vim_external_scanner_destroy(void *payload) {
+  Scanner *s = (Scanner *)payload;
+
+  if (s->marker_len > 0) {
+    free(s->script_marker);
+  }
+
+  free(s);
+}
 
 unsigned int tree_sitter_vim_external_scanner_serialize(void *payload,
                                                         char *buffer) {
-  return 0;
+  Scanner *s = (Scanner *)payload;
+  buffer[0] = s->marker_len;
+
+  strncpy(buffer + 1, s->script_marker, s->marker_len);
+
+  return s->marker_len + 1;
 }
 
 void tree_sitter_vim_external_scanner_deserialize(void *payload,
                                                   const char *buffer,
-                                                  unsigned length) {}
+                                                  unsigned length) {
+  if (length == 0) {
+    return;
+  }
+
+  Scanner *s = (Scanner *)payload;
+  s->marker_len = buffer[0];
+
+  assert(s->marker_len + 1 == length);
+
+  if (s->marker_len > 0) {
+    s->script_marker = (char *)malloc(s->marker_len);
+    strncpy(s->script_marker, buffer + 1, s->marker_len);
+  }
+}
 
 static void advance(TSLexer *lexer, bool skip) { lexer->advance(lexer, skip); }
 
 void skip_space_tabs(TSLexer *lexer) {
-  while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+  while (IS_SPACE_TABS(lexer->lookahead)) {
     advance(lexer, true);
   }
 }
@@ -40,18 +89,54 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
   return true;
 }
 
+bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
+{
+  // Before that I must be on a non whitespace char
+  char marker[UINT8_MAX] = { '\0' };
+  uint16_t marker_len = 0;
+
+  if (lexer->lookahead != '<') {
+    return false;
+  }
+  advance(lexer, false);
+
+  if (lexer->lookahead != '<') {
+    return false;
+  }
+  advance(lexer, false);
+  skip_space_tabs(lexer);
+
+  // We are at the start of the script marker
+  while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead != '\n' && marker_len < UINT8_MAX) {
+    marker[marker_len] = lexer->lookahead;
+    marker_len++;
+    advance(lexer, false);
+  }
+
+  assert(scanner->script_marker == NULL);
+
+  scanner->script_marker = (char *)malloc(marker_len);
+  strncpy(scanner->script_marker, marker, marker_len);
+  scanner->marker_len = marker_len;
+
+  return true;
+}
+
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
-  (void)payload;
+  Scanner *s = (Scanner *)payload;
 
   skip_space_tabs(lexer);
 
+  // options can be inverted by prepending a 'no' or 'inv'
   if (valid_symbols[NO] && lexer->lookahead == 'n') {
-    // options can be inverted by prepending a 'no' or 'inv'
     return check_prefix(lexer, "no", 2, NO);
   } else if (valid_symbols[INV] && lexer->lookahead == 'i') {
     return check_prefix(lexer, "inv", 3, INV);
-  } else if (valid_symbols[CMD_SEPARATOR] && valid_symbols[LINE_CONTINUATION]) {
+  }
+
+  // cmd separator and |
+  if (valid_symbols[CMD_SEPARATOR] && valid_symbols[LINE_CONTINUATION]) {
     if (lexer->lookahead == '\n') {
       advance(lexer, false);
       skip_space_tabs(lexer);
@@ -69,6 +154,27 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       lexer->result_symbol = CMD_SEPARATOR;
       return true;
     }
+  }
+
+  // Script starts and ends
+  if (valid_symbols[EMBEDDED_SCRIPT_START]) {
+    lexer->result_symbol = EMBEDDED_SCRIPT_START;
+    return try_lex_script_start(s, lexer);
+  } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
+    for (size_t i = 0; i < s->marker_len; i++) {
+      if (s->script_marker[i] != lexer->lookahead) {
+        return false;
+      } else {
+        advance(lexer, false);
+      }
+    }
+
+    // Found the end marker
+    lexer->result_symbol = EMDEDDED_SCRIPT_END;
+    s->marker_len = 0;
+    free(s->script_marker);
+
+    return true;
   }
 
   return false;

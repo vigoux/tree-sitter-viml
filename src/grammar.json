@@ -63,6 +63,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "lua_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call_statement"
         },
         {
@@ -108,6 +112,72 @@
           "value": ".*"
         }
       ]
+    },
+    "lua_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "lua"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chunk"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "script"
+            }
+          ]
+        }
+      ]
+    },
+    "chunk": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^\\n]*"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "script": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_embedded_script_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_cmd_separator"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "chunk"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_embedded_script_end"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_cmd_separator"
+          }
+        ]
+      }
     },
     "for_loop": {
       "type": "SEQ",
@@ -2550,6 +2620,14 @@
     {
       "type": "SYMBOL",
       "name": "_line_continuation"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_embedded_script_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_embedded_script_end"
     }
   ],
   "inline": [],
