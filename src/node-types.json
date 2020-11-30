@@ -340,6 +340,10 @@
           "named": true
         },
         {
+          "type": "range_statement",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         },
@@ -532,6 +536,11 @@
   },
   {
     "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "current_line",
     "named": true,
     "fields": {}
   },
@@ -1761,6 +1770,11 @@
     }
   },
   {
+    "type": "last_line",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "let_statement",
     "named": true,
     "fields": {},
@@ -1981,7 +1995,18 @@
   {
     "type": "normal_statement",
     "named": true,
-    "fields": {}
+    "fields": {
+      "range": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "range",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "option",
@@ -2014,6 +2039,11 @@
     }
   },
   {
+    "type": "pattern",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "perl_statement",
     "named": true,
     "fields": {},
@@ -2033,6 +2063,11 @@
     }
   },
   {
+    "type": "previous_pattern",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "python_statement",
     "named": true,
     "fields": {},
@@ -2046,6 +2081,158 @@
         },
         {
           "type": "script",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range",
+    "named": true,
+    "fields": {
+      "end": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "current_line",
+            "named": true
+          },
+          {
+            "type": "last_line",
+            "named": true
+          },
+          {
+            "type": "line_number",
+            "named": true
+          },
+          {
+            "type": "mark",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "previous_pattern",
+            "named": true
+          }
+        ]
+      },
+      "start": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "current_line",
+            "named": true
+          },
+          {
+            "type": "last_line",
+            "named": true
+          },
+          {
+            "type": "line_number",
+            "named": true
+          },
+          {
+            "type": "mark",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "previous_pattern",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "file",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range_statement",
+    "named": true,
+    "fields": {
+      "end": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "current_line",
+            "named": true
+          },
+          {
+            "type": "last_line",
+            "named": true
+          },
+          {
+            "type": "line_number",
+            "named": true
+          },
+          {
+            "type": "mark",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "previous_pattern",
+            "named": true
+          }
+        ]
+      },
+      "start": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "current_line",
+            "named": true
+          },
+          {
+            "type": "last_line",
+            "named": true
+          },
+          {
+            "type": "line_number",
+            "named": true
+          },
+          {
+            "type": "mark",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "previous_pattern",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "file",
           "named": true
         }
       ]
@@ -2237,6 +2424,10 @@
         },
         {
           "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "range_statement",
           "named": true
         },
         {
@@ -3277,6 +3468,18 @@
     "named": false
   },
   {
+    "type": "\\&",
+    "named": false
+  },
+  {
+    "type": "\\/",
+    "named": false
+  },
+  {
+    "type": "\\?",
+    "named": false
+  },
+  {
     "type": "]",
     "named": false
   },
@@ -3409,6 +3612,10 @@
     "named": false
   },
   {
+    "type": "file",
+    "named": true
+  },
+  {
     "type": "finally",
     "named": false
   },
@@ -3453,8 +3660,16 @@
     "named": false
   },
   {
+    "type": "line_number",
+    "named": true
+  },
+  {
     "type": "lua",
     "named": false
+  },
+  {
+    "type": "mark",
+    "named": true
   },
   {
     "type": "normal",
@@ -3462,10 +3677,6 @@
   },
   {
     "type": "option_name",
-    "named": true
-  },
-  {
-    "type": "pattern",
     "named": true
   },
   {

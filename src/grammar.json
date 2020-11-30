@@ -67,6 +67,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "range_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "ruby_statement"
         },
         {
@@ -115,6 +119,27 @@
     "normal_statement": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "range",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_range"
+                },
+                "named": true,
+                "value": "range"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "normal"
@@ -504,8 +529,17 @@
       ]
     },
     "pattern": {
-      "type": "PATTERN",
-      "value": "\\/.*\\/"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\/.*\\/"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\?.*\\?"
+        }
+      ]
     },
     "try_statement": {
       "type": "SEQ",
@@ -513,6 +547,10 @@
         {
           "type": "STRING",
           "value": "try"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         },
         {
           "type": "ALIAS",
@@ -586,6 +624,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         },
         {
           "type": "ALIAS",
@@ -1233,6 +1275,138 @@
     "bang": {
       "type": "STRING",
       "value": "!"
+    },
+    "mark": {
+      "type": "PATTERN",
+      "value": "'."
+    },
+    "range_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_range"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "_range": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "%"
+          },
+          "named": true,
+          "value": "file"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_range_explicit"
+        }
+      ]
+    },
+    "_range_explicit": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "start",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_range_marker"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "FIELD",
+                  "name": "end",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_range_marker"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_range_marker": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "integer_literal"
+          },
+          "named": true,
+          "value": "line_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "current_line"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "last_line"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "previous_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mark"
+        }
+      ]
+    },
+    "current_line": {
+      "type": "STRING",
+      "value": "."
+    },
+    "last_line": {
+      "type": "STRING",
+      "value": "$"
+    },
+    "previous_pattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\\/"
+        },
+        {
+          "type": "STRING",
+          "value": "\\?"
+        },
+        {
+          "type": "STRING",
+          "value": "\\&"
+        }
+      ]
     },
     "_variable": {
       "type": "PREC_LEFT",

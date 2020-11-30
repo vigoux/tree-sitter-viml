@@ -135,14 +135,35 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return check_prefix(lexer, "inv", 3, INV);
   }
 
-  // cmd separator and |
+  // cmd separator and | this is not trivial at all because of how line
+  // continuations are handled after encoutering an EOL :
+  //  - Next line starts by a `\\` ?
+  //    - Yes : is next character `/` or `?` ?
+  //      - Yes : Next line is another command (preceded by a range)
+  //      - No : This is a line continuation
+  //    - No : Next line is another command.
+  //
+  // This ambiguity forces us to use the mark_end function and lookahead more
+  // than just past the final newline and indentationg character.
   if (valid_symbols[CMD_SEPARATOR] && valid_symbols[LINE_CONTINUATION]) {
     if (lexer->lookahead == '\n') {
       advance(lexer, false);
+      lexer->mark_end(lexer);
       skip_space_tabs(lexer);
 
       if (lexer->lookahead == '\\') {
+        // You think this is a line continuation ? It might not
         advance(lexer, false);
+
+        if (lexer->lookahead == '/'
+            || lexer->lookahead == '?'
+            || lexer->lookahead == '&') {
+          // Actually this might be a range before a command
+          lexer->result_symbol = CMD_SEPARATOR;
+          return true;
+        }
+
+        lexer->mark_end(lexer);
         lexer->result_symbol = LINE_CONTINUATION;
         return true;
       } else {
@@ -151,6 +172,8 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       }
     } else if (lexer->lookahead == '|') {
       advance(lexer, false);
+      lexer->mark_end(lexer); // Because we broke advance before
+
       lexer->result_symbol = CMD_SEPARATOR;
       return true;
     }

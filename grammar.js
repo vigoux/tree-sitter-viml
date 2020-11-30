@@ -55,6 +55,7 @@ module.exports = grammar({
         $.if_statement,
         // $.execute_statement,
         $.lua_statement,
+        $.range_statement,
         $.ruby_statement,
         $.python_statement,
         $.perl_statement,
@@ -66,7 +67,7 @@ module.exports = grammar({
 
     return_statement: ($) => seq('return', $._expression),
 
-    normal_statement: ($) => seq('normal', /.*/),
+    normal_statement: ($) => command($, 'normal', /.*/),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq('ruby', choice($.chunk, $.script)),
@@ -121,11 +122,11 @@ module.exports = grammar({
 
     else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
 
-    pattern: ($) => /\/.*\//,
+    pattern: ($) => choice(/\/.*\//, /\?.*\?/),
 
     try_statement: ($) =>
       seq(
-        'try',
+        'try', $._cmd_separator,
         alias(repeat($._statement), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
@@ -133,7 +134,7 @@ module.exports = grammar({
       ),
 
     catch_statement: ($) =>
-      seq('catch', optional($.pattern), alias(repeat($._statement), $.body)),
+      seq('catch', optional($.pattern), $._cmd_separator, alias(repeat($._statement), $.body)),
 
     finally_statement: ($) =>
       seq('finally', alias(repeat($._statement), $.body)),
@@ -237,6 +238,34 @@ module.exports = grammar({
     parameters: ($) => seq('(', commaSep($.identifier), ')'),
 
     bang: ($) => '!',
+
+    mark: ($) => /'./,
+
+    // :h 10.3
+
+    range_statement: ($) => seq($._range, $._cmd_separator),
+
+    _range: ($) => choice(alias('%', $.file), $._range_explicit),
+
+    _range_explicit: ($) =>
+      seq(
+        field('start', $._range_marker),
+        optional(seq(',', field('end', $._range_marker))),
+      ),
+
+    _range_marker: ($) =>
+      choice(
+        alias($.integer_literal, $.line_number),
+        $.current_line,
+        $.last_line,
+        $.pattern,
+        $.previous_pattern,
+        $.mark
+      ),
+
+    current_line: ($) => '.',
+    last_line: ($) => '$',
+    previous_pattern: ($) => choice('\\/', '\\?', '\\&'),
 
     // :h variable
     _variable: ($) =>
@@ -403,6 +432,10 @@ module.exports = grammar({
       seq('{', commaSep($.identifier), '->', $._expression, '}'),
   },
 });
+
+function command($, name, ...args) {
+  return seq(optional(field('range', alias($._range, $.range))), name, ...args);
+}
 
 function maybe_bang($, cmd_name) {
   return seq(cmd_name, optional($.bang));
