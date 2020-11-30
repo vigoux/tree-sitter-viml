@@ -28,6 +28,16 @@ normal abc|def
 (script_file (normal_statement))
 
 =============================
+Normal space pipe
+=============================
+
+normal abd | def | g
+
+---
+
+(script_file (normal_statement))
+
+=============================
 Normal backslash
 =============================
 
@@ -47,3 +57,13 @@ normal def
 ---
 
 (script_file (normal_statement) (normal_statement))
+
+=============================
+Range normal
+=============================
+
+%normal foo
+
+---
+
+(script_file (normal_statement (range (file))))
