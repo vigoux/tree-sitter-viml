@@ -91,7 +91,10 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
 
 bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
 {
-  // Before that I must be on a non whitespace char
+  if (scanner->script_marker != NULL) {
+    // There must be an error
+    return false;
+  }
   char marker[UINT8_MAX] = { '\0' };
   uint16_t marker_len = 0;
 
@@ -112,8 +115,6 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
     marker_len++;
     advance(lexer, false);
   }
-
-  assert(scanner->script_marker == NULL);
 
   scanner->script_marker = (char *)malloc(marker_len);
   strncpy(scanner->script_marker, marker, marker_len);
@@ -184,6 +185,11 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     lexer->result_symbol = EMBEDDED_SCRIPT_START;
     return try_lex_script_start(s, lexer);
   } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
+    if (s->marker_len == 0) {
+      // This must be an error
+      return false;
+    }
+
     for (size_t i = 0; i < s->marker_len; i++) {
       if (s->script_marker[i] != lexer->lookahead) {
         return false;
