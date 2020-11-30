@@ -67,6 +67,18 @@
         },
         {
           "type": "SYMBOL",
+          "name": "ruby_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "python_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "perl_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call_statement"
         },
         {
@@ -135,6 +147,72 @@
         }
       ]
     },
+    "ruby_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "ruby"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chunk"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "script"
+            }
+          ]
+        }
+      ]
+    },
+    "python_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "python"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chunk"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "script"
+            }
+          ]
+        }
+      ]
+    },
+    "perl_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "perl"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chunk"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "script"
+            }
+          ]
+        }
+      ]
+    },
     "chunk": {
       "type": "SEQ",
       "members": [
@@ -149,35 +227,37 @@
       ]
     },
     "script": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_embedded_script_start"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_cmd_separator"
-          },
-          {
-            "type": "REPEAT",
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_embedded_script_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
               "name": "chunk"
-            }
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_embedded_script_end"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_cmd_separator"
+            },
+            "named": true,
+            "value": "line"
           }
-        ]
-      }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_embedded_script_end"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
     },
     "for_loop": {
       "type": "SEQ",

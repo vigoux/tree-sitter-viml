@@ -55,6 +55,9 @@ module.exports = grammar({
         $.if_statement,
         // $.execute_statement,
         $.lua_statement,
+        $.ruby_statement,
+        $.python_statement,
+        $.perl_statement,
         $.call_statement,
         $.echo_statement,
         $.try_statement,
@@ -66,6 +69,9 @@ module.exports = grammar({
     normal_statement: ($) => seq('normal', /.*/),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
+    ruby_statement: ($) => seq('ruby', choice($.chunk, $.script)),
+    python_statement: ($) => seq('python', choice($.chunk, $.script)),
+    perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
 
     chunk: ($) => seq(/[^\n]*/, $._cmd_separator),
 
