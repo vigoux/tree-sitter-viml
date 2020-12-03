@@ -8,7 +8,7 @@
 #define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
 
 typedef struct {
-  // The EOF markers (but they can be whatever so lex that correctlu
+  // The EOF markers (but they can be whatever so lex that correctly)
   char *script_marker;
   uint8_t marker_len;
 
@@ -20,7 +20,16 @@ enum TokenType {
   CMD_SEPARATOR,
   LINE_CONTINUATION,
   EMBEDDED_SCRIPT_START,
-  EMDEDDED_SCRIPT_END
+  EMDEDDED_SCRIPT_END,
+  // Many many many many keywords that are impossible to lex otherwise
+  ENDFUNCTION, // For some reason any other end works
+  TOKENTYPE_NR
+};
+
+typedef char* keyword[2];
+
+keyword keywords[] = {
+  { "end", "function" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {
@@ -131,6 +140,31 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   return true;
 }
 
+bool try_lex_keyword(TSLexer *lexer, keyword keyword) {
+
+  // Try lexing mandatory part
+  for (size_t i = 0; keyword[0][i]; i++, advance(lexer, false)) {
+    if (lexer->lookahead != keyword[0][i]) {
+      return false;
+    }
+  }
+
+  // Now try lexing optional part
+  for (size_t i = 0; keyword[1][i]; i++, advance(lexer, false)) {
+    char c = lexer->lookahead;
+    if (c != keyword[1][i]) {
+      // Either end of keyword (i.e. whitespace) or wrong keyword
+      if (iswalpha(c)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  return true;
+}
+
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
   Scanner *s = (Scanner *)payload;
@@ -212,6 +246,14 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     free(s->script_marker);
 
     return true;
+  }
+
+  // Other keywords
+  for (enum TokenType t = ENDFUNCTION; t < TOKENTYPE_NR; t++) {
+    if (valid_symbols[t] && try_lex_keyword(lexer, keywords[t - ENDFUNCTION])) {
+      lexer->result_symbol = t;
+      return true;
+    }
   }
 
   return false;

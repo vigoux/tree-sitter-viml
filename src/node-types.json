@@ -3528,51 +3528,7 @@
     "named": false
   },
   {
-    "type": "end",
-    "named": false
-  },
-  {
-    "type": "endf",
-    "named": false
-  },
-  {
-    "type": "endfo",
-    "named": false
-  },
-  {
     "type": "endfor",
-    "named": false
-  },
-  {
-    "type": "endfu",
-    "named": false
-  },
-  {
-    "type": "endfun",
-    "named": false
-  },
-  {
-    "type": "endfunc",
-    "named": false
-  },
-  {
-    "type": "endfunct",
-    "named": false
-  },
-  {
-    "type": "endfuncti",
-    "named": false
-  },
-  {
-    "type": "endfunctio",
-    "named": false
-  },
-  {
-    "type": "endfunction",
-    "named": false
-  },
-  {
-    "type": "endi",
     "named": false
   },
   {
@@ -3580,31 +3536,7 @@
     "named": false
   },
   {
-    "type": "endt",
-    "named": false
-  },
-  {
-    "type": "endtr",
-    "named": false
-  },
-  {
     "type": "endtry",
-    "named": false
-  },
-  {
-    "type": "endw",
-    "named": false
-  },
-  {
-    "type": "endwh",
-    "named": false
-  },
-  {
-    "type": "endwhi",
-    "named": false
-  },
-  {
-    "type": "endwhil",
     "named": false
   },
   {

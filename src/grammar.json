@@ -141,7 +141,12 @@
           ]
         },
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "norm(a(l)?)?"
+          },
+          "named": false,
           "value": "normal"
         },
         {
@@ -333,25 +338,13 @@
           "value": "body"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "end"
-            },
-            {
-              "type": "STRING",
-              "value": "endf"
-            },
-            {
-              "type": "STRING",
-              "value": "endfo"
-            },
-            {
-              "type": "STRING",
-              "value": "endfor"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "end(f(o(r)?)?)?"
+          },
+          "named": false,
+          "value": "endfor"
         }
       ]
     },
@@ -383,33 +376,13 @@
           "value": "body"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "end"
-            },
-            {
-              "type": "STRING",
-              "value": "endw"
-            },
-            {
-              "type": "STRING",
-              "value": "endwh"
-            },
-            {
-              "type": "STRING",
-              "value": "endwhi"
-            },
-            {
-              "type": "STRING",
-              "value": "endwhil"
-            },
-            {
-              "type": "STRING",
-              "value": "endwhile"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "end(w(h(i(l(e)?)?)?)?)?"
+          },
+          "named": false,
+          "value": "endwhile"
         }
       ]
     },
@@ -460,21 +433,13 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "end"
-            },
-            {
-              "type": "STRING",
-              "value": "endi"
-            },
-            {
-              "type": "STRING",
-              "value": "endif"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "end(i(f)?)?"
+          },
+          "named": false,
+          "value": "endif"
         }
       ]
     },
@@ -584,25 +549,13 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "end"
-            },
-            {
-              "type": "STRING",
-              "value": "endt"
-            },
-            {
-              "type": "STRING",
-              "value": "endtr"
-            },
-            {
-              "type": "STRING",
-              "value": "endtry"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "end(t(r(y)?)?)?"
+          },
+          "named": false,
+          "value": "endtry"
         }
       ]
     },
@@ -1133,45 +1086,8 @@
           "value": "body"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "end"
-            },
-            {
-              "type": "STRING",
-              "value": "endf"
-            },
-            {
-              "type": "STRING",
-              "value": "endfu"
-            },
-            {
-              "type": "STRING",
-              "value": "endfun"
-            },
-            {
-              "type": "STRING",
-              "value": "endfunc"
-            },
-            {
-              "type": "STRING",
-              "value": "endfunct"
-            },
-            {
-              "type": "STRING",
-              "value": "endfuncti"
-            },
-            {
-              "type": "STRING",
-              "value": "endfunctio"
-            },
-            {
-              "type": "STRING",
-              "value": "endfunction"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_endfunction"
         },
         {
           "type": "SYMBOL",
@@ -2882,6 +2798,10 @@
     {
       "type": "SYMBOL",
       "name": "_embedded_script_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_endfunction"
     }
   ],
   "inline": [],

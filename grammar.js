@@ -29,6 +29,7 @@ module.exports = grammar({
     $._line_continuation,
     $._embedded_script_start,
     $._embedded_script_end,
+    $._endfunction
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -67,7 +68,7 @@ module.exports = grammar({
 
     return_statement: ($) => seq('return', $._expression),
 
-    normal_statement: ($) => command($, 'normal', /.*/),
+    normal_statement: ($) => command($, 'norm', 'al', /.*/),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq('ruby', choice($.chunk, $.script)),
@@ -222,7 +223,7 @@ module.exports = grammar({
 
         alias(repeat($._statement), $.body),
 
-        end('function'),
+        $._endfunction,
         $._cmd_separator,
       ),
 
@@ -433,27 +434,32 @@ module.exports = grammar({
   },
 });
 
-function command($, name, ...args) {
-  return seq(optional(field('range', alias($._range, $.range))), name, ...args);
+function command($, start, suff, ...args) {
+  return seq(optional(field('range', alias($._range, $.range))), cmd_token(start, suff), ...args);
 }
 
 function maybe_bang($, cmd_name) {
   return seq(cmd_name, optional($.bang));
 }
 
-function end(cmd_name) {
-  // choice('end', 'endf', 'endfu', ..)
-  var list = [];
-  var current_preffix = 'end';
-
-  list.push(current_preffix);
-
-  for (const c of cmd_name) {
-    current_preffix += c;
-    list.push(current_preffix);
+// Shamelessly stolen from tree-sitter-php
+function cmd_token(cmd, suffix, aliasTok=true) {
+  let pattern = '';
+  for (var i = suffix.length - 1; i >= 0; i--) {
+    pattern = `(${suffix[i]}${pattern})?`;
   }
 
-  return choice(...list);
+  let result = new RegExp(cmd + pattern);
+
+  if (aliasTok) {
+    result = alias(result, cmd + suffix);
+  }
+
+  return result;
+}
+
+function end(cmd_name) {
+  return cmd_token('end', cmd_name);
 }
 
 function commaSep(rule) {
