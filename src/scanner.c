@@ -8,8 +8,10 @@
 #define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
 
 typedef struct {
+  // The EOF markers (but they can be whatever so lex that correctlu
   char *script_marker;
   uint8_t marker_len;
+
 } Scanner;
 
 enum TokenType {
@@ -39,6 +41,13 @@ void tree_sitter_vim_external_scanner_destroy(void *payload) {
   free(s);
 }
 
+/// Serialize / deserialize
+//
+// Memory layout is :
+//
+// [ marker_len, marker ... (marker_len size) ]
+
+
 unsigned int tree_sitter_vim_external_scanner_serialize(void *payload,
                                                         char *buffer) {
   Scanner *s = (Scanner *)payload;
@@ -59,6 +68,7 @@ void tree_sitter_vim_external_scanner_deserialize(void *payload,
   Scanner *s = (Scanner *)payload;
   s->marker_len = buffer[0];
 
+  // Sanity check, just to be sure
   assert(s->marker_len + 1 == length);
 
   if (s->marker_len > 0) {
@@ -98,18 +108,16 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   char marker[UINT8_MAX] = { '\0' };
   uint16_t marker_len = 0;
 
-  if (lexer->lookahead != '<') {
-    return false;
+  // Lex <<
+  for(size_t j = 0; j < 2; j++) {
+    if (lexer->lookahead != '<') {
+      return false;
+    }
+    advance(lexer, false);
   }
-  advance(lexer, false);
-
-  if (lexer->lookahead != '<') {
-    return false;
-  }
-  advance(lexer, false);
   skip_space_tabs(lexer);
 
-  // We are at the start of the script marker
+  // We should be at the start of the script marker
   while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead != '\n' && marker_len < UINT8_MAX) {
     marker[marker_len] = lexer->lookahead;
     marker_len++;
