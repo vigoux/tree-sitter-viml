@@ -33,6 +33,7 @@ enum TokenType {
   RETURN,
   RUBY,
   PYTHON,
+  THROW,
   TOKENTYPE_NR
 };
 
@@ -48,6 +49,7 @@ keyword keywords[] = {
   { "retu", "rn" },
   { "rub", "y" },
   { "py", "thon" },
+  { "th", "row" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {
@@ -169,6 +171,9 @@ bool lex_string(TSLexer *lexer) {
   advance(lexer, false);
 
   while (lexer->lookahead != string_start_char && lexer->lookahead != '\n') {
+    if (lexer->lookahead == '\\') {
+      advance(lexer, false);
+    }
     advance(lexer, false);
   }
 

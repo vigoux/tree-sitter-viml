@@ -40,6 +40,7 @@ module.exports = grammar({
     $._return,
     $._ruby,
     $._python,
+    $._throw,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -67,6 +68,7 @@ module.exports = grammar({
         $.call_statement,
         $.echo_statement,
         $.try_statement,
+        $.throw_statement,
         $.command,
       ),
 
@@ -144,14 +146,23 @@ module.exports = grammar({
     finally_statement: ($) =>
       seq('finally', alias(repeat($._statement), $.body)),
 
-    scoped_identifier: ($) => seq($.scope, ':', $.identifier),
+    throw_statement: ($) => seq(tokalias($, "throw"), $._expression, $._cmd_separator),
+
+    // TODO(vigoux): maybe we should find some names here
+    scope: ($) => choice('b', 's', 't', 'v', 'w', 'g'),
+
+    _scope_sep: ($) => ':',
+
+    scoped_identifier: ($) => seq($.scope, $._scope_sep, $.identifier),
+
+    argument: ($) => seq(
+      'a',
+      ':',
+      choice($.identifier, $.integer_literal)),
 
     identifier: ($) => /[a-zA-Z_]\w*/,
 
-    _ident: ($) => choice($.scoped_identifier, $.identifier),
-
-    // TODO(vigoux): maybe we should find some names here
-    scope: ($) => choice('a', 'b', 's', 't', 'v', 'w', 'g'),
+    _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
 
@@ -159,11 +170,12 @@ module.exports = grammar({
       seq(
         'let',
         choice(
-          $.identifier,
-          $.scoped_identifier,
+          $._ident,
           $.env_variable,
           $.register,
           $.option,
+          $.index_expression,
+          $.field_expression,
         ),
         $._let_operator,
         $._expression,
@@ -238,9 +250,11 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(field('name', $._ident), field('parameters', $.parameters)),
 
-    parameters: ($) => seq('(', commaSep($.identifier), ')'),
+    parameters: ($) => seq('(', commaSep($.identifier), optional(seq(',', $.spread)), ')'),
 
     bang: ($) => '!',
+
+    spread: ($) => '...',
 
     // :h 10.3
 

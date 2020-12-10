@@ -82,6 +82,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "throw_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -630,47 +634,31 @@
         }
       ]
     },
-    "scoped_identifier": {
+    "throw_statement": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "scope"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
-    },
-    "identifier": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z_]\\w*"
-    },
-    "_ident": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "scoped_identifier"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_throw"
+          },
+          "named": false,
+          "value": "throw"
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
     "scope": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "STRING",
-          "value": "a"
-        },
         {
           "type": "STRING",
           "value": "b"
@@ -694,6 +682,74 @@
         {
           "type": "STRING",
           "value": "g"
+        }
+      ]
+    },
+    "_scope_sep": {
+      "type": "STRING",
+      "value": ":"
+    },
+    "scoped_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "scope"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_scope_sep"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "argument": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "a"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "integer_literal"
+            }
+          ]
+        }
+      ]
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_]\\w*"
+    },
+    "_ident": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "scoped_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "argument"
         }
       ]
     },
@@ -742,11 +798,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "scoped_identifier"
+              "name": "_ident"
             },
             {
               "type": "SYMBOL",
@@ -759,6 +811,14 @@
             {
               "type": "SYMBOL",
               "name": "option"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "index_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "field_expression"
             }
           ]
         },
@@ -1227,6 +1287,27 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "spread"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ")"
         }
@@ -1235,6 +1316,10 @@
     "bang": {
       "type": "STRING",
       "value": "!"
+    },
+    "spread": {
+      "type": "STRING",
+      "value": "..."
     },
     "mark": {
       "type": "PATTERN",
@@ -2864,6 +2949,10 @@
     {
       "type": "SYMBOL",
       "name": "_python"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_throw"
     }
   ],
   "inline": [],

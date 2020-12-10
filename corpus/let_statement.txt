@@ -12,3 +12,27 @@ let g:foo = 1
       (scope)
       (identifier))
     (integer_literal)))
+
+================================================================================
+Let arguments
+================================================================================
+
+let a:foo = 1
+let a:0 = 30
+let a:000 = {}
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (argument
+      (identifier))
+    (integer_literal))
+  (let_statement
+    (argument
+      (integer_literal))
+    (integer_literal))
+  (let_statement
+    (argument
+      (integer_literal))
+    (dictionnary)))
