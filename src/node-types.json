@@ -5,82 +5,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "binary_operation",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "dictionnary",
-          "named": true
-        },
-        {
-          "type": "env_variable",
-          "named": true
-        },
-        {
-          "type": "field_expression",
-          "named": true
-        },
-        {
-          "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index_expression",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "lambda_expression",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "option",
-          "named": true
-        },
-        {
-          "type": "register",
-          "named": true
-        },
-        {
-          "type": "scoped_identifier",
-          "named": true
-        },
-        {
-          "type": "slice_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "ternary_expression",
-          "named": true
-        },
-        {
-          "type": "unary_operation",
           "named": true
         }
       ]
@@ -129,10 +57,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -219,10 +143,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -375,91 +295,15 @@
     "named": true,
     "fields": {
       "function": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "binary_operation",
-            "named": true
-          },
-          {
-            "type": "call_expression",
-            "named": true
-          },
-          {
-            "type": "dictionnary",
-            "named": true
-          },
-          {
-            "type": "env_variable",
-            "named": true
-          },
-          {
-            "type": "field_expression",
-            "named": true
-          },
-          {
-            "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
           {
             "type": "identifier",
             "named": true
           },
           {
-            "type": "index_expression",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "lambda_expression",
-            "named": true
-          },
-          {
-            "type": "list",
-            "named": true
-          },
-          {
-            "type": "option",
-            "named": true
-          },
-          {
-            "type": "register",
-            "named": true
-          },
-          {
             "type": "scoped_identifier",
-            "named": true
-          },
-          {
-            "type": "slice_expression",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "ternary_expression",
-            "named": true
-          },
-          {
-            "type": "unary_operation",
             "named": true
           }
         ]
@@ -470,7 +314,75 @@
       "required": false,
       "types": [
         {
-          "type": "arguments",
+          "type": "binary_operation",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "dictionnary",
+          "named": true
+        },
+        {
+          "type": "env_variable",
+          "named": true
+        },
+        {
+          "type": "field_expression",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "lambda_expression",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
+          "type": "register",
+          "named": true
+        },
+        {
+          "type": "scoped_identifier",
+          "named": true
+        },
+        {
+          "type": "slice_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_operation",
           "named": true
         }
       ]
@@ -485,7 +397,7 @@
       "required": true,
       "types": [
         {
-          "type": "function_call",
+          "type": "call_expression",
           "named": true
         }
       ]
@@ -533,11 +445,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "comment",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "current_line",
@@ -612,10 +519,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -705,10 +608,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -778,10 +677,6 @@
         },
         {
           "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
           "named": true
         },
         {
@@ -875,10 +770,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -951,10 +842,6 @@
         {
           "type": "identifier",
           "named": true
-        },
-        {
-          "type": "scoped_identifier",
-          "named": true
         }
       ]
     }
@@ -997,10 +884,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -1087,10 +970,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -1201,10 +1080,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -1282,36 +1157,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "function_call",
-    "named": true,
-    "fields": {
-      "arguments": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "arguments",
-            "named": true
-          }
-        ]
-      },
-      "function": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "scoped_identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -1405,10 +1250,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -1522,10 +1363,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -1609,10 +1446,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -1715,10 +1548,6 @@
           "named": true
         },
         {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -1807,10 +1636,6 @@
           "named": true
         },
         {
-          "type": "function_call",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -1896,10 +1721,6 @@
         },
         {
           "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
           "named": true
         },
         {
@@ -2249,10 +2070,6 @@
         {
           "type": "identifier",
           "named": true
-        },
-        {
-          "type": "scoped_identifier",
-          "named": true
         }
       ]
     }
@@ -2266,6 +2083,14 @@
       "required": true,
       "types": [
         {
+          "type": "binary_operation",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
           "type": "dictionnary",
           "named": true
         },
@@ -2274,15 +2099,19 @@
           "named": true
         },
         {
+          "type": "field_expression",
+          "named": true
+        },
+        {
           "type": "float_literal",
           "named": true
         },
         {
-          "type": "function_call",
+          "type": "identifier",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "index_expression",
           "named": true
         },
         {
@@ -2310,7 +2139,19 @@
           "named": true
         },
         {
+          "type": "slice_expression",
+          "named": true
+        },
+        {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "unary_operation",
           "named": true
         }
       ]
@@ -2568,10 +2409,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -2655,10 +2492,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -2748,10 +2581,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -2804,11 +2633,6 @@
     }
   },
   {
-    "type": "string_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "ternary_expression",
     "named": true,
     "fields": {
@@ -2846,10 +2670,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -2939,10 +2759,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -3026,10 +2842,6 @@
           },
           {
             "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "function_call",
             "named": true
           },
           {
@@ -3137,10 +2949,6 @@
         },
         {
           "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
           "named": true
         },
         {
@@ -3258,10 +3066,6 @@
             "named": true
           },
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
             "type": "identifier",
             "named": true
           },
@@ -3333,10 +3137,6 @@
   },
   {
     "type": "!~",
-    "named": false
-  },
-  {
-    "type": "\"",
     "named": false
   },
   {
@@ -3492,6 +3292,10 @@
     "named": false
   },
   {
+    "type": "abort",
+    "named": false
+  },
+  {
     "type": "all",
     "named": false
   },
@@ -3512,8 +3316,20 @@
     "named": false
   },
   {
+    "type": "closure",
+    "named": false
+  },
+  {
     "type": "command_name",
     "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "dict",
+    "named": false
   },
   {
     "type": "echo",
@@ -3561,6 +3377,10 @@
   },
   {
     "type": "function",
+    "named": false
+  },
+  {
+    "type": "g",
     "named": false
   },
   {
@@ -3620,6 +3440,10 @@
     "named": false
   },
   {
+    "type": "range",
+    "named": false
+  },
+  {
     "type": "return",
     "named": false
   },
@@ -3637,6 +3461,10 @@
   },
   {
     "type": "set_value",
+    "named": true
+  },
+  {
+    "type": "string_literal",
     "named": true
   },
   {

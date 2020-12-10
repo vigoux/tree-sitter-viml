@@ -21,6 +21,8 @@ enum TokenType {
   LINE_CONTINUATION,
   EMBEDDED_SCRIPT_START,
   EMDEDDED_SCRIPT_END,
+  STRING,
+  COMMENT,
   // Many many many many keywords that are impossible to lex otherwise
   ENDFUNCTION, // For some reason any other end works
   TOKENTYPE_NR
@@ -140,6 +142,31 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   return true;
 }
 
+bool lex_string(TSLexer *lexer) {
+  char string_start_char;
+
+  if (lexer->lookahead != '\'' && lexer->lookahead != '"') {
+    return false;
+  }
+
+  string_start_char = lexer->lookahead;
+  advance(lexer, false);
+
+  while (lexer->lookahead != string_start_char && lexer->lookahead != '\n') {
+    advance(lexer, false);
+  }
+
+  if (lexer->lookahead == string_start_char) {
+    advance(lexer, false);
+    lexer->result_symbol = STRING;
+    return true;
+  } else {
+    // This may be a comment
+    lexer->result_symbol = COMMENT;
+    return string_start_char == '"';
+  }
+}
+
 bool try_lex_keyword(TSLexer *lexer, keyword keyword) {
 
   // Try lexing mandatory part
@@ -254,6 +281,11 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       lexer->result_symbol = t;
       return true;
     }
+  }
+
+  // String and comments
+  if (valid_symbols[STRING] || valid_symbols[COMMENT]) {
+    return lex_string(lexer);
   }
 
   return false;

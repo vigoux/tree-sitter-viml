@@ -29,6 +29,8 @@ module.exports = grammar({
     $._line_continuation,
     $._embedded_script_start,
     $._embedded_script_end,
+    $.string_literal,
+    $.comment,
     $._endfunction
   ],
 
@@ -36,12 +38,6 @@ module.exports = grammar({
 
   rules: {
     script_file: ($) => repeat($._statement),
-
-    comment: ($) =>
-      seq(
-        '"', // I don't want to include that " so that we can easily parse the comment content
-        /.*/,
-      ),
 
     _statement: ($) =>
       choice(
@@ -147,7 +143,7 @@ module.exports = grammar({
     _ident: ($) => choice($.scoped_identifier, $.identifier),
 
     // TODO(vigoux): maybe we should find some names here
-    scope: ($) => choice('a', 'b', 's', 't', 'v', 'w'),
+    scope: ($) => choice('a', 'b', 's', 't', 'v', 'w', 'g'),
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
 
@@ -202,11 +198,11 @@ module.exports = grammar({
     unlet_statement: ($) =>
       seq(maybe_bang($, 'unlet'), $._ident, $._cmd_separator),
 
-    call_statement: ($) => seq('call', $.function_call, $._cmd_separator),
+    call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
 
     echo_statement: ($) => seq('echo', repeat($._variable), $._cmd_separator),
 
-    return_statement: ($) => seq('return', $._variable, $._cmd_separator),
+    return_statement: ($) => seq('return', $._expression, $._cmd_separator),
 
     command: ($) =>
       seq(
@@ -219,6 +215,10 @@ module.exports = grammar({
       seq(
         maybe_bang($, 'function'),
         $.function_declaration,
+        optional('range'),
+        optional('abort'),
+        optional('dict'),
+        optional('closure'),
         $._cmd_separator,
 
         alias(repeat($._statement), $.body),
@@ -230,19 +230,13 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(field('name', $._ident), field('parameters', $.parameters)),
 
-    function_call: ($) =>
-      seq(
-        field('function', $._ident),
-        field('arguments', alias($.parameters, $.arguments)),
-      ),
-
     parameters: ($) => seq('(', commaSep($.identifier), ')'),
 
     bang: ($) => '!',
 
-    mark: ($) => /'./,
-
     // :h 10.3
+
+    mark: ($) => /'./,
 
     range_statement: ($) => seq($._range, $._cmd_separator),
 
@@ -278,7 +272,6 @@ module.exports = grammar({
           $.float_literal,
           $.integer_literal,
           $.list,
-          $.function_call,
           $.env_variable,
           $.register,
           $.option,
@@ -351,8 +344,6 @@ module.exports = grammar({
     unary_operation: ($) =>
       prec.left(PREC.UNARY, seq(choice('-', '!', '+'), $._expression)),
 
-    string_literal: ($) => choice(/".*"/, /'.*'/),
-
     // :h floating-point-format
     float_literal: ($) => {
       const digits = /[0-9]+/;
@@ -412,15 +403,15 @@ module.exports = grammar({
       prec(
         PREC.CALL,
         seq(
-          field('function', $._expression),
+          field('function', $._ident),
           '(',
-          alias(commaSep($._expression), $.arguments),
+          optional(commaSep1($._expression)),
           ')',
         ),
       ),
 
-    env_variable: ($) => seq('$', $._ident),
-    register: ($) => seq('@', $._ident),
+    env_variable: ($) => seq('$', $.identifier),
+    register: ($) => seq('@', $.identifier),
     option: ($) => seq('&', $.option_name),
 
     dictionnary_entry: ($) =>
