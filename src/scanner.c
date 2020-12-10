@@ -171,7 +171,7 @@ bool lex_string(TSLexer *lexer) {
   advance(lexer, false);
 
   while (lexer->lookahead != string_start_char && lexer->lookahead != '\n') {
-    if (lexer->lookahead == '\\') {
+    if (lexer->lookahead == '\\' && string_start_char == '"') {
       advance(lexer, false);
     }
     advance(lexer, false);

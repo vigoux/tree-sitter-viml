@@ -250,7 +250,8 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(field('name', $._ident), field('parameters', $.parameters)),
 
-    parameters: ($) => seq('(', commaSep($.identifier), optional(seq(',', $.spread)), ')'),
+    // FIXME(vigoux): The spread here is not exactly right...
+    parameters: ($) => seq('(', commaSep(choice($.identifier, $.spread)), ')'),
 
     bang: ($) => '!',
 

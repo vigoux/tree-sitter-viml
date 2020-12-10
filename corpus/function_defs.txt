@@ -1,6 +1,6 @@
-=============================
+================================================================================
 Function definitions end keywords
-=============================
+================================================================================
 
 function f()
 end
@@ -14,39 +14,91 @@ endfu
 function f()
 endfunction
 
----
-
+--------------------------------------------------------------------------------
 
 (script_file
-  (function_definition (function_declaration (identifier) (parameters)))
-  (function_definition (function_declaration (identifier) (parameters)))
-  (function_definition (function_declaration (identifier) (parameters)))
-  (function_definition (function_declaration (identifier) (parameters))))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters)))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters)))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters)))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))))
 
-=============================
+================================================================================
 Function definition without body
-=============================
+================================================================================
 
 function foo()
 end
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-  (function_definition (function_declaration (identifier) (parameters))))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))))
 
-
-=============================
+================================================================================
 Function definition with body
-=============================
+================================================================================
 
 function foo()
 	let bar = 31
 end
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-	(function_definition
-		(function_declaration (identifier) (parameters))
-		(body (let_statement (identifier) (integer_literal)))))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (let_statement
+        (identifier)
+        (integer_literal)))))
+
+================================================================================
+Function with args and spread
+================================================================================
+
+function foo(a, b, ...)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters
+        (identifier)
+        (identifier)
+        (spread)))))
+
+================================================================================
+Function with spread
+================================================================================
+
+function foo(...)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters
+        (spread)))))
