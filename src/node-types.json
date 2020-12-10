@@ -3348,6 +3348,10 @@
     "named": false
   },
   {
+    "type": "endfunction",
+    "named": false
+  },
+  {
     "type": "endif",
     "named": false
   },

@@ -31,7 +31,12 @@ module.exports = grammar({
     $._embedded_script_end,
     $.string_literal,
     $.comment,
-    $._endfunction
+    $._endfunction,
+    $._endfor,
+    $._endwhile,
+    $._endif,
+    $._endtry,
+    $._normal,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -64,7 +69,7 @@ module.exports = grammar({
 
     return_statement: ($) => seq('return', $._expression),
 
-    normal_statement: ($) => command($, 'norm', 'al', /.*/),
+    normal_statement: ($) => command($, "normal", /.*/),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq('ruby', choice($.chunk, $.script)),
@@ -89,7 +94,7 @@ module.exports = grammar({
         'in',
         field('iter', $._expression),
         alias(repeat($._statement), $.body),
-        end('for'),
+        tokalias($, "endfor"), $._cmd_separator,
       ),
 
     while_loop: ($) =>
@@ -97,7 +102,7 @@ module.exports = grammar({
         'while',
         field('condition', $._expression),
         alias(repeat($._statement), $.body),
-        end('while'),
+        tokalias($, "endwhile"), $._cmd_separator,
       ),
 
     if_statement: ($) =>
@@ -107,7 +112,7 @@ module.exports = grammar({
         alias(repeat($._statement), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
-        end('if'),
+        tokalias($, "endif"), $._cmd_separator,
       ),
 
     elseif_statement: ($) =>
@@ -127,7 +132,7 @@ module.exports = grammar({
         alias(repeat($._statement), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
-        end('try'),
+        tokalias($, "endtry"), $._cmd_separator,
       ),
 
     catch_statement: ($) =>
@@ -223,7 +228,7 @@ module.exports = grammar({
 
         alias(repeat($._statement), $.body),
 
-        $._endfunction,
+        tokalias($, "endfunction"),
         $._cmd_separator,
       ),
 
@@ -425,32 +430,16 @@ module.exports = grammar({
   },
 });
 
-function command($, start, suff, ...args) {
-  return seq(optional(field('range', alias($._range, $.range))), cmd_token(start, suff), ...args);
+function tokalias(gram, name) {
+  return alias(gram["_" + name], name);
+}
+
+function command($, cmd, ...args) {
+  return seq(optional(field('range', alias($._range, $.range))), tokalias($, cmd), ...args);
 }
 
 function maybe_bang($, cmd_name) {
   return seq(cmd_name, optional($.bang));
-}
-
-// Shamelessly stolen from tree-sitter-php
-function cmd_token(cmd, suffix, aliasTok=true) {
-  let pattern = '';
-  for (var i = suffix.length - 1; i >= 0; i--) {
-    pattern = `(${suffix[i]}${pattern})?`;
-  }
-
-  let result = new RegExp(cmd + pattern);
-
-  if (aliasTok) {
-    result = alias(result, cmd + suffix);
-  }
-
-  return result;
-}
-
-function end(cmd_name) {
-  return cmd_token('end', cmd_name);
 }
 
 function commaSep(rule) {

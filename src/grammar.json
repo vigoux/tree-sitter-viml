@@ -130,8 +130,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "norm(a(l)?)?"
+            "type": "SYMBOL",
+            "name": "_normal"
           },
           "named": false,
           "value": "normal"
@@ -327,11 +327,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "end(f(o(r)?)?)?"
+            "type": "SYMBOL",
+            "name": "_endfor"
           },
           "named": false,
           "value": "endfor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -365,11 +369,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "end(w(h(i(l(e)?)?)?)?)?"
+            "type": "SYMBOL",
+            "name": "_endwhile"
           },
           "named": false,
           "value": "endwhile"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -422,11 +430,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "end(i(f)?)?"
+            "type": "SYMBOL",
+            "name": "_endif"
           },
           "named": false,
           "value": "endif"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -538,11 +550,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "end(t(r(y)?)?)?"
+            "type": "SYMBOL",
+            "name": "_endtry"
           },
           "named": false,
           "value": "endtry"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -1125,8 +1141,13 @@
           "value": "body"
         },
         {
-          "type": "SYMBOL",
-          "name": "_endfunction"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_endfunction"
+          },
+          "named": false,
+          "value": "endfunction"
         },
         {
           "type": "SYMBOL",
@@ -2801,6 +2822,26 @@
     {
       "type": "SYMBOL",
       "name": "_endfunction"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_endfor"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_endwhile"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_endif"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_endtry"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_normal"
     }
   ],
   "inline": [],

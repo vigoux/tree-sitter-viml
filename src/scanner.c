@@ -25,6 +25,11 @@ enum TokenType {
   COMMENT,
   // Many many many many keywords that are impossible to lex otherwise
   ENDFUNCTION, // For some reason any other end works
+  ENDFOR,
+  ENDWHILE,
+  ENDIF,
+  ENDTRY,
+  NORMAL,
   TOKENTYPE_NR
 };
 
@@ -32,6 +37,11 @@ typedef char* keyword[2];
 
 keyword keywords[] = {
   { "end", "function" },
+  { "end", "for" },
+  { "end", "while" },
+  { "end", "if" },
+  { "end", "try" },
+  { "norm", "al" }
 };
 
 void *tree_sitter_vim_external_scanner_create() {
