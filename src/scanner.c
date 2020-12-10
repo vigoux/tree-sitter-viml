@@ -263,6 +263,10 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       }
     } else if (lexer->lookahead == '|') {
       advance(lexer, false);
+      if (lexer->lookahead == '|') {
+        // This is an or expression
+        return false;
+      }
       lexer->mark_end(lexer); // Because we broke advance before
 
       lexer->result_symbol = CMD_SEPARATOR;

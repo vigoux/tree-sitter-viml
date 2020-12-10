@@ -28,3 +28,18 @@ call foo('abc', 'efg')
       (identifier)
       (string_literal)
       (string_literal))))
+
+================================================================================
+Or expression
+================================================================================
+
+let foo = bar || baz
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (binary_operation
+      (identifier)
+      (identifier))))
