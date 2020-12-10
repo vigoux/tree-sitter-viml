@@ -6,7 +6,7 @@ Try without catch
 
 try
   foo
-end
+endt
 
 ---
 
@@ -23,7 +23,7 @@ try
   foo
 catch /bar/
   baz
-end
+endt
 
 ---
 
@@ -41,7 +41,7 @@ try
   foo
 finally
   bar
-end
+endt
 
 ---
 
@@ -63,7 +63,7 @@ catch /qux/
   quux
 finally
   quuz
-end
+endt
 
 ---
 

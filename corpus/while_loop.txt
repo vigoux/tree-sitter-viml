@@ -5,7 +5,7 @@ While loop without a body
 =============================
 
 while foo
-end
+endw
 
 ---
 
@@ -19,7 +19,7 @@ While loop with a body
 while foo
   bar
   baz
-end
+endwhile
 
 ---
 

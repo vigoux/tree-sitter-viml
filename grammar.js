@@ -37,6 +37,9 @@ module.exports = grammar({
     $._endif,
     $._endtry,
     $._normal,
+    $._return,
+    $._ruby,
+    $._python,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -67,13 +70,13 @@ module.exports = grammar({
         $.command,
       ),
 
-    return_statement: ($) => seq('return', $._expression),
+    return_statement: ($) => seq(tokalias($, 'return'), $._expression),
 
     normal_statement: ($) => command($, "normal", /.*/),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
-    ruby_statement: ($) => seq('ruby', choice($.chunk, $.script)),
-    python_statement: ($) => seq('python', choice($.chunk, $.script)),
+    ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),
+    python_statement: ($) => seq(tokalias($, 'python'), choice($.chunk, $.script)),
     perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
 
     chunk: ($) => seq(/[^\n]*/, $._cmd_separator),

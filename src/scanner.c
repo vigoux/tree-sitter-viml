@@ -30,6 +30,9 @@ enum TokenType {
   ENDIF,
   ENDTRY,
   NORMAL,
+  RETURN,
+  RUBY,
+  PYTHON,
   TOKENTYPE_NR
 };
 
@@ -37,11 +40,14 @@ typedef char* keyword[2];
 
 keyword keywords[] = {
   { "end", "function" },
-  { "end", "for" },
-  { "end", "while" },
-  { "end", "if" },
-  { "end", "try" },
-  { "norm", "al" }
+  { "endfo", "r" },
+  { "endw", "hile" },
+  { "en", "dif" },
+  { "endt", "ry" },
+  { "norm", "al" },
+  { "retu", "rn" },
+  { "rub", "y" },
+  { "py", "thon" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {

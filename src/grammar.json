@@ -168,7 +168,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_ruby"
+          },
+          "named": false,
           "value": "ruby"
         },
         {
@@ -190,7 +195,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_python"
+          },
+          "named": false,
           "value": "python"
         },
         {
@@ -2842,6 +2852,18 @@
     {
       "type": "SYMBOL",
       "name": "_normal"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_return"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_ruby"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_python"
     }
   ],
   "inline": [],
