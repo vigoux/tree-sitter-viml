@@ -68,3 +68,45 @@ thr abc
     (identifier))
   (throw_statement
     (identifier)))
+
+================================================================================
+Execute statement
+================================================================================
+
+execute "abd"
+exe "foobar" .. "bcd"
+exe "foobar" .. "bcd" foor
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (execute_statement
+    (string_literal))
+  (execute_statement
+    (binary_operation
+      (string_literal)
+      (string_literal)))
+  (execute_statement
+    (binary_operation
+      (string_literal)
+      (string_literal))
+    (identifier)))
+
+================================================================================
+Execute in if
+================================================================================
+
+if v:true
+  exe foo
+endif
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (if_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (body
+      (execute_statement
+        (identifier)))))

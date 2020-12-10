@@ -43,6 +43,7 @@ module.exports = grammar({
     $._ruby,
     $._python,
     $._throw,
+    $._execute,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -61,13 +62,13 @@ module.exports = grammar({
         $.while_loop,
         $.for_loop,
         $.if_statement,
-        // $.execute_statement,
         $.lua_statement,
         $.range_statement,
         $.ruby_statement,
         $.python_statement,
         $.perl_statement,
         $.call_statement,
+        $.execute_statement,
         $.echo_statement,
         $.try_statement,
         $.throw_statement,
@@ -116,6 +117,7 @@ module.exports = grammar({
       seq(
         'if',
         field('condition', $._expression),
+        $._cmd_separator,
         alias(repeat($._statement), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
@@ -158,7 +160,7 @@ module.exports = grammar({
       ':',
       choice($.identifier, $.integer_literal)),
 
-    identifier: ($) => /[a-zA-Z_]\w*/,
+    identifier: ($) => /[a-zA-Z_](\w|#)*/,
 
     _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
 
@@ -219,6 +221,8 @@ module.exports = grammar({
     call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
 
     echo_statement: ($) => seq('echo', repeat($._variable), $._cmd_separator),
+
+    execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
 
     return_statement: ($) => seq('return', $._expression, $._cmd_separator),
 

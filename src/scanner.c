@@ -36,6 +36,7 @@ enum TokenType {
   RUBY,
   PYTHON,
   THROW,
+  EXECUTE,
   TOKENTYPE_NR
 };
 
@@ -52,6 +53,7 @@ keyword keywords[] = {
   { "rub", "y" },
   { "py", "thon" },
   { "th", "row" },
+  { "exe", "cute" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {
@@ -190,25 +192,21 @@ bool lex_string(TSLexer *lexer) {
   }
 }
 
-bool try_lex_keyword(TSLexer *lexer, keyword keyword) {
+bool try_lex_keyword(char *possible, keyword keyword) {
 
   // Try lexing mandatory part
-  for (size_t i = 0; keyword[0][i]; i++, advance(lexer, false)) {
-    if (lexer->lookahead != keyword[0][i]) {
+  size_t i;
+  for (i = 0; keyword[0][i] && possible[i]; i++) {
+    if (possible[i] != keyword[0][i]) {
       return false;
     }
   }
 
+  size_t mandat_len = i;
   // Now try lexing optional part
-  for (size_t i = 0; keyword[1][i]; i++, advance(lexer, false)) {
-    char c = lexer->lookahead;
-    if (c != keyword[1][i]) {
-      // Either end of keyword (i.e. whitespace) or wrong keyword
-      if (iswalpha(c)) {
-        return false;
-      } else {
-        return true;
-      }
+  for (size_t i = 0; keyword[1][i] && possible[mandat_len + i]; i++) {
+    if (possible[mandat_len + i] != keyword[1][i]) {
+      return false;
     }
   }
 
@@ -333,12 +331,39 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return true;
   }
 
-  // Other keywords
-  for (enum TokenType t = ENDFUNCTION; t < TOKENTYPE_NR; t++) {
-    if (valid_symbols[t] && try_lex_keyword(lexer, keywords[t - ENDFUNCTION])) {
-      lexer->result_symbol = t;
+  if (scope_correct(lexer) && (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE])) {
+    if (lex_scope(lexer)) {
       return true;
     }
+  }
+
+  // Other keywords
+  if (iswlower(lexer->lookahead)) {
+#define KEYWORD_SIZE 30
+    char keyword[KEYWORD_SIZE + 1] = { lexer->lookahead, 0 };
+
+    advance(lexer, false);
+
+    size_t i = 1;
+    for (; i < KEYWORD_SIZE && iswlower(lexer->lookahead); i++) {
+      keyword[i] = lexer->lookahead;
+      advance(lexer, false);
+    }
+
+    if (i == KEYWORD_SIZE) {
+      return false;
+    }
+
+    keyword[i] = '\0';
+
+    // Now really try to find the keyword
+    for (enum TokenType t = ENDFUNCTION; t < TOKENTYPE_NR; t++) {
+      if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - ENDFUNCTION])) {
+        lexer->result_symbol = t;
+        return true;
+      }
+    }
+#undef KEYWORD_SIZE
   }
 
   // String and comments
@@ -347,13 +372,6 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       return true;
     }
   }
-
-  if (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE]) {
-    if (lex_scope(lexer)) {
-      return true;
-    }
-  }
-
 
   return false;
 }

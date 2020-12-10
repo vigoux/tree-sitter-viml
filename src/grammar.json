@@ -74,6 +74,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "execute_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "echo_statement"
         },
         {
@@ -411,6 +415,10 @@
           }
         },
         {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "REPEAT",
@@ -697,7 +705,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-zA-Z_]\\w*"
+      "value": "[a-zA-Z_](\\w|#)*"
     },
     "_ident": {
       "type": "CHOICE",
@@ -1043,6 +1051,31 @@
           "content": {
             "type": "SYMBOL",
             "name": "_variable"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "execute_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_execute"
+          },
+          "named": false,
+          "value": "execute"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
           }
         },
         {
@@ -2925,6 +2958,10 @@
     {
       "type": "SYMBOL",
       "name": "_throw"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_execute"
     }
   ],
   "inline": [],
