@@ -656,49 +656,12 @@
         }
       ]
     },
-    "scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "b"
-        },
-        {
-          "type": "STRING",
-          "value": "s"
-        },
-        {
-          "type": "STRING",
-          "value": "t"
-        },
-        {
-          "type": "STRING",
-          "value": "v"
-        },
-        {
-          "type": "STRING",
-          "value": "w"
-        },
-        {
-          "type": "STRING",
-          "value": "g"
-        }
-      ]
-    },
-    "_scope_sep": {
-      "type": "STRING",
-      "value": ":"
-    },
     "scoped_identifier": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
           "name": "scope"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_scope_sep"
         },
         {
           "type": "SYMBOL",
@@ -1456,6 +1419,10 @@
       "content": {
         "type": "CHOICE",
         "members": [
+          {
+            "type": "SYMBOL",
+            "name": "scope_dict"
+          },
           {
             "type": "SYMBOL",
             "name": "_ident"
@@ -2902,6 +2869,14 @@
     {
       "type": "SYMBOL",
       "name": "_embedded_script_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scope_dict"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "scope"
     },
     {
       "type": "SYMBOL",

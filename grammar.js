@@ -29,6 +29,8 @@ module.exports = grammar({
     $._line_continuation,
     $._embedded_script_start,
     $._embedded_script_end,
+    $.scope_dict,
+    $.scope,
     $.string_literal,
     $.comment,
     $._endfunction,
@@ -149,11 +151,7 @@ module.exports = grammar({
     throw_statement: ($) => seq(tokalias($, "throw"), $._expression, $._cmd_separator),
 
     // TODO(vigoux): maybe we should find some names here
-    scope: ($) => choice('b', 's', 't', 'v', 'w', 'g'),
-
-    _scope_sep: ($) => ':',
-
-    scoped_identifier: ($) => seq($.scope, $._scope_sep, $.identifier),
+    scoped_identifier: ($) => seq($.scope, $.identifier),
 
     argument: ($) => seq(
       'a',
@@ -290,6 +288,7 @@ module.exports = grammar({
       prec.left(
         0,
         choice(
+          $.scope_dict,
           $._ident,
           $.string_literal,
           $.float_literal,

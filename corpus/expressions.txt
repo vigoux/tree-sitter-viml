@@ -43,3 +43,19 @@ let foo = bar || baz
     (binary_operation
       (identifier)
       (identifier))))
+
+================================================================================
+Scope dict
+================================================================================
+
+let foo = get(g:, "bar")
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (call_expression
+      (identifier)
+      (scope_dict)
+      (string_literal))))

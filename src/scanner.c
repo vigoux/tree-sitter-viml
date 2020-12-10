@@ -21,6 +21,8 @@ enum TokenType {
   LINE_CONTINUATION,
   EMBEDDED_SCRIPT_START,
   EMDEDDED_SCRIPT_END,
+  SCOPE_DICT,
+  SCOPE,
   STRING,
   COMMENT,
   // Many many many many keywords that are impossible to lex otherwise
@@ -213,6 +215,37 @@ bool try_lex_keyword(TSLexer *lexer, keyword keyword) {
   return true;
 }
 
+bool scope_correct(TSLexer *lexer) {
+  const char *SCOPES = "bstvwg";
+  for (size_t i = 0; SCOPES[i]; i++) {
+    if (lexer->lookahead == SCOPES[i]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+bool lex_scope(TSLexer *lexer) {
+  if (!scope_correct(lexer)) {
+    return false;
+  }
+  advance(lexer, false);
+
+  if (lexer->lookahead != ':') {
+    return false;
+  }
+  advance(lexer, false);
+
+  if (iswalnum(lexer->lookahead)) {
+    lexer->result_symbol = SCOPE;
+  } else {
+    lexer->result_symbol = SCOPE_DICT;
+  }
+
+  return true;
+}
+
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
   Scanner *s = (Scanner *)payload;
@@ -310,8 +343,17 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
 
   // String and comments
   if (valid_symbols[STRING] || valid_symbols[COMMENT]) {
-    return lex_string(lexer);
+    if (lex_string(lexer)) {
+      return true;
+    }
   }
+
+  if (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE]) {
+    if (lex_scope(lexer)) {
+      return true;
+    }
+  }
+
 
   return false;
 }
