@@ -257,6 +257,15 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return check_prefix(lexer, "inv", 3, INV);
   }
 
+  // Top level comments...
+  if (valid_symbols[COMMENT] && lexer->lookahead == '"') {
+    while (lexer->lookahead != '\n') {
+      advance(lexer, false);
+    }
+    lexer->result_symbol = COMMENT;
+    return true;
+  }
+
   // cmd separator and | this is not trivial at all because of how line
   // continuations are handled after encoutering an EOL :
   //  - Next line starts by a `\\` ?
