@@ -443,7 +443,7 @@ module.exports = grammar({
     dictionnary_entry: ($) =>
       seq(field('key', $._expression), ':', field('value', $._expression)),
 
-    dictionnary: ($) => seq('{', commaSep($.dictionnary_entry), '}'),
+    dictionnary: ($) => seq('{', commaSep($.dictionnary_entry), optional(','), '}'),
 
     // :h lambda
     lambda_expression: ($) =>
