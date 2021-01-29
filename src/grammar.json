@@ -98,7 +98,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_return"
+          },
+          "named": false,
           "value": "return"
         },
         {

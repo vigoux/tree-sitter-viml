@@ -75,7 +75,7 @@ module.exports = grammar({
         $.command,
       ),
 
-    return_statement: ($) => seq(tokalias($, 'return'), $._expression),
+    return_statement: ($) => seq(tokalias($, 'return'), $._expression, $._cmd_separator),
 
     normal_statement: ($) => command($, "normal", /.*/),
 
@@ -223,8 +223,6 @@ module.exports = grammar({
     echo_statement: ($) => seq('echo', repeat($._variable), $._cmd_separator),
 
     execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
-
-    return_statement: ($) => seq('return', $._expression, $._cmd_separator),
 
     command: ($) =>
       seq(
