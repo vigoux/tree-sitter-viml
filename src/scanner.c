@@ -164,31 +164,65 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   return true;
 }
 
-bool lex_string(TSLexer *lexer) {
-  char string_start_char;
+inline bool is_valid_string_delim(char c) {
+  return c == '\'' || c == '"';
+}
 
-  if (lexer->lookahead != '\'' && lexer->lookahead != '"') {
+bool lex_literal_string(TSLexer *lexer) {
+  while (true) {
+    if(lexer->lookahead == '\'') {
+      // Maybe end of string, but not sure, it could be double quote
+      advance(lexer, false);
+      if (lexer->lookahead == '\'') {
+        advance(lexer, false);
+      } else {
+        lexer->result_symbol = STRING;
+        return true;
+      }
+    } else if (lexer->lookahead == '\n') {
+      // Invalid EOL here
+      return false;
+    } else {
+      advance(lexer, false);
+    }
+  }
+}
+
+bool lex_escapable_string(TSLexer *lexer) {
+  while (true) {
+    if (lexer->lookahead == '\\') {
+      advance(lexer, false);
+      advance(lexer, false);
+    } else if (lexer->lookahead == '"') {
+      advance(lexer, false);
+      lexer->result_symbol = STRING;
+      return true;
+    } else if (lexer->lookahead == '\n') {
+      lexer->result_symbol = COMMENT;
+      return true;
+    } else {
+      advance(lexer, false);
+    }
+  }
+}
+
+bool lex_string(TSLexer *lexer) {
+  char string_delim;
+
+  if (!is_valid_string_delim(lexer->lookahead)) {
     return false;
   }
 
-  string_start_char = lexer->lookahead;
+  string_delim = lexer->lookahead;
   advance(lexer, false);
 
-  while (lexer->lookahead != string_start_char && lexer->lookahead != '\n') {
-    if (lexer->lookahead == '\\' && string_start_char == '"') {
-      advance(lexer, false);
-    }
-    advance(lexer, false);
-  }
-
-  if (lexer->lookahead == string_start_char) {
-    advance(lexer, false);
-    lexer->result_symbol = STRING;
-    return true;
-  } else {
-    // This may be a comment
-    lexer->result_symbol = COMMENT;
-    return string_start_char == '"';
+  switch (string_delim) {
+    case '"':
+      return lex_escapable_string(lexer);
+    case '\'':
+      return lex_literal_string(lexer);
+    default:
+      assert(0);
   }
 }
 
@@ -255,15 +289,6 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return check_prefix(lexer, "no", 2, NO);
   } else if (valid_symbols[INV] && lexer->lookahead == 'i') {
     return check_prefix(lexer, "inv", 3, INV);
-  }
-
-  // Top level comments...
-  if (valid_symbols[COMMENT] && lexer->lookahead == '"') {
-    while (lexer->lookahead != '\n') {
-      advance(lexer, false);
-    }
-    lexer->result_symbol = COMMENT;
-    return true;
   }
 
   // cmd separator and | this is not trivial at all because of how line
@@ -343,6 +368,8 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   if (scope_correct(lexer) && (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE])) {
     if (lex_scope(lexer)) {
       return true;
+    } else {
+      return false;
     }
   }
 
@@ -377,9 +404,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
 
   // String and comments
   if (valid_symbols[STRING] || valid_symbols[COMMENT]) {
-    if (lex_string(lexer)) {
-      return true;
-    }
+    return lex_string(lexer);
   }
 
   return false;
