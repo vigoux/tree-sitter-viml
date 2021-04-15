@@ -208,11 +208,16 @@ module.exports = grammar({
 
     _set_rhs: ($) => seq($._set_operator, $.set_value),
 
+    set_item: ($) => seq(
+        field('option', $._set_option),
+        optional(field('value', $._set_rhs)),
+    ),
+
     set_statement: ($) =>
       seq(
         'set',
-        field('option', $._set_option),
-        optional(field('value', $._set_rhs)),
+        repeat($.set_item),
+        $._cmd_separator
       ),
 
     unlet_statement: ($) =>

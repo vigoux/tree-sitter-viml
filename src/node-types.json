@@ -2572,7 +2572,7 @@
     }
   },
   {
-    "type": "set_statement",
+    "type": "set_item",
     "named": true,
     "fields": {
       "option": {
@@ -2639,6 +2639,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "set_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "set_item",
+          "named": true
+        }
+      ]
     }
   },
   {

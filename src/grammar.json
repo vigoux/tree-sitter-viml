@@ -960,13 +960,9 @@
         }
       ]
     },
-    "set_statement": {
+    "set_item": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "STRING",
-          "value": "set"
-        },
         {
           "type": "FIELD",
           "name": "option",
@@ -990,6 +986,26 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "set_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "set"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "set_item"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
