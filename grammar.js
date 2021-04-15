@@ -44,6 +44,7 @@ module.exports = grammar({
     $._python,
     $._throw,
     $._execute,
+    $._autocmd,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -72,6 +73,7 @@ module.exports = grammar({
         $.echo_statement,
         $.try_statement,
         $.throw_statement,
+        $.autocmd_statement,
         $.command,
       ),
 
@@ -228,6 +230,16 @@ module.exports = grammar({
     echo_statement: ($) => seq('echo', repeat($._variable), $._cmd_separator),
 
     execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
+
+    autocmd_statement: ($) => seq(
+      tokalias($, "autocmd"),
+      // TODO: Support groups
+      alias(/[A-Za-z]+/, $.event),
+      alias(/\S+/, $.pattern),
+      optional("++once"),
+      optional("++nested"),
+      field("command", $._statement)
+    ),
 
     command: ($) =>
       seq(

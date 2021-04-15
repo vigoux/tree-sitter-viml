@@ -37,6 +37,7 @@ enum TokenType {
   PYTHON,
   THROW,
   EXECUTE,
+  AUTOCMD,
   TOKENTYPE_NR
 };
 
@@ -54,6 +55,7 @@ keyword keywords[] = {
   { "py", "thon" },
   { "th", "row" },
   { "exe", "cute" },
+  { "au", "tocmd" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {

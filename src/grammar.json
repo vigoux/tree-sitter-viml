@@ -90,6 +90,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "autocmd_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -1102,6 +1106,70 @@
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
+        }
+      ]
+    },
+    "autocmd_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_autocmd"
+          },
+          "named": false,
+          "value": "autocmd"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[A-Za-z]+"
+          },
+          "named": true,
+          "value": "event"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\S+"
+          },
+          "named": true,
+          "value": "pattern"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "++once"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "++nested"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "command",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
         }
       ]
     },
@@ -2996,6 +3064,10 @@
     {
       "type": "SYMBOL",
       "name": "_execute"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_autocmd"
     }
   ],
   "inline": [],
