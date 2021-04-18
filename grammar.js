@@ -45,6 +45,7 @@ module.exports = grammar({
     $._throw,
     $._execute,
     $._autocmd,
+    $._silent,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -74,6 +75,7 @@ module.exports = grammar({
         $.try_statement,
         $.throw_statement,
         $.autocmd_statement,
+        $.silent_statement,
         $.command,
       ),
 
@@ -239,6 +241,11 @@ module.exports = grammar({
       optional("++once"),
       optional("++nested"),
       field("command", $._statement)
+    ),
+
+    silent_statement: ($) => seq(
+      maybe_bang($, tokalias($, "silent")),
+      $._statement
     ),
 
     command: ($) =>

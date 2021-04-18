@@ -110,6 +110,10 @@
             "named": true
           },
           {
+            "type": "silent_statement",
+            "named": true
+          },
+          {
             "type": "throw_statement",
             "named": true
           },
@@ -426,6 +430,10 @@
         },
         {
           "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "silent_statement",
           "named": true
         },
         {
@@ -2671,6 +2679,10 @@
           "named": true
         },
         {
+          "type": "silent_statement",
+          "named": true
+        },
+        {
           "type": "throw_statement",
           "named": true
         },
@@ -2769,6 +2781,109 @@
       "types": [
         {
           "type": "set_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "silent_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "autocmd_statement",
+          "named": true
+        },
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "echo_statement",
+          "named": true
+        },
+        {
+          "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "lua_statement",
+          "named": true
+        },
+        {
+          "type": "normal_statement",
+          "named": true
+        },
+        {
+          "type": "perl_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "range_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "throw_statement",
+          "named": true
+        },
+        {
+          "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unlet_statement",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -4047,6 +4162,10 @@
   {
     "type": "set_value",
     "named": true
+  },
+  {
+    "type": "silent",
+    "named": false
   },
   {
     "type": "spread",

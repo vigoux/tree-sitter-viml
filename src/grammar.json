@@ -94,6 +94,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "silent_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -1170,6 +1174,41 @@
             "type": "SYMBOL",
             "name": "_statement"
           }
+        }
+      ]
+    },
+    "silent_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_silent"
+              },
+              "named": false,
+              "value": "silent"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
         }
       ]
     },
@@ -3068,6 +3107,10 @@
     {
       "type": "SYMBOL",
       "name": "_autocmd"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_silent"
     }
   ],
   "inline": [],

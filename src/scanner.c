@@ -38,6 +38,7 @@ enum TokenType {
   THROW,
   EXECUTE,
   AUTOCMD,
+  SILENT,
   TOKENTYPE_NR
 };
 
@@ -56,6 +57,7 @@ keyword keywords[] = {
   { "th", "row" },
   { "exe", "cute" },
   { "au", "tocmd" },
+  { "sil", "ent" },
 };
 
 void *tree_sitter_vim_external_scanner_create() {
