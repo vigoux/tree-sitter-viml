@@ -79,7 +79,7 @@ module.exports = grammar({
         $.command,
       ),
 
-    return_statement: ($) => seq(tokalias($, 'return'), $._expression, $._cmd_separator),
+    return_statement: ($) => seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
 
     normal_statement: ($) => command($, "normal", /.*/),
 

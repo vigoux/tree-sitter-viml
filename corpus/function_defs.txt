@@ -119,3 +119,40 @@ endfunction
         (scope)
         (identifier))
       (parameters))))
+
+================================================================================
+Function return integer
+================================================================================
+
+function foo()
+  return 1
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (return_statement
+        (integer_literal)))))
+
+================================================================================
+Function empty return
+================================================================================
+
+function foo()
+  return
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (return_statement))))
