@@ -271,8 +271,9 @@ module.exports = grammar({
         $._cmd_separator,
       ),
 
-    function_declaration: ($) =>
-      seq(field('name', $._ident), field('parameters', $.parameters)),
+    function_declaration: ($) => seq(
+        field('name', $._ident),
+        field('parameters', $.parameters)),
 
     // FIXME(vigoux): The spread here is not exactly right...
     parameters: ($) => seq('(', commaSep(choice($.identifier, $.spread)), ')'),

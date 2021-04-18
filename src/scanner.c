@@ -253,7 +253,7 @@ bool try_lex_keyword(char *possible, keyword keyword) {
 }
 
 bool scope_correct(TSLexer *lexer) {
-  const char *SCOPES = "bstvwg";
+  const char *SCOPES = "bstvwg<";
   for (size_t i = 0; SCOPES[i]; i++) {
     if (lexer->lookahead == SCOPES[i]) {
       return true;
@@ -267,20 +267,34 @@ bool lex_scope(TSLexer *lexer) {
   if (!scope_correct(lexer)) {
     return false;
   }
-  advance(lexer, false);
-
-  if (lexer->lookahead != ':') {
-    return false;
-  }
-  advance(lexer, false);
-
-  if (iswalnum(lexer->lookahead)) {
+  
+  if (lexer->lookahead == '<') {
+    advance(lexer, false);
+    const char sid[4 + 1] = "SID>";
+    for (size_t i = 0; sid[i] && lexer->lookahead; i++) {
+      if (lexer->lookahead != sid[i]) {
+        return false;
+      }
+      advance(lexer, false);
+    }
     lexer->result_symbol = SCOPE;
+    return true;
   } else {
-    lexer->result_symbol = SCOPE_DICT;
-  }
+    advance(lexer, false);
 
-  return true;
+    if (lexer->lookahead != ':') {
+      return false;
+    }
+    advance(lexer, false);
+
+    if (iswalnum(lexer->lookahead)) {
+      lexer->result_symbol = SCOPE;
+    } else {
+      lexer->result_symbol = SCOPE_DICT;
+    }
+
+    return true;
+  }
 }
 
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
@@ -410,9 +424,10 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   // String and comments
   if (valid_symbols[COMMENT] && !valid_symbols[STRING]
       && lexer->lookahead == '"') {
-    while (lexer->lookahead != '\n') {
-      advance(lexer, true);
-    }
+    do {
+      advance(lexer, false);
+    } while (lexer->lookahead != '\n');
+
     lexer->result_symbol = COMMENT;
     return true;
   } else if (valid_symbols[STRING] && valid_symbols[COMMENT]) {

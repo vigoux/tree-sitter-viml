@@ -102,3 +102,20 @@ end
       (identifier)
       (parameters
         (spread)))))
+
+================================================================================
+Script local function
+================================================================================
+
+function <SID>foo()
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (scoped_identifier
+        (scope)
+        (identifier))
+      (parameters))))
