@@ -229,7 +229,7 @@ module.exports = grammar({
 
     call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
 
-    echo_statement: ($) => seq('echo', repeat($._variable), $._cmd_separator),
+    echo_statement: ($) => seq('echo', repeat($._expression), $._cmd_separator),
 
     execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
 

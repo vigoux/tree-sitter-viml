@@ -1087,7 +1087,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_variable"
+            "name": "_expression"
           }
         },
         {
