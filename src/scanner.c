@@ -192,6 +192,7 @@ bool lex_literal_string(TSLexer *lexer) {
   }
 }
 
+// FIXME: this does not support comments like `" Hello "mister" how are you ?`
 bool lex_escapable_string(TSLexer *lexer) {
   while (true) {
     if (lexer->lookahead == '\\') {
@@ -407,7 +408,14 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   }
 
   // String and comments
-  if (valid_symbols[STRING] || valid_symbols[COMMENT]) {
+  if (valid_symbols[COMMENT] && !valid_symbols[STRING]
+      && lexer->lookahead == '"') {
+    while (lexer->lookahead != '\n') {
+      advance(lexer, true);
+    }
+    lexer->result_symbol = COMMENT;
+    return true;
+  } else if (valid_symbols[STRING] && valid_symbols[COMMENT]) {
     return lex_string(lexer);
   }
 
