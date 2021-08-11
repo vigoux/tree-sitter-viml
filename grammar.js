@@ -156,6 +156,18 @@ module.exports = grammar({
 
     throw_statement: ($) => seq(tokalias($, "throw"), $._expression, $._cmd_separator),
 
+    autocmd_statement: ($) => seq(
+      tokalias($, "autocmd"),
+      $.au_event_list,
+      alias(/[a-zA-Z*.]+/, $.pattern),
+      optional("++once"),
+      optional("++nested"),
+      field("command", $._statement)
+    ),
+
+    au_event: ($) => /[A-Z][a-zA-Z]+/,
+    au_event_list: ($) => commaSep1($.au_event),
+
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
 
@@ -232,16 +244,6 @@ module.exports = grammar({
     echo_statement: ($) => seq('echo', repeat($._expression), $._cmd_separator),
 
     execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
-
-    autocmd_statement: ($) => seq(
-      tokalias($, "autocmd"),
-      // TODO: Support groups
-      alias(/[A-Za-z]+/, $.event),
-      alias(/\S+/, $.pattern),
-      optional("++once"),
-      optional("++nested"),
-      field("command", $._statement)
-    ),
 
     silent_statement: ($) => seq(
       maybe_bang($, tokalias($, "silent")),

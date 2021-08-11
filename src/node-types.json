@@ -34,6 +34,21 @@
     }
   },
   {
+    "type": "au_event_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "au_event",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "autocmd_statement",
     "named": true,
     "fields": {
@@ -137,7 +152,7 @@
       "required": true,
       "types": [
         {
-          "type": "event",
+          "type": "au_event_list",
           "named": true
         },
         {
@@ -4020,6 +4035,10 @@
     "named": false
   },
   {
+    "type": "au_event",
+    "named": true
+  },
+  {
     "type": "autocmd",
     "named": false
   },
@@ -4078,10 +4097,6 @@
   {
     "type": "endwhile",
     "named": false
-  },
-  {
-    "type": "event",
-    "named": true
   },
   {
     "type": "execute",
