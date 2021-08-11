@@ -3026,7 +3026,6 @@
       "field_expression"
     ]
   ],
-  "precedences": [],
   "externals": [
     {
       "type": "SYMBOL",
