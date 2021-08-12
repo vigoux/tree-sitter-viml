@@ -632,6 +632,10 @@
           "named": true
         },
         {
+          "type": "bang",
+          "named": true
+        },
+        {
           "type": "command_name",
           "named": true
         }
