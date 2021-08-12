@@ -26,6 +26,7 @@ enum TokenType {
   STRING,
   COMMENT,
   // Many many many many keywords that are impossible to lex otherwise
+  FUNCTION,
   ENDFUNCTION, // For some reason any other end works
   ENDFOR,
   ENDWHILE,
@@ -42,9 +43,12 @@ enum TokenType {
   TOKENTYPE_NR
 };
 
+const enum TokenType TRIE_START = COMMENT + 1;
+
 typedef char* keyword[2];
 
 keyword keywords[] = {
+  { "fu", "nction" },
   { "end", "function" },
   { "endfo", "r" },
   { "endw", "hile" },
@@ -412,8 +416,8 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     keyword[i] = '\0';
 
     // Now really try to find the keyword
-    for (enum TokenType t = ENDFUNCTION; t < TOKENTYPE_NR; t++) {
-      if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - ENDFUNCTION])) {
+    for (enum TokenType t = TRIE_START; t < TOKENTYPE_NR; t++) {
+      if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - TRIE_START])) {
         lexer->result_symbol = t;
         return true;
       }

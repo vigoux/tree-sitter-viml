@@ -1306,7 +1306,12 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_function"
+              },
+              "named": false,
               "value": "function"
             },
             {
@@ -3092,6 +3097,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_function"
     },
     {
       "type": "SYMBOL",

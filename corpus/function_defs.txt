@@ -184,3 +184,21 @@ endfunction
       (parameters))
     (body
       (return_statement))))
+
+================================================================================
+:fun-y function
+================================================================================
+
+fun bar()
+  return
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (return_statement))))

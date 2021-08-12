@@ -33,6 +33,7 @@ module.exports = grammar({
     $.scope,
     $.string_literal,
     $.comment,
+    $._function,
     $._endfunction,
     $._endfor,
     $._endwhile,
@@ -262,7 +263,7 @@ module.exports = grammar({
 
     function_definition: ($) =>
       seq(
-        maybe_bang($, 'function'),
+        maybe_bang($, tokalias($, 'function')),
         $.function_declaration,
         repeat(choice('dict', 'range', 'abort', 'closure')),
         $._cmd_separator,
