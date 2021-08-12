@@ -47,6 +47,8 @@ module.exports = grammar({
     $._execute,
     $._autocmd,
     $._silent,
+    $._echo,
+    $._echomsg,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -241,7 +243,8 @@ module.exports = grammar({
 
     call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
 
-    echo_statement: ($) => seq('echo', repeat($._expression), $._cmd_separator),
+    echo_statement: ($) => echo_variant($, 'echo'),
+    echomsg_statement: ($) => echo_variant($, 'echomsg'),
 
     execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
 
@@ -509,4 +512,8 @@ function sep1(rule, separator) {
 
 function bin_left_right(left, operator, right) {
   return seq(field('left', left), operator, field('right', right));
+}
+
+function echo_variant($, cmd) {
+    return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
 }

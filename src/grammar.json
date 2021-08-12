@@ -1177,8 +1177,38 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_echo"
+          },
+          "named": false,
           "value": "echo"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "echomsg_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_echomsg"
+          },
+          "named": false,
+          "value": "echomsg"
         },
         {
           "type": "REPEAT",
@@ -3161,6 +3191,14 @@
     {
       "type": "SYMBOL",
       "name": "_silent"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_echo"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_echomsg"
     }
   ],
   "inline": [],

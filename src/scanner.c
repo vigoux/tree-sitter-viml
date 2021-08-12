@@ -40,6 +40,8 @@ enum TokenType {
   EXECUTE,
   AUTOCMD,
   SILENT,
+  ECHO,
+  ECHOMSG,
   TOKENTYPE_NR
 };
 
@@ -64,6 +66,8 @@ keyword keywords[] = {
   KEYWORD(EXECUTE, "exe", "cute"),
   KEYWORD(AUTOCMD, "au", "tocmd"),
   KEYWORD(SILENT, "sil", "ent"),
+  KEYWORD(ECHO, "ec", "ho"),
+  KEYWORD(ECHOMSG, "echom", "sg"),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
