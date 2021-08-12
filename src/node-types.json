@@ -113,6 +113,10 @@
             "named": true
           },
           {
+            "type": "register_statement",
+            "named": true
+          },
+          {
             "type": "return_statement",
             "named": true
           },
@@ -433,6 +437,10 @@
         },
         {
           "type": "range_statement",
+          "named": true
+        },
+        {
+          "type": "register_statement",
           "named": true
         },
         {
@@ -2501,7 +2509,7 @@
     }
   },
   {
-    "type": "register",
+    "type": "register_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -2509,7 +2517,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "register",
           "named": true
         }
       ]
@@ -2724,6 +2732,10 @@
           "named": true
         },
         {
+          "type": "register_statement",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         },
@@ -2909,6 +2921,10 @@
         },
         {
           "type": "range_statement",
+          "named": true
+        },
+        {
+          "type": "register_statement",
           "named": true
         },
         {
@@ -4005,10 +4021,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -4203,6 +4215,10 @@
   {
     "type": "range",
     "named": false
+  },
+  {
+    "type": "register",
+    "named": true
   },
   {
     "type": "return",

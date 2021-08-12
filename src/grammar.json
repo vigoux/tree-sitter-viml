@@ -98,6 +98,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "register_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -1617,6 +1621,10 @@
         }
       ]
     },
+    "register_statement": {
+      "type": "SYMBOL",
+      "name": "register"
+    },
     "_variable": {
       "type": "PREC_LEFT",
       "value": 0,
@@ -2869,17 +2877,8 @@
       ]
     },
     "register": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "@[\"0-9a-zA-Z:.%#=*+_/-]"
     },
     "option": {
       "type": "SEQ",

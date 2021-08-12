@@ -77,6 +77,7 @@ module.exports = grammar({
         $.throw_statement,
         $.autocmd_statement,
         $.silent_statement,
+        $.register_statement,
         $.command,
       ),
 
@@ -313,6 +314,9 @@ module.exports = grammar({
     last_line: ($) => '$',
     previous_pattern: ($) => choice('\\/', '\\?', '\\&'),
 
+    // :h :@
+    register_statement: ($) => $.register,
+
     // :h variable
     _variable: ($) =>
       prec.left(
@@ -463,7 +467,10 @@ module.exports = grammar({
       ),
 
     env_variable: ($) => seq('$', $.identifier),
-    register: ($) => seq('@', $.identifier),
+
+    // :h registers
+    register: ($) => /@["0-9a-zA-Z:.%#=*+_/-]/,
+
     option: ($) => seq('&', $.option_name),
 
     dictionnary_entry: ($) =>
