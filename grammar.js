@@ -301,6 +301,7 @@ module.exports = grammar({
       choice(
         alias($.integer_literal, $.line_number),
         $.current_line,
+        $.next_line,
         $.last_line,
         $.pattern,
         $.previous_pattern,
@@ -308,6 +309,7 @@ module.exports = grammar({
       ),
 
     current_line: ($) => '.',
+    next_line: ($) => '+',
     last_line: ($) => '$',
     previous_pattern: ($) => choice('\\/', '\\?', '\\&'),
 

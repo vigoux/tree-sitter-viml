@@ -1576,6 +1576,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "next_line"
+        },
+        {
+          "type": "SYMBOL",
           "name": "last_line"
         },
         {
@@ -1595,6 +1599,10 @@
     "current_line": {
       "type": "STRING",
       "value": "."
+    },
+    "next_line": {
+      "type": "STRING",
+      "value": "+"
     },
     "last_line": {
       "type": "STRING",

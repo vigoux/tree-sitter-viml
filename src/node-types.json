@@ -2234,6 +2234,11 @@
     "fields": {}
   },
   {
+    "type": "next_line",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "no_option",
     "named": true,
     "fields": {},
@@ -2381,6 +2386,10 @@
             "named": true
           },
           {
+            "type": "next_line",
+            "named": true
+          },
+          {
             "type": "pattern",
             "named": true
           },
@@ -2408,6 +2417,10 @@
           },
           {
             "type": "mark",
+            "named": true
+          },
+          {
+            "type": "next_line",
             "named": true
           },
           {
@@ -2457,6 +2470,10 @@
             "named": true
           },
           {
+            "type": "next_line",
+            "named": true
+          },
+          {
             "type": "pattern",
             "named": true
           },
@@ -2484,6 +2501,10 @@
           },
           {
             "type": "mark",
+            "named": true
+          },
+          {
+            "type": "next_line",
             "named": true
           },
           {
