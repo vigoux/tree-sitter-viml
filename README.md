@@ -1,26 +1,6 @@
 # Tree-sitter VimL parser
 
-A (really WIP) parser for VimL using treesitter.
+A parser for VimL using treesitter.
 
-The support of the language is really partial (just look at the `grammar.js`), but it will become
-better as we go.
-
-Any contribution is greatly appreciated !
-
-TODO:
- - [x] Literals
-   - [x] Integers
-   - [x] Floats
- - Expressions
-   - [x] Lists
-     - [x] Creation
-     - [x] Index
-   - [x] Multiline expressions
-   - [x] Closures
- - [x] Conditionnals and loops
-   - [x] if
-   - [x] for
-   - [x] while
- - [x] Try block
- - [ ] Builtin commands
- - [ ] Tests and example queries
+Any contribution is greatly appreciated, so please look [here](CONTRIBUTING.md) for more information.
+__Don't forget that reporting and issue is already a contribution, and will greatly help, so please do report issues!__

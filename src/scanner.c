@@ -43,25 +43,27 @@ enum TokenType {
   TOKENTYPE_NR
 };
 
-const enum TokenType TRIE_START = COMMENT + 1;
+#define TRIE_START (COMMENT + 1)
 
 typedef char* keyword[2];
 
+#define KEYWORD(tk, m, opt) [tk - TRIE_START] = { (m), (opt) }
+
 keyword keywords[] = {
-  { "fu", "nction" },
-  { "end", "function" },
-  { "endfo", "r" },
-  { "endw", "hile" },
-  { "en", "dif" },
-  { "endt", "ry" },
-  { "norm", "al" },
-  { "retu", "rn" },
-  { "rub", "y" },
-  { "py", "thon" },
-  { "th", "row" },
-  { "exe", "cute" },
-  { "au", "tocmd" },
-  { "sil", "ent" },
+  KEYWORD(FUNCTION, "fu", "nction"),
+  KEYWORD(ENDFUNCTION, "end", "function"),
+  KEYWORD(ENDFOR, "endfo", "r"),
+  KEYWORD(ENDWHILE, "endw", "hile"),
+  KEYWORD(ENDIF, "en", "dif"),
+  KEYWORD(ENDTRY, "endt", "ry"),
+  KEYWORD(NORMAL, "norm", "al"),
+  KEYWORD(RETURN, "retu", "rn"),
+  KEYWORD(RUBY, "rub", "y"),
+  KEYWORD(PYTHON, "py", "thon"),
+  KEYWORD(THROW, "th", "row"),
+  KEYWORD(EXECUTE, "exe", "cute"),
+  KEYWORD(AUTOCMD, "au", "tocmd"),
+  KEYWORD(SILENT, "sil", "ent"),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
