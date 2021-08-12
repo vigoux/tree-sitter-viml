@@ -13,7 +13,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  test:
+    name: Tree-sitter tests
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -25,6 +26,6 @@ jobs:
       - uses: actions/setup-node@v2.4.0
       - name: Install Dependencies
         run: npm install
-        
+
       - name: Run tests
         run: npm test
