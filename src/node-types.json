@@ -27,7 +27,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "command_argument",
           "named": true
         }
       ]
@@ -4057,6 +4057,10 @@
   {
     "type": "closure",
     "named": false
+  },
+  {
+    "type": "command_argument",
+    "named": true
   },
   {
     "type": "command_name",

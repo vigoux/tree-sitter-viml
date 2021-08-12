@@ -1283,7 +1283,7 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "identifier"
+              "name": "command_argument"
             }
           },
           "named": true,
@@ -1294,6 +1294,10 @@
           "name": "_cmd_separator"
         }
       ]
+    },
+    "command_argument": {
+      "type": "PATTERN",
+      "value": "\\S+"
     },
     "function_definition": {
       "type": "SEQ",

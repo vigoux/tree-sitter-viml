@@ -254,9 +254,11 @@ module.exports = grammar({
     command: ($) =>
       seq(
         maybe_bang($, alias($.identifier, $.command_name)),
-        alias(repeat($.identifier), $.arguments),
+        alias(repeat($.command_argument), $.arguments),
         $._cmd_separator,
       ),
+
+    command_argument: ($) => /\S+/,
 
     function_definition: ($) =>
       seq(

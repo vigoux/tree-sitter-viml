@@ -10,7 +10,7 @@ test foo
   (command
     (command_name)
     (arguments
-      (identifier))))
+      (command_argument))))
 
 ================================================================================
 Simple command with bang
@@ -24,6 +24,21 @@ test!
   (command
     (command_name)
     (bang)))
+
+================================================================================
+Simple command with weird arguments
+================================================================================
+
+test a.b.c a:foobar
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (command
+    (command_name)
+    (arguments
+      (command_argument)
+      (command_argument))))
 
 ================================================================================
 Simple command without args
@@ -50,8 +65,8 @@ test foo
   (command
     (command_name)
     (arguments
-      (identifier)
-      (identifier))))
+      (command_argument)
+      (command_argument))))
 
 ================================================================================
 Multiple commands pipe
