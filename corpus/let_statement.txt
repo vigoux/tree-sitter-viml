@@ -72,3 +72,40 @@ let l:foo = l:bar
     (scoped_identifier
       (scope)
       (identifier))))
+
+================================================================================
+Let variable named like scopes
+================================================================================
+
+let a = 1
+let b = 1
+let g = 1
+let l = 1
+let w = 1
+let t = 1
+let v = 1
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (integer_literal)))

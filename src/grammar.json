@@ -800,11 +800,7 @@
       "members": [
         {
           "type": "STRING",
-          "value": "a"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
+          "value": "a:"
         },
         {
           "type": "CHOICE",

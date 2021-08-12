@@ -173,10 +173,7 @@ module.exports = grammar({
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
 
-    argument: ($) => seq(
-      'a',
-      ':',
-      choice($.identifier, $.integer_literal)),
+    argument: ($) => seq( 'a:', choice($.identifier, $.integer_literal)),
 
     identifier: ($) => /[a-zA-Z_](\w|#)*/,
 
