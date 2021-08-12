@@ -264,10 +264,7 @@ module.exports = grammar({
       seq(
         maybe_bang($, 'function'),
         $.function_declaration,
-        optional('range'),
-        optional('abort'),
-        optional('dict'),
-        optional('closure'),
+        repeat(choice('dict', 'range', 'abort', 'closure')),
         $._cmd_separator,
 
         alias(repeat($._statement), $.body),

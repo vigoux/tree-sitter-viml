@@ -156,3 +156,31 @@ endfunction
       (parameters))
     (body
       (return_statement))))
+
+================================================================================
+Function with definition arguments
+================================================================================
+
+function foo() dict abort range closure
+  return
+endfunction
+
+function foo() abort dict range closure
+  return
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (return_statement)))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (body
+      (return_statement))))
