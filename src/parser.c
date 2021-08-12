@@ -221,7 +221,7 @@ enum {
 static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [sym_identifier] = "identifier",
-  [aux_sym_normal_statement_token1] = "normal_statement_token1",
+  [aux_sym_normal_statement_token1] = "commands",
   [anon_sym_lua] = "lua",
   [anon_sym_perl] = "perl",
   [aux_sym_chunk_token1] = "chunk_token1",
@@ -634,8 +634,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [aux_sym_normal_statement_token1] = {
-    .visible = false,
-    .named = false,
+    .visible = true,
+    .named = true,
   },
   [anon_sym_lua] = {
     .visible = true,

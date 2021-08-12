@@ -166,8 +166,13 @@
           "value": "normal"
         },
         {
-          "type": "PATTERN",
-          "value": ".*"
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": ".*"
+          },
+          "named": true,
+          "value": "commands"
         }
       ]
     },

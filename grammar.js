@@ -82,7 +82,7 @@ module.exports = grammar({
 
     return_statement: ($) => seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
 
-    normal_statement: ($) => command($, "normal", /.*/),
+    normal_statement: ($) => command($, "normal", alias(/.*/, $.commands)),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),
