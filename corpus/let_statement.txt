@@ -55,3 +55,20 @@ let [fleh, b, c] = [1, 2, 3]
       (integer_literal)
       (integer_literal)
       (integer_literal))))
+
+================================================================================
+Let local variable
+================================================================================
+
+let l:foo = l:bar
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (scoped_identifier
+      (scope)
+      (identifier))))

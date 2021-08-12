@@ -257,7 +257,7 @@ bool try_lex_keyword(char *possible, keyword keyword) {
 }
 
 bool scope_correct(TSLexer *lexer) {
-  const char *SCOPES = "bstvwg<";
+  const char *SCOPES = "lbstvwg<";
   for (size_t i = 0; SCOPES[i]; i++) {
     if (lexer->lookahead == SCOPES[i]) {
       return true;
@@ -271,7 +271,7 @@ bool lex_scope(TSLexer *lexer) {
   if (!scope_correct(lexer)) {
     return false;
   }
-  
+
   if (lexer->lookahead == '<') {
     advance(lexer, false);
     const char sid[4 + 1] = "SID>";
