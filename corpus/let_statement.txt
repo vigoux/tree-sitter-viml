@@ -36,3 +36,22 @@ let a:000 = {}
     (argument
       (integer_literal))
     (dictionnary)))
+
+================================================================================
+Let destructuring
+================================================================================
+
+let [fleh, b, c] = [1, 2, 3]
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (list
+      (identifier)
+      (identifier)
+      (identifier))
+    (list
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))))

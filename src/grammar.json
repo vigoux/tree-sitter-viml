@@ -899,6 +899,10 @@
             {
               "type": "SYMBOL",
               "name": "field_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "list"
             }
           ]
         },

@@ -192,6 +192,7 @@ module.exports = grammar({
           $.option,
           $.index_expression,
           $.field_expression,
+          $.list
         ),
         $._let_operator,
         $._expression,
