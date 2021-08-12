@@ -302,7 +302,7 @@ module.exports = grammar({
 
     _range_marker: ($) =>
       choice(
-        alias($.integer_literal, $.line_number),
+        $.integer_literal,
         $.current_line,
         $.next_line,
         $.last_line,

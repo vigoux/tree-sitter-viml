@@ -2374,11 +2374,11 @@
             "named": true
           },
           {
-            "type": "last_line",
+            "type": "integer_literal",
             "named": true
           },
           {
-            "type": "line_number",
+            "type": "last_line",
             "named": true
           },
           {
@@ -2408,11 +2408,11 @@
             "named": true
           },
           {
-            "type": "last_line",
+            "type": "integer_literal",
             "named": true
           },
           {
-            "type": "line_number",
+            "type": "last_line",
             "named": true
           },
           {
@@ -2458,11 +2458,11 @@
             "named": true
           },
           {
-            "type": "last_line",
+            "type": "integer_literal",
             "named": true
           },
           {
-            "type": "line_number",
+            "type": "last_line",
             "named": true
           },
           {
@@ -2492,11 +2492,11 @@
             "named": true
           },
           {
-            "type": "last_line",
+            "type": "integer_literal",
             "named": true
           },
           {
-            "type": "line_number",
+            "type": "last_line",
             "named": true
           },
           {
@@ -4276,10 +4276,6 @@
   {
     "type": "let",
     "named": false
-  },
-  {
-    "type": "line_number",
-    "named": true
   },
   {
     "type": "lua",

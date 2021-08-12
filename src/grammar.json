@@ -1595,13 +1595,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "integer_literal"
-          },
-          "named": true,
-          "value": "line_number"
+          "type": "SYMBOL",
+          "name": "integer_literal"
         },
         {
           "type": "SYMBOL",

@@ -20,7 +20,7 @@ Range one line
 
 (script_file
   (range_statement
-    (line_number)))
+    (integer_literal)))
 
 ================================================================================
 Range two line
@@ -32,8 +32,8 @@ Range two line
 
 (script_file
   (range_statement
-    (line_number)
-    (line_number)))
+    (integer_literal)
+    (integer_literal)))
 
 ================================================================================
 Range line and eof
@@ -45,7 +45,7 @@ Range line and eof
 
 (script_file
   (range_statement
-    (line_number)
+    (integer_literal)
     (last_line)))
 
 ================================================================================
