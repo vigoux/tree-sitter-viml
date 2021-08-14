@@ -72,3 +72,30 @@ let foo = 'hello ''you'''
   (let_statement
     (identifier)
     (string_literal)))
+
+================================================================================
+Slice expression
+================================================================================
+
+let l = mylist[:3]
+let l = mylist[4:4]
+let l = mylist[:]
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (slice_expression
+      (identifier)
+      (integer_literal)))
+  (let_statement
+    (identifier)
+    (slice_expression
+      (identifier)
+      (integer_literal)
+      (integer_literal)))
+  (let_statement
+    (identifier)
+    (slice_expression
+      (identifier))))
