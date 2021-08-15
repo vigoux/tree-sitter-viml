@@ -483,6 +483,8 @@ module.exports = grammar({
     // :h lambda
     lambda_expression: ($) =>
       seq('{', commaSep($.identifier), '->', $._expression, '}'),
+
+    _escaped_line: ($) => alias($._line_continuation, '\\'),
   },
 });
 
