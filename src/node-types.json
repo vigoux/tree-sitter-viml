@@ -97,6 +97,10 @@
             "named": true
           },
           {
+            "type": "map_statement",
+            "named": true
+          },
+          {
             "type": "normal_statement",
             "named": true
           },
@@ -421,6 +425,10 @@
         },
         {
           "type": "lua_statement",
+          "named": true
+        },
+        {
+          "type": "map_statement",
           "named": true
         },
         {
@@ -2229,6 +2237,32 @@
     }
   },
   {
+    "type": "map_statement",
+    "named": true,
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "map_side",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "map_side",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "match_case",
     "named": true,
     "fields": {}
@@ -2737,6 +2771,10 @@
           "named": true
         },
         {
+          "type": "map_statement",
+          "named": true
+        },
+        {
           "type": "normal_statement",
           "named": true
         },
@@ -2926,6 +2964,10 @@
         },
         {
           "type": "lua_statement",
+          "named": true
+        },
+        {
+          "type": "map_statement",
           "named": true
         },
         {
@@ -4110,6 +4152,22 @@
     "named": false
   },
   {
+    "type": "CR",
+    "named": false
+  },
+  {
+    "type": "Cmd",
+    "named": false
+  },
+  {
+    "type": "Ignore",
+    "named": false
+  },
+  {
+    "type": "Nop",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -4280,6 +4338,14 @@
   {
     "type": "lua",
     "named": false
+  },
+  {
+    "type": "map",
+    "named": false
+  },
+  {
+    "type": "map_side",
+    "named": true
   },
   {
     "type": "mark",

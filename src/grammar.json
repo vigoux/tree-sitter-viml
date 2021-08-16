@@ -102,6 +102,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "map_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -1679,6 +1683,83 @@
       "type": "SYMBOL",
       "name": "register"
     },
+    "map_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_map"
+          },
+          "named": false,
+          "value": "map"
+        },
+        {
+          "type": "FIELD",
+          "name": "lhs",
+          "content": {
+            "type": "SYMBOL",
+            "name": "map_side"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "rhs",
+          "content": {
+            "type": "SYMBOL",
+            "name": "map_side"
+          }
+        }
+      ]
+    },
+    "map_side": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\n \\t]+"
+      }
+    },
+    "keycode": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "<"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "Cmd"
+            },
+            {
+              "type": "STRING",
+              "value": "CR"
+            },
+            {
+              "type": "STRING",
+              "value": "Ignore"
+            },
+            {
+              "type": "STRING",
+              "value": "Nop"
+            }
+          ]
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": ">"
+          }
+        }
+      ]
+    },
     "_variable": {
       "type": "PREC_LEFT",
       "value": 0,
@@ -3238,6 +3319,10 @@
     {
       "type": "SYMBOL",
       "name": "_echomsg"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_map"
     }
   ],
   "inline": [],

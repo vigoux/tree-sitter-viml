@@ -42,6 +42,7 @@ enum TokenType {
   SILENT,
   ECHO,
   ECHOMSG,
+  MAP,
   TOKENTYPE_NR
 };
 
@@ -68,6 +69,7 @@ keyword keywords[] = {
   KEYWORD(SILENT, "sil", "ent"),
   KEYWORD(ECHO, "ec", "ho"),
   KEYWORD(ECHOMSG, "echom", "sg"),
+  KEYWORD(MAP, "map", ""),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

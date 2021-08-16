@@ -49,6 +49,7 @@ module.exports = grammar({
     $._silent,
     $._echo,
     $._echomsg,
+    $._map,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -80,6 +81,7 @@ module.exports = grammar({
         $.autocmd_statement,
         $.silent_statement,
         $.register_statement,
+        $.map_statement,
         $.command,
       ),
 
@@ -327,6 +329,14 @@ module.exports = grammar({
 
     // :h :@
     register_statement: ($) => $.register,
+
+    map_statement: ($) => seq(
+      tokalias($, "map"),
+      field("lhs", $.map_side),
+      field("rhs", $.map_side)
+    ),
+
+    map_side: ($) => /[^\n \t]+/,
 
     // :h variable
     _variable: ($) =>

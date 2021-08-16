@@ -1,0 +1,21 @@
+======
+Simple mapping
+======
+
+map a b
+
+---
+
+====
+Mapping with multiple items on left and right
+=====
+
+map ab cd
+
+-----
+
+=======
+Mapping with keycodes
+======
+
+map abc <CMD>fooo<CR>
