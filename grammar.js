@@ -239,7 +239,7 @@ module.exports = grammar({
       ),
 
     unlet_statement: ($) =>
-      seq(maybe_bang($, 'unlet'), $._ident, $._cmd_separator),
+      seq(maybe_bang($, 'unlet'), repeat1($._expression), $._cmd_separator),
 
     call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
 
@@ -444,9 +444,9 @@ module.exports = grammar({
         seq(
           field('value', $._expression),
           '[',
-          field('start', $._expression),
+          optional(field('start', $._expression)),
           ':',
-          field('stop', $._expression),
+          optional(field('stop', $._expression)),
           ']',
         ),
       ),

@@ -4,6 +4,7 @@
   "description": "A Tree-sitter VimL parser !",
   "main": "bindings/node",
   "scripts": {
+    "build": "tree-sitter generate",
     "test": "tree-sitter test"
   },
   "author": "Thomas Vigouroux",
