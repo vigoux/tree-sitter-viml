@@ -330,11 +330,13 @@ module.exports = grammar({
     // :h :@
     register_statement: ($) => $.register,
 
-    map_statement: ($) => seq(
-      tokalias($, "map"),
-      field("lhs", $.map_side),
-      field("rhs", $.map_side)
-    ),
+    map_statement: ($) =>
+      seq(
+        tokalias($, 'map'),
+        field('lhs', $.map_side),
+        field('rhs', $.map_side),
+        $._cmd_separator,
+      ),
 
     map_side: ($) => /[^\n \t]+/,
 

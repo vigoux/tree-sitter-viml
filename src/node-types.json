@@ -4152,22 +4152,6 @@
     "named": false
   },
   {
-    "type": "CR",
-    "named": false
-  },
-  {
-    "type": "Cmd",
-    "named": false
-  },
-  {
-    "type": "Ignore",
-    "named": false
-  },
-  {
-    "type": "Nop",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },

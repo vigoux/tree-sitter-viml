@@ -1710,55 +1710,16 @@
             "type": "SYMBOL",
             "name": "map_side"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
     "map_side": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "PATTERN",
-        "value": "[^\\n \\t]+"
-      }
-    },
-    "keycode": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": "<"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "Cmd"
-            },
-            {
-              "type": "STRING",
-              "value": "CR"
-            },
-            {
-              "type": "STRING",
-              "value": "Ignore"
-            },
-            {
-              "type": "STRING",
-              "value": "Nop"
-            }
-          ]
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": ">"
-          }
-        }
-      ]
+      "type": "PATTERN",
+      "value": "[^\\n \\t]+"
     },
     "_variable": {
       "type": "PREC_LEFT",
