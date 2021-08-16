@@ -83,13 +83,15 @@ module.exports = grammar({
         $.command,
       ),
 
-    return_statement: ($) => seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
+    return_statement: ($) =>
+      seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
 
-    normal_statement: ($) => command($, "normal", alias(/.*/, $.commands)),
+    normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),
-    python_statement: ($) => seq(tokalias($, 'python'), choice($.chunk, $.script)),
+    python_statement: ($) =>
+      seq(tokalias($, 'python'), choice($.chunk, $.script)),
     perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
 
     chunk: ($) => seq(/[^\n]*/, $._cmd_separator),
@@ -110,7 +112,8 @@ module.exports = grammar({
         'in',
         field('iter', $._expression),
         alias(repeat($._statement), $.body),
-        tokalias($, "endfor"), $._cmd_separator,
+        tokalias($, 'endfor'),
+        $._cmd_separator,
       ),
 
     while_loop: ($) =>
@@ -118,7 +121,8 @@ module.exports = grammar({
         'while',
         field('condition', $._expression),
         alias(repeat($._statement), $.body),
-        tokalias($, "endwhile"), $._cmd_separator,
+        tokalias($, 'endwhile'),
+        $._cmd_separator,
       ),
 
     if_statement: ($) =>
@@ -129,7 +133,8 @@ module.exports = grammar({
         alias(repeat($._statement), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
-        tokalias($, "endif"), $._cmd_separator,
+        tokalias($, 'endif'),
+        $._cmd_separator,
       ),
 
     elseif_statement: ($) =>
@@ -141,33 +146,42 @@ module.exports = grammar({
 
     else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
 
-    pattern: ($) => choice(/\/.*\//, /\?.*\?/),
-
     try_statement: ($) =>
       seq(
-        'try', $._cmd_separator,
+        'try',
+        $._cmd_separator,
         alias(repeat($._statement), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
-        tokalias($, "endtry"), $._cmd_separator,
+        tokalias($, 'endtry'),
+        $._cmd_separator,
       ),
 
+    _au_pattern: ($) => choice(/\/.*\//, /\?.*\?/),
+
     catch_statement: ($) =>
-      seq('catch', optional($.pattern), $._cmd_separator, alias(repeat($._statement), $.body)),
+      seq(
+        'catch',
+        optional(alias($._au_pattern, $.pattern)),
+        $._cmd_separator,
+        alias(repeat($._statement), $.body),
+      ),
 
     finally_statement: ($) =>
       seq('finally', alias(repeat($._statement), $.body)),
 
-    throw_statement: ($) => seq(tokalias($, "throw"), $._expression, $._cmd_separator),
+    throw_statement: ($) =>
+      seq(tokalias($, 'throw'), $._expression, $._cmd_separator),
 
-    autocmd_statement: ($) => seq(
-      tokalias($, "autocmd"),
-      $.au_event_list,
-      alias(/[a-zA-Z*.]+/, $.pattern),
-      optional("++once"),
-      optional("++nested"),
-      field("command", $._statement)
-    ),
+    autocmd_statement: ($) =>
+      seq(
+        tokalias($, 'autocmd'),
+        $.au_event_list,
+        alias(/[a-zA-Z*.]+/, $.pattern),
+        optional('++once'),
+        optional('++nested'),
+        field('command', $._statement),
+      ),
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
     au_event_list: ($) => commaSep1($.au_event),
@@ -175,7 +189,7 @@ module.exports = grammar({
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
 
-    argument: ($) => seq( 'a:', choice($.identifier, $.integer_literal)),
+    argument: ($) => seq('a:', choice($.identifier, $.integer_literal)),
 
     identifier: ($) => /[a-zA-Z_](\w|#)*/,
 
@@ -193,7 +207,7 @@ module.exports = grammar({
           $.option,
           $.index_expression,
           $.field_expression,
-          $.list
+          $.list,
         ),
         $._let_operator,
         $._expression,
@@ -226,17 +240,10 @@ module.exports = grammar({
 
     _set_rhs: ($) => seq($._set_operator, $.set_value),
 
-    set_item: ($) => seq(
-        field('option', $._set_option),
-        optional(field('value', $._set_rhs)),
-    ),
+    set_item: ($) =>
+      seq(field('option', $._set_option), optional(field('value', $._set_rhs))),
 
-    set_statement: ($) =>
-      seq(
-        'set',
-        repeat($.set_item),
-        $._cmd_separator
-      ),
+    set_statement: ($) => seq('set', repeat($.set_item), $._cmd_separator),
 
     unlet_statement: ($) =>
       seq(maybe_bang($, 'unlet'), repeat1($._expression), $._cmd_separator),
@@ -246,12 +253,11 @@ module.exports = grammar({
     echo_statement: ($) => echo_variant($, 'echo'),
     echomsg_statement: ($) => echo_variant($, 'echomsg'),
 
-    execute_statement: ($) => seq(tokalias($, "execute"), repeat1($._expression), $._cmd_separator),
+    execute_statement: ($) =>
+      seq(tokalias($, 'execute'), repeat1($._expression), $._cmd_separator),
 
-    silent_statement: ($) => seq(
-      maybe_bang($, tokalias($, "silent")),
-      $._statement
-    ),
+    silent_statement: ($) =>
+      seq(maybe_bang($, tokalias($, 'silent')), $._statement),
 
     command: ($) =>
       seq(
@@ -271,13 +277,12 @@ module.exports = grammar({
 
         alias(repeat($._statement), $.body),
 
-        tokalias($, "endfunction"),
+        tokalias($, 'endfunction'),
         $._cmd_separator,
       ),
 
-    function_declaration: ($) => seq(
-        field('name', $._ident),
-        field('parameters', $.parameters)),
+    function_declaration: ($) =>
+      seq(field('name', $._ident), field('parameters', $.parameters)),
 
     // FIXME(vigoux): The spread here is not exactly right...
     parameters: ($) => seq('(', commaSep(choice($.identifier, $.spread)), ')'),
@@ -285,6 +290,9 @@ module.exports = grammar({
     bang: ($) => '!',
 
     spread: ($) => '...',
+
+    // :h Pattern
+    pattern: ($) => choice(/\/[^,\n]+\/?/, /\?[^,\n]+\??/),
 
     // :h 10.3
 
@@ -308,7 +316,7 @@ module.exports = grammar({
         $.last_line,
         $.pattern,
         $.previous_pattern,
-        $.mark
+        $.mark,
       ),
 
     current_line: ($) => '.',
@@ -478,7 +486,8 @@ module.exports = grammar({
     dictionnary_entry: ($) =>
       seq(field('key', $._expression), ':', field('value', $._expression)),
 
-    dictionnary: ($) => seq('{', commaSep($.dictionnary_entry), optional(','), '}'),
+    dictionnary: ($) =>
+      seq('{', commaSep($.dictionnary_entry), optional(','), '}'),
 
     // :h lambda
     lambda_expression: ($) =>
@@ -487,11 +496,15 @@ module.exports = grammar({
 });
 
 function tokalias(gram, name) {
-  return alias(gram["_" + name], name);
+  return alias(gram['_' + name], name);
 }
 
 function command($, cmd, ...args) {
-  return seq(optional(field('range', alias($._range, $.range))), tokalias($, cmd), ...args);
+  return seq(
+    optional(field('range', alias($._range, $.range))),
+    tokalias($, cmd),
+    ...args,
+  );
 }
 
 function maybe_bang($, cmd_name) {
@@ -515,5 +528,5 @@ function bin_left_right(left, operator, right) {
 }
 
 function echo_variant($, cmd) {
-    return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
+  return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
 }

@@ -544,19 +544,6 @@
         }
       ]
     },
-    "pattern": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\/.*\\/"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\?.*\\?"
-        }
-      ]
-    },
     "try_statement": {
       "type": "SEQ",
       "members": [
@@ -614,6 +601,19 @@
         }
       ]
     },
+    "_au_pattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\/.*\\/"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\?.*\\?"
+        }
+      ]
+    },
     "catch_statement": {
       "type": "SEQ",
       "members": [
@@ -625,8 +625,13 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "pattern"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_au_pattern"
+              },
+              "named": true,
+              "value": "pattern"
             },
             {
               "type": "BLANK"
@@ -1517,6 +1522,19 @@
     "spread": {
       "type": "STRING",
       "value": "..."
+    },
+    "pattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\/[^,\\n]+\\/?"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\?[^,\\n]+\\??"
+        }
+      ]
     },
     "mark": {
       "type": "PATTERN",

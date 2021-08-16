@@ -178,7 +178,7 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   return true;
 }
 
-inline bool is_valid_string_delim(char c) {
+bool is_valid_string_delim(char c) {
   return c == '\'' || c == '"';
 }
 
