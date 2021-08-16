@@ -4212,6 +4212,10 @@
     "named": false
   },
   {
+    "type": "cmap",
+    "named": false
+  },
+  {
     "type": "command_argument",
     "named": true
   },
@@ -4300,6 +4304,10 @@
     "named": false
   },
   {
+    "type": "imap",
+    "named": false
+  },
+  {
     "type": "in",
     "named": false
   },
@@ -4320,6 +4328,10 @@
     "named": false
   },
   {
+    "type": "lmap",
+    "named": false
+  },
+  {
     "type": "lua",
     "named": false
   },
@@ -4336,7 +4348,15 @@
     "named": true
   },
   {
+    "type": "nmap",
+    "named": false
+  },
+  {
     "type": "normal",
+    "named": false
+  },
+  {
+    "type": "omap",
     "named": false
   },
   {
@@ -4388,6 +4408,10 @@
     "named": false
   },
   {
+    "type": "smap",
+    "named": false
+  },
+  {
     "type": "spread",
     "named": true
   },
@@ -4397,6 +4421,10 @@
   },
   {
     "type": "throw",
+    "named": false
+  },
+  {
+    "type": "tmap",
     "named": false
   },
   {
@@ -4416,7 +4444,15 @@
     "named": false
   },
   {
+    "type": "vmap",
+    "named": false
+  },
+  {
     "type": "while",
+    "named": false
+  },
+  {
+    "type": "xmap",
     "named": false
   },
   {

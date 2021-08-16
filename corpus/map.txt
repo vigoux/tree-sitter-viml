@@ -23,3 +23,20 @@ map ab cd
   (map_statement
     (map_side)
     (map_side)))
+
+======
+All map commands
+======
+
+map a b
+nmap a b
+vmap a b
+xmap a b
+smap a b
+omap a b
+imap a b
+lmap a b
+cmap a b
+tmap a b
+
+----

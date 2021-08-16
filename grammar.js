@@ -50,6 +50,15 @@ module.exports = grammar({
     $._echo,
     $._echomsg,
     $._map,
+    $._nmap,
+    $._vmap,
+    $._xmap,
+    $._smap,
+    $._omap,
+    $._imap,
+    $._lmap,
+    $._cmap,
+    $._tmap,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -332,7 +341,18 @@ module.exports = grammar({
 
     map_statement: ($) =>
       seq(
-        tokalias($, 'map'),
+        choice(...[
+          "map",
+          "nmap",
+          "vmap",
+          "xmap",
+          "smap",
+          "omap",
+          "imap",
+          "lmap",
+          "cmap",
+          "tmap"
+        ].map((name) => tokalias($, name))),
         field('lhs', $.map_side),
         field('rhs', $.map_side),
         $._cmd_separator,

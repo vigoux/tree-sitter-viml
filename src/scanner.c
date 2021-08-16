@@ -43,6 +43,15 @@ enum TokenType {
   ECHO,
   ECHOMSG,
   MAP,
+  NMAP,
+  VMAP,
+  XMAP,
+  SMAP,
+  OMAP,
+  IMAP,
+  LMAP,
+  CMAP,
+  TMAP,
   TOKENTYPE_NR
 };
 
@@ -70,6 +79,15 @@ keyword keywords[] = {
   KEYWORD(ECHO, "ec", "ho"),
   KEYWORD(ECHOMSG, "echom", "sg"),
   KEYWORD(MAP, "map", ""),
+  KEYWORD(NMAP, "nm", "ap"),
+  KEYWORD(VMAP, "vm", "ap"),
+  KEYWORD(XMAP, "xm", "ap"),
+  KEYWORD(SMAP, "smap", ""),
+  KEYWORD(OMAP, "om", "ap"),
+  KEYWORD(IMAP, "im", "ap"),
+  KEYWORD(LMAP, "lm", "ap"),
+  KEYWORD(CMAP, "cm", "ap"),
+  KEYWORD(TMAP, "tma", "p"),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

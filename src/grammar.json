@@ -1687,13 +1687,99 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_map"
-          },
-          "named": false,
-          "value": "map"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_map"
+              },
+              "named": false,
+              "value": "map"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_nmap"
+              },
+              "named": false,
+              "value": "nmap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_vmap"
+              },
+              "named": false,
+              "value": "vmap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_xmap"
+              },
+              "named": false,
+              "value": "xmap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_smap"
+              },
+              "named": false,
+              "value": "smap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_omap"
+              },
+              "named": false,
+              "value": "omap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_imap"
+              },
+              "named": false,
+              "value": "imap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_lmap"
+              },
+              "named": false,
+              "value": "lmap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_cmap"
+              },
+              "named": false,
+              "value": "cmap"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_tmap"
+              },
+              "named": false,
+              "value": "tmap"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -3284,6 +3370,42 @@
     {
       "type": "SYMBOL",
       "name": "_map"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_nmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_vmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_xmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_smap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_omap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_imap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_lmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_tmap"
     }
   ],
   "inline": [],
