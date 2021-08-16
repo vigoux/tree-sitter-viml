@@ -99,3 +99,45 @@ let l = mylist[:]
     (identifier)
     (slice_expression
       (identifier))))
+
+================================================================================
+String concatenation
+================================================================================
+
+let a = "abc" .. "def"
+let a = "abc" . "def"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (binary_operation
+      (string_literal)
+      (string_literal)))
+  (let_statement
+    (identifier)
+    (binary_operation
+      (string_literal)
+      (string_literal))))
+
+================================================================================
+Dictionnary keys
+================================================================================
+
+let d.bar = 30
+let a = d.bar
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (field_expression
+      (identifier)
+      (identifier))
+    (integer_literal))
+  (let_statement
+    (identifier)
+    (field_expression
+      (identifier)
+      (identifier))))
