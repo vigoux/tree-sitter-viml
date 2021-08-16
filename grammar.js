@@ -341,21 +341,28 @@ module.exports = grammar({
 
     map_statement: ($) =>
       seq(
-        choice(...[
-          "map",
-          "nmap",
-          "vmap",
-          "xmap",
-          "smap",
-          "omap",
-          "imap",
-          "lmap",
-          "cmap",
-          "tmap"
-        ].map((name) => tokalias($, name))),
-        field('lhs', $.map_side),
-        field('rhs', $.map_side),
+        choice(
+          ...[
+            'map',
+            'nmap',
+            'vmap',
+            'xmap',
+            'smap',
+            'omap',
+            'imap',
+            'lmap',
+            'cmap',
+            'tmap',
+          ].map((name) => tokalias($, name)),
+        ),
+        $._map_definition,
         $._cmd_separator,
+      ),
+
+    _map_definition: ($) =>
+      choice(
+        seq('<expr>', field('lhs', $.map_side), field('rhs', $._expression)),
+        seq(field('lhs', $.map_side), field('rhs', $.map_side)),
       ),
 
     map_side: ($) => /[^\n \t]+/,

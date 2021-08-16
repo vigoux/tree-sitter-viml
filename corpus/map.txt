@@ -24,9 +24,9 @@ map ab cd
     (map_side)
     (map_side)))
 
-======
+================================================================================
 All map commands
-======
+================================================================================
 
 map a b
 nmap a b
@@ -39,4 +39,52 @@ lmap a b
 cmap a b
 tmap a b
 
-----
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side)))
+
+================================================================================
+Map expression
+================================================================================
+
+map <expr> a foobar() + 31
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (binary_operation
+      (call_expression
+        (identifier))
+      (integer_literal))))

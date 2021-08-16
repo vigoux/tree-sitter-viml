@@ -1782,24 +1782,63 @@
           ]
         },
         {
-          "type": "FIELD",
-          "name": "lhs",
-          "content": {
-            "type": "SYMBOL",
-            "name": "map_side"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "rhs",
-          "content": {
-            "type": "SYMBOL",
-            "name": "map_side"
-          }
+          "type": "SYMBOL",
+          "name": "_map_definition"
         },
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
+        }
+      ]
+    },
+    "_map_definition": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "<expr>"
+            },
+            {
+              "type": "FIELD",
+              "name": "lhs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "map_side"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "rhs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "lhs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "map_side"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "rhs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "map_side"
+              }
+            }
+          ]
         }
       ]
     },
