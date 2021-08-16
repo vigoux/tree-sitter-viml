@@ -403,6 +403,10 @@
           }
         },
         {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "REPEAT",

@@ -120,6 +120,7 @@ module.exports = grammar({
       seq(
         'while',
         field('condition', $._expression),
+        $._cmd_separator,
         alias(repeat($._statement), $.body),
         tokalias($, 'endwhile'),
         $._cmd_separator,
