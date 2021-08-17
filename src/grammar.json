@@ -1811,6 +1811,96 @@
                 },
                 "named": false,
                 "value": "tmap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_noremap"
+                },
+                "named": false,
+                "value": "noremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_vnoremap"
+                },
+                "named": false,
+                "value": "vnoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_nnoremap"
+                },
+                "named": false,
+                "value": "nnoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_xnoremap"
+                },
+                "named": false,
+                "value": "xnoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_snoremap"
+                },
+                "named": false,
+                "value": "snoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_onoremap"
+                },
+                "named": false,
+                "value": "onoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_inoremap"
+                },
+                "named": false,
+                "value": "inoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_lnoremap"
+                },
+                "named": false,
+                "value": "lnoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_cnoremap"
+                },
+                "named": false,
+                "value": "cnoremap"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_tnoremap"
+                },
+                "named": false,
+                "value": "tnoremap"
               }
             ]
           }
@@ -3547,6 +3637,46 @@
     {
       "type": "SYMBOL",
       "name": "_tmap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_noremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_vnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_nnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_xnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_snoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_onoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_inoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_lnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_tnoremap"
     }
   ],
   "inline": [],

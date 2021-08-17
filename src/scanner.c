@@ -52,6 +52,16 @@ enum TokenType {
   LMAP,
   CMAP,
   TMAP,
+  NOREMAP,
+  NNOREMAP,
+  VNOREMAP,
+  XNOREMAP,
+  SNOREMAP,
+  ONOREMAP,
+  INOREMAP,
+  LNOREMAP,
+  CNOREMAP,
+  TNOREMAP,
   TOKENTYPE_NR
 };
 
@@ -88,6 +98,16 @@ keyword keywords[] = {
   KEYWORD(LMAP, "lm", "ap"),
   KEYWORD(CMAP, "cm", "ap"),
   KEYWORD(TMAP, "tma", "p"),
+  KEYWORD(NOREMAP, "no", "remap"),
+  KEYWORD(NNOREMAP, "nn", "oremap"),
+  KEYWORD(VNOREMAP, "vn", "oremap"),
+  KEYWORD(XNOREMAP, "xn", "oremap"),
+  KEYWORD(SNOREMAP, "snor", "emap"),
+  KEYWORD(ONOREMAP, "ono", "remap"),
+  KEYWORD(INOREMAP, "ino", "remap"),
+  KEYWORD(LNOREMAP, "ln", "oremap"),
+  KEYWORD(CNOREMAP, "cno", "remap"),
+  KEYWORD(TNOREMAP, "tno", "remap"),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

@@ -2253,11 +2253,23 @@
             "named": false
           },
           {
+            "type": "cnoremap",
+            "named": false
+          },
+          {
             "type": "imap",
             "named": false
           },
           {
+            "type": "inoremap",
+            "named": false
+          },
+          {
             "type": "lmap",
+            "named": false
+          },
+          {
+            "type": "lnoremap",
             "named": false
           },
           {
@@ -2269,7 +2281,19 @@
             "named": false
           },
           {
+            "type": "nnoremap",
+            "named": false
+          },
+          {
+            "type": "noremap",
+            "named": false
+          },
+          {
             "type": "omap",
+            "named": false
+          },
+          {
+            "type": "onoremap",
             "named": false
           },
           {
@@ -2277,7 +2301,15 @@
             "named": false
           },
           {
+            "type": "snoremap",
+            "named": false
+          },
+          {
             "type": "tmap",
+            "named": false
+          },
+          {
+            "type": "tnoremap",
             "named": false
           },
           {
@@ -2285,7 +2317,15 @@
             "named": false
           },
           {
+            "type": "vnoremap",
+            "named": false
+          },
+          {
             "type": "xmap",
+            "named": false
+          },
+          {
+            "type": "xnoremap",
             "named": false
           }
         ]
@@ -4378,6 +4418,10 @@
     "named": false
   },
   {
+    "type": "cnoremap",
+    "named": false
+  },
+  {
     "type": "command_argument",
     "named": true
   },
@@ -4474,6 +4518,10 @@
     "named": false
   },
   {
+    "type": "inoremap",
+    "named": false
+  },
+  {
     "type": "integer_literal",
     "named": true
   },
@@ -4491,6 +4539,10 @@
   },
   {
     "type": "lmap",
+    "named": false
+  },
+  {
+    "type": "lnoremap",
     "named": false
   },
   {
@@ -4514,11 +4566,23 @@
     "named": false
   },
   {
+    "type": "nnoremap",
+    "named": false
+  },
+  {
+    "type": "noremap",
+    "named": false
+  },
+  {
     "type": "normal",
     "named": false
   },
   {
     "type": "omap",
+    "named": false
+  },
+  {
+    "type": "onoremap",
     "named": false
   },
   {
@@ -4574,6 +4638,10 @@
     "named": false
   },
   {
+    "type": "snoremap",
+    "named": false
+  },
+  {
     "type": "spread",
     "named": true
   },
@@ -4587,6 +4655,10 @@
   },
   {
     "type": "tmap",
+    "named": false
+  },
+  {
+    "type": "tnoremap",
     "named": false
   },
   {
@@ -4610,11 +4682,19 @@
     "named": false
   },
   {
+    "type": "vnoremap",
+    "named": false
+  },
+  {
     "type": "while",
     "named": false
   },
   {
     "type": "xmap",
+    "named": false
+  },
+  {
+    "type": "xnoremap",
     "named": false
   },
   {
