@@ -88,3 +88,49 @@ map <expr> a foobar() + 31
       (call_expression
         (identifier))
       (integer_literal))))
+
+================================================================================
+Map options
+================================================================================
+
+map <buffer> a b
+map <nowait> a b
+map <silent> a b
+map <script> a b
+map <unique> a b
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side)))
+
+================================================================================
+Map options combined
+================================================================================
+
+map <buffer> <unique> a b
+map <unique> <buffer> a b
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (map_side))
+  (map_statement
+    (map_side)
+    (map_side)))

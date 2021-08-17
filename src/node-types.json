@@ -2244,6 +2244,52 @@
     "type": "map_statement",
     "named": true,
     "fields": {
+      "cmd": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "cmap",
+            "named": false
+          },
+          {
+            "type": "imap",
+            "named": false
+          },
+          {
+            "type": "lmap",
+            "named": false
+          },
+          {
+            "type": "map",
+            "named": false
+          },
+          {
+            "type": "nmap",
+            "named": false
+          },
+          {
+            "type": "omap",
+            "named": false
+          },
+          {
+            "type": "smap",
+            "named": false
+          },
+          {
+            "type": "tmap",
+            "named": false
+          },
+          {
+            "type": "vmap",
+            "named": false
+          },
+          {
+            "type": "xmap",
+            "named": false
+          }
+        ]
+      },
       "lhs": {
         "multiple": false,
         "required": true,
@@ -4220,7 +4266,27 @@
     "named": false
   },
   {
+    "type": "<buffer>",
+    "named": false
+  },
+  {
     "type": "<expr>",
+    "named": false
+  },
+  {
+    "type": "<nowait>",
+    "named": false
+  },
+  {
+    "type": "<script>",
+    "named": false
+  },
+  {
+    "type": "<silent>",
+    "named": false
+  },
+  {
+    "type": "<unique>",
     "named": false
   },
   {

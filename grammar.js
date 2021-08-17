@@ -1,5 +1,13 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
+const MAP_OPTIONS = any_order(
+  '<buffer>',
+  '<nowait>',
+  '<silent>',
+  '<unique>',
+  '<script>',
+);
+
 PREC = {
   TERNARY: 1, //=> expr ? expr : expr
   OR: 2, //=> or
@@ -187,14 +195,14 @@ module.exports = grammar({
 
     autocmd_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "autocmd")),
+        maybe_bang($, tokalias($, 'autocmd')),
         optional(
           seq(
             $.au_event_list,
             alias(/[a-zA-Z*.]+/, $.pattern),
-            optional("++once"),
-            optional("++nested"),
-            field("command", $._statement)
+            optional('++once'),
+            optional('++nested'),
+            field('command', $._statement),
           ),
         ),
       ),
@@ -288,7 +296,7 @@ module.exports = grammar({
       seq(
         maybe_bang($, tokalias($, 'function')),
         $.function_declaration,
-        repeat(choice('dict', 'range', 'abort', 'closure')),
+        any_order('dict', 'range', 'abort', 'closure'),
         $._cmd_separator,
 
         alias(repeat($._statement), $.body),
@@ -345,27 +353,36 @@ module.exports = grammar({
 
     map_statement: ($) =>
       seq(
-        choice(
-          ...[
-            'map',
-            'nmap',
-            'vmap',
-            'xmap',
-            'smap',
-            'omap',
-            'imap',
-            'lmap',
-            'cmap',
-            'tmap',
-          ].map((name) => tokalias($, name)),
+        field(
+          'cmd',
+          choice(
+            ...[
+              'map',
+              'nmap',
+              'vmap',
+              'xmap',
+              'smap',
+              'omap',
+              'imap',
+              'lmap',
+              'cmap',
+              'tmap',
+            ].map((name) => tokalias($, name)),
+          ),
         ),
+        MAP_OPTIONS,
         $._map_definition,
         $._cmd_separator,
       ),
 
     _map_definition: ($) =>
       choice(
-        seq('<expr>', field('lhs', $.map_side), field('rhs', $._expression)),
+        seq(
+          '<expr>',
+          MAP_OPTIONS,
+          field('lhs', $.map_side),
+          field('rhs', $._expression),
+        ),
         seq(field('lhs', $.map_side), field('rhs', $.map_side)),
       ),
 
@@ -577,4 +594,8 @@ function bin_left_right(left, operator, right) {
 
 function echo_variant($, cmd) {
   return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
+}
+
+function any_order(...args) {
+  return repeat(choice(...args));
 }
