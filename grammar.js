@@ -187,12 +187,16 @@ module.exports = grammar({
 
     autocmd_statement: ($) =>
       seq(
-        tokalias($, 'autocmd'),
-        $.au_event_list,
-        alias(/[a-zA-Z*.]+/, $.pattern),
-        optional('++once'),
-        optional('++nested'),
-        field('command', $._statement),
+        maybe_bang($, tokalias($, "autocmd")),
+        optional(
+          seq(
+            $.au_event_list,
+            alias(/[a-zA-Z*.]+/, $.pattern),
+            optional("++once"),
+            optional("++nested"),
+            field("command", $._statement)
+          ),
+        ),
       ),
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,

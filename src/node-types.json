@@ -54,7 +54,7 @@
     "fields": {
       "command": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "autocmd_statement",
@@ -157,10 +157,14 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "au_event_list",
+          "named": true
+        },
+        {
+          "type": "bang",
           "named": true
         },
         {

@@ -711,36 +711,28 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_autocmd"
-          },
-          "named": false,
-          "value": "autocmd"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "au_event_list"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z*.]+"
-          },
-          "named": true,
-          "value": "pattern"
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": "++once"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_autocmd"
+              },
+              "named": false,
+              "value": "autocmd"
             },
             {
-              "type": "BLANK"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },
@@ -748,21 +740,59 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "++nested"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "au_event_list"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[a-zA-Z*.]+"
+                  },
+                  "named": true,
+                  "value": "pattern"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "++once"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "++nested"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "FIELD",
+                  "name": "command",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_statement"
+                  }
+                }
+              ]
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "FIELD",
-          "name": "command",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
         }
       ]
     },
