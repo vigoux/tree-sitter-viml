@@ -134,3 +134,22 @@ map <unique> <buffer> a b
   (map_statement
     (map_side)
     (map_side)))
+
+================================================================================
+Quoted map expr
+================================================================================
+
+map <expr> [a ":\<C-U>" . v:count1 . "prev\<CR>"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (binary_operation
+      (binary_operation
+        (string_literal)
+        (scoped_identifier
+          (scope)
+          (identifier)))
+      (string_literal))))
