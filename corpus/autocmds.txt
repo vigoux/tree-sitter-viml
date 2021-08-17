@@ -3,6 +3,9 @@ Basic
 ================================================================================
 
 au BufNewFile *.html echo "foo"
+au! BufNewFile *.html echo "foo"
+autocmd BufNewFile *.html echo "foo"
+autocmd! BufNewFile *.html echo "foo"
 
 --------------------------------------------------------------------------------
 
@@ -12,18 +15,79 @@ au BufNewFile *.html echo "foo"
       (au_event))
     (pattern)
     (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (echo_statement
       (string_literal))))
+
+================================================================================
+No arguments
+================================================================================
+
+au!
+autocmd!
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (bang))
+  (autocmd_statement
+    (bang)))
 
 ================================================================================
 Multiple events
 ================================================================================
 
 au BufNewFile,BufEnter *.html echo "foo"
+au! BufNewFile,BufEnter *.html echo "foo"
+autocmd BufNewFile,BufEnter *.html echo "foo"
+autocmd! BufNewFile,BufEnter *.html echo "foo"
 
 --------------------------------------------------------------------------------
 
 (script_file
   (autocmd_statement
+    (au_event_list
+      (au_event)
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event)
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (au_event_list
+      (au_event)
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
     (au_event_list
       (au_event)
       (au_event))
