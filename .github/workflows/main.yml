@@ -29,3 +29,14 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  parse-examples:
+    name: Parse vim files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+      - name: Install Dependencies
+        run: npm install
+      - name: Parse vim files
+        run: make download-examples parse-examples
