@@ -2063,12 +2063,21 @@
               "name": "rhs",
               "content": {
                 "type": "SYMBOL",
-                "name": "map_side"
+                "name": "_map_rhs"
               }
             }
           ]
         }
       ]
+    },
+    "_map_rhs": {
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\n\\r]+"
+      },
+      "named": true,
+      "value": "map_side"
     },
     "map_side": {
       "type": "PATTERN",

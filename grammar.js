@@ -411,9 +411,10 @@ module.exports = grammar({
           field('lhs', $.map_side),
           field('rhs', $._expression),
         ),
-        seq(field('lhs', $.map_side), field('rhs', $.map_side)),
+        seq(field('lhs', $.map_side), field('rhs', $._map_rhs)),
       ),
 
+    _map_rhs: ($) => alias(/[^\n\r]+/, $.map_side),
     map_side: ($) => /[^\n \t]+/,
 
     // :h variable

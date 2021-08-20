@@ -16,10 +16,14 @@ Mapping with multiple items on left and right
 ================================================================================
 
 map ab cd
+nnoremap <leader>v :e $MYVIMRC<CR>
 
 --------------------------------------------------------------------------------
 
 (script_file
+  (map_statement
+    (map_side)
+    (map_side))
   (map_statement
     (map_side)
     (map_side)))
