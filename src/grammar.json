@@ -106,6 +106,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "augroup_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command"
         }
       ]
@@ -795,6 +799,49 @@
           ]
         }
       ]
+    },
+    "augroup_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_augroup"
+              },
+              "named": false,
+              "value": "augroup"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "augroup_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "augroup_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z]+"
     },
     "au_event": {
       "type": "PATTERN",
@@ -3677,6 +3724,10 @@
     {
       "type": "SYMBOL",
       "name": "_tnoremap"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_augroup"
     }
   ],
   "inline": [],

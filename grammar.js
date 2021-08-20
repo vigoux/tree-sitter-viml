@@ -77,6 +77,7 @@ module.exports = grammar({
     $._lnoremap,
     $._cnoremap,
     $._tnoremap,
+    $._augroup,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -109,6 +110,7 @@ module.exports = grammar({
         $.silent_statement,
         $.register_statement,
         $.map_statement,
+        $.augroup_statement,
         $.command,
       ),
 
@@ -216,6 +218,14 @@ module.exports = grammar({
           ),
         ),
       ),
+
+    augroup_statement: ($) => seq(
+      maybe_bang($, tokalias($, 'augroup')),
+      $.augroup_name,
+      $._cmd_separator
+    ),
+
+    augroup_name: ($) => /[a-zA-Z]+/,
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
     au_event_list: ($) => commaSep1($.au_event),

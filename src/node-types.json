@@ -49,6 +49,25 @@
     }
   },
   {
+    "type": "augroup_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "augroup_name",
+          "named": true
+        },
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "autocmd_statement",
     "named": true,
     "fields": {
@@ -56,6 +75,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "augroup_statement",
+            "named": true
+          },
           {
             "type": "autocmd_statement",
             "named": true
@@ -391,6 +414,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "augroup_statement",
+          "named": true
+        },
         {
           "type": "autocmd_statement",
           "named": true
@@ -2909,6 +2936,10 @@
       "required": false,
       "types": [
         {
+          "type": "augroup_statement",
+          "named": true
+        },
+        {
           "type": "autocmd_statement",
           "named": true
         },
@@ -3100,6 +3131,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "augroup_statement",
+          "named": true
+        },
         {
           "type": "autocmd_statement",
           "named": true
@@ -4395,6 +4430,14 @@
   },
   {
     "type": "au_event",
+    "named": true
+  },
+  {
+    "type": "augroup",
+    "named": false
+  },
+  {
+    "type": "augroup_name",
     "named": true
   },
   {
