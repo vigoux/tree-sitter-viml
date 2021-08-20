@@ -25,11 +25,6 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
-  conflicts: ($) => [
-    [$.binary_operation, $.unary_operation, $.field_expression],
-    [$.binary_operation, $.field_expression],
-  ],
-
   externals: ($) => [
     $._no,
     $._inv,
@@ -229,13 +224,14 @@ module.exports = grammar({
     au_event_list: ($) => commaSep1($.au_event),
 
     // TODO(vigoux): maybe we should find some names here
-    scoped_identifier: ($) => seq($.scope, $.identifier),
+    scoped_identifier: ($) => seq($.scope, choice($.identifier, $.field)),
 
-    argument: ($) => seq('a:', choice($.identifier, $.integer_literal)),
+    argument: ($) => seq('a:', choice($.identifier, $.integer_literal, $.field)),
 
-    identifier: ($) => /[a-zA-Z_](\w|#)*/,
+    identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_#]*/,
+    _simple_identifier: ($) => alias(/[a-zA-Z_][a-zA-Z0-9_]*/, $.identifier),
 
-    _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
+    _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument, $.field),
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
 
@@ -248,7 +244,6 @@ module.exports = grammar({
           $.register,
           $.option,
           $.index_expression,
-          $.field_expression,
           $.list,
         ),
         $._let_operator,
@@ -445,7 +440,6 @@ module.exports = grammar({
         $.binary_operation,
         seq('(', $._expression, ')'),
         $.unary_operation,
-        $.field_expression,
         $.call_expression,
       ),
 
@@ -548,13 +542,25 @@ module.exports = grammar({
         ),
       ),
 
-    field_expression: ($) =>
+    field: ($) =>
       prec.left(
         PREC.CALL,
         seq(
-          field('value', $._expression),
+          field('value', $.identifier),
           token.immediate('.'),
-          field('field', $._expression),
+          field('field', choice($._simple_identifier, alias($._field, $.field))),
+        ),
+      ),
+
+    // The second part of a field doesn't allow the same charset
+    // as the main identifier.
+    _field: ($) =>
+      prec.left(
+        PREC.CALL,
+        seq(
+          field('value', $._simple_identifier),
+          token.immediate('.'),
+          field('field', choice($._simple_identifier, alias($._field, $.field))),
         ),
       ),
 
@@ -569,7 +575,7 @@ module.exports = grammar({
         ),
       ),
 
-    env_variable: ($) => seq('$', $.identifier),
+    env_variable: ($) => seq('$', $._simple_identifier),
 
     // :h registers
     register: ($) => /@["0-9a-zA-Z:.%#=*+_/-]/,

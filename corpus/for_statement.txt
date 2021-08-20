@@ -1,0 +1,57 @@
+================================================================================
+For statement keywords
+================================================================================
+
+for i in list
+endfor
+
+for i in list
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (for_loop
+    (identifier)
+    (identifier))
+  (for_loop
+    (identifier)
+    (identifier)))
+
+================================================================================
+For statement
+================================================================================
+
+for i in [1, 2, 3]
+  echo i
+endfor
+
+for i.j in [1, 2, 3]
+  echo i.j
+endfor
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (for_loop
+    (identifier)
+    (list
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))
+    (body
+      (echo_statement
+        (identifier))))
+  (for_loop
+    (field
+      (identifier)
+      (identifier))
+    (list
+      (integer_literal)
+      (integer_literal)
+      (integer_literal))
+    (body
+      (echo_statement
+        (field
+          (identifier)
+          (identifier))))))

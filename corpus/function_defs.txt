@@ -88,6 +88,60 @@ end
         (spread)))))
 
 ================================================================================
+Function definition autoload
+================================================================================
+
+function foo#bar(foo)
+end
+
+function foo#bar#baz(foo)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters
+        (identifier))))
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters
+        (identifier)))))
+
+================================================================================
+Function definition dict
+================================================================================
+
+function foo.bar(foo)
+end
+
+function foo.bar.baz(foo)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (field
+        (identifier)
+        (identifier))
+      (parameters
+        (identifier))))
+  (function_definition
+    (function_declaration
+      (field
+        (identifier)
+        (field
+          (identifier)
+          (identifier)))
+      (parameters
+        (identifier)))))
+
+================================================================================
 Function with spread
 ================================================================================
 

@@ -77,21 +77,21 @@ unlet g:dict.two dict['three']
         (identifier))
       (string_literal)))
   (unlet_statement
-    (field_expression
+    (field
       (identifier)
       (identifier)))
   (unlet_statement
-    (field_expression
-      (scoped_identifier
-        (scope)
-        (identifier))
-      (identifier)))
+    (scoped_identifier
+      (scope)
+      (field
+        (identifier)
+        (identifier))))
   (unlet_statement
-    (field_expression
-      (scoped_identifier
-        (scope)
-        (identifier))
-      (identifier))
+    (scoped_identifier
+      (scope)
+      (field
+        (identifier)
+        (identifier)))
     (index_expression
       (identifier)
       (string_literal))))

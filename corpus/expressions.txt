@@ -125,22 +125,64 @@ let a = "abc" . "def"
 Dictionnary keys
 ================================================================================
 
-let d.bar = 30
 let a = d.bar
+let g:foo.bar = 'baz'
+let g:foo.bar.baz = 'baz'
+let a:foo.bar = 'baz'
+let a:foo.bar.baz = 'baz'
+let foo.bar = 'baz'
+let foo.bar.baz = 'baz'
 
 --------------------------------------------------------------------------------
 
 (script_file
   (let_statement
-    (field_expression
+    (identifier)
+    (field
+      (identifier)
+      (identifier)))
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (field
+        (identifier)
+        (identifier)))
+    (string_literal))
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (field
+        (identifier)
+        (field
+          (identifier)
+          (identifier))))
+    (string_literal))
+  (let_statement
+    (argument
+      (field
+        (identifier)
+        (identifier)))
+    (string_literal))
+  (let_statement
+    (argument
+      (field
+        (identifier)
+        (field
+          (identifier)
+          (identifier))))
+    (string_literal))
+  (let_statement
+    (field
       (identifier)
       (identifier))
-    (integer_literal))
+    (string_literal))
   (let_statement
-    (identifier)
-    (field_expression
+    (field
       (identifier)
-      (identifier))))
+      (field
+        (identifier)
+        (identifier)))
+    (string_literal)))
 
 ================================================================================
 Lists
