@@ -211,7 +211,7 @@ module.exports = grammar({
         optional(
           seq(
             $.au_event_list,
-            alias(/[a-zA-Z*.]+/, $.pattern),
+            commaSep1(alias(/[a-zA-Z*.]+/, $.pattern)),
             optional('++once'),
             optional('++nested'),
             field('command', $._statement),

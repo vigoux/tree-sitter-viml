@@ -94,3 +94,74 @@ autocmd! BufNewFile,BufEnter *.html echo "foo"
     (pattern)
     (echo_statement
       (string_literal))))
+
+================================================================================
+Multiple patterns
+================================================================================
+
+au FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
+au! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
+autocmd FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
+autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (command
+      (command_name)
+      (arguments
+        (command_argument))))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (command
+      (command_name)
+      (arguments
+        (command_argument))))
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (command
+      (command_name)
+      (arguments
+        (command_argument))))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (pattern)
+    (command
+      (command_name)
+      (arguments
+        (command_argument)))))
