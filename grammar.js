@@ -221,11 +221,9 @@ module.exports = grammar({
 
     augroup_statement: ($) => seq(
       maybe_bang($, tokalias($, 'augroup')),
-      $.augroup_name,
+      alias($.identifier, $.augroup_name),
       $._cmd_separator
     ),
-
-    augroup_name: ($) => /[a-zA-Z]+/,
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
     au_event_list: ($) => commaSep1($.au_event),

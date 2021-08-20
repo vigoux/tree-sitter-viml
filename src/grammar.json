@@ -830,18 +830,19 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "augroup_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "augroup_name"
         },
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
         }
       ]
-    },
-    "augroup_name": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z]+"
     },
     "au_event": {
       "type": "PATTERN",
