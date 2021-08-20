@@ -429,6 +429,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     // Found the end marker
     lexer->result_symbol = EMDEDDED_SCRIPT_END;
     s->marker_len = 0;
+    s->script_marker = NULL;
     free(s->script_marker);
 
     return true;
