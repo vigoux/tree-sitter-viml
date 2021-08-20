@@ -751,13 +751,39 @@
                   "name": "au_event_list"
                 },
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[a-zA-Z*.]+"
-                  },
-                  "named": true,
-                  "value": "pattern"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[a-zA-Z*.]+"
+                      },
+                      "named": true,
+                      "value": "pattern"
+                    },
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "[a-zA-Z*.]+"
+                            },
+                            "named": true,
+                            "value": "pattern"
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 },
                 {
                   "type": "CHOICE",
