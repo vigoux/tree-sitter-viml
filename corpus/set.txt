@@ -3,10 +3,14 @@ Simple set
 ================================================================================
 
 set number
+set number?
 
 --------------------------------------------------------------------------------
 
 (script_file
+  (set_statement
+    (set_item
+      option: (option_name)))
   (set_statement
     (set_item
       option: (option_name))))
