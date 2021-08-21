@@ -2523,11 +2523,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "option_name",
+          "named": true
+        },
+        {
+          "type": "scope",
           "named": true
         }
       ]

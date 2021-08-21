@@ -574,7 +574,7 @@ module.exports = grammar({
     // :h registers
     register: ($) => /@["0-9a-zA-Z:.%#=*+_/-]/,
 
-    option: ($) => seq('&', $.option_name),
+    option: ($) => seq('&', optional($.scope), $.option_name),
 
     dictionnary_entry: ($) =>
       seq(field('key', $._expression), ':', field('value', $._expression)),

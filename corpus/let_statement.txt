@@ -109,3 +109,63 @@ let v = 1
   (let_statement
     (identifier)
     (integer_literal)))
+
+================================================================================
+Let options
+================================================================================
+
+let l:efm = &l:errorformat
+let l:efm = &g:errorformat
+let l:efm = &errorformat
+let &path = &path . ',/usr/local/include'
+let &l:path = &l:path . ',/usr/local/include'
+let &g:path = &g:path . ',/usr/local/include'
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (option
+      (scope)
+      (option_name)))
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (option
+      (scope)
+      (option_name)))
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (option
+      (option_name)))
+  (let_statement
+    (option
+      (option_name))
+    (binary_operation
+      (option
+        (option_name))
+      (string_literal)))
+  (let_statement
+    (option
+      (scope)
+      (option_name))
+    (binary_operation
+      (option
+        (scope)
+        (option_name))
+      (string_literal)))
+  (let_statement
+    (option
+      (scope)
+      (option_name))
+    (binary_operation
+      (option
+        (scope)
+        (option_name))
+      (string_literal))))
