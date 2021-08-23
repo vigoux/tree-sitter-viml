@@ -11,7 +11,7 @@ typedef struct {
   // The EOF markers (but they can be whatever so lex that correctly)
   char *script_marker;
   uint8_t marker_len;
-
+  bool ignore_comments;
 } Scanner;
 
 enum TokenType {
@@ -68,54 +68,59 @@ enum TokenType {
 
 #define TRIE_START (COMMENT + 1)
 
-typedef char* keyword[2];
+typedef struct {
+  char * mandat;
+  char * opt;
+  bool ignore_comments_after;
+} keyword;
 
-#define KEYWORD(tk, m, opt) [tk - TRIE_START] = { (m), (opt) }
+#define KEYWORD(tk, m, opt, i) [tk - TRIE_START] = { (m), (opt), (i) }
 
 keyword keywords[] = {
-  KEYWORD(FUNCTION, "fu", "nction"),
-  KEYWORD(ENDFUNCTION, "end", "function"),
-  KEYWORD(ENDFOR, "endfo", "r"),
-  KEYWORD(ENDWHILE, "endw", "hile"),
-  KEYWORD(ENDIF, "en", "dif"),
-  KEYWORD(ENDTRY, "endt", "ry"),
-  KEYWORD(NORMAL, "norm", "al"),
-  KEYWORD(RETURN, "retu", "rn"),
-  KEYWORD(RUBY, "rub", "y"),
-  KEYWORD(PYTHON, "py", "thon"),
-  KEYWORD(THROW, "th", "row"),
-  KEYWORD(EXECUTE, "exe", "cute"),
-  KEYWORD(AUTOCMD, "au", "tocmd"),
-  KEYWORD(SILENT, "sil", "ent"),
-  KEYWORD(ECHO, "ec", "ho"),
-  KEYWORD(ECHOMSG, "echom", "sg"),
-  KEYWORD(MAP, "map", ""),
-  KEYWORD(NMAP, "nm", "ap"),
-  KEYWORD(VMAP, "vm", "ap"),
-  KEYWORD(XMAP, "xm", "ap"),
-  KEYWORD(SMAP, "smap", ""),
-  KEYWORD(OMAP, "om", "ap"),
-  KEYWORD(IMAP, "im", "ap"),
-  KEYWORD(LMAP, "lm", "ap"),
-  KEYWORD(CMAP, "cm", "ap"),
-  KEYWORD(TMAP, "tma", "p"),
-  KEYWORD(NOREMAP, "no", "remap"),
-  KEYWORD(NNOREMAP, "nn", "oremap"),
-  KEYWORD(VNOREMAP, "vn", "oremap"),
-  KEYWORD(XNOREMAP, "xn", "oremap"),
-  KEYWORD(SNOREMAP, "snor", "emap"),
-  KEYWORD(ONOREMAP, "ono", "remap"),
-  KEYWORD(INOREMAP, "ino", "remap"),
-  KEYWORD(LNOREMAP, "ln", "oremap"),
-  KEYWORD(CNOREMAP, "cno", "remap"),
-  KEYWORD(TNOREMAP, "tno", "remap"),
-  KEYWORD(AUGROUP, "aug", "roup"),
+  KEYWORD(FUNCTION, "fu", "nction", false),
+  KEYWORD(ENDFUNCTION, "end", "function", false),
+  KEYWORD(ENDFOR, "endfo", "r", false),
+  KEYWORD(ENDWHILE, "endw", "hile", false),
+  KEYWORD(ENDIF, "en", "dif", false),
+  KEYWORD(ENDTRY, "endt", "ry", false),
+  KEYWORD(NORMAL, "norm", "al", false),
+  KEYWORD(RETURN, "retu", "rn", false),
+  KEYWORD(RUBY, "rub", "y", false),
+  KEYWORD(PYTHON, "py", "thon", false),
+  KEYWORD(THROW, "th", "row", false),
+  KEYWORD(EXECUTE, "exe", "cute", false),
+  KEYWORD(AUTOCMD, "au", "tocmd", false),
+  KEYWORD(SILENT, "sil", "ent", false),
+  KEYWORD(ECHO, "ec", "ho", false),
+  KEYWORD(ECHOMSG, "echom", "sg", false),
+  KEYWORD(MAP, "map", "", true),
+  KEYWORD(NMAP, "nm", "ap", true),
+  KEYWORD(VMAP, "vm", "ap", true),
+  KEYWORD(XMAP, "xm", "ap", true),
+  KEYWORD(SMAP, "smap", "", true),
+  KEYWORD(OMAP, "om", "ap", true),
+  KEYWORD(IMAP, "im", "ap", true),
+  KEYWORD(LMAP, "lm", "ap", true),
+  KEYWORD(CMAP, "cm", "ap", true),
+  KEYWORD(TMAP, "tma", "p", true),
+  KEYWORD(NOREMAP, "no", "remap", true),
+  KEYWORD(NNOREMAP, "nn", "oremap", true),
+  KEYWORD(VNOREMAP, "vn", "oremap", true),
+  KEYWORD(XNOREMAP, "xn", "oremap", true),
+  KEYWORD(SNOREMAP, "snor", "emap", true),
+  KEYWORD(ONOREMAP, "ono", "remap", true),
+  KEYWORD(INOREMAP, "ino", "remap", true),
+  KEYWORD(LNOREMAP, "ln", "oremap", true),
+  KEYWORD(CNOREMAP, "cno", "remap", true),
+  KEYWORD(TNOREMAP, "tno", "remap", true),
+  KEYWORD(AUGROUP, "aug", "roup", true),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
   Scanner *s = (Scanner *)malloc(sizeof(Scanner));
   s->marker_len = 0;
   s->script_marker = NULL;
+  s->ignore_comments = false;
 
   return (void *)s;
 }
@@ -136,15 +141,20 @@ void tree_sitter_vim_external_scanner_destroy(void *payload) {
 //
 // [ marker_len, marker ... (marker_len size) ]
 
+#define SC_IGNORE_COMMENTS 0
+#define SC_MARK_LEN 1
+#define SC_MARK 2
+
 
 unsigned int tree_sitter_vim_external_scanner_serialize(void *payload,
                                                         char *buffer) {
   Scanner *s = (Scanner *)payload;
-  buffer[0] = s->marker_len;
+  buffer[SC_IGNORE_COMMENTS] = s->ignore_comments;
+  buffer[SC_MARK_LEN] = s->marker_len;
 
-  strncpy(buffer + 1, s->script_marker, s->marker_len);
+  strncpy(buffer + SC_MARK, s->script_marker, s->marker_len);
 
-  return s->marker_len + 1;
+  return s->marker_len + SC_MARK;
 }
 
 void tree_sitter_vim_external_scanner_deserialize(void *payload,
@@ -155,14 +165,15 @@ void tree_sitter_vim_external_scanner_deserialize(void *payload,
   }
 
   Scanner *s = (Scanner *)payload;
-  s->marker_len = buffer[0];
+  s->ignore_comments = buffer[SC_IGNORE_COMMENTS];
+  s->marker_len = buffer[SC_MARK_LEN];
 
   // Sanity check, just to be sure
-  assert(s->marker_len + 1 == length);
+  assert(s->marker_len + SC_MARK == length);
 
   if (s->marker_len > 0) {
     s->script_marker = (char *)malloc(s->marker_len);
-    strncpy(s->script_marker, buffer + 1, s->marker_len);
+    strncpy(s->script_marker, buffer + SC_MARK, s->marker_len);
   }
 }
 
@@ -287,16 +298,16 @@ bool try_lex_keyword(char *possible, keyword keyword) {
 
   // Try lexing mandatory part
   size_t i;
-  for (i = 0; keyword[0][i] && possible[i]; i++) {
-    if (possible[i] != keyword[0][i]) {
+  for (i = 0; keyword.mandat[i] && possible[i]; i++) {
+    if (possible[i] != keyword.mandat[i]) {
       return false;
     }
   }
 
   size_t mandat_len = i;
   // Now try lexing optional part
-  for (size_t i = 0; keyword[1][i] && possible[mandat_len + i]; i++) {
-    if (possible[mandat_len + i] != keyword[1][i]) {
+  for (size_t i = 0; keyword.opt[i] && possible[mandat_len + i]; i++) {
+    if (possible[mandat_len + i] != keyword.opt[i]) {
       return false;
     }
   }
@@ -387,6 +398,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
             || lexer->lookahead == '&') {
           // Actually this might be a range before a command
           lexer->result_symbol = CMD_SEPARATOR;
+          s->ignore_comments = false;
           return true;
         }
 
@@ -395,6 +407,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
         return true;
       } else {
         lexer->result_symbol = CMD_SEPARATOR;
+        s->ignore_comments = false;
         return true;
       }
     } else if (lexer->lookahead == '|') {
@@ -468,6 +481,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     for (enum TokenType t = TRIE_START; t < TOKENTYPE_NR; t++) {
       if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - TRIE_START])) {
         lexer->result_symbol = t;
+        s->ignore_comments = keywords[t - TRIE_START].ignore_comments_after;
         return true;
       }
     }
@@ -476,7 +490,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
 
   // String and comments
   if (valid_symbols[COMMENT] && !valid_symbols[STRING]
-      && lexer->lookahead == '"') {
+      && lexer->lookahead == '"' && !s->ignore_comments) {
     do {
       advance(lexer, false);
     } while (lexer->lookahead != '\n');

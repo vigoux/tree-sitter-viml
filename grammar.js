@@ -219,11 +219,12 @@ module.exports = grammar({
         ),
       ),
 
-    augroup_statement: ($) => seq(
-      maybe_bang($, tokalias($, 'augroup')),
-      alias($.identifier, $.augroup_name),
-      $._cmd_separator
-    ),
+    augroup_statement: ($) =>
+      seq(
+        maybe_bang($, tokalias($, 'augroup')),
+        alias($.identifier, $.augroup_name),
+        $._cmd_separator,
+      ),
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
     au_event_list: ($) => commaSep1($.au_event),
@@ -408,13 +409,32 @@ module.exports = grammar({
         seq(
           '<expr>',
           MAP_OPTIONS,
-          field('lhs', $.map_side),
+          field('lhs', alias($._map_lhs, $.map_side)),
           field('rhs', $._expression),
         ),
-        seq(field('lhs', $.map_side), field('rhs', $.map_side)),
+        seq(
+          field('lhs', alias($._map_lhs, $.map_side)),
+          field('rhs', alias($._map_rhs, $.map_side)),
+        ),
       ),
 
-    map_side: ($) => /[^\n \t]+/,
+    _keycode_in: ($) => seq(token.immediate(/C-\S/), token.immediate('>')),
+
+    _immediate_keycode: ($) =>
+      alias(seq(token.immediate('<'), $._keycode_in), $.keycode),
+    keycode: ($) => seq('<', $._keycode_in),
+
+    _map_lhs: ($) =>
+      seq(
+        choice(/[^\n ]+/, $.keycode),
+        repeat(choice(token.immediate(/[^\n ]+/), $._immediate_keycode)),
+      ),
+
+    _map_rhs: ($) =>
+      seq(
+        choice(/[^\n]+/, $.keycode),
+        repeat(choice(token.immediate(/[^\n]+/), $._immediate_keycode)),
+      ),
 
     // :h variable
     _variable: ($) =>

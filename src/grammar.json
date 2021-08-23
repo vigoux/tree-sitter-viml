@@ -2033,8 +2033,13 @@
               "type": "FIELD",
               "name": "lhs",
               "content": {
-                "type": "SYMBOL",
-                "name": "map_side"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_map_lhs"
+                },
+                "named": true,
+                "value": "map_side"
               }
             },
             {
@@ -2054,25 +2059,158 @@
               "type": "FIELD",
               "name": "lhs",
               "content": {
-                "type": "SYMBOL",
-                "name": "map_side"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_map_lhs"
+                },
+                "named": true,
+                "value": "map_side"
               }
             },
             {
               "type": "FIELD",
               "name": "rhs",
               "content": {
-                "type": "SYMBOL",
-                "name": "map_side"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_map_rhs"
+                },
+                "named": true,
+                "value": "map_side"
               }
             }
           ]
         }
       ]
     },
-    "map_side": {
-      "type": "PATTERN",
-      "value": "[^\\n \\t]+"
+    "_keycode_in": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "C-\\S"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": ">"
+          }
+        }
+      ]
+    },
+    "_immediate_keycode": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "<"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_keycode_in"
+          }
+        ]
+      },
+      "named": true,
+      "value": "keycode"
+    },
+    "keycode": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_keycode_in"
+        }
+      ]
+    },
+    "_map_lhs": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\n ]+"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keycode"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\n ]+"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_immediate_keycode"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_map_rhs": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\n]+"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keycode"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\n]+"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_immediate_keycode"
+              }
+            ]
+          }
+        }
+      ]
     },
     "_variable": {
       "type": "PREC_LEFT",

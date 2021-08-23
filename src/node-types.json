@@ -1966,6 +1966,11 @@
     }
   },
   {
+    "type": "keycode",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "lambda_expression",
     "named": true,
     "fields": {},
@@ -2262,6 +2267,21 @@
         },
         {
           "type": "script",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "map_side",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "keycode",
           "named": true
         }
       ]
@@ -4599,10 +4619,6 @@
   {
     "type": "map",
     "named": false
-  },
-  {
-    "type": "map_side",
-    "named": true
   },
   {
     "type": "mark",
