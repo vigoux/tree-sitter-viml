@@ -63,15 +63,16 @@ enum TokenType {
   CNOREMAP,
   TNOREMAP,
   AUGROUP,
+  HIGHLIGHT,
   TOKENTYPE_NR
 };
 
 #define TRIE_START (COMMENT + 1)
 
 typedef struct {
-  char * mandat;
-  char * opt;
-  bool ignore_comments_after;
+  char * mandat;               /// Mandatory part of the command
+  char * opt;                  /// Optional part of the command
+  bool ignore_comments_after;  /// Ignore comments until EOL
 } keyword;
 
 #define KEYWORD(tk, m, opt, i) [tk - TRIE_START] = { (m), (opt), (i) }
@@ -114,6 +115,7 @@ keyword keywords[] = {
   KEYWORD(CNOREMAP, "cno", "remap", true),
   KEYWORD(TNOREMAP, "tno", "remap", true),
   KEYWORD(AUGROUP, "aug", "roup", true),
+  KEYWORD(HIGHLIGHT, "hi", "ghlight", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

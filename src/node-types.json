@@ -108,6 +108,10 @@
             "named": true
           },
           {
+            "type": "highlight_statement",
+            "named": true
+          },
+          {
             "type": "if_statement",
             "named": true
           },
@@ -444,6 +448,10 @@
         },
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "highlight_statement",
           "named": true
         },
         {
@@ -1636,6 +1644,155 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "highlight_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "hl_attribute",
+          "named": true
+        },
+        {
+          "type": "hl_group",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hl_attribute",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "cterm",
+            "named": false
+          },
+          {
+            "type": "ctermbg",
+            "named": false
+          },
+          {
+            "type": "ctermfg",
+            "named": false
+          },
+          {
+            "type": "font",
+            "named": false
+          },
+          {
+            "type": "gui",
+            "named": false
+          },
+          {
+            "type": "guibg",
+            "named": false
+          },
+          {
+            "type": "guifg",
+            "named": false
+          },
+          {
+            "type": "guisp",
+            "named": false
+          },
+          {
+            "type": "start",
+            "named": false
+          },
+          {
+            "type": "stop",
+            "named": false
+          }
+        ]
+      },
+      "val": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "'",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "NONE",
+            "named": false
+          },
+          {
+            "type": "background",
+            "named": false
+          },
+          {
+            "type": "bg",
+            "named": false
+          },
+          {
+            "type": "bold",
+            "named": false
+          },
+          {
+            "type": "fg",
+            "named": false
+          },
+          {
+            "type": "foreground",
+            "named": false
+          },
+          {
+            "type": "inverse",
+            "named": false
+          },
+          {
+            "type": "italic",
+            "named": false
+          },
+          {
+            "type": "keycode",
+            "named": true
+          },
+          {
+            "type": "nocombine",
+            "named": false
+          },
+          {
+            "type": "reverse",
+            "named": false
+          },
+          {
+            "type": "standout",
+            "named": false
+          },
+          {
+            "type": "strikethrough",
+            "named": false
+          },
+          {
+            "type": "undercurl",
+            "named": false
+          },
+          {
+            "type": "underline",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -2992,6 +3149,10 @@
           "named": true
         },
         {
+          "type": "highlight_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -3189,6 +3350,10 @@
         },
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "highlight_statement",
           "named": true
         },
         {
@@ -4285,6 +4450,10 @@
     "named": false
   },
   {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -4413,6 +4582,10 @@
     "named": false
   },
   {
+    "type": "NONE",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -4469,11 +4642,27 @@
     "named": false
   },
   {
+    "type": "background",
+    "named": false
+  },
+  {
+    "type": "bg",
+    "named": false
+  },
+  {
+    "type": "bold",
+    "named": false
+  },
+  {
     "type": "call",
     "named": false
   },
   {
     "type": "catch",
+    "named": false
+  },
+  {
+    "type": "clear",
     "named": false
   },
   {
@@ -4503,6 +4692,22 @@
   {
     "type": "comment",
     "named": true
+  },
+  {
+    "type": "cterm",
+    "named": false
+  },
+  {
+    "type": "ctermbg",
+    "named": false
+  },
+  {
+    "type": "ctermfg",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
   },
   {
     "type": "dict",
@@ -4549,6 +4754,10 @@
     "named": false
   },
   {
+    "type": "fg",
+    "named": false
+  },
+  {
     "type": "file",
     "named": true
   },
@@ -4561,12 +4770,44 @@
     "named": true
   },
   {
+    "type": "font",
+    "named": false
+  },
+  {
     "type": "for",
+    "named": false
+  },
+  {
+    "type": "foreground",
     "named": false
   },
   {
     "type": "function",
     "named": false
+  },
+  {
+    "type": "gui",
+    "named": false
+  },
+  {
+    "type": "guibg",
+    "named": false
+  },
+  {
+    "type": "guifg",
+    "named": false
+  },
+  {
+    "type": "guisp",
+    "named": false
+  },
+  {
+    "type": "highlight",
+    "named": false
+  },
+  {
+    "type": "hl_group",
+    "named": true
   },
   {
     "type": "identifier",
@@ -4593,11 +4834,19 @@
     "named": true
   },
   {
+    "type": "inverse",
+    "named": false
+  },
+  {
     "type": "is",
     "named": false
   },
   {
     "type": "isnot",
+    "named": false
+  },
+  {
+    "type": "italic",
     "named": false
   },
   {
@@ -4630,6 +4879,10 @@
   },
   {
     "type": "nnoremap",
+    "named": false
+  },
+  {
+    "type": "nocombine",
     "named": false
   },
   {
@@ -4673,6 +4926,10 @@
     "named": false
   },
   {
+    "type": "reverse",
+    "named": false
+  },
+  {
     "type": "ruby",
     "named": false
   },
@@ -4709,6 +4966,22 @@
     "named": true
   },
   {
+    "type": "standout",
+    "named": false
+  },
+  {
+    "type": "start",
+    "named": false
+  },
+  {
+    "type": "stop",
+    "named": false
+  },
+  {
+    "type": "strikethrough",
+    "named": false
+  },
+  {
     "type": "string_literal",
     "named": true
   },
@@ -4726,6 +4999,14 @@
   },
   {
     "type": "try",
+    "named": false
+  },
+  {
+    "type": "undercurl",
+    "named": false
+  },
+  {
+    "type": "underline",
     "named": false
   },
   {

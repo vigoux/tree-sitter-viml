@@ -1,0 +1,206 @@
+================================================================================
+Empty highlight
+================================================================================
+
+highlight
+hi
+high
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement)
+  (highlight_statement)
+  (highlight_statement))
+
+================================================================================
+Highlight clear
+================================================================================
+
+hi clear
+hi clear Foo
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement)
+  (highlight_statement
+    (hl_group)))
+
+================================================================================
+Highlight none
+================================================================================
+
+high Foo NONE
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)))
+
+================================================================================
+Highlight cterm
+================================================================================
+
+hi Foo cterm=bold
+hi Foo cterm=bold
+hi Foo cterm=underline
+hi Foo cterm=undercurl
+hi Foo cterm=strikethrough
+hi Foo cterm=reverse
+hi Foo cterm=inverse
+hi Foo cterm=italic
+hi Foo cterm=standout
+hi Foo cterm=nocombine
+hi Foo cterm=NONE
+hi Foo cterm=standout,italic
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)))
+
+================================================================================
+Highlight start stop
+================================================================================
+
+hi Foo start=bleh stop=bar
+hi Foo start=<Space>Foo
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)))
+
+================================================================================
+Highglight ctermfg ctermbg
+================================================================================
+
+hi Foo ctermfg=0
+hi Foo ctermfg=0*
+hi Foo ctermfg=grey ctermbg=darkblue
+highlight Visual ctermfg=bg ctermbg=fg
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)
+    (hl_attribute)))
+
+================================================================================
+Highlight gui
+================================================================================
+
+hi Foo gui=italic
+hi Foo gui=bold
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)))
+
+================================================================================
+Highlight guifg guibg guisp
+================================================================================
+
+hi Foo guifg=NONE
+hi Foo guibg=bg
+hi Foo guisp=fg
+hi Foo guifg=foreground
+highlight Comment guifg=#11f0c3 guibg=#ff00ff
+hi Comment guifg='salmon pink'
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)))
+
+================================================================================
+Highlight font
+================================================================================
+
+hi Foo font=-misc-fixed-bold-r-normal--14-130-75-75-c-70-iso8859-1
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute)))

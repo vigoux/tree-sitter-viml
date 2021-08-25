@@ -78,6 +78,7 @@ module.exports = grammar({
     $._cnoremap,
     $._tnoremap,
     $._augroup,
+    $._highlight,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -111,6 +112,7 @@ module.exports = grammar({
         $.register_statement,
         $.map_statement,
         $.augroup_statement,
+        $.highlight_statement,
         $.command,
       ),
 
@@ -424,16 +426,90 @@ module.exports = grammar({
       alias(seq(token.immediate('<'), $._keycode_in), $.keycode),
     keycode: ($) => seq('<', $._keycode_in),
 
-    _map_lhs: ($) =>
-      seq(
-        choice(/[^\n ]+/, $.keycode),
-        repeat(choice(token.immediate(/[^\n ]+/), $._immediate_keycode)),
+    _map_lhs: ($) => keys($, /[^\n ]+/),
+    _map_rhs: ($) => keys($, /[^\n]+/),
+
+    // :h :highlight
+
+    hl_group: ($) => /[a-zA-Z0-9_]+/,
+
+    _hl_body_clear: ($) => seq('clear', optional($.hl_group)),
+
+    _hl_body_none: ($) => seq($.hl_group, 'NONE'),
+
+    _hl_attr_list: ($) => commaSep1(
+      choice(
+        ...[
+          'bold',
+          'underline',
+          'undercurl',
+          'strikethrough',
+          'reverse',
+          'inverse',
+          'italic',
+          'standout',
+          'nocombine',
+          'NONE',
+        ].map((v) => token.immediate(v)),
+      )),
+
+    _hl_key_cterm: ($) => hl_key_val('cterm', $._hl_attr_list),
+
+    _hl_term_list: ($) =>
+      repeat1(choice(token.immediate(/\S+/), $._immediate_keycode)),
+    _hl_key_start_stop: ($) =>
+      hl_key_val(choice('start', 'stop'), $._hl_term_list),
+
+    _hl_color_nr: ($) => token.immediate(/[0-9]+\*?/),
+    _hl_key_ctermfg_ctermbg: ($) =>
+      hl_key_val(choice('ctermfg', 'ctermbg'), choice($._hl_color_name, $._hl_color_nr)),
+
+    _hl_key_gui: ($) => hl_key_val('gui', $._hl_attr_list),
+
+    _hl_quoted_name: ($) => seq(token.immediate("'"), token.immediate(/[^'\n]+/), "'"),
+
+    _hl_color_name: ($) =>
+      choice(
+        $._hl_quoted_name,
+        ...[
+          'NONE',
+          'bg',
+          'background',
+          'fg',
+          'foreground',
+          /#[0-9a-fA-F]{6}/,
+          /[a-zA-Z]+/,
+        ].map((n) => token.immediate(n)),
+      ),
+    _hl_key_gui_color: ($) =>
+      hl_key_val(choice('guifg', 'guibg', 'guisp'), $._hl_color_name),
+
+    _hl_key_font: ($) =>
+      hl_key_val(
+        'font',
+        choice(token.immediate(/[a-zA-Z0-9-]+/), $._hl_quoted_name),
       ),
 
-    _map_rhs: ($) =>
+    hl_attribute: ($) =>
+      choice(
+        $._hl_key_cterm,
+        $._hl_key_start_stop,
+        $._hl_key_ctermfg_ctermbg,
+        $._hl_key_gui,
+        $._hl_key_gui_color,
+        $._hl_key_font,
+      ),
+
+    _hl_body_keys: ($) =>
+      seq(optional('default'), $.hl_group, repeat1($.hl_attribute)),
+
+    _hl_body: ($) => choice($._hl_body_clear, $._hl_body_none, $._hl_body_keys),
+
+    highlight_statement: ($) =>
       seq(
-        choice(/[^\n]+/, $.keycode),
-        repeat(choice(token.immediate(/[^\n]+/), $._immediate_keycode)),
+        maybe_bang($, tokalias($, 'highlight')),
+        optional($._hl_body),
+        $._cmd_separator,
       ),
 
     // :h variable
@@ -646,4 +722,15 @@ function echo_variant($, cmd) {
 
 function any_order(...args) {
   return repeat(choice(...args));
+}
+
+function hl_key_val(left, right) {
+  return seq(field('key', left), token.immediate('='), field('val', right));
+}
+
+function keys($, allowed) {
+  return seq(
+    choice(allowed, $.keycode),
+    repeat(choice(token.immediate(allowed), $._immediate_keycode)),
+  );
 }
