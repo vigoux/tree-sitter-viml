@@ -79,6 +79,7 @@ module.exports = grammar({
     $._tnoremap,
     $._augroup,
     $._highlight,
+    $._syntax,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -113,6 +114,7 @@ module.exports = grammar({
         $.map_statement,
         $.augroup_statement,
         $.highlight_statement,
+        $.syntax_statement,
         $.command,
       ),
 
@@ -279,14 +281,15 @@ module.exports = grammar({
         $.default_option,
       ),
 
-    _set_operator: ($) => choice(...['=', ':', '+=', '^=', '-='].map(token.immediate)),
+    _set_operator: ($) =>
+      choice(...['=', ':', '+=', '^=', '-='].map(token.immediate)),
 
     set_value: ($) => token.immediate(/([^ \n]|\\\s)+/),
 
-    _set_rhs: ($) => seq($._set_operator, optional(field('value', $.set_value))),
+    _set_rhs: ($) =>
+      seq($._set_operator, optional(field('value', $.set_value))),
 
-    set_item: ($) =>
-      seq(field('option', $._set_option), optional($._set_rhs)),
+    set_item: ($) => seq(field('option', $._set_option), optional($._set_rhs)),
 
     set_statement: ($) => seq('set', repeat($.set_item), $._cmd_separator),
 
@@ -437,21 +440,23 @@ module.exports = grammar({
 
     _hl_body_none: ($) => seq($.hl_group, 'NONE'),
 
-    _hl_attr_list: ($) => commaSep1(
-      choice(
-        ...[
-          'bold',
-          'underline',
-          'undercurl',
-          'strikethrough',
-          'reverse',
-          'inverse',
-          'italic',
-          'standout',
-          'nocombine',
-          'NONE',
-        ].map(token.immediate),
-      )),
+    _hl_attr_list: ($) =>
+      commaSep1(
+        choice(
+          ...[
+            'bold',
+            'underline',
+            'undercurl',
+            'strikethrough',
+            'reverse',
+            'inverse',
+            'italic',
+            'standout',
+            'nocombine',
+            'NONE',
+          ].map(token.immediate),
+        ),
+      ),
 
     _hl_key_cterm: ($) => hl_key_val('cterm', $._hl_attr_list),
 
@@ -462,11 +467,15 @@ module.exports = grammar({
 
     _hl_color_nr: ($) => token.immediate(/[0-9]+\*?/),
     _hl_key_ctermfg_ctermbg: ($) =>
-      hl_key_val(choice('ctermfg', 'ctermbg'), choice($._hl_color_name, $._hl_color_nr)),
+      hl_key_val(
+        choice('ctermfg', 'ctermbg'),
+        choice($._hl_color_name, $._hl_color_nr),
+      ),
 
     _hl_key_gui: ($) => hl_key_val('gui', $._hl_attr_list),
 
-    _hl_quoted_name: ($) => seq(token.immediate("'"), token.immediate(/[^'\n]+/), "'"),
+    _hl_quoted_name: ($) =>
+      seq(token.immediate("'"), token.immediate(/[^'\n]+/), "'"),
 
     _hl_color_name: ($) =>
       choice(
@@ -510,6 +519,41 @@ module.exports = grammar({
         maybe_bang($, tokalias($, 'highlight')),
         optional($._hl_body),
         $._cmd_separator,
+      ),
+
+    // :h :syntax
+    _syn_enable: ($) => syn_sub(choice('enable', 'on', 'off', 'reset')),
+
+    _syn_case: ($) => syn_sub('case', optional(choice('match', 'ignore'))),
+
+    _syn_spell: ($) =>
+      syn_sub('spell', optional(choice('toplevel', 'notoplevel', 'default'))),
+
+    _syn_foldlevel: ($) =>
+      syn_sub('foldlevel', optional(choice('start', 'minimum'))),
+
+    _syn_iskeyword: ($) =>
+      syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
+
+    _syn_keyword: ($) =>
+      syn_sub(
+        'keyword',
+        $.hl_group,
+        repeat1(alias(/[a-zA-Z\[\]]+/, $.keyword))
+      ),
+
+    syntax_statement: ($) =>
+      seq(
+        tokalias($, 'syntax'),
+        choice(
+          $._syn_enable,
+          $._syn_case,
+          $._syn_spell,
+          $._syn_foldlevel,
+          $._syn_iskeyword,
+          $._syn_keyword,
+        ),
+        $._cmd_separator
       ),
 
     // :h variable
@@ -726,6 +770,14 @@ function any_order(...args) {
 
 function hl_key_val(left, right) {
   return seq(field('key', left), token.immediate('='), field('val', right));
+}
+
+function syn_sub(sub, ...args) {
+  if (args.length > 0) {
+    return seq(field('sub', sub), ...args);
+  } else {
+    return field('sub', sub);
+  }
 }
 
 function keys($, allowed) {

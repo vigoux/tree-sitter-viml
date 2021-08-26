@@ -1,0 +1,104 @@
+================================================================================
+Syntax enable and on
+================================================================================
+
+syntax enable
+syn enable
+syntax enable	" start highlighting, use 'background' to set colors
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement
+    (comment)))
+
+================================================================================
+Syntax case
+================================================================================
+
+sy case match
+sy case
+sy case ignore
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement))
+
+================================================================================
+Syntax spell
+================================================================================
+
+syn spell
+syn spell toplevel
+syn spell notoplevel
+syn spell default
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement))
+
+================================================================================
+Syntax foldlevel
+================================================================================
+
+syntax foldlevel
+syntax foldlevel start
+syntax foldlevel minimum
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement))
+
+================================================================================
+Syntax keyword
+================================================================================
+
+syntax keyword   Type   int long char
+syntax keyword   vimCommand ab[breviate] n[ext]
+syn keyword vimCommand tag
+syn keyword vimSetting tag
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement
+    (hl_group)
+    (keyword)
+    (keyword)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (keyword)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (keyword)))
+
+================================================================================
+Syntax iskeyword
+================================================================================
+
+syntax iskeyword clear
+syntax iskeyword @,48-57,192-255,$,_
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement
+    (value)))

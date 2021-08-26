@@ -164,6 +164,10 @@
             "named": true
           },
           {
+            "type": "syntax_statement",
+            "named": true
+          },
+          {
             "type": "throw_statement",
             "named": true
           },
@@ -504,6 +508,10 @@
         },
         {
           "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "syntax_statement",
           "named": true
         },
         {
@@ -3205,6 +3213,10 @@
           "named": true
         },
         {
+          "type": "syntax_statement",
+          "named": true
+        },
+        {
           "type": "throw_statement",
           "named": true
         },
@@ -3386,6 +3398,10 @@
         },
         {
           "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "syntax_statement",
           "named": true
         },
         {
@@ -3693,6 +3709,72 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "syntax_statement",
+    "named": true,
+    "fields": {
+      "sub": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "enable",
+            "named": false
+          },
+          {
+            "type": "foldlevel",
+            "named": false
+          },
+          {
+            "type": "iskeyword",
+            "named": false
+          },
+          {
+            "type": "keyword",
+            "named": false
+          },
+          {
+            "type": "off",
+            "named": false
+          },
+          {
+            "type": "on",
+            "named": false
+          },
+          {
+            "type": "reset",
+            "named": false
+          },
+          {
+            "type": "spell",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "hl_group",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4638,6 +4720,10 @@
     "named": false
   },
   {
+    "type": "case",
+    "named": false
+  },
+  {
     "type": "catch",
     "named": false
   },
@@ -4710,6 +4796,10 @@
     "named": false
   },
   {
+    "type": "enable",
+    "named": false
+  },
+  {
     "type": "endfor",
     "named": false
   },
@@ -4748,6 +4838,10 @@
   {
     "type": "float_literal",
     "named": true
+  },
+  {
+    "type": "foldlevel",
+    "named": false
   },
   {
     "type": "font",
@@ -4798,6 +4892,10 @@
     "named": false
   },
   {
+    "type": "ignore",
+    "named": false
+  },
+  {
     "type": "imap",
     "named": false
   },
@@ -4822,11 +4920,23 @@
     "named": false
   },
   {
+    "type": "iskeyword",
+    "named": false
+  },
+  {
     "type": "isnot",
     "named": false
   },
   {
     "type": "italic",
+    "named": false
+  },
+  {
+    "type": "keyword",
+    "named": true
+  },
+  {
+    "type": "keyword",
     "named": false
   },
   {
@@ -4854,6 +4964,14 @@
     "named": true
   },
   {
+    "type": "match",
+    "named": false
+  },
+  {
+    "type": "minimum",
+    "named": false
+  },
+  {
     "type": "nmap",
     "named": false
   },
@@ -4874,7 +4992,19 @@
     "named": false
   },
   {
+    "type": "notoplevel",
+    "named": false
+  },
+  {
+    "type": "off",
+    "named": false
+  },
+  {
     "type": "omap",
+    "named": false
+  },
+  {
+    "type": "on",
     "named": false
   },
   {
@@ -4900,6 +5030,10 @@
   {
     "type": "register",
     "named": true
+  },
+  {
+    "type": "reset",
+    "named": false
   },
   {
     "type": "return",
@@ -4942,6 +5076,10 @@
     "named": false
   },
   {
+    "type": "spell",
+    "named": false
+  },
+  {
     "type": "spread",
     "named": true
   },
@@ -4966,6 +5104,10 @@
     "named": true
   },
   {
+    "type": "syntax",
+    "named": false
+  },
+  {
     "type": "throw",
     "named": false
   },
@@ -4975,6 +5117,10 @@
   },
   {
     "type": "tnoremap",
+    "named": false
+  },
+  {
+    "type": "toplevel",
     "named": false
   },
   {
@@ -4992,6 +5138,10 @@
   {
     "type": "unlet",
     "named": false
+  },
+  {
+    "type": "value",
+    "named": true
   },
   {
     "type": "vi",

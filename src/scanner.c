@@ -64,6 +64,7 @@ enum TokenType {
   TNOREMAP,
   AUGROUP,
   HIGHLIGHT,
+  SYNTAX,
   TOKENTYPE_NR
 };
 
@@ -116,6 +117,7 @@ keyword keywords[] = {
   KEYWORD(TNOREMAP, "tno", "remap", true),
   KEYWORD(AUGROUP, "aug", "roup", true),
   KEYWORD(HIGHLIGHT, "hi", "ghlight", false),
+  KEYWORD(SYNTAX, "sy", "ntax", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
