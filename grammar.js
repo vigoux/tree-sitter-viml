@@ -279,14 +279,14 @@ module.exports = grammar({
         $.default_option,
       ),
 
-    _set_operator: ($) => choice('=', ':', '+=', '^=', '-='),
+    _set_operator: ($) => choice(...['=', ':', '+=', '^=', '-='].map(token.immediate)),
 
-    set_value: ($) => /(\S|\\\s)*/,
+    set_value: ($) => token.immediate(/([^ \n]|\\\s)+/),
 
-    _set_rhs: ($) => seq($._set_operator, $.set_value),
+    _set_rhs: ($) => seq($._set_operator, optional(field('value', $.set_value))),
 
     set_item: ($) =>
-      seq(field('option', $._set_option), optional(field('value', $._set_rhs))),
+      seq(field('option', $._set_option), optional($._set_rhs)),
 
     set_statement: ($) => seq('set', repeat($.set_item), $._cmd_separator),
 
@@ -450,7 +450,7 @@ module.exports = grammar({
           'standout',
           'nocombine',
           'NONE',
-        ].map((v) => token.immediate(v)),
+        ].map(token.immediate),
       )),
 
     _hl_key_cterm: ($) => hl_key_val('cterm', $._hl_attr_list),
@@ -479,7 +479,7 @@ module.exports = grammar({
           'foreground',
           /#[0-9a-fA-F]{6}/,
           /[a-zA-Z]+/,
-        ].map((n) => token.immediate(n)),
+        ].map(token.immediate),
       ),
     _hl_key_gui_color: ($) =>
       hl_key_val(choice('guifg', 'guibg', 'guisp'), $._hl_color_name),

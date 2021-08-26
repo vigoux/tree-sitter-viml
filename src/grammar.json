@@ -1156,30 +1156,48 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "="
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "="
+          }
         },
         {
-          "type": "STRING",
-          "value": ":"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          }
         },
         {
-          "type": "STRING",
-          "value": "+="
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "+="
+          }
         },
         {
-          "type": "STRING",
-          "value": "^="
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "^="
+          }
         },
         {
-          "type": "STRING",
-          "value": "-="
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "-="
+          }
         }
       ]
     },
     "set_value": {
-      "type": "PATTERN",
-      "value": "(\\S|\\\\\\s)*"
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "([^ \\n]|\\\\\\s)+"
+      }
     },
     "_set_rhs": {
       "type": "SEQ",
@@ -1189,8 +1207,20 @@
           "name": "_set_operator"
         },
         {
-          "type": "SYMBOL",
-          "name": "set_value"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "set_value"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -1209,12 +1239,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "FIELD",
-              "name": "value",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_set_rhs"
-              }
+              "type": "SYMBOL",
+              "name": "_set_rhs"
             },
             {
               "type": "BLANK"
