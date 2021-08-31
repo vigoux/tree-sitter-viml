@@ -1200,7 +1200,7 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "([^ \\n]|\\\\\\s)+"
+        "value": "([^ \\n\\t]|\\\\\\s)+"
       }
     },
     "_set_rhs": {
@@ -1261,7 +1261,7 @@
           "value": "set"
         },
         {
-          "type": "REPEAT",
+          "type": "REPEAT1",
           "content": {
             "type": "SYMBOL",
             "name": "set_item"

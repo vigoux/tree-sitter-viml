@@ -284,14 +284,14 @@ module.exports = grammar({
     _set_operator: ($) =>
       choice(...['=', ':', '+=', '^=', '-='].map(token.immediate)),
 
-    set_value: ($) => token.immediate(/([^ \n]|\\\s)+/),
+    set_value: ($) => token.immediate(/([^ \n\t]|\\\s)+/),
 
     _set_rhs: ($) =>
       seq($._set_operator, optional(field('value', $.set_value))),
 
     set_item: ($) => seq(field('option', $._set_option), optional($._set_rhs)),
 
-    set_statement: ($) => seq('set', repeat($.set_item), $._cmd_separator),
+    set_statement: ($) => seq('set', repeat1($.set_item), $._cmd_separator),
 
     unlet_statement: ($) =>
       seq(maybe_bang($, 'unlet'), repeat1($._expression), $._cmd_separator),
