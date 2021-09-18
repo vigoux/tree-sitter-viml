@@ -30,6 +30,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "setlocal_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "return_statement"
         },
         {
@@ -79,6 +83,10 @@
         {
           "type": "SYMBOL",
           "name": "echo_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "echomsg_statement"
         },
         {
           "type": "SYMBOL",
@@ -1257,8 +1265,38 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_set"
+          },
+          "named": false,
           "value": "set"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "set_item"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "setlocal_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_setlocal"
+          },
+          "named": false,
+          "value": "setlocal"
         },
         {
           "type": "REPEAT1",
@@ -4846,6 +4884,14 @@
     {
       "type": "SYMBOL",
       "name": "_syntax"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_set"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_setlocal"
     }
   ],
   "inline": [],

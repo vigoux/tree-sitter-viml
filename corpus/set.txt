@@ -4,6 +4,8 @@ Simple set
 
 set number
 set number?
+setlocal number
+setlocal number?
 
 --------------------------------------------------------------------------------
 
@@ -13,6 +15,12 @@ set number?
       option: (option_name)))
   (set_statement
     (set_item
+      option: (option_name)))
+  (setlocal_statement
+    (set_item
+      option: (option_name)))
+  (setlocal_statement
+    (set_item
       option: (option_name))))
 
 ================================================================================
@@ -20,11 +28,16 @@ Set noopt
 ================================================================================
 
 set nofoo
+setlocal nofoo
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      option: (no_option
+        (option_name))))
+  (setlocal_statement
     (set_item
       option: (no_option
         (option_name)))))
@@ -34,11 +47,15 @@ Set opt?
 ================================================================================
 
 set foo?
+setlocal foo?
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      option: (option_name)))
+  (setlocal_statement
     (set_item
       option: (option_name))))
 
@@ -47,11 +64,16 @@ Set invopt
 ================================================================================
 
 set invfoo
+setlocal invfoo
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      option: (inv_option
+        (option_name))))
+  (setlocal_statement
     (set_item
       option: (inv_option
         (option_name)))))
@@ -63,6 +85,9 @@ Set default
 set foo&
 set foo&vi
 set foo&vim
+setlocal foo&
+setlocal foo&vi
+setlocal foo&vim
 
 --------------------------------------------------------------------------------
 
@@ -76,6 +101,18 @@ set foo&vim
       option: (default_option
         (option_name))))
   (set_statement
+    (set_item
+      option: (default_option
+        (option_name))))
+  (setlocal_statement
+    (set_item
+      option: (default_option
+        (option_name))))
+  (setlocal_statement
+    (set_item
+      option: (default_option
+        (option_name))))
+  (setlocal_statement
     (set_item
       option: (default_option
         (option_name)))))
@@ -85,11 +122,16 @@ Set value
 ================================================================================
 
 set foo=val
+setlocal foo=val
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      option: (option_name)
+      value: (set_value)))
+  (setlocal_statement
     (set_item
       option: (option_name)
       value: (set_value))))
@@ -100,6 +142,8 @@ Set value with spaces
 
 set foo=bar\ baz
 set bar
+setlocal foo=bar\ baz
+setlocal bar
 
 --------------------------------------------------------------------------------
 
@@ -110,6 +154,13 @@ set bar
       value: (set_value)))
   (set_statement
     (set_item
+      option: (option_name)))
+  (setlocal_statement
+    (set_item
+      option: (option_name)
+      value: (set_value)))
+  (setlocal_statement
+    (set_item
       option: (option_name))))
 
 ================================================================================
@@ -117,11 +168,20 @@ Multiple set
 ================================================================================
 
 set foo bar=3 baz
+setlocal foo bar=3 baz
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      (option_name))
+    (set_item
+      (option_name)
+      (set_value))
+    (set_item
+      (option_name)))
+  (setlocal_statement
     (set_item
       (option_name))
     (set_item
@@ -135,11 +195,15 @@ Set empty value
 ================================================================================
 
 set foo=
+setlocal foo=
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      (option_name)))
+  (setlocal_statement
     (set_item
       (option_name))))
 
@@ -148,11 +212,17 @@ Set with tabs (#24)
 ================================================================================
 
 set scrolloff=7		" comment
+setlocal scrolloff=7		" comment
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      (option_name)
+      (set_value))
+    (comment))
+  (setlocal_statement
     (set_item
       (option_name)
       (set_value))
