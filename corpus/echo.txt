@@ -75,5 +75,5 @@ echomsg "foobar"
 --------------------------------------------------------------------------------
 
 (script_file
-  (echo_statement
+  (echomsg_statement
     (string_literal)))

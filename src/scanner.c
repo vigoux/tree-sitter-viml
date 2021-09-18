@@ -65,7 +65,9 @@ enum TokenType {
   AUGROUP,
   HIGHLIGHT,
   SYNTAX,
-  TOKENTYPE_NR
+  SET,
+  SETLOCAL,
+  TOKENTYPE_NR,
 };
 
 #define TRIE_START (COMMENT + 1)
@@ -118,6 +120,8 @@ keyword keywords[] = {
   KEYWORD(AUGROUP, "aug", "roup", true),
   KEYWORD(HIGHLIGHT, "hi", "ghlight", false),
   KEYWORD(SYNTAX, "sy", "ntax", false),
+  KEYWORD(SET, "se", "t", false),
+  KEYWORD(SETLOCAL, "setl", "ocal", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
@@ -299,6 +303,9 @@ bool lex_string(TSLexer *lexer) {
 }
 
 bool try_lex_keyword(char *possible, keyword keyword) {
+  if (strlen(possible) > strlen(keyword.mandat) + strlen(keyword.opt)) {
+    return false;
+  }
 
   // Try lexing mandatory part
   size_t i;

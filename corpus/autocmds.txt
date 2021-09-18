@@ -117,10 +117,10 @@ autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
     (pattern)
     (pattern)
     (pattern)
-    (command
-      (command_name)
-      (arguments
-        (command_argument))))
+    (setlocal_statement
+      (set_item
+        (option_name)
+        (set_value))))
   (autocmd_statement
     (bang)
     (au_event_list
@@ -132,10 +132,10 @@ autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
     (pattern)
     (pattern)
     (pattern)
-    (command
-      (command_name)
-      (arguments
-        (command_argument))))
+    (setlocal_statement
+      (set_item
+        (option_name)
+        (set_value))))
   (autocmd_statement
     (au_event_list
       (au_event))
@@ -146,10 +146,10 @@ autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
     (pattern)
     (pattern)
     (pattern)
-    (command
-      (command_name)
-      (arguments
-        (command_argument))))
+    (setlocal_statement
+      (set_item
+        (option_name)
+        (set_value))))
   (autocmd_statement
     (bang)
     (au_event_list
@@ -161,7 +161,7 @@ autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
     (pattern)
     (pattern)
     (pattern)
-    (command
-      (command_name)
-      (arguments
-        (command_argument)))))
+    (setlocal_statement
+      (set_item
+        (option_name)
+        (set_value)))))

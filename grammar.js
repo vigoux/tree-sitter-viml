@@ -80,6 +80,8 @@ module.exports = grammar({
     $._augroup,
     $._highlight,
     $._syntax,
+    $._set,
+    $._setlocal,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -93,6 +95,7 @@ module.exports = grammar({
         $.let_statement,
         $.unlet_statement,
         $.set_statement,
+        $.setlocal_statement,
         $.return_statement,
         $.normal_statement,
         $.while_loop,
@@ -106,6 +109,7 @@ module.exports = grammar({
         $.call_statement,
         $.execute_statement,
         $.echo_statement,
+        $.echomsg_statement,
         $.try_statement,
         $.throw_statement,
         $.autocmd_statement,
@@ -291,7 +295,8 @@ module.exports = grammar({
 
     set_item: ($) => seq(field('option', $._set_option), optional($._set_rhs)),
 
-    set_statement: ($) => seq('set', repeat1($.set_item), $._cmd_separator),
+    set_statement: ($) => set_variant($, 'set'),
+    setlocal_statement: ($) => set_variant($, 'setlocal'),
 
     unlet_statement: ($) =>
       seq(maybe_bang($, 'unlet'), repeat1($._expression), $._cmd_separator),
@@ -762,6 +767,10 @@ function bin_left_right(left, operator, right) {
 
 function echo_variant($, cmd) {
   return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
+}
+
+function set_variant($, cmd) {
+  return seq(tokalias($, cmd), repeat1($.set_item), $._cmd_separator);
 }
 
 function any_order(...args) {
