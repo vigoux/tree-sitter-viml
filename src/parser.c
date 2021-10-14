@@ -365,7 +365,7 @@ enum {
   alias_sym_range = 338,
 };
 
-static const char * const ts_symbol_names[] = {
+static const char *ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [sym_identifier] = "identifier",
   [aux_sym_normal_statement_token1] = "commands",
@@ -707,7 +707,7 @@ static const char * const ts_symbol_names[] = {
   [alias_sym_range] = "range",
 };
 
-static const TSSymbol ts_symbol_map[] = {
+static TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [sym_identifier] = sym_identifier,
   [aux_sym_normal_statement_token1] = aux_sym_normal_statement_token1,
@@ -2434,7 +2434,7 @@ enum {
   field_variable = 23,
 };
 
-static const char * const ts_field_names[] = {
+static const char *ts_field_names[] = {
   [0] = NULL,
   [field_cmd] = "cmd",
   [field_command] = "command",
@@ -2602,7 +2602,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_command, 7},
 };
 
-static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
+static TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
   [0] = {0},
   [1] = {
     [0] = alias_sym_file,
@@ -2659,7 +2659,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
   },
 };
 
-static const uint16_t ts_non_terminal_alias_map[] = {
+static uint16_t ts_non_terminal_alias_map[] = {
   sym_chunk, 2,
     sym_chunk,
     alias_sym_line,
@@ -2760,6 +2760,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t') ADVANCE(325);
       if (lookahead == ' ') ADVANCE(340);
       if (lookahead == '<') ADVANCE(277);
+      if (lookahead == '|') ADVANCE(339);
       if (lookahead != 0 &&
           lookahead != '\n') ADVANCE(326);
       END_STATE();
@@ -3191,12 +3192,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == ' ') ADVANCE(340);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(341);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(341);
       END_STATE();
     case 37:
       if (lookahead == '<') ADVANCE(281);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(342);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(342);
       END_STATE();
     case 38:
       if (lookahead == '=') ADVANCE(448);
@@ -4567,6 +4570,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 277:
       ACCEPT_TOKEN(anon_sym_LT);
       if (lookahead == ' ') ADVANCE(341);
+      if (lookahead == '|') ADVANCE(339);
       if (lookahead != 0 &&
           lookahead != '\n') ADVANCE(326);
       END_STATE();
@@ -4596,11 +4600,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 281:
       ACCEPT_TOKEN(anon_sym_LT);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(342);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(342);
       END_STATE();
     case 282:
       ACCEPT_TOKEN(anon_sym_LT2);
       if (lookahead == ' ') ADVANCE(341);
+      if (lookahead == '|') ADVANCE(339);
       if (lookahead != 0 &&
           lookahead != '\n') ADVANCE(326);
       END_STATE();
@@ -4641,7 +4647,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 287:
       ACCEPT_TOKEN(anon_sym_LT2);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(341);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(341);
       END_STATE();
     case 288:
       ACCEPT_TOKEN(aux_sym__map_lhs_token1);
@@ -4923,6 +4930,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(aux_sym__map_lhs_token2);
       if (lookahead == '\t') ADVANCE(325);
       if (lookahead == '<') ADVANCE(282);
+      if (lookahead == '|') ADVANCE(339);
       if (lookahead != 0 &&
           lookahead != '\n' &&
           lookahead != ' ') ADVANCE(326);
@@ -4930,6 +4938,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 326:
       ACCEPT_TOKEN(aux_sym__map_lhs_token2);
       if (lookahead == ' ') ADVANCE(341);
+      if (lookahead == '|') ADVANCE(339);
       if (lookahead != 0 &&
           lookahead != '\n') ADVANCE(326);
       END_STATE();
@@ -5065,17 +5074,20 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == ' ') ADVANCE(340);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(341);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(341);
       END_STATE();
     case 341:
       ACCEPT_TOKEN(aux_sym__map_rhs_token1);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(341);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(341);
       END_STATE();
     case 342:
       ACCEPT_TOKEN(aux_sym__map_rhs_token2);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(342);
+          lookahead != '\n' &&
+          lookahead != '|') ADVANCE(342);
       END_STATE();
     case 343:
       ACCEPT_TOKEN(sym_hl_group);
@@ -6723,7 +6735,7 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
   }
 }
 
-static const TSLexMode ts_lex_modes[STATE_COUNT] = {
+static TSLexMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0, .external_lex_state = 1},
   [1] = {.lex_state = 139, .external_lex_state = 2},
   [2] = {.lex_state = 11, .external_lex_state = 3},
@@ -8679,7 +8691,7 @@ enum {
   ts_external_token__setlocal = 50,
 };
 
-static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
+static TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token__no] = sym__no,
   [ts_external_token__inv] = sym__inv,
   [ts_external_token__cmd_separator] = sym__cmd_separator,
@@ -8733,7 +8745,7 @@ static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token__setlocal] = sym__setlocal,
 };
 
-static const bool ts_external_scanner_states[18][EXTERNAL_TOKEN_COUNT] = {
+static bool ts_external_scanner_states[18][EXTERNAL_TOKEN_COUNT] = {
   [1] = {
     [ts_external_token__no] = true,
     [ts_external_token__inv] = true,
@@ -9105,7 +9117,7 @@ static const bool ts_external_scanner_states[18][EXTERNAL_TOKEN_COUNT] = {
   },
 };
 
-static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
+static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [0] = {
     [ts_builtin_sym_end] = ACTIONS(1),
     [sym_identifier] = ACTIONS(1),
@@ -34707,7 +34719,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   },
 };
 
-static const uint16_t ts_small_parse_table[] = {
+static uint16_t ts_small_parse_table[] = {
   [0] = 3,
     ACTIONS(3), 3,
       sym__cmd_separator,
@@ -93573,7 +93585,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_comment,
 };
 
-static const uint32_t ts_small_parse_table_map[] = {
+static uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(262)] = 0,
   [SMALL_STATE(263)] = 71,
   [SMALL_STATE(264)] = 142,
@@ -95213,7 +95225,7 @@ static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(1898)] = 68433,
 };
 
-static const TSParseActionEntry ts_parse_actions[] = {
+static TSParseActionEntry ts_parse_actions[] = {
   [0] = {.entry = {.count = 0, .reusable = false}},
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, SHIFT_EXTRA(),
@@ -97378,7 +97390,7 @@ void tree_sitter_vim_external_scanner_deserialize(void *, const char *, unsigned
 #endif
 
 extern const TSLanguage *tree_sitter_vim(void) {
-  static const TSLanguage language = {
+  static TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
     .alias_count = ALIAS_COUNT,
@@ -97389,24 +97401,24 @@ extern const TSLanguage *tree_sitter_vim(void) {
     .production_id_count = PRODUCTION_ID_COUNT,
     .field_count = FIELD_COUNT,
     .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
-    .parse_table = &ts_parse_table[0][0],
-    .small_parse_table = ts_small_parse_table,
-    .small_parse_table_map = ts_small_parse_table_map,
+    .parse_table = (const uint16_t *)ts_parse_table,
+    .small_parse_table = (const uint16_t *)ts_small_parse_table,
+    .small_parse_table_map = (const uint32_t *)ts_small_parse_table_map,
     .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
     .field_names = ts_field_names,
-    .field_map_slices = ts_field_map_slices,
-    .field_map_entries = ts_field_map_entries,
+    .field_map_slices = (const TSFieldMapSlice *)ts_field_map_slices,
+    .field_map_entries = (const TSFieldMapEntry *)ts_field_map_entries,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
-    .alias_sequences = &ts_alias_sequences[0][0],
+    .alias_sequences = (const TSSymbol *)ts_alias_sequences,
     .lex_modes = ts_lex_modes,
     .lex_fn = ts_lex,
     .keyword_lex_fn = ts_lex_keywords,
     .keyword_capture_token = sym_identifier,
     .external_scanner = {
-      &ts_external_scanner_states[0][0],
+      (const bool *)ts_external_scanner_states,
       ts_external_scanner_symbol_map,
       tree_sitter_vim_external_scanner_create,
       tree_sitter_vim_external_scanner_destroy,

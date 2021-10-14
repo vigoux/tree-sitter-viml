@@ -2281,7 +2281,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[^\\n]+"
+              "value": "[^|\\n]+"
             },
             {
               "type": "SYMBOL",
@@ -2298,7 +2298,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[^\\n]+"
+                  "value": "[^|\\n]+"
                 }
               },
               {
