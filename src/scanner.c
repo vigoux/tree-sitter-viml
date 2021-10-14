@@ -265,6 +265,8 @@ bool lex_literal_string(TSLexer *lexer) {
         // Was an invalid end...
         return false;
       }
+    } else if (lexer->lookahead == '\0') {
+      return false;
     } else {
       advance(lexer, false);
     }
@@ -292,6 +294,8 @@ bool lex_escapable_string(TSLexer *lexer) {
         lexer->result_symbol = COMMENT;
         return true;
       }
+    } else if (lexer->lookahead == '\0') {
+      return false;
     } else {
       advance(lexer, false);
     }
@@ -520,7 +524,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       && lexer->lookahead == '"' && !s->ignore_comments) {
     do {
       advance(lexer, false);
-    } while (lexer->lookahead != '\n');
+    } while (lexer->lookahead != '\n' && lexer->lookahead != '\0');
 
     lexer->result_symbol = COMMENT;
     return true;
