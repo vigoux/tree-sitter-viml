@@ -4,6 +4,7 @@
 #include <string.h>
 #include <wctype.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
 
@@ -252,11 +253,18 @@ bool lex_literal_string(TSLexer *lexer) {
         advance(lexer, false);
       } else {
         lexer->result_symbol = STRING;
+        lexer->mark_end(lexer);
         return true;
       }
     } else if (lexer->lookahead == '\n') {
-      // Invalid EOL here
-      return false;
+      // Not sure at this point, look after that if there's not a \\ character
+      lexer->mark_end(lexer);
+      advance(lexer, true);
+      skip_space_tabs(lexer);
+      if (lexer->lookahead != '\\') {
+        // Was an invalid end...
+        return false;
+      }
     } else {
       advance(lexer, false);
     }
@@ -271,11 +279,19 @@ bool lex_escapable_string(TSLexer *lexer) {
       advance(lexer, false);
     } else if (lexer->lookahead == '"') {
       advance(lexer, false);
+      lexer->mark_end(lexer);
       lexer->result_symbol = STRING;
       return true;
     } else if (lexer->lookahead == '\n') {
-      lexer->result_symbol = COMMENT;
-      return true;
+      // Not sure at this point, look after that if there's not a \\ character
+      lexer->mark_end(lexer);
+      advance(lexer, true);
+      skip_space_tabs(lexer);
+      if (lexer->lookahead != '\\') {
+        // Was a comment...
+        lexer->result_symbol = COMMENT;
+        return true;
+      }
     } else {
       advance(lexer, false);
     }

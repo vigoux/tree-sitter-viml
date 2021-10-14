@@ -74,6 +74,27 @@ let foo = 'hello ''you'''
     (string_literal)))
 
 ================================================================================
+Multiline string #31
+================================================================================
+
+let var = '
+\ long multiline string
+\ "with nested quotes" '
+let var = "
+\ long multiline string
+\ 'with nested quotes' "
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (string_literal))
+  (let_statement
+    (identifier)
+    (string_literal)))
+
+================================================================================
 Slice expression
 ================================================================================
 
