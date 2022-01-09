@@ -126,6 +126,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "startinsert_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "user_command"
         }
       ]
@@ -201,6 +205,41 @@
           },
           "named": true,
           "value": "commands"
+        }
+      ]
+    },
+    "startinsert_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_startinsert"
+              },
+              "named": false,
+              "value": "startinsert"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -4978,6 +5017,10 @@
     {
       "type": "SYMBOL",
       "name": "_setlocal"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_startinsert"
     }
   ],
   "inline": [],

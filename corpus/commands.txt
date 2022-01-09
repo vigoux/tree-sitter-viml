@@ -160,3 +160,19 @@ Plug 'abcd efgh' foo
       (command_argument
         (string_literal))
       (command_argument))))
+
+================================================================================
+startinsert
+================================================================================
+
+startinsert
+star
+startinsert " HEWO
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (startinsert_statement)
+  (startinsert_statement)
+  (startinsert_statement
+    (comment)))

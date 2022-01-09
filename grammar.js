@@ -82,6 +82,7 @@ module.exports = grammar({
     $._syntax,
     $._set,
     $._setlocal,
+    $._startinsert,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -119,6 +120,7 @@ module.exports = grammar({
         $.augroup_statement,
         $.highlight_statement,
         $.syntax_statement,
+        $.startinsert_statement,
         $.user_command,
       ),
 
@@ -126,6 +128,7 @@ module.exports = grammar({
       seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
+    startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert')), $._cmd_separator),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),

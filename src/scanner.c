@@ -68,6 +68,7 @@ enum TokenType {
   SYNTAX,
   SET,
   SETLOCAL,
+  STARTINSERT,
   TOKENTYPE_NR,
 };
 
@@ -123,6 +124,7 @@ keyword keywords[] = {
   KEYWORD(SYNTAX, "sy", "ntax", false),
   KEYWORD(SET, "se", "t", false),
   KEYWORD(SETLOCAL, "setl", "ocal", false),
+  KEYWORD(STARTINSERT, "star", "tinsert", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
