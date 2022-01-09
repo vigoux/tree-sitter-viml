@@ -254,10 +254,14 @@ Map included bar
 ================================================================================
 
 map a b\|b
+nnoremap a :echo 1\|echo 2<Cr>
 
 --------------------------------------------------------------------------------
 
 (script_file
+  (map_statement
+    (map_side)
+    (map_side))
   (map_statement
     (map_side)
     (map_side)))
