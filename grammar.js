@@ -435,7 +435,7 @@ module.exports = grammar({
     keycode: ($) => seq('<', $._keycode_in),
 
     _map_lhs: ($) => keys($, /[^\n ]+/),
-    _map_rhs: ($) => keys($, /[^\s|][^|\n]*/),
+    _map_rhs: ($) => keys($, /[^\s|]([^|\n]|\\\|)*/),
 
     // :h :highlight
 

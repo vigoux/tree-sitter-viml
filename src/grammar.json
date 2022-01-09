@@ -2326,7 +2326,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[^\\s|][^|\\n]*"
+              "value": "[^\\s|]([^|\\n]|\\\\\\|)*"
             },
             {
               "type": "SYMBOL",
@@ -2343,7 +2343,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[^\\s|][^|\\n]*"
+                  "value": "[^\\s|]([^|\\n]|\\\\\\|)*"
                 }
               },
               {
