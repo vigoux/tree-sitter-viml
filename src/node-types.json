@@ -699,6 +699,21 @@
     "fields": {}
   },
   {
+    "type": "command_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "current_line",
     "named": true,
     "fields": {}
@@ -4880,10 +4895,6 @@
   {
     "type": "cnoremap",
     "named": false
-  },
-  {
-    "type": "command_argument",
-    "named": true
   },
   {
     "type": "command_name",

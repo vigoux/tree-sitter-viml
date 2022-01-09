@@ -138,3 +138,25 @@ endif
     (body
       (execute_statement
         (identifier)))))
+
+================================================================================
+User command with string
+================================================================================
+
+Plug 'abcd'
+Plug 'abcd efgh' foo
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (user_command
+    (command_name)
+    (arguments
+      (command_argument
+        (string_literal))))
+  (user_command
+    (command_name)
+    (arguments
+      (command_argument
+        (string_literal))
+      (command_argument))))

@@ -1523,8 +1523,17 @@
       ]
     },
     "command_argument": {
-      "type": "PATTERN",
-      "value": "\\S+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\S+"
+        }
+      ]
     },
     "function_definition": {
       "type": "SEQ",

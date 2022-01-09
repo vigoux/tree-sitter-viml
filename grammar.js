@@ -319,7 +319,7 @@ module.exports = grammar({
         $._cmd_separator,
       ),
 
-    command_argument: ($) => /\S+/,
+    command_argument: ($) => choice($.string_literal, /\S+/),
 
     function_definition: ($) =>
       seq(
