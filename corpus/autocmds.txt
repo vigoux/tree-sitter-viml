@@ -165,3 +165,19 @@ autocmd! FileType json,js,html,c,cpp,h,hh setlocal tabstop=4
       (set_item
         (option_name)
         (set_value)))))
+
+================================================================================
+Autocommand term pattern
+================================================================================
+
+au BufWinEnter term://* echo "foo"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal))))

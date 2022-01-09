@@ -773,7 +773,7 @@
                       "type": "ALIAS",
                       "content": {
                         "type": "PATTERN",
-                        "value": "[a-zA-Z*.]+"
+                        "value": "[^ \\t\\n,]+"
                       },
                       "named": true,
                       "value": "pattern"
@@ -791,7 +791,7 @@
                             "type": "ALIAS",
                             "content": {
                               "type": "PATTERN",
-                              "value": "[a-zA-Z*.]+"
+                              "value": "[^ \\t\\n,]+"
                             },
                             "named": true,
                             "value": "pattern"
