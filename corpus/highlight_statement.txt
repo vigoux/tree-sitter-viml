@@ -204,3 +204,28 @@ hi Foo font=-misc-fixed-bold-r-normal--14-130-75-75-c-70-iso8859-1
   (highlight_statement
     (hl_group)
     (hl_attribute)))
+
+================================================================================
+Highlight link
+================================================================================
+
+highlight link Foo Bar
+hi link Foo Bar
+hi default link Foo Bar
+highlight default link Foo Bar
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_group))
+  (highlight_statement
+    (hl_group)
+    (hl_group))
+  (highlight_statement
+    (hl_group)
+    (hl_group))
+  (highlight_statement
+    (hl_group)
+    (hl_group)))

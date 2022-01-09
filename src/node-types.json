@@ -1756,7 +1756,28 @@
   {
     "type": "highlight_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "hl_group",
+            "named": true
+          }
+        ]
+      },
+      "to": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "hl_group",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -5090,6 +5111,10 @@
   },
   {
     "type": "let",
+    "named": false
+  },
+  {
+    "type": "link",
     "named": false
   },
   {
