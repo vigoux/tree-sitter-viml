@@ -1274,11 +1274,29 @@
           "value": "set"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "set_item"
-          }
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "set_item"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": " "
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "set_item"
+                  }
+                ]
+              }
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -1299,11 +1317,29 @@
           "value": "setlocal"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "set_item"
-          }
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "set_item"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": " "
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "set_item"
+                  }
+                ]
+              }
+            }
+          ]
         },
         {
           "type": "SYMBOL",

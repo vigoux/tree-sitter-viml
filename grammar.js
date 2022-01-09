@@ -772,7 +772,7 @@ function echo_variant($, cmd) {
 }
 
 function set_variant($, cmd) {
-  return seq(tokalias($, cmd), repeat1($.set_item), $._cmd_separator);
+  return seq(tokalias($, cmd), sep1($.set_item, ' '), $._cmd_separator);
 }
 
 function any_order(...args) {

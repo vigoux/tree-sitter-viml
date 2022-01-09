@@ -245,3 +245,21 @@ set foo
   (set_statement
     (set_item
       (option_name))))
+
+================================================================================
+Set with no
+================================================================================
+
+set foo=no
+set bar
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name))))
