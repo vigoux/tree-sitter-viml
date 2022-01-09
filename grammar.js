@@ -119,7 +119,7 @@ module.exports = grammar({
         $.augroup_statement,
         $.highlight_statement,
         $.syntax_statement,
-        $.command,
+        $.user_command,
       ),
 
     return_statement: ($) =>
@@ -312,9 +312,9 @@ module.exports = grammar({
     silent_statement: ($) =>
       seq(maybe_bang($, tokalias($, 'silent')), $._statement),
 
-    command: ($) =>
+    user_command: ($) =>
       seq(
-        maybe_bang($, alias($.identifier, $.command_name)),
+        maybe_bang($, alias(/[A-Z][A-Za-z0-9]*/, $.command_name)),
         alias(repeat($.command_argument), $.arguments),
         $._cmd_separator,
       ),

@@ -2,12 +2,12 @@
 Simple command with args
 ================================================================================
 
-test foo
+Test foo
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name)
     (arguments
       (command_argument))))
@@ -16,12 +16,12 @@ test foo
 Simple command with bang
 ================================================================================
 
-test!
+Test!
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name)
     (bang)))
 
@@ -29,12 +29,12 @@ test!
 Simple command with weird arguments
 ================================================================================
 
-test a.b.c a:foobar
+Test a.b.c a:foobar
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name)
     (arguments
       (command_argument)
@@ -44,25 +44,25 @@ test a.b.c a:foobar
 Simple command without args
 ================================================================================
 
-test
+Test
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name)))
 
 ================================================================================
 Simple command multiline
 ================================================================================
 
-test foo
+Test foo
 	\ foo
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name)
     (arguments
       (command_argument)
@@ -72,14 +72,14 @@ test foo
 Multiple commands pipe
 ================================================================================
 
-test | test
+Test | Test
 
 --------------------------------------------------------------------------------
 
 (script_file
-  (command
+  (user_command
     (command_name))
-  (command
+  (user_command
     (command_name)))
 
 ================================================================================

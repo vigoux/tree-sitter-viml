@@ -126,7 +126,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "command"
+          "name": "user_command"
         }
       ]
     },
@@ -1475,7 +1475,7 @@
         }
       ]
     },
-    "command": {
+    "user_command": {
       "type": "SEQ",
       "members": [
         {
@@ -1484,8 +1484,8 @@
             {
               "type": "ALIAS",
               "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "PATTERN",
+                "value": "[A-Z][A-Za-z0-9]*"
               },
               "named": true,
               "value": "command_name"

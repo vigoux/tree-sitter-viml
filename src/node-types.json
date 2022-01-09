@@ -88,10 +88,6 @@
             "named": true
           },
           {
-            "type": "command",
-            "named": true
-          },
-          {
             "type": "echo_statement",
             "named": true
           },
@@ -185,6 +181,10 @@
           },
           {
             "type": "unlet_statement",
+            "named": true
+          },
+          {
+            "type": "user_command",
             "named": true
           },
           {
@@ -443,10 +443,6 @@
           "named": true
         },
         {
-          "type": "command",
-          "named": true
-        },
-        {
           "type": "echo_statement",
           "named": true
         },
@@ -540,6 +536,10 @@
         },
         {
           "type": "unlet_statement",
+          "named": true
+        },
+        {
+          "type": "user_command",
           "named": true
         },
         {
@@ -697,29 +697,6 @@
     "type": "chunk",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "command",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "arguments",
-          "named": true
-        },
-        {
-          "type": "bang",
-          "named": true
-        },
-        {
-          "type": "command_name",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "current_line",
@@ -3244,10 +3221,6 @@
           "named": true
         },
         {
-          "type": "command",
-          "named": true
-        },
-        {
           "type": "echo_statement",
           "named": true
         },
@@ -3341,6 +3314,10 @@
         },
         {
           "type": "unlet_statement",
+          "named": true
+        },
+        {
+          "type": "user_command",
           "named": true
         },
         {
@@ -3455,10 +3432,6 @@
           "named": true
         },
         {
-          "type": "command",
-          "named": true
-        },
-        {
           "type": "echo_statement",
           "named": true
         },
@@ -3552,6 +3525,10 @@
         },
         {
           "type": "unlet_statement",
+          "named": true
+        },
+        {
+          "type": "user_command",
           "named": true
         },
         {
@@ -4498,6 +4475,29 @@
         },
         {
           "type": "unary_operation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "user_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arguments",
+          "named": true
+        },
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "command_name",
           "named": true
         }
       ]

@@ -16,8 +16,8 @@ While loop with a body
 ================================================================================
 
 while foo
-  bar
-  baz
+  Bar
+  Baz
 endwhile
 
 --------------------------------------------------------------------------------
@@ -26,9 +26,9 @@ endwhile
   (while_loop
     condition: (identifier)
     (body
-      (command
+      (user_command
         (command_name))
-      (command
+      (user_command
         (command_name)))))
 
 ================================================================================

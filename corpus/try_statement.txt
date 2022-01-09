@@ -1,78 +1,96 @@
-
-
-=============================
+================================================================================
 Try without catch
-=============================
+================================================================================
 
 try
-  foo
+  Foo
 endt
 
----
+--------------------------------------------------------------------------------
 
-(script_file 
-  (try_statement 
-    (body (command (command_name))))) 
+(script_file
+  (try_statement
+    (body
+      (user_command
+        (command_name)))))
 
-
-=============================
-Try with catch 
-=============================
+================================================================================
+Try with catch
+================================================================================
 
 try
-  foo
+  Foo
 catch /bar/
-  baz
+  Baz
 endt
 
----
+--------------------------------------------------------------------------------
 
-(script_file 
-  (try_statement 
-    (body (command (command_name))) 
-  (catch_statement (pattern) 
-    (body (command (command_name))))))
+(script_file
+  (try_statement
+    (body
+      (user_command
+        (command_name)))
+    (catch_statement
+      (pattern)
+      (body
+        (user_command
+          (command_name))))))
 
-=============================
+================================================================================
 Try with finally
-=============================
+================================================================================
 
 try
-  foo
+  Foo
 finally
-  bar
+  Bar
 endt
 
----
+--------------------------------------------------------------------------------
 
-(script_file 
-  (try_statement 
-    (body (command (command_name))) 
-  (finally_statement 
-    (body (command (command_name))))))
+(script_file
+  (try_statement
+    (body
+      (user_command
+        (command_name)))
+    (finally_statement
+      (body
+        (user_command
+          (command_name))))))
 
-=============================
+================================================================================
 Try with catch and finally
-=============================
+================================================================================
 
 try
-  foo
+  Foo
 catch /bar/
-  baz
+  Baz
 catch /qux/
-  quux
+  Quux
 finally
-  quuz
+  Quuz
 endt
 
----
+--------------------------------------------------------------------------------
 
-(script_file 
-  (try_statement 
-    (body (command (command_name))) 
-  (catch_statement (pattern) 
-    (body (command (command_name)))) 
-  (catch_statement (pattern) 
-    (body (command (command_name)))) 
-  (finally_statement 
-    (body (command (command_name))))))
+(script_file
+  (try_statement
+    (body
+      (user_command
+        (command_name)))
+    (catch_statement
+      (pattern)
+      (body
+        (user_command
+          (command_name))))
+    (catch_statement
+      (pattern)
+      (body
+        (user_command
+          (command_name))))
+    (finally_statement
+      (body
+        (user_command
+          (command_name))))))

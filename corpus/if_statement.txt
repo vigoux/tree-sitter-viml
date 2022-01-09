@@ -1,73 +1,96 @@
-
-=============================
+================================================================================
 Single if statement
-=============================
+================================================================================
 
 if foo
-  bar
+  Bar
 endif
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-  (if_statement condition: (identifier)
-    (body (command (command_name)))))
+  (if_statement
+    condition: (identifier)
+    (body
+      (user_command
+        (command_name)))))
 
-=============================
+================================================================================
 If - else statement
-=============================
+================================================================================
 
 if foo
-  bar
+  Bar
 else
-  baz
+  Baz
 end
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-  (if_statement condition: (identifier)
-    (body (command (command_name)))
-  (else_statement
-    (body (command (command_name))))))
+  (if_statement
+    condition: (identifier)
+    (body
+      (user_command
+        (command_name)))
+    (else_statement
+      (body
+        (user_command
+          (command_name))))))
 
-=============================
+================================================================================
 If - elseif - else statement
-=============================
+================================================================================
 
 if foo
-  bar
+  Bar
 elseif baz
-  qux
+  Bux
 else
-  quux
+  Quux
 end
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-  (if_statement condition: (identifier)
-    (body (command (command_name)))
-  (elseif_statement condition: (identifier)
-    (body (command (command_name))))
-  (else_statement
-    (body (command (command_name))))))
+  (if_statement
+    condition: (identifier)
+    (body
+      (user_command
+        (command_name)))
+    (elseif_statement
+      condition: (identifier)
+      (body
+        (user_command
+          (command_name))))
+    (else_statement
+      (body
+        (user_command
+          (command_name))))))
 
-=============================
+================================================================================
 If - elseif - else statement
-=============================
+================================================================================
 
 if foo
-  bar
+  Bar
 elseif bar
-  baz
-  qux
+  Baz
+  Qux
 end
 
----
+--------------------------------------------------------------------------------
 
 (script_file
-  (if_statement condition: (identifier)
-    (body (command (command_name)))
-  (elseif_statement condition: (identifier)
-    (body (command (command_name)) (command (command_name))))))
+  (if_statement
+    condition: (identifier)
+    (body
+      (user_command
+        (command_name)))
+    (elseif_statement
+      condition: (identifier)
+      (body
+        (user_command
+          (command_name))
+        (user_command
+          (command_name))))))
