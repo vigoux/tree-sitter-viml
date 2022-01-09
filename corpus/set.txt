@@ -227,3 +227,21 @@ setlocal scrolloff=7		" comment
       (option_name)
       (set_value))
     (comment)))
+
+================================================================================
+Set with backslash at the end
+================================================================================
+
+set abc=\
+set foo
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name))))

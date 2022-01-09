@@ -1208,7 +1208,7 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "([^ \\n\\t]|\\\\\\s)+"
+        "value": "([^ \\n\\t]|\\\\[\\t ])+"
       }
     },
     "_set_rhs": {

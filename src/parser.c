@@ -5062,9 +5062,9 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 328:
       ACCEPT_TOKEN(sym_set_value);
-      if (lookahead != 0 &&
-          lookahead != '\\') ADVANCE(327);
       if (lookahead == '\\') ADVANCE(328);
+      if (lookahead != 0 &&
+          lookahead != '\n') ADVANCE(327);
       END_STATE();
     case 329:
       ACCEPT_TOKEN(anon_sym_unlet);

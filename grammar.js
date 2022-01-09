@@ -288,7 +288,7 @@ module.exports = grammar({
     _set_operator: ($) =>
       choice(...['=', ':', '+=', '^=', '-='].map(token.immediate)),
 
-    set_value: ($) => token.immediate(/([^ \n\t]|\\\s)+/),
+    set_value: ($) => token.immediate(/([^ \n\t]|\\[\t ])+/),
 
     _set_rhs: ($) =>
       seq($._set_operator, optional(field('value', $.set_value))),
