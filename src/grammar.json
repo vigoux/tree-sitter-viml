@@ -3331,7 +3331,7 @@
         }
       ]
     },
-    "_syn_arguments_all": {
+    "_syn_arguments_basic": {
       "type": "CHOICE",
       "members": [
         {
@@ -3481,6 +3481,85 @@
         }
       ]
     },
+    "_syn_arguments_match": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "contains"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "="
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "hl_group"
+                    },
+                    {
+                      "type": "REPEAT",
+                      "content": {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "hl_group"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "fold"
+        },
+        {
+          "type": "STRING",
+          "value": "display"
+        },
+        {
+          "type": "STRING",
+          "value": "extend"
+        }
+      ]
+    },
+    "_syn_arguments_region": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "oneline"
+        },
+        {
+          "type": "STRING",
+          "value": "concealends"
+        }
+      ]
+    },
     "_syn_keyword": {
       "type": "SEQ",
       "members": [
@@ -3505,7 +3584,7 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_syn_arguments_all"
+                  "name": "_syn_arguments_basic"
                 },
                 "named": true,
                 "value": "syntax_argument"
