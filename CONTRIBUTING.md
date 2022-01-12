@@ -6,13 +6,13 @@ There is still quite a lot to do, and the main axes of improvements
 are:
 
 - Add support for more builtin commands: the list of currently
-  supported builtin command can be found in the [scanner file](scanner)
+  supported builtin command can be found in the [scanner file]
 - Add support for language constructs: like `let` variants for
   unpacking.
 
 ## Adding a new builtin command
 
-First, you will need to edit the [scanner file](scanner) to include
+First, you will need to edit the [scanner file] to include
 your new command:
 
 1. Add a new `enum` variant with the name of you command in the
@@ -35,4 +35,4 @@ Then open a pull request, and you'll be good to go !
 It should be sufficient to just modify the `grammar.js` for that,
 adding the appropriate rule.
 
-[scanner]: ./src/scanner.c
+[scanner file]: ./src/scanner.c
