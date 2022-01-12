@@ -558,12 +558,14 @@ module.exports = grammar({
       syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
 
     // :h :syn-arguments
-    _syn_arguments_all: ($) =>
-        choice (
+    // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
+    _syn_arguments_basic: ($) =>
+        choice(
           'conceal',
-          // TODO: check for what is exactly a control character in viml
+          // FIXME: check for what is exactly a control character in viml
           syn_argument_key_val('cchar', token.immediate(/[^\t\n\v\f\r]/)),
           'contained',
+          // FIXME: allow regex of hlgroups for `containedin` and nextgroup
           syn_argument_key_val('containedin', commaSep($.hl_group)),
           syn_argument_key_val('nextgroup', commaSep($.hl_group)),
           'transparent',
@@ -572,12 +574,26 @@ module.exports = grammar({
           'skipempty',
         ),
 
+    _syn_arguments_match: ($) =>
+        choice(
+          syn_argument_key_val('contains', commaSep($.hl_group)),
+          'fold',
+          'display',
+          'extend',
+        ),
+
+    _syn_arguments_region: ($) =>
+        choice(
+          'oneline',
+          'concealends',
+        ),
+
     _syn_keyword: ($) =>
       syn_sub(
         'keyword',
         $.hl_group,
         repeat1(choice(
-          alias($._syn_arguments_all, $.syntax_argument),
+          alias($._syn_arguments_basic, $.syntax_argument),
           alias(/[a-zA-Z\[\]]+/, $.keyword)
         )),
       ),

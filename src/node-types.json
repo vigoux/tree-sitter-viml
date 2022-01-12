@@ -5167,11 +5167,19 @@
     "named": false
   },
   {
+    "type": "concealends",
+    "named": false
+  },
+  {
     "type": "contained",
     "named": false
   },
   {
     "type": "containedin",
+    "named": false
+  },
+  {
+    "type": "contains",
     "named": false
   },
   {
@@ -5192,6 +5200,10 @@
   },
   {
     "type": "dict",
+    "named": false
+  },
+  {
+    "type": "display",
     "named": false
   },
   {
@@ -5239,6 +5251,10 @@
     "named": false
   },
   {
+    "type": "extend",
+    "named": false
+  },
+  {
     "type": "fg",
     "named": false
   },
@@ -5253,6 +5269,10 @@
   {
     "type": "float_literal",
     "named": true
+  },
+  {
+    "type": "fold",
+    "named": false
   },
   {
     "type": "foldlevel",
@@ -5432,6 +5452,10 @@
   },
   {
     "type": "on",
+    "named": false
+  },
+  {
+    "type": "oneline",
     "named": false
   },
   {
