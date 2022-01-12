@@ -90,6 +90,47 @@ syn keyword vimSetting tag
     (keyword)))
 
 ================================================================================
+Syntax keyword options
+================================================================================
+
+syntax keyword   Type   conceal int long contained char cchar=.
+syntax keyword   vimCommand containedin=Type,vimCommand ab[breviate] n[ext]
+syn keyword vimCommand tag nextgroup=vimSetting,vimCommand
+syn keyword vimSetting transparent skipwhite skipnl skipempty tag
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword)
+    (keyword)
+    (syntax_argument)
+    (keyword)
+    (syntax_argument))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument
+      (hl_group)
+      (hl_group))
+    (keyword)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (keyword)
+    (syntax_argument
+      (hl_group)
+      (hl_group)))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (syntax_argument)
+    (syntax_argument)
+    (syntax_argument)
+    (keyword)))
+
+================================================================================
 Syntax iskeyword
 ================================================================================
 

@@ -557,11 +557,29 @@ module.exports = grammar({
     _syn_iskeyword: ($) =>
       syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
 
+    // :h :syn-arguments
+    _syn_arguments_all: ($) =>
+        choice (
+          'conceal',
+          // TODO: check for what is exactly a control character in viml
+          syn_argument_key_val('cchar', token.immediate(/[^\t\n\v\f\r]/)),
+          'contained',
+          syn_argument_key_val('containedin', commaSep($.hl_group)),
+          syn_argument_key_val('nextgroup', commaSep($.hl_group)),
+          'transparent',
+          'skipwhite',
+          'skipnl',
+          'skipempty',
+        ),
+
     _syn_keyword: ($) =>
       syn_sub(
         'keyword',
         $.hl_group,
-        repeat1(alias(/[a-zA-Z\[\]]+/, $.keyword))
+        repeat1(choice(
+          alias($._syn_arguments_all, $.syntax_argument),
+          alias(/[a-zA-Z\[\]]+/, $.keyword)
+        )),
       ),
 
     syntax_statement: ($) =>
@@ -804,6 +822,10 @@ function syn_sub(sub, ...args) {
   } else {
     return field('sub', sub);
   }
+}
+
+function syn_argument_key_val(key, ...args) {
+  return seq(key, token.immediate('='), ...args);
 }
 
 function keys($, allowed) {
