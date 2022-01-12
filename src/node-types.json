@@ -4069,9 +4069,19 @@
     }
   },
   {
-    "type": "stopinsert_statement",
+    "type": "syntax_argument",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "hl_group",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "syntax_statement",
@@ -4130,6 +4140,10 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "syntax_argument",
           "named": true
         },
         {
@@ -5117,6 +5131,10 @@
     "named": false
   },
   {
+    "type": "cchar",
+    "named": false
+  },
+  {
     "type": "clear",
     "named": false
   },
@@ -5143,6 +5161,18 @@
   {
     "type": "comment",
     "named": true
+  },
+  {
+    "type": "conceal",
+    "named": false
+  },
+  {
+    "type": "contained",
+    "named": false
+  },
+  {
+    "type": "containedin",
+    "named": false
   },
   {
     "type": "cterm",
@@ -5365,6 +5395,10 @@
     "named": false
   },
   {
+    "type": "nextgroup",
+    "named": false
+  },
+  {
     "type": "nmap",
     "named": false
   },
@@ -5465,6 +5499,18 @@
     "named": false
   },
   {
+    "type": "skipempty",
+    "named": false
+  },
+  {
+    "type": "skipnl",
+    "named": false
+  },
+  {
+    "type": "skipwhite",
+    "named": false
+  },
+  {
     "type": "smap",
     "named": false
   },
@@ -5526,6 +5572,10 @@
   },
   {
     "type": "toplevel",
+    "named": false
+  },
+  {
+    "type": "transparent",
     "named": false
   },
   {
