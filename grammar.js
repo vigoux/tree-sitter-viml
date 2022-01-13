@@ -592,9 +592,9 @@ module.exports = grammar({
     _syn_arguments_region: ($) =>
       choice(
         $._syn_arguments_match,
+        syn_arg('matchgroup', commaSep($.hl_group)),
         syn_arg('oneline'),
         syn_arg('concealends'),
-        syn_arg('extend'),
       ),
 
     _syn_pattern_offset: ($) =>
@@ -648,6 +648,26 @@ module.exports = grammar({
         repeat(alias($._syn_arguments_match, $.syntax_argument)),
       ),
 
+    _syn_region: ($) =>
+      syn_sub(
+        'region',
+        $.hl_group,
+        repeat(alias($._syn_arguments_region, $.syntax_argument)),
+        syn_arg('start', $._syn_hl_pattern),
+        commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+        repeat(alias($._syn_arguments_region, $.syntax_argument)),
+        optional(
+          seq(
+            syn_arg('skip', $._syn_hl_pattern),
+            commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+            repeat(alias($._syn_arguments_region, $.syntax_argument)),
+          ),
+        ),
+        syn_arg('end', $._syn_hl_pattern),
+        commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+        repeat(alias($._syn_arguments_region, $.syntax_argument)),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
@@ -659,6 +679,7 @@ module.exports = grammar({
           $._syn_iskeyword,
           $._syn_keyword,
           $._syn_match,
+          $._syn_region,
         ),
         $._cmd_separator
       ),
