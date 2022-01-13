@@ -70,7 +70,7 @@ Range patterns
 
 (script_file
   (range_statement
-    (pattern)
+    (range_pattern)
     (mark)))
 
 ================================================================================
@@ -108,4 +108,4 @@ Range pattern with missing end
 
 (script_file
   (range_statement
-    (pattern)))
+    (range_pattern)))
