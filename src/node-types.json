@@ -3053,6 +3053,46 @@
     "fields": {}
   },
   {
+    "type": "pattern_offset",
+    "named": true,
+    "fields": {
+      "what": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "he",
+            "named": false
+          },
+          {
+            "type": "hs",
+            "named": false
+          },
+          {
+            "type": "lc",
+            "named": false
+          },
+          {
+            "type": "me",
+            "named": false
+          },
+          {
+            "type": "ms",
+            "named": false
+          },
+          {
+            "type": "re",
+            "named": false
+          },
+          {
+            "type": "rs",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "perl_statement",
     "named": true,
     "fields": {},
@@ -4117,6 +4157,30 @@
             "named": false
           },
           {
+            "type": "contains",
+            "named": false
+          },
+          {
+            "type": "display",
+            "named": false
+          },
+          {
+            "type": "excludenl",
+            "named": false
+          },
+          {
+            "type": "extend",
+            "named": false
+          },
+          {
+            "type": "fold",
+            "named": false
+          },
+          {
+            "type": "keepend",
+            "named": false
+          },
+          {
             "type": "nextgroup",
             "named": false
           },
@@ -4183,6 +4247,10 @@
             "named": false
           },
           {
+            "type": "match",
+            "named": false
+          },
+          {
             "type": "off",
             "named": false
           },
@@ -4211,6 +4279,14 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "pattern_offset",
           "named": true
         },
         {
@@ -4962,10 +5038,6 @@
     "named": false
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": "#",
     "named": false
   },
@@ -5346,6 +5418,10 @@
     "named": false
   },
   {
+    "type": "excludenl",
+    "named": false
+  },
+  {
     "type": "execute",
     "named": false
   },
@@ -5414,12 +5490,20 @@
     "named": false
   },
   {
+    "type": "he",
+    "named": false
+  },
+  {
     "type": "highlight",
     "named": false
   },
   {
     "type": "hl_group",
     "named": true
+  },
+  {
+    "type": "hs",
+    "named": false
   },
   {
     "type": "identifier",
@@ -5470,12 +5554,20 @@
     "named": false
   },
   {
-    "type": "keyword",
+    "type": "keepend",
     "named": false
   },
   {
     "type": "keyword",
     "named": true
+  },
+  {
+    "type": "keyword",
+    "named": false
+  },
+  {
+    "type": "lc",
+    "named": false
   },
   {
     "type": "let",
@@ -5510,7 +5602,15 @@
     "named": false
   },
   {
+    "type": "me",
+    "named": false
+  },
+  {
     "type": "minimum",
+    "named": false
+  },
+  {
+    "type": "ms",
     "named": false
   },
   {
@@ -5578,6 +5678,10 @@
     "named": false
   },
   {
+    "type": "re",
+    "named": false
+  },
+  {
     "type": "register",
     "named": true
   },
@@ -5591,6 +5695,10 @@
   },
   {
     "type": "reverse",
+    "named": false
+  },
+  {
+    "type": "rs",
     "named": false
   },
   {
