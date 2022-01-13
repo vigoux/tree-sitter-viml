@@ -360,7 +360,7 @@ module.exports = grammar({
     spread: ($) => '...',
 
     // :h Pattern
-    pattern: ($) => choice(/\/[^,\n]+\/?/, /\?[^,\n]+\??/),
+    range_pattern: ($) => choice(/\/[^,\n]+\/?/, /\?[^,\n]+\??/),
 
     // :h 10.3
 
@@ -382,7 +382,7 @@ module.exports = grammar({
         $.current_line,
         $.next_line,
         $.last_line,
-        $.pattern,
+        $.range_pattern,
         $.previous_pattern,
         $.mark,
       ),
@@ -558,10 +558,14 @@ module.exports = grammar({
       syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
 
     // :h :syn-arguments
+
+    _syn_hl_pattern: ($) =>
+        seq('"', $.pattern, '"'),
+
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
         choice(
-          'conceal',
+          syn_arg('conceal'),
           // FIXME: check for what is exactly a control character in viml
           syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
           syn_arg('contained'),
@@ -766,6 +770,49 @@ module.exports = grammar({
           ')',
         ),
       ),
+
+    // :h pattern
+    pattern_multi: ($) =>
+      choice(
+        '*',
+        /\\[+=?]/,
+        /\\@[!>=]|<[=!]/,
+        /\\\{-?[0-9]*,?[0-9]*}/,
+      ),
+
+    _pattern_ordinary_atom: ($) =>
+      repeat1(choice(
+        seq(
+          '[',
+          repeat(choice(
+            seq('\\', /./), // escaped character
+            /[^\]\n\\]/       // any character besides ']' or '\n'
+          )),
+          ']'
+        ),              // square-bracket-delimited character class
+        seq('\\', /./), // escaped character
+        /[^/\\\[\n]/    // any character besides '[', '\', '/', '\n'
+      )),
+
+    _pattern_atom: ($) =>
+        prec.left(choice(
+          $._pattern_ordinary_atom,
+          seq('\\(', $.pattern, '\\)'),
+          seq('\\%(', $.pattern, '\\)'),
+          seq('\\z(', $.pattern, '\\)'),
+        )),
+
+    _pattern_piece: ($) =>
+        seq($._pattern_atom, optional($.pattern_multi)),
+
+    _pattern_concat: ($) =>
+        repeat1($._pattern_piece),
+
+    _pattern_branch: ($) =>
+        sep1($._pattern_concat, '\\&'),
+
+    pattern: ($) =>
+        sep1($._pattern_branch, '\\|'),
 
     env_variable: ($) => seq('$', $.identifier),
 
