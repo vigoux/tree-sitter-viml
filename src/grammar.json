@@ -3685,7 +3685,28 @@
           "name": "hl_group"
         },
         {
-          "type": "REPEAT1",
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_syn_arguments_keyword"
+            },
+            "named": true,
+            "value": "syntax_argument"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[a-zA-Z\\[\\]]+"
+          },
+          "named": true,
+          "value": "keyword"
+        },
+        {
+          "type": "REPEAT",
           "content": {
             "type": "CHOICE",
             "members": [

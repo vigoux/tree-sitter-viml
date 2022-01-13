@@ -598,11 +598,15 @@ module.exports = grammar({
       syn_sub(
         'keyword',
         $.hl_group,
-        repeat1(choice(
+        repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
+        // The list of keyword cannot be empty, but we can have arguments anywhere on the line
+        alias(/[a-zA-Z\[\]]+/, $.keyword),
+        repeat(choice(
           alias($._syn_arguments_keyword, $.syntax_argument),
-          alias(/[a-zA-Z\[\]]+/, $.keyword)
+          alias(/[a-zA-Z\[\]]+/, $.keyword),
         )),
       ),
+
 
     syntax_statement: ($) =>
       seq(
