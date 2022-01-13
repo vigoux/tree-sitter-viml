@@ -161,6 +161,44 @@ syntax match  Type '^[ab]\{1,3}\a\(pattern\)'
       (pattern))))
 
 ================================================================================
+Syntax region
+================================================================================
+
+syntax region  Type start='a' end='a'
+syntax region  Type start='a' skip='aa' end='a'
+syntax region  Type start='a'rs=s+1 skip='aa' end='a'
+syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealends
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement
+    (hl_group)
+    (pattern)
+    (pattern))
+  (syntax_statement
+    (hl_group)
+    (pattern)
+    (pattern)
+    (pattern))
+  (syntax_statement
+    (hl_group)
+    (pattern)
+    (pattern_offset)
+    (pattern)
+    (pattern))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument
+      (hl_group))
+    (pattern)
+    (pattern_offset)
+    (pattern)
+    (pattern)
+    (syntax_argument)))
+
+
+================================================================================
 Syntax iskeyword
 ================================================================================
 

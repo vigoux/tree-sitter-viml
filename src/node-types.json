@@ -4149,6 +4149,10 @@
             "named": false
           },
           {
+            "type": "concealends",
+            "named": false
+          },
+          {
             "type": "contained",
             "named": false
           },
@@ -4181,7 +4185,15 @@
             "named": false
           },
           {
+            "type": "matchgroup",
+            "named": false
+          },
+          {
             "type": "nextgroup",
+            "named": false
+          },
+          {
+            "type": "oneline",
             "named": false
           },
           {
@@ -4222,6 +4234,24 @@
     "type": "syntax_statement",
     "named": true,
     "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "skip",
+            "named": false
+          },
+          {
+            "type": "start",
+            "named": false
+          }
+        ]
+      },
       "sub": {
         "multiple": false,
         "required": true,
@@ -4259,12 +4289,30 @@
             "named": false
           },
           {
+            "type": "region",
+            "named": false
+          },
+          {
             "type": "reset",
             "named": false
           },
           {
             "type": "spell",
             "named": false
+          }
+        ]
+      },
+      "val": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "'",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
           }
         ]
       }
@@ -5398,6 +5446,10 @@
     "named": false
   },
   {
+    "type": "end",
+    "named": false
+  },
+  {
     "type": "endfor",
     "named": false
   },
@@ -5559,11 +5611,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",
@@ -5599,6 +5651,10 @@
   },
   {
     "type": "match",
+    "named": false
+  },
+  {
+    "type": "matchgroup",
     "named": false
   },
   {
@@ -5682,6 +5738,10 @@
     "named": false
   },
   {
+    "type": "region",
+    "named": false
+  },
+  {
     "type": "register",
     "named": true
   },
@@ -5727,6 +5787,10 @@
   },
   {
     "type": "silent",
+    "named": false
+  },
+  {
+    "type": "skip",
     "named": false
   },
   {
