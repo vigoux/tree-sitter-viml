@@ -560,39 +560,70 @@ module.exports = grammar({
     // :h :syn-arguments
 
     _syn_hl_pattern: ($) =>
-        seq('"', $.pattern, '"'),
+        seq('\'', $.pattern, '\''),
 
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
-        choice(
-          syn_arg('conceal'),
-          // FIXME: check for what is exactly a control character in viml
-          syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
-          syn_arg('contained'),
-          // FIXME: allow regex of hlgroups for `containedin` and nextgroup
-          syn_arg('containedin', commaSep($.hl_group)),
-          syn_arg('nextgroup', commaSep($.hl_group)),
-          syn_arg('transparent'),
-          syn_arg('skipwhite'),
-          syn_arg('skipnl'),
-          syn_arg('skipempty'),
-        ),
+      choice(
+        syn_arg('conceal'),
+        // FIXME: check for what is exactly a control character in viml
+        syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
+        syn_arg('contained'),
+        // FIXME: allow regex of hlgroups for `containedin` and nextgroup
+        syn_arg('containedin', commaSep($.hl_group)),
+        syn_arg('nextgroup', commaSep($.hl_group)),
+        syn_arg('transparent'),
+        syn_arg('skipwhite'),
+        syn_arg('skipnl'),
+        syn_arg('skipempty'),
+      ),
 
     _syn_arguments_match: ($) =>
-        choice(
-          $._syn_arguments_keyword,
-          syn_arg('contains', commaSep($.hl_group)),
-          syn_arg('fold'),
-          syn_arg('display'),
-          syn_arg('extend'),
-        ),
+      choice(
+        $._syn_arguments_keyword,
+        syn_arg('contains', commaSep($.hl_group)),
+        syn_arg('fold'),
+        syn_arg('display'),
+        syn_arg('extend'),
+        syn_arg('keepend'),
+        syn_arg('excludenl'),
+      ),
 
     _syn_arguments_region: ($) =>
-        choice(
-          $._syn_arguments_match,
-          syn_arg('oneline'),
-          syn_arg('concealends'),
+      choice(
+        $._syn_arguments_match,
+        syn_arg('oneline'),
+        syn_arg('concealends'),
+        syn_arg('extend'),
+      ),
+
+    _syn_pattern_offset: ($) =>
+      seq(
+        field(
+          'what',
+          choice(
+            ...[
+              'ms',
+              'me',
+              'hs',
+              'he',
+              'rs',
+              're',
+              'lc',
+            ].map(token.immediate),
+          ),
         ),
+        token.immediate('='),
+        field(
+          'offset',
+          choice(
+            ...[
+              /[se]([+-][0-9]+)?/,
+              /[0-9]/,
+            ].map(token.immediate),
+          ),
+        ),
+      ),
 
     _syn_keyword: ($) =>
       syn_sub(
@@ -607,6 +638,15 @@ module.exports = grammar({
         )),
       ),
 
+    _syn_match: ($) =>
+      syn_sub(
+        'match',
+        $.hl_group,
+        repeat(alias($._syn_arguments_match, $.syntax_argument)),
+        $._syn_hl_pattern,
+        commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+        repeat(alias($._syn_arguments_match, $.syntax_argument)),
+      ),
 
     syntax_statement: ($) =>
       seq(
@@ -618,6 +658,7 @@ module.exports = grammar({
           $._syn_foldlevel,
           $._syn_iskeyword,
           $._syn_keyword,
+          $._syn_match,
         ),
         $._cmd_separator
       ),
@@ -795,7 +836,8 @@ module.exports = grammar({
           ']'
         ),              // square-bracket-delimited character class
         seq('\\', /./), // escaped character
-        /[^/\\\[\n]/    // any character besides '[', '\', '/', '\n'
+        // FIXME: makes this stop at the end of the pattern
+        /[^'\\\[\n]/    // any character besides '[', '\', ''', '\n'
       )),
 
     _pattern_atom: ($) =>
