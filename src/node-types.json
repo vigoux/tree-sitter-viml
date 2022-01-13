@@ -4071,16 +4071,59 @@
   {
     "type": "syntax_argument",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "hl_group",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "cchar",
+            "named": false
+          },
+          {
+            "type": "contained",
+            "named": false
+          },
+          {
+            "type": "containedin",
+            "named": false
+          },
+          {
+            "type": "nextgroup",
+            "named": false
+          },
+          {
+            "type": "skipempty",
+            "named": false
+          },
+          {
+            "type": "skipnl",
+            "named": false
+          },
+          {
+            "type": "skipwhite",
+            "named": false
+          },
+          {
+            "type": "transparent",
+            "named": false
+          }
+        ]
+      },
+      "val": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "hl_group",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

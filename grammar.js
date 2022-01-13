@@ -559,33 +559,35 @@ module.exports = grammar({
 
     // :h :syn-arguments
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
-    _syn_arguments_basic: ($) =>
+    _syn_arguments_keyword: ($) =>
         choice(
           'conceal',
           // FIXME: check for what is exactly a control character in viml
-          syn_argument_key_val('cchar', token.immediate(/[^\t\n\v\f\r]/)),
-          'contained',
+          syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
+          syn_arg('contained'),
           // FIXME: allow regex of hlgroups for `containedin` and nextgroup
-          syn_argument_key_val('containedin', commaSep($.hl_group)),
-          syn_argument_key_val('nextgroup', commaSep($.hl_group)),
-          'transparent',
-          'skipwhite',
-          'skipnl',
-          'skipempty',
+          syn_arg('containedin', commaSep($.hl_group)),
+          syn_arg('nextgroup', commaSep($.hl_group)),
+          syn_arg('transparent'),
+          syn_arg('skipwhite'),
+          syn_arg('skipnl'),
+          syn_arg('skipempty'),
         ),
 
     _syn_arguments_match: ($) =>
         choice(
-          syn_argument_key_val('contains', commaSep($.hl_group)),
-          'fold',
-          'display',
-          'extend',
+          $._syn_arguments_keyword,
+          syn_arg('contains', commaSep($.hl_group)),
+          syn_arg('fold'),
+          syn_arg('display'),
+          syn_arg('extend'),
         ),
 
     _syn_arguments_region: ($) =>
         choice(
-          'oneline',
-          'concealends',
+          $._syn_arguments_match,
+          syn_arg('oneline'),
+          syn_arg('concealends'),
         ),
 
     _syn_keyword: ($) =>
@@ -593,7 +595,7 @@ module.exports = grammar({
         'keyword',
         $.hl_group,
         repeat1(choice(
-          alias($._syn_arguments_basic, $.syntax_argument),
+          alias($._syn_arguments_keyword, $.syntax_argument),
           alias(/[a-zA-Z\[\]]+/, $.keyword)
         )),
       ),
@@ -840,8 +842,11 @@ function syn_sub(sub, ...args) {
   }
 }
 
-function syn_argument_key_val(key, ...args) {
-  return seq(key, token.immediate('='), ...args);
+function syn_arg(arg, ...args) {
+  if (args.length > 0)
+    return seq(field('name', arg), token.immediate('='), field('val', ...args));
+  else
+    return field('name', arg);
 }
 
 function keys($, allowed) {
