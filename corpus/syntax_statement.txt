@@ -137,6 +137,7 @@ Syntax match
 
 syntax match  Type 'a'
 syntax match  Type 'a' keepend
+syntax match  Type /[]\// keepend
 syntax match  Type 'a'ms=e-1,me=s-1
 syntax match  Type '^[ab]\{1,3}\a\(pattern\)'
 
@@ -146,6 +147,10 @@ syntax match  Type '^[ab]\{1,3}\a\(pattern\)'
   (syntax_statement
     (hl_group)
     (pattern))
+  (syntax_statement
+    (hl_group)
+    (pattern)
+    (syntax_argument))
   (syntax_statement
     (hl_group)
     (pattern)

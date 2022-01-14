@@ -565,7 +565,7 @@ module.exports = grammar({
     // :h :syn-arguments
 
     _syn_hl_pattern: ($) =>
-        seq('\'', $.pattern, '\''),
+        seq($._separator_first, $.pattern, $._separator),
 
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
@@ -867,39 +867,41 @@ module.exports = grammar({
       ),
 
     _pattern_ordinary_atom: ($) =>
-      repeat1(choice(
-        seq(
-          '[',
-          repeat(choice(
-            seq('\\', /./), // escaped character
-            /[^\]\n\\]/       // any character besides ']' or '\n'
-          )),
-          ']'
-        ),              // square-bracket-delimited character class
-        seq('\\', /./), // escaped character
-        // FIXME: makes this stop at the end of the pattern
-        /[^'\\\[\n]/    // any character besides '[', '\', ''', '\n'
-      )),
+      repeat1(
+        choice(
+          seq(
+            '[',
+            repeat(choice(
+              seq('\\', /./), // escaped character
+              /[^\]\n\\]/       // any character besides ']' or '\n'
+            )),
+            ']'
+          ),              // square-bracket-delimited character class
+          seq('\\', /./), // escaped character
+          // FIXME: makes this stop at the end of the pattern
+          /[^\\\[\n]/    // any character besides '[', '\', ''', '\n'
+        ),
+      ),
 
     _pattern_atom: ($) =>
-        prec.left(choice(
-          $._pattern_ordinary_atom,
-          seq('\\(', $.pattern, '\\)'),
-          seq('\\%(', $.pattern, '\\)'),
-          seq('\\z(', $.pattern, '\\)'),
-        )),
+      prec.left(choice(
+        $._pattern_ordinary_atom,
+        seq('\\(', $.pattern, '\\)'),
+        seq('\\%(', $.pattern, '\\)'),
+        seq('\\z(', $.pattern, '\\)'),
+      )),
 
     _pattern_piece: ($) =>
-        seq($._pattern_atom, optional($.pattern_multi)),
+      seq($._pattern_atom, optional($.pattern_multi)),
 
     _pattern_concat: ($) =>
-        repeat1($._pattern_piece),
+      repeat1($._pattern_piece),
 
     _pattern_branch: ($) =>
-        sep1($._pattern_concat, '\\&'),
+      sep1($._pattern_concat, '\\&'),
 
     pattern: ($) =>
-        sep1($._pattern_branch, '\\|'),
+      sep1($._pattern_branch, '\\|'),
 
     env_variable: ($) => seq('$', $.identifier),
 
