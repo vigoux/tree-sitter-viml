@@ -7,12 +7,14 @@
 #include <stdbool.h>
 
 #define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
+#define SCRIPT_MARKER_LEN 32
 
 typedef struct {
   // The EOF markers (but they can be whatever so lex that correctly)
-  char *script_marker;
-  uint8_t marker_len;
+  char separator;
   bool ignore_comments;
+  uint8_t marker_len;
+  char script_marker[SCRIPT_MARKER_LEN];
 } Scanner;
 
 enum TokenType {
@@ -22,6 +24,8 @@ enum TokenType {
   LINE_CONTINUATION,
   EMBEDDED_SCRIPT_START,
   EMDEDDED_SCRIPT_END,
+  SEP_FIRST,
+  SEP,
   SCOPE_DICT,
   SCOPE,
   STRING,
@@ -69,6 +73,7 @@ enum TokenType {
   SET,
   SETLOCAL,
   STARTINSERT,
+  GLOBAL,
   TOKENTYPE_NR,
 };
 
@@ -125,23 +130,21 @@ keyword keywords[] = {
   KEYWORD(SET, "se", "t", false),
   KEYWORD(SETLOCAL, "setl", "ocal", false),
   KEYWORD(STARTINSERT, "star", "tinsert", false),
+  KEYWORD(GLOBAL, "g", "lobal", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
   Scanner *s = (Scanner *)malloc(sizeof(Scanner));
+  s->separator = '\0';
   s->marker_len = 0;
-  s->script_marker = NULL;
   s->ignore_comments = false;
+  memset(s->script_marker, '\0', SCRIPT_MARKER_LEN);
 
   return (void *)s;
 }
 
 void tree_sitter_vim_external_scanner_destroy(void *payload) {
   Scanner *s = (Scanner *)payload;
-
-  if (s->marker_len > 0) {
-    free(s->script_marker);
-  }
 
   free(s);
 }
@@ -153,13 +156,15 @@ void tree_sitter_vim_external_scanner_destroy(void *payload) {
 // [ marker_len, marker ... (marker_len size) ]
 
 #define SC_IGNORE_COMMENTS 0
-#define SC_MARK_LEN 1
-#define SC_MARK 2
+#define SC_PAIRED_SEP 1
+#define SC_MARK_LEN 2
+#define SC_MARK 3
 
 
 unsigned int tree_sitter_vim_external_scanner_serialize(void *payload,
                                                         char *buffer) {
   Scanner *s = (Scanner *)payload;
+  buffer[SC_PAIRED_SEP] = s->separator;
   buffer[SC_IGNORE_COMMENTS] = s->ignore_comments;
   buffer[SC_MARK_LEN] = s->marker_len;
 
@@ -177,13 +182,14 @@ void tree_sitter_vim_external_scanner_deserialize(void *payload,
 
   Scanner *s = (Scanner *)payload;
   s->ignore_comments = buffer[SC_IGNORE_COMMENTS];
+  s->separator = buffer[SC_PAIRED_SEP];
   s->marker_len = buffer[SC_MARK_LEN];
 
   // Sanity check, just to be sure
   assert(s->marker_len + SC_MARK == length);
+  assert(s->marker_len < SCRIPT_MARKER_LEN);
 
   if (s->marker_len > 0) {
-    s->script_marker = (char *)malloc(s->marker_len);
     strncpy(s->script_marker, buffer + SC_MARK, s->marker_len);
   }
 }
@@ -212,7 +218,7 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
 
 bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
 {
-  if (scanner->script_marker != NULL) {
+  if (scanner->script_marker[0] != '\0') {
     // There must be an error
     return false;
   }
@@ -229,15 +235,19 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   skip_space_tabs(lexer);
 
   // We should be at the start of the script marker
-  while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead != '\n' && marker_len < UINT8_MAX) {
+  while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead && lexer->lookahead != '\n' && marker_len < SCRIPT_MARKER_LEN) {
     marker[marker_len] = lexer->lookahead;
     marker_len++;
     advance(lexer, false);
   }
 
-  scanner->script_marker = (char *)malloc(marker_len);
+  if (marker_len == SCRIPT_MARKER_LEN) {
+    return false;
+  }
+
   strncpy(scanner->script_marker, marker, marker_len);
   scanner->marker_len = marker_len;
+  scanner->script_marker[scanner->marker_len] = '\0';
 
   return true;
 }
@@ -398,6 +408,23 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   Scanner *s = (Scanner *)payload;
 
   skip_space_tabs(lexer);
+  if (!lexer->lookahead) {
+    return false;
+  }
+
+  // Not sure about the punctuation here...
+  if (valid_symbols[SEP_FIRST] && iswpunct(lexer->lookahead)) {
+    s->separator = lexer->lookahead;
+    advance(lexer, false);
+    lexer->result_symbol = SEP_FIRST;
+    return true;
+  } else if (valid_symbols[SEP] && s->separator == lexer->lookahead) {
+    // No need to check for s->separator == 0 above because we know
+    // lexer->lookahead is != 0
+    advance(lexer, false);
+    lexer->result_symbol = SEP;
+    return true;
+  }
 
   // options can be inverted by prepending a 'no' or 'inv'
   if (valid_symbols[NO] && lexer->lookahead == 'n') {
@@ -457,7 +484,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   }
 
   // Script starts and ends
-  if (valid_symbols[EMBEDDED_SCRIPT_START]) {
+  if (valid_symbols[EMBEDDED_SCRIPT_START] && lexer->lookahead == '<') {
     lexer->result_symbol = EMBEDDED_SCRIPT_START;
     return try_lex_script_start(s, lexer);
   } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
@@ -477,8 +504,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     // Found the end marker
     lexer->result_symbol = EMDEDDED_SCRIPT_END;
     s->marker_len = 0;
-    s->script_marker = NULL;
-    free(s->script_marker);
+    memset(s->script_marker, '\0', SCRIPT_MARKER_LEN);
 
     return true;
   }

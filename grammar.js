@@ -37,6 +37,8 @@ module.exports = grammar({
     $._line_continuation,
     $._embedded_script_start,
     $._embedded_script_end,
+    $._separator_first,
+    $._separator,
     $.scope_dict,
     $.scope,
     $.string_literal,
@@ -83,6 +85,7 @@ module.exports = grammar({
     $._set,
     $._setlocal,
     $._startinsert,
+    $._global,
   ],
 
   extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
@@ -122,6 +125,7 @@ module.exports = grammar({
         $.syntax_statement,
         $.startinsert_statement,
         $.user_command,
+        $.global_statement,
       ),
 
     return_statement: ($) =>
@@ -129,6 +133,11 @@ module.exports = grammar({
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
     startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert')), $._cmd_separator),
+
+    global_statement: ($) => seq(
+      maybe_bang($, tokalias($, 'global')),
+      $._separator_first, /[a-zA-A]*/, $._separator,
+      $._statement),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),

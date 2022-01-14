@@ -131,6 +131,10 @@
         {
           "type": "SYMBOL",
           "name": "user_command"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "global_statement"
         }
       ]
     },
@@ -240,6 +244,53 @@
         {
           "type": "SYMBOL",
           "name": "_cmd_separator"
+        }
+      ]
+    },
+    "global_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_global"
+              },
+              "named": false,
+              "value": "global"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_separator_first"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[a-zA-A]*"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_separator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
         }
       ]
     },
@@ -4840,6 +4891,14 @@
     },
     {
       "type": "SYMBOL",
+      "name": "_separator_first"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_separator"
+    },
+    {
+      "type": "SYMBOL",
       "name": "scope_dict"
     },
     {
@@ -5021,6 +5080,10 @@
     {
       "type": "SYMBOL",
       "name": "_startinsert"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_global"
     }
   ],
   "inline": [],
