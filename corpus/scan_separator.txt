@@ -15,3 +15,16 @@ g|abc|echo "foo"
   (global_statement
     (echo_statement
       (string_literal))))
+
+================================================================================
+Global with double quotes
+================================================================================
+
+g"foo"echo "bar"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (global_statement
+    (echo_statement
+      (string_literal))))

@@ -517,6 +517,19 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
   }
 
+  // String and comments
+  if (valid_symbols[COMMENT] && !valid_symbols[STRING]
+      && lexer->lookahead == '"' && !s->ignore_comments) {
+    do {
+      advance(lexer, false);
+    } while (lexer->lookahead != '\n' && lexer->lookahead != '\0');
+
+    lexer->result_symbol = COMMENT;
+    return true;
+  } else if (valid_symbols[STRING] && valid_symbols[COMMENT]) {
+    return lex_string(lexer);
+  }
+
   // Other keywords
   if (iswlower(lexer->lookahead)) {
 #define KEYWORD_SIZE 30
@@ -545,19 +558,6 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       }
     }
 #undef KEYWORD_SIZE
-  }
-
-  // String and comments
-  if (valid_symbols[COMMENT] && !valid_symbols[STRING]
-      && lexer->lookahead == '"' && !s->ignore_comments) {
-    do {
-      advance(lexer, false);
-    } while (lexer->lookahead != '\n' && lexer->lookahead != '\0');
-
-    lexer->result_symbol = COMMENT;
-    return true;
-  } else if (valid_symbols[STRING] && valid_symbols[COMMENT]) {
-    return lex_string(lexer);
   }
 
   return false;
