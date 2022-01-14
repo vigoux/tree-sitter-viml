@@ -263,3 +263,42 @@ set bar
   (set_statement
     (set_item
       (option_name))))
+
+================================================================================
+Foldexpr complicated cases
+================================================================================
+
+set foldexpr=getline(v:lnum)[0]==\"\\t\"
+set foldexpr=MyFoldLevel(v:lnum)
+set foldexpr=getline(v:lnum)=~'^\\s*$'&&getline(v:lnum+1)=~'\\S'?'<1':1
+set foldexpr=getline(v:lnum-1)=~'^\\s*$'&&getline(v:lnum)=~'\\S'?'>1':1
+set foldexpr=foo#bar()
+set foldexpr=foo()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value)))
+  (set_statement
+    (set_item
+      (option_name)
+      (set_value))))
