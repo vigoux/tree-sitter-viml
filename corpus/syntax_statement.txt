@@ -95,7 +95,7 @@ Syntax keyword options
 
 syntax keyword   Type   conceal int long contained char cchar=.
 syntax keyword   vimCommand containedin=Type,vimCommand ab[breviate] n[ext]
-syn keyword vimCommand tag nextgroup=vimSetting,vimCommand
+syn keyword vimCommand tag nextgroup=vimSetting,@vimCommand
 syn keyword vimSetting transparent skipwhite skipnl skipempty tag
 
 --------------------------------------------------------------------------------
@@ -121,6 +121,7 @@ syn keyword vimSetting transparent skipwhite skipnl skipempty tag
     (keyword)
     (syntax_argument
       (hl_group)
+      (at)
       (hl_group)))
   (syntax_statement
     (hl_group)
@@ -202,8 +203,8 @@ Syntax cluster
 ================================================================================
 
 syntax cluster group1
-syntax cluster group1 contains=g1,g2,g3
-syntax cluster group1 add=g4 remove=g1,g2
+syntax cluster group1 contains=@g1,g2,g3
+syntax cluster group1 add=g4 remove=@g1,g2
 
 --------------------------------------------------------------------------------
 
@@ -212,12 +213,14 @@ syntax cluster group1 add=g4 remove=g1,g2
     (hl_group))
   (syntax_statement
     (hl_group)
+    (at)
     (hl_group)
     (hl_group)
     (hl_group))
   (syntax_statement
     (hl_group)
     (hl_group)
+    (at)
     (hl_group)
     (hl_group)))
 
