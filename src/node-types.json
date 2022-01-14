@@ -4239,7 +4239,19 @@
         "required": false,
         "types": [
           {
+            "type": "add",
+            "named": false
+          },
+          {
+            "type": "contains",
+            "named": false
+          },
+          {
             "type": "end",
+            "named": false
+          },
+          {
+            "type": "remove",
             "named": false
           },
           {
@@ -4258,6 +4270,10 @@
         "types": [
           {
             "type": "case",
+            "named": false
+          },
+          {
+            "type": "cluster",
             "named": false
           },
           {
@@ -4313,6 +4329,14 @@
           {
             "type": "'",
             "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "hl_group",
+            "named": true
           },
           {
             "type": "pattern",
@@ -5306,6 +5330,10 @@
     "named": false
   },
   {
+    "type": "add",
+    "named": false
+  },
+  {
     "type": "all",
     "named": false
   },
@@ -5363,6 +5391,10 @@
   },
   {
     "type": "closure",
+    "named": false
+  },
+  {
+    "type": "cluster",
     "named": false
   },
   {
@@ -5748,6 +5780,10 @@
   {
     "type": "register",
     "named": true
+  },
+  {
+    "type": "remove",
+    "named": false
   },
   {
     "type": "reset",
