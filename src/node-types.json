@@ -4133,6 +4133,11 @@
     }
   },
   {
+    "type": "stopinsert_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "syntax_argument",
     "named": true,
     "fields": {
@@ -5659,11 +5664,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "lc",
