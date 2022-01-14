@@ -4223,6 +4223,10 @@
             "named": false
           },
           {
+            "type": "at",
+            "named": true
+          },
+          {
             "type": "hl_group",
             "named": true
           }
@@ -4333,6 +4337,10 @@
           {
             "type": ",",
             "named": false
+          },
+          {
+            "type": "at",
+            "named": true
           },
           {
             "type": "hl_group",
@@ -5340,6 +5348,10 @@
   {
     "type": "all&",
     "named": false
+  },
+  {
+    "type": "at",
+    "named": true
   },
   {
     "type": "au_event",

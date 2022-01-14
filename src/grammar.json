@@ -1860,6 +1860,10 @@
       "type": "STRING",
       "value": "!"
     },
+    "at": {
+      "type": "STRING",
+      "value": "@"
+    },
     "spread": {
       "type": "STRING",
       "value": "..."
@@ -3468,8 +3472,25 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "hl_group"
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "at"
+                              },
+                              {
+                                "type": "BLANK"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "hl_group"
+                          }
+                        ]
                       },
                       {
                         "type": "REPEAT",
@@ -3481,8 +3502,25 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -3525,8 +3563,25 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "hl_group"
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "at"
+                              },
+                              {
+                                "type": "BLANK"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "hl_group"
+                          }
+                        ]
                       },
                       {
                         "type": "REPEAT",
@@ -3538,8 +3593,25 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -3623,8 +3695,25 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "hl_group"
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "at"
+                              },
+                              {
+                                "type": "BLANK"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "hl_group"
+                          }
+                        ]
                       },
                       {
                         "type": "REPEAT",
@@ -3636,8 +3725,25 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -3729,8 +3835,25 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "hl_group"
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "SYMBOL",
+                                "name": "at"
+                              },
+                              {
+                                "type": "BLANK"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "hl_group"
+                          }
+                        ]
                       },
                       {
                         "type": "REPEAT",
@@ -3742,8 +3865,25 @@
                               "value": ","
                             },
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             }
                           ]
                         }
@@ -4360,8 +4500,25 @@
                           "type": "SEQ",
                           "members": [
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             },
                             {
                               "type": "REPEAT",
@@ -4373,8 +4530,25 @@
                                     "value": ","
                                   },
                                   {
-                                    "type": "SYMBOL",
-                                    "name": "hl_group"
+                                    "type": "SEQ",
+                                    "members": [
+                                      {
+                                        "type": "CHOICE",
+                                        "members": [
+                                          {
+                                            "type": "SYMBOL",
+                                            "name": "at"
+                                          },
+                                          {
+                                            "type": "BLANK"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "hl_group"
+                                      }
+                                    ]
                                   }
                                 ]
                               }
@@ -4417,8 +4591,25 @@
                           "type": "SEQ",
                           "members": [
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             },
                             {
                               "type": "REPEAT",
@@ -4430,8 +4621,25 @@
                                     "value": ","
                                   },
                                   {
-                                    "type": "SYMBOL",
-                                    "name": "hl_group"
+                                    "type": "SEQ",
+                                    "members": [
+                                      {
+                                        "type": "CHOICE",
+                                        "members": [
+                                          {
+                                            "type": "SYMBOL",
+                                            "name": "at"
+                                          },
+                                          {
+                                            "type": "BLANK"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "hl_group"
+                                      }
+                                    ]
                                   }
                                 ]
                               }
@@ -4474,8 +4682,25 @@
                           "type": "SEQ",
                           "members": [
                             {
-                              "type": "SYMBOL",
-                              "name": "hl_group"
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "CHOICE",
+                                  "members": [
+                                    {
+                                      "type": "SYMBOL",
+                                      "name": "at"
+                                    },
+                                    {
+                                      "type": "BLANK"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "hl_group"
+                                }
+                              ]
                             },
                             {
                               "type": "REPEAT",
@@ -4487,8 +4712,25 @@
                                     "value": ","
                                   },
                                   {
-                                    "type": "SYMBOL",
-                                    "name": "hl_group"
+                                    "type": "SEQ",
+                                    "members": [
+                                      {
+                                        "type": "CHOICE",
+                                        "members": [
+                                          {
+                                            "type": "SYMBOL",
+                                            "name": "at"
+                                          },
+                                          {
+                                            "type": "BLANK"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "hl_group"
+                                      }
+                                    ]
                                   }
                                 ]
                               }
