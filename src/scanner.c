@@ -73,6 +73,7 @@ enum TokenType {
   SET,
   SETLOCAL,
   STARTINSERT,
+  STOPINSERT,
   GLOBAL,
   TOKENTYPE_NR,
 };
@@ -130,6 +131,7 @@ keyword keywords[] = {
   KEYWORD(SET, "se", "t", false),
   KEYWORD(SETLOCAL, "setl", "ocal", false),
   KEYWORD(STARTINSERT, "star", "tinsert", false),
+  KEYWORD(STOPINSERT, "stopi", "nsert", false),
   KEYWORD(GLOBAL, "g", "lobal", false),
 };
 

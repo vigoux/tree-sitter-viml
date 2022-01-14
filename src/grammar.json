@@ -130,6 +130,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "stopinsert_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "user_command"
         },
         {
@@ -240,6 +244,24 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
+        }
+      ]
+    },
+    "stopinsert_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_stopinsert"
+          },
+          "named": false,
+          "value": "stopinsert"
         },
         {
           "type": "SYMBOL",
@@ -5080,6 +5102,10 @@
     {
       "type": "SYMBOL",
       "name": "_startinsert"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_stopinsert"
     },
     {
       "type": "SYMBOL",

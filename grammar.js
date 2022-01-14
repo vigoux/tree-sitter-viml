@@ -85,6 +85,7 @@ module.exports = grammar({
     $._set,
     $._setlocal,
     $._startinsert,
+    $._stopinsert,
     $._global,
   ],
 
@@ -124,6 +125,7 @@ module.exports = grammar({
         $.highlight_statement,
         $.syntax_statement,
         $.startinsert_statement,
+        $.stopinsert_statement,
         $.user_command,
         $.global_statement,
       ),
@@ -133,6 +135,7 @@ module.exports = grammar({
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
     startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert')), $._cmd_separator),
+    stopinsert_statement: ($) => seq(tokalias($, 'stopinsert'), $._cmd_separator),
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
