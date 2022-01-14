@@ -197,6 +197,29 @@ syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealen
     (pattern)
     (syntax_argument)))
 
+================================================================================
+Syntax cluster
+================================================================================
+
+syntax cluster group1
+syntax cluster group1 contains=g1,g2,g3
+syntax cluster group1 add=g4 remove=g1,g2
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement
+    (hl_group))
+  (syntax_statement
+    (hl_group)
+    (hl_group)
+    (hl_group)
+    (hl_group))
+  (syntax_statement
+    (hl_group)
+    (hl_group)
+    (hl_group)
+    (hl_group)))
 
 ================================================================================
 Syntax iskeyword

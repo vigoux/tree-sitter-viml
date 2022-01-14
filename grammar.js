@@ -671,6 +671,19 @@ module.exports = grammar({
         repeat(alias($._syn_arguments_region, $.syntax_argument)),
       ),
 
+    _syn_cluster: ($) =>
+      syn_sub(
+        'cluster',
+        $.hl_group,
+        repeat(
+          choice(
+            syn_arg('contains', commaSep($.hl_group)),
+            syn_arg('add', commaSep($.hl_group)),
+            syn_arg('remove', commaSep($.hl_group)),
+          ),
+        ),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
@@ -684,6 +697,7 @@ module.exports = grammar({
           $._syn_keyword,
           $._syn_match,
           $._syn_region,
+          $._syn_cluster,
         ),
         $._cmd_separator
       ),
