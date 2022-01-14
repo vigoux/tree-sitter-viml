@@ -557,6 +557,9 @@ module.exports = grammar({
     _syn_iskeyword: ($) =>
       syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
 
+    _syn_conceal: ($) =>
+      syn_sub('conceal', optional(choice('on', 'off'))),
+
     // :h :syn-arguments
 
     _syn_hl_pattern: ($) =>
@@ -677,6 +680,7 @@ module.exports = grammar({
           $._syn_spell,
           $._syn_foldlevel,
           $._syn_iskeyword,
+          $._syn_conceal,
           $._syn_keyword,
           $._syn_match,
           $._syn_region,

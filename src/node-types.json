@@ -4261,6 +4261,10 @@
             "named": false
           },
           {
+            "type": "conceal",
+            "named": false
+          },
+          {
             "type": "enable",
             "named": false
           },

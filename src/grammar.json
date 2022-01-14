@@ -3331,6 +3331,40 @@
         }
       ]
     },
+    "_syn_conceal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "sub",
+          "content": {
+            "type": "STRING",
+            "value": "conceal"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "on"
+                },
+                {
+                  "type": "STRING",
+                  "value": "off"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "_syn_hl_pattern": {
       "type": "SEQ",
       "members": [
@@ -4312,6 +4346,10 @@
             {
               "type": "SYMBOL",
               "name": "_syn_iskeyword"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_syn_conceal"
             },
             {
               "type": "SYMBOL",

@@ -211,3 +211,18 @@ syntax iskeyword @,48-57,192-255,$,_
   (syntax_statement)
   (syntax_statement
     (value)))
+
+================================================================================
+Syntax conceal
+================================================================================
+
+syntax conceal
+syntax conceal on
+syntax conceal off
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement))
