@@ -714,7 +714,7 @@ module.exports = grammar({
         choice(
           syn_sync_meth('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
           syn_sync_meth('fromstart'),
-          syn_sync_meth('ccomment', optional($.hl_group), repeat($._syn_sync_lines))),
+          syn_sync_meth('ccomment', optional($.hl_group), repeat($._syn_sync_lines)),
           syn_sync_meth(choice('lines', 'minlines', 'maxlines'), token.immediate('='), field('val', token.immediate(/[0-9]+/))),
           syn_sync_meth(choice('match', 'region'), $.hl_group, optional(seq(choice('grouphere', 'groupthere'), $.hl_group)), $.pattern),
           syn_sync_meth('linecont', repeat($._syn_sync_lines), $.pattern, repeat($._syn_sync_lines)),
@@ -722,22 +722,32 @@ module.exports = grammar({
         ),
       ),
 
+    _syn_list: ($) =>
+      syn_sub(
+        'list',
+        optional(maybe_at($, $.hl_group)),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
-        choice(
-          $._syn_enable,
-          $._syn_case,
-          $._syn_spell,
-          $._syn_foldlevel,
-          $._syn_iskeyword,
-          $._syn_conceal,
-          $._syn_keyword,
-          $._syn_match,
-          $._syn_region,
-          $._syn_cluster,
-          $._syn_include,
-          $._syn_sync,
+        // `:syntax` = `:syntax list`
+        optional(
+          choice(
+            $._syn_enable,
+            $._syn_case,
+            $._syn_spell,
+            $._syn_foldlevel,
+            $._syn_iskeyword,
+            $._syn_conceal,
+            $._syn_keyword,
+            $._syn_match,
+            $._syn_region,
+            $._syn_cluster,
+            $._syn_include,
+            $._syn_sync,
+            $._syn_list,
+          ),
         ),
         $._cmd_separator
       ),
