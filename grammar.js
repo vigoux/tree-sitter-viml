@@ -705,6 +705,23 @@ module.exports = grammar({
         ),
       ),
 
+
+    // :h syn-sync
+    _syn_sync_lines: ($) => syn_arg(choice('minlines', 'maxlines'), /[0-9]+/),
+    _syn_sync: ($) =>
+      syn_sub(
+        'sync',
+        choice(
+          syn_sync_meth('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
+          syn_sync_meth('fromstart'),
+          syn_sync_meth('ccomment', optional($.hl_group), repeat($._syn_sync_lines))),
+          syn_sync_meth(choice('lines', 'minlines', 'maxlines'), token.immediate('='), field('val', token.immediate(/[0-9]+/))),
+          syn_sync_meth(choice('match', 'region'), $.hl_group, optional(seq(choice('grouphere', 'groupthere'), $.hl_group)), $.pattern),
+          syn_sync_meth('linecont', repeat($._syn_sync_lines), $.pattern, repeat($._syn_sync_lines)),
+          syn_sync_meth('clear', optional($.hl_group))
+        ),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
@@ -720,6 +737,7 @@ module.exports = grammar({
           $._syn_region,
           $._syn_cluster,
           $._syn_include,
+          $._syn_sync,
         ),
         $._cmd_separator
       ),
@@ -1008,6 +1026,14 @@ function syn_arg(arg, ...args) {
   else
     return field('name', arg);
 }
+
+function syn_sync_meth(arg, ...args) {
+  if (args.length > 0)
+    return seq(field('method', arg), ...args);
+  else
+    return field('method', arg);
+}
+
 
 function keys($, allowed) {
   return seq(

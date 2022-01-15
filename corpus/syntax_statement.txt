@@ -230,6 +230,48 @@ syntax cluster group1 add=g4 remove=@g1,g2
     (hl_group)))
 
 ================================================================================
+Syntax sync
+================================================================================
+
+syntax sync linebreaks=1
+syntax sync fromstart
+syntax sync ccomment
+syntax sync ccomment hlgroup maxlines=1
+syntax sync minlines=22
+syntax sync lines=1
+syntax sync match g2 .*
+syntax sync region h2 groupthere h3 [^.]
+syntax sync linecont [n]\+
+syntax sync clear
+syntax sync clear g5
+
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement
+    (hl_group))
+  (syntax_statement)
+  (syntax_statement)
+  (syntax_statement
+    (hl_group)
+    (pattern
+      (pattern_multi)))
+  (syntax_statement
+    (hl_group)
+    (hl_group)
+    (pattern))
+  (syntax_statement
+    (pattern
+      (pattern_multi)))
+  (syntax_statement)
+  (syntax_statement
+    (hl_group)))
+
+================================================================================
 Syntax include
 ================================================================================
 
