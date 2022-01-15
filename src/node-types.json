@@ -4267,6 +4267,48 @@
           }
         ]
       },
+      "method": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ccomment",
+            "named": false
+          },
+          {
+            "type": "clear",
+            "named": false
+          },
+          {
+            "type": "fromstart",
+            "named": false
+          },
+          {
+            "type": "linebreaks",
+            "named": false
+          },
+          {
+            "type": "linecont",
+            "named": false
+          },
+          {
+            "type": "lines",
+            "named": false
+          },
+          {
+            "type": "match",
+            "named": false
+          },
+          {
+            "type": "minlines",
+            "named": false
+          },
+          {
+            "type": "region",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": false,
@@ -4281,6 +4323,14 @@
           },
           {
             "type": "end",
+            "named": false
+          },
+          {
+            "type": "maxlines",
+            "named": false
+          },
+          {
+            "type": "minlines",
             "named": false
           },
           {
@@ -4355,6 +4405,10 @@
           },
           {
             "type": "spell",
+            "named": false
+          },
+          {
+            "type": "sync",
             "named": false
           }
         ]
@@ -5431,6 +5485,10 @@
     "named": false
   },
   {
+    "type": "ccomment",
+    "named": false
+  },
+  {
     "type": "clear",
     "named": false
   },
@@ -5599,11 +5657,23 @@
     "named": false
   },
   {
+    "type": "fromstart",
+    "named": false
+  },
+  {
     "type": "function",
     "named": false
   },
   {
     "type": "global",
+    "named": false
+  },
+  {
+    "type": "grouphere",
+    "named": false
+  },
+  {
+    "type": "groupthere",
     "named": false
   },
   {
@@ -5711,6 +5781,18 @@
     "named": false
   },
   {
+    "type": "linebreaks",
+    "named": false
+  },
+  {
+    "type": "linecont",
+    "named": false
+  },
+  {
+    "type": "lines",
+    "named": false
+  },
+  {
     "type": "link",
     "named": false
   },
@@ -5743,11 +5825,19 @@
     "named": false
   },
   {
+    "type": "maxlines",
+    "named": false
+  },
+  {
     "type": "me",
     "named": false
   },
   {
     "type": "minimum",
+    "named": false
+  },
+  {
+    "type": "minlines",
     "named": false
   },
   {
@@ -5937,6 +6027,10 @@
   {
     "type": "string_literal",
     "named": true
+  },
+  {
+    "type": "sync",
+    "named": false
   },
   {
     "type": "syntax",
