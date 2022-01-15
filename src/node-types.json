@@ -4360,6 +4360,10 @@
             "named": false
           },
           {
+            "type": "clear",
+            "named": false
+          },
+          {
             "type": "cluster",
             "named": false
           },
