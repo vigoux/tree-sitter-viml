@@ -5141,6 +5141,48 @@
         }
       ]
     },
+    "_syn_clear": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "sub",
+          "content": {
+            "type": "STRING",
+            "value": "clear"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "at"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "hl_group"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "syntax_statement": {
       "type": "SEQ",
       "members": [
@@ -5210,6 +5252,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "_syn_list"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_syn_clear"
                 }
               ]
             },

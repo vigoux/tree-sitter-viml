@@ -728,6 +728,12 @@ module.exports = grammar({
         optional(maybe_at($, $.hl_group)),
       ),
 
+    _syn_clear: ($) =>
+      syn_sub(
+        'clear',
+        optional(maybe_at($, $.hl_group)),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
@@ -747,6 +753,7 @@ module.exports = grammar({
             $._syn_include,
             $._syn_sync,
             $._syn_list,
+            $._syn_clear,
           ),
         ),
         $._cmd_separator
