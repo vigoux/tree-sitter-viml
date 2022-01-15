@@ -4300,6 +4300,10 @@
             "named": false
           },
           {
+            "type": "maxlines",
+            "named": false
+          },
+          {
             "type": "minlines",
             "named": false
           },
@@ -4349,7 +4353,7 @@
       },
       "sub": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "case",
@@ -4381,6 +4385,10 @@
           },
           {
             "type": "keyword",
+            "named": false
+          },
+          {
+            "type": "list",
             "named": false
           },
           {
@@ -4440,6 +4448,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "at",
+          "named": true
+        },
         {
           "type": "filename",
           "named": true
@@ -5766,11 +5778,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "lc",
@@ -5794,6 +5806,10 @@
   },
   {
     "type": "link",
+    "named": false
+  },
+  {
+    "type": "list",
     "named": false
   },
   {
