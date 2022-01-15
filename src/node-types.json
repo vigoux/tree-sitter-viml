@@ -34,6 +34,11 @@
     }
   },
   {
+    "type": "at",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "au_event_list",
     "named": true,
     "fields": {},
@@ -1572,6 +1577,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "filename",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "finally_statement",
@@ -4243,6 +4253,20 @@
     "type": "syntax_statement",
     "named": true,
     "fields": {
+      "grouplist": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "@",
+            "named": false
+          },
+          {
+            "type": "hl_group",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": true,
         "required": false,
@@ -4295,6 +4319,10 @@
           },
           {
             "type": "foldlevel",
+            "named": false
+          },
+          {
+            "type": "include",
             "named": false
           },
           {
@@ -4358,6 +4386,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "filename",
+          "named": true
+        },
         {
           "type": "hl_group",
           "named": true
@@ -5279,6 +5311,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "NONE",
     "named": false
   },
@@ -5349,10 +5385,6 @@
   {
     "type": "all&",
     "named": false
-  },
-  {
-    "type": "at",
-    "named": true
   },
   {
     "type": "au_event",
@@ -5627,6 +5659,10 @@
     "named": false
   },
   {
+    "type": "include",
+    "named": false
+  },
+  {
     "type": "inoremap",
     "named": false
   },
@@ -5660,11 +5696,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",

@@ -565,7 +565,7 @@ module.exports = grammar({
     // :h :syn-arguments
 
     _syn_hl_pattern: ($) =>
-        seq($._separator_first, $.pattern, $._separator),
+      seq($._separator_first, $.pattern, $._separator),
 
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
@@ -686,6 +686,25 @@ module.exports = grammar({
         ),
       ),
 
+    _syn_include: ($) =>
+      syn_sub(
+        'include',
+        // Here we can't have pattern and `@` is mandatory
+        optional(field('grouplist', seq('@', $.hl_group))),
+        // Use default :h isfname
+        alias(
+          repeat1(
+            choice(
+              /[A-Za-z0-9]/,
+              /[/._+,#$%~=-]/,
+              // Include windows characters
+              /[\\{}\[\]:@!]/,
+            )
+          ),
+          $.filename
+        ),
+      ),
+
     syntax_statement: ($) =>
       seq(
         tokalias($, 'syntax'),
@@ -700,6 +719,7 @@ module.exports = grammar({
           $._syn_match,
           $._syn_region,
           $._syn_cluster,
+          $._syn_include,
         ),
         $._cmd_separator
       ),
