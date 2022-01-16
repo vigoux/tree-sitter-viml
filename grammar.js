@@ -361,9 +361,6 @@ module.exports = grammar({
 
     spread: ($) => '...',
 
-    // :h Pattern
-    range_pattern: ($) => choice(/\/[^,\n]+\/?/, /\?[^,\n]+\??/),
-
     // :h 10.3
 
     mark: ($) => /'./,
@@ -384,7 +381,7 @@ module.exports = grammar({
         $.current_line,
         $.next_line,
         $.last_line,
-        $.range_pattern,
+        $.pattern,
         $.previous_pattern,
         $.mark,
       ),
