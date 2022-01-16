@@ -4854,6 +4854,15 @@
           "value": "}"
         }
       ]
+    },
+    "_escaped_line": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_line_continuation"
+      },
+      "named": false,
+      "value": "\\"
     }
   },
   "extras": [

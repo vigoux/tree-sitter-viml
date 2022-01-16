@@ -543,7 +543,7 @@ static const char * const ts_symbol_names[] = {
   [sym__no] = "_no",
   [sym__inv] = "_inv",
   [sym__cmd_separator] = "_cmd_separator",
-  [sym__line_continuation] = "_line_continuation",
+  [sym__line_continuation] = "\\",
   [sym__embedded_script_start] = "_embedded_script_start",
   [sym__embedded_script_end] = "_embedded_script_end",
   [sym__separator_first] = "_separator_first",
@@ -1746,8 +1746,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [sym__line_continuation] = {
-    .visible = false,
-    .named = true,
+    .visible = true,
+    .named = false,
   },
   [sym__embedded_script_start] = {
     .visible = false,
