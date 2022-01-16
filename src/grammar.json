@@ -1868,19 +1868,6 @@
       "type": "STRING",
       "value": "..."
     },
-    "range_pattern": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\/[^,\\n]+\\/?"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\?[^,\\n]+\\??"
-        }
-      ]
-    },
     "mark": {
       "type": "PATTERN",
       "value": "'."
@@ -1975,7 +1962,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "range_pattern"
+          "name": "pattern"
         },
         {
           "type": "SYMBOL",
