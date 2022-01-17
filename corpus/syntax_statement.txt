@@ -173,6 +173,7 @@ Syntax region
 syntax region  Type start='a' end='a'
 syntax region  Type start='a' skip='aa' end='a'
 syntax region  Type start='a'rs=s+1 skip='aa' end='a'
+syntax region  Type start=+"+ skip=+\\\\\|\\"+ end=+"+
 syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealends
 
 --------------------------------------------------------------------------------
@@ -191,6 +192,11 @@ syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealen
     (hl_group)
     (pattern)
     (pattern_offset)
+    (pattern)
+    (pattern))
+  (syntax_statement
+    (hl_group)
+    (pattern)
     (pattern)
     (pattern))
   (syntax_statement

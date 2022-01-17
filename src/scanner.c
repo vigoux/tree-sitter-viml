@@ -418,12 +418,14 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[SEP_FIRST] && iswpunct(lexer->lookahead)) {
     s->separator = lexer->lookahead;
     advance(lexer, false);
+    s->ignore_comments = true;
     lexer->result_symbol = SEP_FIRST;
     return true;
   } else if (valid_symbols[SEP] && s->separator == lexer->lookahead) {
     // No need to check for s->separator == 0 above because we know
     // lexer->lookahead is != 0
     advance(lexer, false);
+    s->ignore_comments = false;
     lexer->result_symbol = SEP;
     return true;
   }
