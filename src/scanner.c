@@ -25,6 +25,7 @@ enum TokenType {
   EMBEDDED_SCRIPT_START,
   EMDEDDED_SCRIPT_END,
   SEP_FIRST,
+  SYN_PATTERN_SEP_FIRST,
   SEP,
   SCOPE_DICT,
   SCOPE,
@@ -258,6 +259,38 @@ bool is_valid_string_delim(char c) {
   return c == '\'' || c == '"';
 }
 
+// Symbols allowed as pattern delimiter
+bool is_valid_syn_pattern_delimiter(char c) {
+  static char valids[] = {
+    '-',
+    '`',
+    '~',
+    '!',
+    '@',
+    '#',
+    '$',
+    '^',
+    '&',
+    '*',
+    '_',
+    '=',
+    '+',
+    ';',
+    ':',
+    ',',
+    '/',
+    '?',
+    '\'',
+    '"',
+  };
+
+  for (int i = 0; i < sizeof(valids) / sizeof(valids[0]); ++i)
+    if (c == valids[i])
+      return true;
+
+  return false;
+}
+
 bool lex_literal_string(TSLexer *lexer) {
   while (true) {
     if(lexer->lookahead == '\'') {
@@ -420,6 +453,14 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     advance(lexer, false);
     s->ignore_comments = true;
     lexer->result_symbol = SEP_FIRST;
+    return true;
+  // Allowed symbols around pattern in syntax commands is more restrive
+  } else if (valid_symbols[SYN_PATTERN_SEP_FIRST]
+      && is_valid_syn_pattern_delimiter(lexer->lookahead)) {
+    s->separator = lexer->lookahead;
+    advance(lexer, false);
+    s->ignore_comments = true;
+    lexer->result_symbol = SYN_PATTERN_SEP_FIRST;
     return true;
   } else if (valid_symbols[SEP] && s->separator == lexer->lookahead) {
     // No need to check for s->separator == 0 above because we know

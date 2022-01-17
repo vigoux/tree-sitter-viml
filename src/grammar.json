@@ -303,8 +303,8 @@
           "name": "_separator_first"
         },
         {
-          "type": "PATTERN",
-          "value": "[a-zA-A]*"
+          "type": "SYMBOL",
+          "name": "pattern"
         },
         {
           "type": "SYMBOL",
@@ -3361,7 +3361,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_separator_first"
+          "name": "_syn_pattern_separator_first"
         },
         {
           "type": "SYMBOL",
@@ -6990,6 +6990,10 @@
     {
       "type": "SYMBOL",
       "name": "_separator_first"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_syn_pattern_separator_first"
     },
     {
       "type": "SYMBOL",

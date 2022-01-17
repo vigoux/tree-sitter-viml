@@ -1860,6 +1860,10 @@
           "named": true
         },
         {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "perl_statement",
           "named": true
         },

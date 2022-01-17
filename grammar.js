@@ -38,6 +38,7 @@ module.exports = grammar({
     $._embedded_script_start,
     $._embedded_script_end,
     $._separator_first,
+    $._syn_pattern_separator_first,
     $._separator,
     $.scope_dict,
     $.scope,
@@ -139,7 +140,7 @@ module.exports = grammar({
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
-      $._separator_first, /[a-zA-A]*/, $._separator,
+      $._separator_first, $.pattern, $._separator,
       $._statement),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
@@ -562,7 +563,7 @@ module.exports = grammar({
     // :h :syn-arguments
 
     _syn_hl_pattern: ($) =>
-      seq($._separator_first, $.pattern, $._separator),
+      seq($._syn_pattern_separator_first, $.pattern, $._separator),
 
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>

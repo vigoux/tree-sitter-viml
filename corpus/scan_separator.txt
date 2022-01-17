@@ -10,9 +10,11 @@ g|abc|echo "foo"
 
 (script_file
   (global_statement
+    (pattern)
     (echo_statement
       (string_literal)))
   (global_statement
+    (pattern)
     (echo_statement
       (string_literal))))
 
@@ -26,5 +28,23 @@ g"foo"echo "bar"
 
 (script_file
   (global_statement
+    (pattern)
+    (echo_statement
+      (string_literal))))
+
+================================================================================
+Global with pattern
+================================================================================
+
+g:^contain\(edin\|s\)=\("String with spaces and	tabs"\)\+:echo "bar"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (global_statement
+    (pattern
+      (pattern)
+      (pattern)
+      (pattern_multi))
     (echo_statement
       (string_literal))))
