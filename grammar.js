@@ -709,10 +709,10 @@ module.exports = grammar({
       syn_sub(
         'sync',
         choice(
-          syn_sync_meth('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
-          syn_sync_meth('fromstart'),
-          syn_sync_meth('ccomment', optional($.hl_group), repeat($._syn_sync_lines)),
-          syn_sync_meth(
+          syn_sync_method('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
+          syn_sync_method('fromstart'),
+          syn_sync_method('ccomment', optional($.hl_group), repeat($._syn_sync_lines)),
+          syn_sync_method(
             choice(
               'lines',
               'minlines',
@@ -721,7 +721,7 @@ module.exports = grammar({
             token.immediate('='),
             field('val', token.immediate(/[0-9]+/)),
           ),
-          syn_sync_meth(
+          syn_sync_method(
             choice(
               'match',
               'region'
@@ -737,8 +737,8 @@ module.exports = grammar({
             ),
             $.pattern
           ),
-          syn_sync_meth('linecont', repeat($._syn_sync_lines), $.pattern, repeat($._syn_sync_lines)),
-          syn_sync_meth('clear', optional($.hl_group))
+          syn_sync_method('linecont', repeat($._syn_sync_lines), $.pattern, repeat($._syn_sync_lines)),
+          syn_sync_method('clear', optional($.hl_group))
         ),
       ),
 
@@ -948,12 +948,12 @@ module.exports = grammar({
             '[',
             repeat(choice(
               seq('\\', /./), // escaped character
-              /[^\]\n\\]/       // any character besides ']' or '\n'
+              /[^\]\n\\]/       // any character besides ']', '\' or '\n'
             )),
             ']'
           ),              // square-bracket-delimited character class
           seq('\\', /./), // escaped character
-          /[^\\\[\n]/    // any character besides '[', '\', ''', '\n'
+          /[^\\\[\n]/    // any character besides '[', '\' or '\n'
         ),
       ),
 
@@ -1063,7 +1063,7 @@ function syn_arg(arg, ...args) {
     return field('name', arg);
 }
 
-function syn_sync_meth(arg, ...args) {
+function syn_sync_method(arg, ...args) {
   if (args.length > 0)
     return seq(field('method', arg), ...args);
   else
