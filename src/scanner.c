@@ -408,6 +408,7 @@ bool lex_scope(TSLexer *lexer) {
 bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {
   Scanner *s = (Scanner *)payload;
+  assert(valid_symbols[LINE_CONTINUATION]);
 
   skip_space_tabs(lexer);
   if (!lexer->lookahead) {
@@ -447,7 +448,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   //
   // This ambiguity forces us to use the mark_end function and lookahead more
   // than just past the final newline and indentationg character.
-  if (valid_symbols[CMD_SEPARATOR] && valid_symbols[LINE_CONTINUATION]) {
+  if (valid_symbols[CMD_SEPARATOR]) {
     if (lexer->lookahead == '\n') {
       advance(lexer, false);
       lexer->mark_end(lexer);

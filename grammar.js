@@ -89,7 +89,7 @@ module.exports = grammar({
     $._global,
   ],
 
-  extras: ($) => [$._cmd_separator, $._line_continuation, /[\t ]/, $.comment],
+  extras: ($) => [$._line_continuation, /[\t ]/, $.comment],
 
   rules: {
     script_file: ($) => repeat($._statement),
@@ -128,6 +128,7 @@ module.exports = grammar({
         $.stopinsert_statement,
         $.user_command,
         $.global_statement,
+        $._cmd_separator,
       ),
 
     return_statement: ($) =>

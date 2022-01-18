@@ -139,6 +139,10 @@
         {
           "type": "SYMBOL",
           "name": "global_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cmd_separator"
         }
       ]
     },
@@ -6983,10 +6987,6 @@
     }
   },
   "extras": [
-    {
-      "type": "SYMBOL",
-      "name": "_cmd_separator"
-    },
     {
       "type": "SYMBOL",
       "name": "_line_continuation"
