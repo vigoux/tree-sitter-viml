@@ -650,26 +650,27 @@ module.exports = grammar({
         repeat(alias($._syn_arguments_match, $.syntax_argument)),
       ),
 
+    _syn_region_start: ($) => syn_region_arg($, 'start'),
+    _syn_region_skip: ($) => syn_region_arg($, 'skip'),
+    _syn_region_end: ($) => syn_region_arg($, 'end'),
+
     _syn_region: ($) =>
       syn_sub(
         'region',
         $.hl_group,
         repeat(alias($._syn_arguments_region, $.syntax_argument)),
-        syn_arg('start', $._syn_hl_pattern),
-        commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+        alias($._syn_region_start, $.syntax_argument),
         repeat(alias($._syn_arguments_region, $.syntax_argument)),
         optional(
           seq(
-            syn_arg('skip', $._syn_hl_pattern),
-            commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+            alias($._syn_region_skip, $.syntax_argument),
             repeat(alias($._syn_arguments_region, $.syntax_argument)),
           ),
         ),
         // Can have multiple end
         repeat1(
           seq(
-            syn_arg('end', $._syn_hl_pattern),
-            commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+            alias($._syn_region_end, $.syntax_argument),
             repeat(alias($._syn_arguments_region, $.syntax_argument)),
           ),
         ),
@@ -1066,6 +1067,10 @@ function syn_arg(arg, ...args) {
     return seq(field('name', arg), token.immediate('='), field('val', ...args));
   else
     return field('name', arg);
+}
+
+function syn_region_arg($, name) {
+  return seq(syn_arg(name, $._syn_hl_pattern), commaSep(alias($._syn_pattern_offset, $.pattern_offset)));
 }
 
 function syn_sync_method(arg, ...args) {
