@@ -3361,7 +3361,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_syn_pattern_separator_first"
+          "name": "_separator_first"
         },
         {
           "type": "SYMBOL",
@@ -7040,10 +7040,6 @@
     {
       "type": "SYMBOL",
       "name": "_separator_first"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_syn_pattern_separator_first"
     },
     {
       "type": "SYMBOL",
