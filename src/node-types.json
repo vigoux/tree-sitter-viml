@@ -4183,6 +4183,10 @@
             "named": false
           },
           {
+            "type": "end",
+            "named": false
+          },
+          {
             "type": "excludenl",
             "named": false
           },
@@ -4211,6 +4215,10 @@
             "named": false
           },
           {
+            "type": "skip",
+            "named": false
+          },
+          {
             "type": "skipempty",
             "named": false
           },
@@ -4220,6 +4228,10 @@
           },
           {
             "type": "skipwhite",
+            "named": false
+          },
+          {
+            "type": "start",
             "named": false
           },
           {
@@ -4243,9 +4255,23 @@
           {
             "type": "hl_group",
             "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern_offset",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4325,10 +4351,6 @@
             "named": false
           },
           {
-            "type": "end",
-            "named": false
-          },
-          {
             "type": "maxlines",
             "named": false
           },
@@ -4338,14 +4360,6 @@
           },
           {
             "type": "remove",
-            "named": false
-          },
-          {
-            "type": "skip",
-            "named": false
-          },
-          {
-            "type": "start",
             "named": false
           }
         ]
@@ -4438,10 +4452,6 @@
           },
           {
             "type": "hl_group",
-            "named": true
-          },
-          {
-            "type": "pattern",
             "named": true
           }
         ]

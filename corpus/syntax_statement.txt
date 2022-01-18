@@ -191,38 +191,56 @@ syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealen
 (script_file
   (syntax_statement
     (hl_group)
-    (pattern)
-    (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern)))
   (syntax_statement
     (hl_group)
-    (pattern)
-    (pattern)
-    (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern)))
   (syntax_statement
     (hl_group)
-    (pattern)
-    (pattern_offset)
-    (pattern)
-    (pattern))
+    (syntax_argument
+      (pattern)
+      (pattern_offset))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern)))
   (syntax_statement
     (hl_group)
-    (pattern)
-    (pattern)
-    (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern)))
   (syntax_statement
     (hl_group)
-    (pattern)
-    (pattern)
-    (pattern)
-    (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern)))
   (syntax_statement
     (hl_group)
     (syntax_argument
       (hl_group))
-    (pattern)
-    (pattern_offset)
-    (pattern)
-    (pattern)
+    (syntax_argument
+      (pattern)
+      (pattern_offset))
+    (syntax_argument
+      (pattern))
+    (syntax_argument
+      (pattern))
     (syntax_argument)))
 
 ================================================================================
