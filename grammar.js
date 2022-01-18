@@ -569,7 +569,6 @@ module.exports = grammar({
     _syn_arguments_keyword: ($) =>
       choice(
         syn_arg('conceal'),
-        // FIXME: check for what is exactly a control character in viml
         syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
         syn_arg('contained'),
         // FIXME: allow regex of hlgroups
@@ -584,7 +583,6 @@ module.exports = grammar({
     _syn_arguments_match: ($) =>
       choice(
         $._syn_arguments_keyword,
-        // FIXME: allow regex of hlgroups
         syn_arg('contains', commaSep(maybe_at($, $.hl_group))),
         syn_arg('fold'),
         syn_arg('display'),
@@ -596,7 +594,6 @@ module.exports = grammar({
     _syn_arguments_region: ($) =>
       choice(
         $._syn_arguments_match,
-        // FIXME: allow regex of hlgroups
         syn_arg('matchgroup', commaSep(maybe_at($, $.hl_group))),
         syn_arg('oneline'),
         syn_arg('concealends'),
@@ -679,7 +676,6 @@ module.exports = grammar({
         $.hl_group,
         repeat(
           choice(
-            // FIXME: allow regex of hlgroups
             syn_arg('contains', commaSep(maybe_at($, $.hl_group))),
             syn_arg('add', commaSep(maybe_at($, $.hl_group))),
             syn_arg('remove', commaSep(maybe_at($, $.hl_group))),
@@ -715,7 +711,6 @@ module.exports = grammar({
         choice(
           syn_sync_meth('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
           syn_sync_meth('fromstart'),
-          // FIXME: allow regex of hlgroups
           syn_sync_meth('ccomment', optional($.hl_group), repeat($._syn_sync_lines)),
           syn_sync_meth(
             choice(
@@ -958,7 +953,6 @@ module.exports = grammar({
             ']'
           ),              // square-bracket-delimited character class
           seq('\\', /./), // escaped character
-          // FIXME: makes this stop at the end of the pattern
           /[^\\\[\n]/    // any character besides '[', '\', ''', '\n'
         ),
       ),
