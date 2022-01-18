@@ -633,10 +633,10 @@ module.exports = grammar({
         $.hl_group,
         repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
         // The list of keyword cannot be empty, but we can have arguments anywhere on the line
-        alias(/[a-zA-Z\[\]]+/, $.keyword),
+        alias(/[a-zA-Z0-9\[\]]+/, $.keyword),
         repeat(choice(
           alias($._syn_arguments_keyword, $.syntax_argument),
-          alias(/[a-zA-Z\[\]]+/, $.keyword),
+          alias(/[a-zA-Z0-9\[\]]+/, $.keyword),
         )),
       ),
 
@@ -665,9 +665,14 @@ module.exports = grammar({
             repeat(alias($._syn_arguments_region, $.syntax_argument)),
           ),
         ),
-        syn_arg('end', $._syn_hl_pattern),
-        commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
-        repeat(alias($._syn_arguments_region, $.syntax_argument)),
+        // Can have multiple end
+        repeat1(
+          seq(
+            syn_arg('end', $._syn_hl_pattern),
+            commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+            repeat(alias($._syn_arguments_region, $.syntax_argument)),
+          ),
+        ),
       ),
 
     _syn_cluster: ($) =>

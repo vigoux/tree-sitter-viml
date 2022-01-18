@@ -94,6 +94,7 @@ Syntax keyword options
 ================================================================================
 
 syntax keyword   Type   conceal int long contained char cchar=.
+syntax keyword   Type   conceal int long3 contained char cchar=.
 syntax keyword   vimCommand containedin=Type,vimCommand ab[breviate] n[ext]
 syn keyword vimCommand tag nextgroup=vimSetting,@vimCommand
 syn keyword vimSetting transparent skipwhite skipnl skipempty tag
@@ -101,6 +102,14 @@ syn keyword vimSetting transparent skipwhite skipnl skipempty tag
 --------------------------------------------------------------------------------
 
 (script_file
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword)
+    (keyword)
+    (syntax_argument)
+    (keyword)
+    (syntax_argument))
   (syntax_statement
     (hl_group)
     (syntax_argument)
@@ -174,6 +183,7 @@ syntax region  Type start='a' end='a'
 syntax region  Type start='a' skip='aa' end='a'
 syntax region  Type start='a'rs=s+1 skip='aa' end='a'
 syntax region  Type start=+"+ skip=+\\\\\|\\"+ end=+"+
+syntax region  Type start=+"+ skip=+\\\\\|\\"+ end=+"+ end=+'+
 syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealends
 
 --------------------------------------------------------------------------------
@@ -196,6 +206,12 @@ syntax region  Type matchgroup=Type1 start='a'rs=s+1 skip='aa' end='a' concealen
     (pattern))
   (syntax_statement
     (hl_group)
+    (pattern)
+    (pattern)
+    (pattern))
+  (syntax_statement
+    (hl_group)
+    (pattern)
     (pattern)
     (pattern)
     (pattern))
