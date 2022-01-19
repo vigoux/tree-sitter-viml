@@ -626,6 +626,12 @@ module.exports = grammar({
         syn_arg('concealends'),
       ),
 
+    _syn_arguments_cluster: ($) => choice(
+      syn_arg('contains', optional($.hl_groups)),
+      syn_arg('add', optional($.hl_groups)),
+      syn_arg('remove', optional($.hl_groups)),
+    ),
+
     _syn_pattern_offset: ($) =>
       seq(
         field(
@@ -707,13 +713,7 @@ module.exports = grammar({
       syn_sub(
         'cluster',
         $.hl_group,
-        repeat(
-          choice(
-            syn_arg('contains', optional($.hl_groups)),
-            syn_arg('add', optional($.hl_groups)),
-            syn_arg('remove', optional($.hl_groups)),
-          ),
-        ),
+        repeat(alias($._syn_arguments_cluster, $.syntax_argument)),
       ),
 
     _syn_include: ($) =>

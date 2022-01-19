@@ -4276,6 +4276,10 @@
         "required": true,
         "types": [
           {
+            "type": "add",
+            "named": false
+          },
+          {
             "type": "cchar",
             "named": false
           },
@@ -4333,6 +4337,10 @@
           },
           {
             "type": "oneline",
+            "named": false
+          },
+          {
+            "type": "remove",
             "named": false
           },
           {
@@ -4456,23 +4464,11 @@
         "required": false,
         "types": [
           {
-            "type": "add",
-            "named": false
-          },
-          {
-            "type": "contains",
-            "named": false
-          },
-          {
             "type": "maxlines",
             "named": false
           },
           {
             "type": "minlines",
-            "named": false
-          },
-          {
-            "type": "remove",
             "named": false
           }
         ]
@@ -4548,16 +4544,6 @@
           {
             "type": "sync",
             "named": false
-          }
-        ]
-      },
-      "val": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "hl_groups",
-            "named": true
           }
         ]
       }
