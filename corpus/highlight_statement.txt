@@ -164,8 +164,8 @@ Highlight guifg guibg guisp
 
 hi Foo guifg=NONE
 hi Foo guibg=bg
-hi Foo guisp=fg
-hi Foo guifg=foreground
+hi def Foo guisp=fg
+hi default Foo guifg=foreground
 highlight Comment guifg=#11f0c3 guibg=#ff00ff
 hi Comment guifg='salmon pink'
 
@@ -211,7 +211,7 @@ Highlight link
 
 highlight link Foo Bar
 hi link Foo Bar
-hi default link Foo Bar
+hi defa link Foo Bar
 highlight default link Foo Bar
 
 --------------------------------------------------------------------------------

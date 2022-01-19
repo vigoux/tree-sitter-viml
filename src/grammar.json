@@ -2466,7 +2466,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_default"
+              },
+              "named": false,
               "value": "default"
             },
             {
@@ -3060,7 +3065,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_default"
+              },
+              "named": false,
               "value": "default"
             },
             {
@@ -7193,6 +7203,10 @@
     {
       "type": "SYMBOL",
       "name": "_highlight"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_default"
     },
     {
       "type": "SYMBOL",

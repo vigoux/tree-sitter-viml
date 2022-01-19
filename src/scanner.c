@@ -69,6 +69,7 @@ enum TokenType {
   TNOREMAP,
   AUGROUP,
   HIGHLIGHT,
+  DEFAULT, // highlight def[fault]
   SYNTAX,
   SET,
   SETLOCAL,
@@ -127,6 +128,7 @@ keyword keywords[] = {
   KEYWORD(TNOREMAP, "tno", "remap", true),
   KEYWORD(AUGROUP, "aug", "roup", true),
   KEYWORD(HIGHLIGHT, "hi", "ghlight", false),
+  KEYWORD(DEFAULT, "def", "ault", false),
   KEYWORD(SYNTAX, "sy", "ntax", false),
   KEYWORD(SET, "se", "t", false),
   KEYWORD(SETLOCAL, "setl", "ocal", false),

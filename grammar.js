@@ -81,6 +81,7 @@ module.exports = grammar({
     $._tnoremap,
     $._augroup,
     $._highlight,
+    $._default, // highlight def[ault]
     $._syntax,
     $._set,
     $._setlocal,
@@ -450,7 +451,7 @@ module.exports = grammar({
 
     hl_group: ($) => /[a-zA-Z0-9_]+/,
 
-    _hl_body_link: ($) => seq(optional('default'), 'link', field('from', $.hl_group), field('to', $.hl_group)),
+    _hl_body_link: ($) => seq(optional(tokalias($, 'default')), 'link', field('from', $.hl_group), field('to', $.hl_group)),
 
     _hl_body_clear: ($) => seq('clear', optional($.hl_group)),
 
@@ -526,7 +527,7 @@ module.exports = grammar({
       ),
 
     _hl_body_keys: ($) =>
-      seq(optional('default'), $.hl_group, repeat1($.hl_attribute)),
+      seq(optional(tokalias($, 'default')), $.hl_group, repeat1($.hl_attribute)),
 
     _hl_body: ($) => choice($._hl_body_clear, $._hl_body_none, $._hl_body_keys, $._hl_body_link),
 
