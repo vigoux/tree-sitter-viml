@@ -67,6 +67,7 @@ Syntax keyword
 
 syntax keyword   Type   int long char
 syntax keyword   vimCommand ab[breviate] n[ext]
+syntax keyword   Underscore one_keyword
 syn keyword vimCommand tag
 syn keyword vimSetting tag
 
@@ -81,6 +82,9 @@ syn keyword vimSetting tag
   (syntax_statement
     (hl_group)
     (keyword)
+    (keyword))
+  (syntax_statement
+    (hl_group)
     (keyword))
   (syntax_statement
     (hl_group)
