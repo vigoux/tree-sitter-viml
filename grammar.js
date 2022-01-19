@@ -142,7 +142,7 @@ module.exports = grammar({
       seq(tokalias($, 'return'), optional($._expression)),
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
-    startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert'))),
+    startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
     comclear_statement: ($) => tokalias($, "comclear"),
 
@@ -372,8 +372,11 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(field('name', $._ident), field('parameters', $.parameters)),
 
-    // FIXME(vigoux): The spread here is not exactly right...
-    parameters: ($) => seq('(', commaSep(choice($.identifier, $.spread)), ')'),
+    parameters: ($) => seq('(',
+      choice(
+        $.spread,
+        seq(commaSep($.identifier), optional(seq(',', $.spread)))),
+      ')'),
 
     bang: ($) => '!',
 
