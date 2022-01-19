@@ -100,7 +100,7 @@ module.exports = grammar({
       seq(optional($._statement), choice($._cmd_separator, $.comment))
     ),
 
-    _statement: ($) => choice(
+    _statement: ($) => seq(repeat(':'), choice(
         $.function_definition,
         $.let_statement,
         $.unlet_statement,
@@ -134,7 +134,7 @@ module.exports = grammar({
         $.user_command,
         $.global_statement,
         $.colorscheme_statement,
-      ),
+      )),
 
     return_statement: ($) =>
       seq(tokalias($, 'return'), optional($._expression)),

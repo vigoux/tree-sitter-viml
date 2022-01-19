@@ -48,139 +48,151 @@
       }
     },
     "_statement": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "function_definition"
+          "type": "REPEAT",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "let_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "unlet_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "set_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "setlocal_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "return_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "normal_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "while_loop"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "for_loop"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "if_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "lua_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "range_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ruby_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "python_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "perl_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "call_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "execute_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "echo_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "echomsg_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "try_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "throw_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "autocmd_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "silent_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "register_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "map_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "augroup_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "highlight_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "syntax_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "startinsert_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "stopinsert_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "user_command"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "global_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "colorscheme_statement"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_definition"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "let_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "unlet_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "set_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "setlocal_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "return_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "normal_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "while_loop"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "for_loop"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "if_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "lua_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "range_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "ruby_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "python_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "perl_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "call_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "execute_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "echo_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "echomsg_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "try_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "throw_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "autocmd_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "silent_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "register_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "map_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "augroup_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "highlight_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "syntax_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "startinsert_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "stopinsert_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "user_command"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "global_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "colorscheme_statement"
+            }
+          ]
         }
       ]
     },

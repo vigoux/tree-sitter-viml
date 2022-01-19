@@ -191,3 +191,25 @@ stopi
   (stopinsert_statement)
   (stopinsert_statement)
   (stopinsert_statement))
+
+================================================================================
+Colon in commands
+================================================================================
+
+:echo "foo"
+
+autocmd InsertLeave * :set norelnu
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (echo_statement
+    (string_literal))
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (set_statement
+      (set_item
+        (no_option
+          (option_name))))))
