@@ -34,14 +34,14 @@ EOF
 (script_file
   (lua_statement
     (script
-      (line)
-      (line)
-      (line)
-      (line)
-      (line)))
+      (chunk)
+      (chunk)
+      (chunk)
+      (chunk)
+      (chunk)))
   (lua_statement
     (script
-      (line))))
+      (chunk))))
 
 ================================================================================
 Python chunk

@@ -11,8 +11,8 @@ syntax enable	" start highlighting, use 'background' to set colors
 (script_file
   (syntax_statement)
   (syntax_statement)
-  (syntax_statement
-    (comment)))
+  (syntax_statement)
+  (comment))
 
 ================================================================================
 Syntax case

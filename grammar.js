@@ -89,13 +89,16 @@ module.exports = grammar({
     $._global,
   ],
 
-  extras: ($) => [$._line_continuation, /[\t ]/, $.comment],
+  extras: ($) => [$._line_continuation, /[\t ]/],
 
   rules: {
-    script_file: ($) => repeat($._statement),
+    script_file: ($) => optional($._separated_statements),
 
-    _statement: ($) =>
-      choice(
+    _separated_statements: ($) => repeat1(
+      seq(optional($._statement), choice($._cmd_separator, $.comment))
+    ),
+
+    _statement: ($) => choice(
         $.function_definition,
         $.let_statement,
         $.unlet_statement,
@@ -128,15 +131,14 @@ module.exports = grammar({
         $.stopinsert_statement,
         $.user_command,
         $.global_statement,
-        $._cmd_separator,
       ),
 
     return_statement: ($) =>
-      seq(tokalias($, 'return'), optional($._expression), $._cmd_separator),
+      seq(tokalias($, 'return'), optional($._expression)),
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
-    startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert')), $._cmd_separator),
-    stopinsert_statement: ($) => seq(tokalias($, 'stopinsert'), $._cmd_separator),
+    startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert'))),
+    stopinsert_statement: ($) => seq(tokalias($, 'stopinsert')),
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
@@ -149,15 +151,16 @@ module.exports = grammar({
       seq(tokalias($, 'python'), choice($.chunk, $.script)),
     perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
 
-    chunk: ($) => seq(/[^\n]*/, $._cmd_separator),
+    chunk: ($) => /[^\n]+/,
+
+    _script_line: ($) => seq(optional($.chunk), '\n'),
 
     script: ($) =>
       seq(
         $._embedded_script_start,
         $._cmd_separator,
-        repeat(alias($.chunk, $.line)),
+        repeat($._script_line),
         $._embedded_script_end,
-        $._cmd_separator,
       ),
 
     for_loop: ($) =>
@@ -166,9 +169,8 @@ module.exports = grammar({
         field('variable', choice($._ident, $.list)),
         'in',
         field('iter', $._expression),
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
         tokalias($, 'endfor'),
-        $._cmd_separator,
       ),
 
     while_loop: ($) =>
@@ -176,9 +178,8 @@ module.exports = grammar({
         'while',
         field('condition', $._expression),
         $._cmd_separator,
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
         tokalias($, 'endwhile'),
-        $._cmd_separator,
       ),
 
     if_statement: ($) =>
@@ -186,31 +187,29 @@ module.exports = grammar({
         'if',
         field('condition', $._expression),
         $._cmd_separator,
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
         tokalias($, 'endif'),
-        $._cmd_separator,
       ),
 
     elseif_statement: ($) =>
       seq(
         'elseif',
         field('condition', $._expression),
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
       ),
 
-    else_statement: ($) => seq('else', alias(repeat($._statement), $.body)),
+    else_statement: ($) => seq('else', alias(optional($._separated_statements), $.body)),
 
     try_statement: ($) =>
       seq(
         'try',
         $._cmd_separator,
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
         tokalias($, 'endtry'),
-        $._cmd_separator,
       ),
 
     _au_pattern: ($) => choice(/\/.*\//, /\?.*\?/),
@@ -220,14 +219,14 @@ module.exports = grammar({
         'catch',
         optional(alias($._au_pattern, $.pattern)),
         $._cmd_separator,
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
       ),
 
     finally_statement: ($) =>
-      seq('finally', alias(repeat($._statement), $.body)),
+      seq('finally', alias(optional($._separated_statements), $.body)),
 
     throw_statement: ($) =>
-      seq(tokalias($, 'throw'), $._expression, $._cmd_separator),
+      seq(tokalias($, 'throw'), $._expression),
 
     autocmd_statement: ($) =>
       seq(
@@ -247,7 +246,6 @@ module.exports = grammar({
       seq(
         maybe_bang($, tokalias($, 'augroup')),
         alias($.identifier, $.augroup_name),
-        $._cmd_separator,
       ),
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
@@ -278,7 +276,6 @@ module.exports = grammar({
         ),
         $._let_operator,
         $._expression,
-        $._cmd_separator,
       ),
 
     option_name: ($) => /[a-z]+/,
@@ -315,15 +312,15 @@ module.exports = grammar({
     setlocal_statement: ($) => set_variant($, 'setlocal'),
 
     unlet_statement: ($) =>
-      seq(maybe_bang($, 'unlet'), repeat1($._expression), $._cmd_separator),
+      seq(maybe_bang($, 'unlet'), repeat1($._expression)),
 
-    call_statement: ($) => seq('call', $.call_expression, $._cmd_separator),
+    call_statement: ($) => seq('call', $.call_expression),
 
     echo_statement: ($) => echo_variant($, 'echo'),
     echomsg_statement: ($) => echo_variant($, 'echomsg'),
 
     execute_statement: ($) =>
-      seq(tokalias($, 'execute'), repeat1($._expression), $._cmd_separator),
+      seq(tokalias($, 'execute'), repeat1($._expression)),
 
     silent_statement: ($) =>
       seq(maybe_bang($, tokalias($, 'silent')), $._statement),
@@ -332,7 +329,6 @@ module.exports = grammar({
       seq(
         maybe_bang($, alias(/[A-Z][A-Za-z0-9]*/, $.command_name)),
         alias(repeat($.command_argument), $.arguments),
-        $._cmd_separator,
       ),
 
     command_argument: ($) => choice($.string_literal, /\S+/),
@@ -344,10 +340,9 @@ module.exports = grammar({
         any_order('dict', 'range', 'abort', 'closure'),
         $._cmd_separator,
 
-        alias(repeat($._statement), $.body),
+        alias(optional($._separated_statements), $.body),
 
         tokalias($, 'endfunction'),
-        $._cmd_separator,
       ),
 
     function_declaration: ($) =>
@@ -366,7 +361,7 @@ module.exports = grammar({
 
     mark: ($) => /'./,
 
-    range_statement: ($) => seq($._range, $._cmd_separator),
+    range_statement: ($) => $._range,
 
     _range: ($) => choice(alias('%', $.file), $._range_explicit),
 
@@ -426,7 +421,6 @@ module.exports = grammar({
         ),
         MAP_OPTIONS,
         $._map_definition,
-        $._cmd_separator,
       ),
 
     _map_definition: ($) =>
@@ -540,7 +534,6 @@ module.exports = grammar({
       seq(
         maybe_bang($, tokalias($, 'highlight')),
         optional($._hl_body),
-        $._cmd_separator,
       ),
 
     // :h :syntax
@@ -782,7 +775,6 @@ module.exports = grammar({
             $._syn_clear,
           ),
         ),
-        $._cmd_separator
       ),
 
     // :h variable
@@ -1039,11 +1031,11 @@ function bin_left_right(left, operator, right) {
 }
 
 function echo_variant($, cmd) {
-  return seq(tokalias($, cmd), repeat($._expression), $._cmd_separator);
+  return seq(tokalias($, cmd), repeat($._expression));
 }
 
 function set_variant($, cmd) {
-  return seq(tokalias($, cmd), sep1($.set_item, ' '), $._cmd_separator);
+  return seq(tokalias($, cmd), sep1($.set_item, ' '));
 }
 
 function any_order(...args) {

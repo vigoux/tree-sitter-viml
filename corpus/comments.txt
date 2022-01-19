@@ -19,8 +19,8 @@ echo "bar" " Hello
 
 (script_file
   (echo_statement
-    (string_literal)
-    (comment)))
+    (string_literal))
+  (comment))
 
 ================================================================================
 Comment with inner quotes
@@ -55,5 +55,5 @@ set foobar " comment
 (script_file
   (set_statement
     (set_item
-      (option_name))
-    (comment)))
+      (option_name)))
+  (comment))

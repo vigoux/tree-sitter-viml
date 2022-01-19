@@ -174,8 +174,8 @@ startinsert " HEWO
 (script_file
   (startinsert_statement)
   (startinsert_statement)
-  (startinsert_statement
-    (comment)))
+  (startinsert_statement)
+  (comment))
 
 ================================================================================
 stopinsert

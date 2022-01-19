@@ -301,10 +301,11 @@ bool lex_escapable_string(TSLexer *lexer) {
     } else if (lexer->lookahead == '\n') {
       // Not sure at this point, look after that if there's not a \\ character
       lexer->mark_end(lexer);
-      advance(lexer, true);
+      advance(lexer, false);
       skip_space_tabs(lexer);
       if (lexer->lookahead != '\\') {
         // Was a comment...
+        lexer->mark_end(lexer);
         lexer->result_symbol = COMMENT;
         return true;
       }
@@ -448,44 +449,48 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   //
   // This ambiguity forces us to use the mark_end function and lookahead more
   // than just past the final newline and indentationg character.
-  if (valid_symbols[CMD_SEPARATOR]) {
-    if (lexer->lookahead == '\n') {
+  if (lexer->lookahead == '\n') {
+    advance(lexer, false);
+    lexer->mark_end(lexer);
+    skip_space_tabs(lexer);
+
+    if (lexer->lookahead == '\\') {
+      // You think this is a line continuation ? It might not
       advance(lexer, false);
-      lexer->mark_end(lexer);
-      skip_space_tabs(lexer);
 
-      if (lexer->lookahead == '\\') {
-        // You think this is a line continuation ? It might not
-        advance(lexer, false);
-
-        if (lexer->lookahead == '/'
-            || lexer->lookahead == '?'
-            || lexer->lookahead == '&') {
-          // Actually this might be a range before a command
+      if (lexer->lookahead == '/'
+          || lexer->lookahead == '?'
+          || lexer->lookahead == '&') {
+        // Actually this might be a range before a command
+        if (valid_symbols[CMD_SEPARATOR]) {
           lexer->result_symbol = CMD_SEPARATOR;
           s->ignore_comments = false;
           return true;
+        } else {
+          return false;
         }
-
-        lexer->mark_end(lexer);
-        lexer->result_symbol = LINE_CONTINUATION;
-        return true;
-      } else {
-        lexer->result_symbol = CMD_SEPARATOR;
-        s->ignore_comments = false;
-        return true;
       }
-    } else if (lexer->lookahead == '|') {
-      advance(lexer, false);
-      if (lexer->lookahead == '|') {
-        // This is an or expression
-        return false;
-      }
-      lexer->mark_end(lexer); // Because we broke advance before
 
-      lexer->result_symbol = CMD_SEPARATOR;
+      lexer->mark_end(lexer);
+      lexer->result_symbol = LINE_CONTINUATION;
       return true;
+    } else if (valid_symbols[CMD_SEPARATOR]) {
+      lexer->result_symbol = CMD_SEPARATOR;
+      s->ignore_comments = false;
+      return true;
+    } else {
+      return false;
     }
+  }
+
+  if (valid_symbols[CMD_SEPARATOR] && lexer->lookahead == '|') {
+    advance(lexer, false);
+    if (lexer->lookahead == '|') {
+      // This is an or expression
+      return false;
+    }
+    lexer->result_symbol = CMD_SEPARATOR;
+    return true;
   }
 
   // Script starts and ends
@@ -522,16 +527,16 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
   }
 
-  // String and comments
   if (valid_symbols[COMMENT] && !valid_symbols[STRING]
       && lexer->lookahead == '"' && !s->ignore_comments) {
+    // This con only be a comment
     do {
       advance(lexer, false);
     } while (lexer->lookahead != '\n' && lexer->lookahead != '\0');
 
     lexer->result_symbol = COMMENT;
     return true;
-  } else if (valid_symbols[STRING] && valid_symbols[COMMENT]) {
+  } else if (valid_symbols[STRING]) {
     return lex_string(lexer);
   }
 

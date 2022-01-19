@@ -460,6 +460,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "echo_statement",
           "named": true
         },
@@ -721,11 +725,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "chunk",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "command_argument",
@@ -2624,11 +2623,6 @@
     }
   },
   {
-    "type": "line",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "list",
     "named": true,
     "fields": {},
@@ -3470,7 +3464,7 @@
       "required": false,
       "types": [
         {
-          "type": "line",
+          "type": "chunk",
           "named": true
         }
       ]
@@ -3494,6 +3488,10 @@
         },
         {
           "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -3701,7 +3699,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "augroup_statement",
@@ -5218,6 +5216,10 @@
     }
   },
   {
+    "type": "\n",
+    "named": false
+  },
+  {
     "type": " ",
     "named": false
   },
@@ -5514,6 +5516,10 @@
     "named": false
   },
   {
+    "type": "chunk",
+    "named": true
+  },
+  {
     "type": "clear",
     "named": false
   },
@@ -5791,11 +5797,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",

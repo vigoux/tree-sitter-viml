@@ -220,13 +220,13 @@ setlocal scrolloff=7		" comment
   (set_statement
     (set_item
       (option_name)
-      (set_value))
-    (comment))
+      (set_value)))
+  (comment)
   (setlocal_statement
     (set_item
       (option_name)
-      (set_value))
-    (comment)))
+      (set_value)))
+  (comment))
 
 ================================================================================
 Set with backslash at the end
