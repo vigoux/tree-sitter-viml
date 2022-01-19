@@ -90,6 +90,7 @@ module.exports = grammar({
     $._global,
     $._colorscheme,
     $._comclear,
+    $._delcommand,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -136,6 +137,7 @@ module.exports = grammar({
         $.global_statement,
         $.colorscheme_statement,
         $.comclear_statement,
+        $.delcommand_statement,
       )),
 
     return_statement: ($) =>
@@ -145,6 +147,9 @@ module.exports = grammar({
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
     comclear_statement: ($) => tokalias($, "comclear"),
+
+    command_name: ($) => /[A-Z][A-Za-z0-9]*/,
+    delcommand_statement: ($) => seq(tokalias($, 'delcommand'), $.command_name),
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
@@ -351,7 +356,7 @@ module.exports = grammar({
 
     user_command: ($) =>
       seq(
-        maybe_bang($, alias(/[A-Z][A-Za-z0-9]*/, $.command_name)),
+        maybe_bang($, $.command_name),
         alias(repeat($.command_argument), $.arguments),
       ),
 

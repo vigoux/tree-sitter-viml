@@ -195,6 +195,10 @@
             {
               "type": "SYMBOL",
               "name": "comclear_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "delcommand_statement"
             }
           ]
         }
@@ -313,6 +317,28 @@
       },
       "named": false,
       "value": "comclear"
+    },
+    "command_name": {
+      "type": "PATTERN",
+      "value": "[A-Z][A-Za-z0-9]*"
+    },
+    "delcommand_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_delcommand"
+          },
+          "named": false,
+          "value": "delcommand"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_name"
+        }
+      ]
     },
     "global_statement": {
       "type": "SEQ",
@@ -1709,13 +1735,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "[A-Z][A-Za-z0-9]*"
-              },
-              "named": true,
-              "value": "command_name"
+              "type": "SYMBOL",
+              "name": "command_name"
             },
             {
               "type": "CHOICE",
@@ -7322,6 +7343,10 @@
     {
       "type": "SYMBOL",
       "name": "_comclear"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_delcommand"
     }
   ],
   "inline": [],
