@@ -78,6 +78,7 @@ enum TokenType {
   GLOBAL,
   COLORSCHEME,
   COMCLEAR,
+  DELCOMMAND,
   TOKENTYPE_NR,
 };
 
@@ -139,6 +140,7 @@ keyword keywords[] = {
   KEYWORD(GLOBAL, "g", "lobal", false),
   KEYWORD(COLORSCHEME, "colo", "rscheme", false),
   KEYWORD(COMCLEAR, "comc", "lear", false),
+  KEYWORD(DELCOMMAND, "delc", "ommand", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

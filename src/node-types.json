@@ -105,6 +105,10 @@
             "named": true
           },
           {
+            "type": "delcommand_statement",
+            "named": true
+          },
+          {
             "type": "echo_statement",
             "named": true
           },
@@ -484,6 +488,10 @@
           "named": true
         },
         {
+          "type": "delcommand_statement",
+          "named": true
+        },
+        {
           "type": "echo_statement",
           "named": true
         },
@@ -796,6 +804,21 @@
       "types": [
         {
           "type": "option_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "delcommand_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "command_name",
           "named": true
         }
       ]
@@ -1856,6 +1879,10 @@
         },
         {
           "type": "comclear_statement",
+          "named": true
+        },
+        {
+          "type": "delcommand_statement",
           "named": true
         },
         {
@@ -3556,6 +3583,10 @@
           "named": true
         },
         {
+          "type": "delcommand_statement",
+          "named": true
+        },
+        {
           "type": "echo_statement",
           "named": true
         },
@@ -3784,6 +3815,10 @@
         },
         {
           "type": "comclear_statement",
+          "named": true
+        },
+        {
+          "type": "delcommand_statement",
           "named": true
         },
         {
@@ -5665,6 +5700,10 @@
     "named": false
   },
   {
+    "type": "delcommand",
+    "named": false
+  },
+  {
     "type": "dict",
     "named": false
   },
@@ -5874,11 +5913,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",
