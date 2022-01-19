@@ -101,6 +101,10 @@
             "named": true
           },
           {
+            "type": "comclear_statement",
+            "named": true
+          },
+          {
             "type": "echo_statement",
             "named": true
           },
@@ -472,6 +476,10 @@
           "named": true
         },
         {
+          "type": "comclear_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -752,6 +760,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "comclear_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "command_argument",
@@ -1839,6 +1852,10 @@
         },
         {
           "type": "colorscheme_statement",
+          "named": true
+        },
+        {
+          "type": "comclear_statement",
           "named": true
         },
         {
@@ -3531,6 +3548,10 @@
           "named": true
         },
         {
+          "type": "comclear_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -3759,6 +3780,10 @@
         },
         {
           "type": "colorscheme_statement",
+          "named": true
+        },
+        {
+          "type": "comclear_statement",
           "named": true
         },
         {
@@ -5585,6 +5610,10 @@
   },
   {
     "type": "colorscheme",
+    "named": false
+  },
+  {
+    "type": "comclear",
     "named": false
   },
   {

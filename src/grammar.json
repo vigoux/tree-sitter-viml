@@ -191,6 +191,10 @@
             {
               "type": "SYMBOL",
               "name": "colorscheme_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "comclear_statement"
             }
           ]
         }
@@ -298,18 +302,22 @@
       ]
     },
     "stopinsert_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_stopinsert"
-          },
-          "named": false,
-          "value": "stopinsert"
-        }
-      ]
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_stopinsert"
+      },
+      "named": false,
+      "value": "stopinsert"
+    },
+    "comclear_statement": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_comclear"
+      },
+      "named": false,
+      "value": "comclear"
     },
     "global_statement": {
       "type": "SEQ",
@@ -7298,6 +7306,10 @@
     {
       "type": "SYMBOL",
       "name": "_colorscheme"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_comclear"
     }
   ],
   "inline": [],

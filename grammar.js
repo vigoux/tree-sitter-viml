@@ -89,6 +89,7 @@ module.exports = grammar({
     $._stopinsert,
     $._global,
     $._colorscheme,
+    $._comclear,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -134,6 +135,7 @@ module.exports = grammar({
         $.user_command,
         $.global_statement,
         $.colorscheme_statement,
+        $.comclear_statement,
       )),
 
     return_statement: ($) =>
@@ -141,7 +143,8 @@ module.exports = grammar({
 
     normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
     startinsert_statement: ($) => seq(maybe_bang($, tokalias($, 'startinsert'))),
-    stopinsert_statement: ($) => seq(tokalias($, 'stopinsert')),
+    stopinsert_statement: ($) => tokalias($, 'stopinsert'),
+    comclear_statement: ($) => tokalias($, "comclear"),
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
