@@ -125,17 +125,19 @@ syn keyword vimSetting transparent skipwhite skipnl skipempty tag
   (syntax_statement
     (hl_group)
     (syntax_argument
-      (hl_group)
-      (hl_group))
+      (hl_groups
+        (hl_group)
+        (hl_group)))
     (keyword)
     (keyword))
   (syntax_statement
     (hl_group)
     (keyword)
     (syntax_argument
-      (hl_group)
-      (at)
-      (hl_group)))
+      (hl_groups
+        (hl_group)
+        (at)
+        (hl_group))))
   (syntax_statement
     (hl_group)
     (syntax_argument)
@@ -243,7 +245,8 @@ syntax region  Type start='a' skip='|' end='a'
   (syntax_statement
     (hl_group)
     (syntax_argument
-      (hl_group))
+      (hl_groups
+        (hl_group)))
     (syntax_argument
       (pattern)
       (pattern_offset))
@@ -276,16 +279,19 @@ syntax cluster group1 add=g4 remove=@g1,g2
     (hl_group))
   (syntax_statement
     (hl_group)
-    (at)
-    (hl_group)
-    (hl_group)
-    (hl_group))
+    (hl_groups
+      (at)
+      (hl_group)
+      (hl_group)
+      (hl_group)))
   (syntax_statement
     (hl_group)
-    (hl_group)
-    (at)
-    (hl_group)
-    (hl_group)))
+    (hl_groups
+      (hl_group))
+    (hl_groups
+      (at)
+      (hl_group)
+      (hl_group))))
 
 ================================================================================
 Syntax sync

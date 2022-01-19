@@ -2179,6 +2179,25 @@
     }
   },
   {
+    "type": "hl_groups",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "at",
+          "named": true
+        },
+        {
+          "type": "hl_group",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -4343,19 +4362,11 @@
         ]
       },
       "val": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "at",
-            "named": true
-          },
-          {
-            "type": "hl_group",
+            "type": "hl_groups",
             "named": true
           },
           {
@@ -4545,15 +4556,7 @@
         "required": false,
         "types": [
           {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "at",
-            "named": true
-          },
-          {
-            "type": "hl_group",
+            "type": "hl_groups",
             "named": true
           }
         ]

@@ -590,6 +590,8 @@ module.exports = grammar({
     _syn_hl_pattern: ($) =>
       seq($._separator_first, $.pattern, $._separator),
 
+    hl_groups: ($) => commaSep1(maybe_at($, $.hl_group)),
+
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
       choice(
@@ -597,8 +599,8 @@ module.exports = grammar({
         syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
         syn_arg('contained'),
         // FIXME: allow regex of hlgroups
-        syn_arg('containedin', commaSep(maybe_at($, $.hl_group))),
-        syn_arg('nextgroup', commaSep(maybe_at($, $.hl_group))),
+        syn_arg('containedin', optional($.hl_groups)),
+        syn_arg('nextgroup', optional($.hl_groups)),
         syn_arg('transparent'),
         syn_arg('skipwhite'),
         syn_arg('skipnl'),
@@ -608,7 +610,7 @@ module.exports = grammar({
     _syn_arguments_match: ($) =>
       choice(
         $._syn_arguments_keyword,
-        syn_arg('contains', commaSep(maybe_at($, $.hl_group))),
+        syn_arg('contains', optional($.hl_groups)),
         syn_arg('fold'),
         syn_arg('display'),
         syn_arg('extend'),
@@ -619,7 +621,7 @@ module.exports = grammar({
     _syn_arguments_region: ($) =>
       choice(
         $._syn_arguments_match,
-        syn_arg('matchgroup', commaSep(maybe_at($, $.hl_group))),
+        syn_arg('matchgroup', optional($.hl_groups)),
         syn_arg('oneline'),
         syn_arg('concealends'),
       ),
@@ -707,9 +709,9 @@ module.exports = grammar({
         $.hl_group,
         repeat(
           choice(
-            syn_arg('contains', commaSep(maybe_at($, $.hl_group))),
-            syn_arg('add', commaSep(maybe_at($, $.hl_group))),
-            syn_arg('remove', commaSep(maybe_at($, $.hl_group))),
+            syn_arg('contains', optional($.hl_groups)),
+            syn_arg('add', optional($.hl_groups)),
+            syn_arg('remove', optional($.hl_groups)),
           ),
         ),
       ),
