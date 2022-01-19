@@ -177,6 +177,10 @@
         {
           "type": "SYMBOL",
           "name": "global_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "colorscheme_statement"
         }
       ]
     },
@@ -339,6 +343,53 @@
         {
           "type": "SYMBOL",
           "name": "_statement"
+        }
+      ]
+    },
+    "colorscheme_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_colorscheme"
+          },
+          "named": false,
+          "value": "colorscheme"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[A-Za-z0-9]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[/._+,#$%~=-]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[\\\\{}\\[\\]:@!]"
+                    }
+                  ]
+                }
+              },
+              "named": true,
+              "value": "name"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -7231,6 +7282,10 @@
     {
       "type": "SYMBOL",
       "name": "_global"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_colorscheme"
     }
   ],
   "inline": [],

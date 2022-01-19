@@ -76,6 +76,7 @@ enum TokenType {
   STARTINSERT,
   STOPINSERT,
   GLOBAL,
+  COLORSCHEME,
   TOKENTYPE_NR,
 };
 
@@ -135,6 +136,7 @@ keyword keywords[] = {
   KEYWORD(STARTINSERT, "star", "tinsert", false),
   KEYWORD(STOPINSERT, "stopi", "nsert", false),
   KEYWORD(GLOBAL, "g", "lobal", false),
+  KEYWORD(COLORSCHEME, "colo", "rscheme", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

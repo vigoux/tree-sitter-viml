@@ -88,6 +88,7 @@ module.exports = grammar({
     $._startinsert,
     $._stopinsert,
     $._global,
+    $._colorscheme,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -132,6 +133,7 @@ module.exports = grammar({
         $.stopinsert_statement,
         $.user_command,
         $.global_statement,
+        $.colorscheme_statement,
       ),
 
     return_statement: ($) =>
@@ -145,6 +147,24 @@ module.exports = grammar({
       maybe_bang($, tokalias($, 'global')),
       $._separator_first, $.pattern, $._separator,
       $._statement),
+
+    colorscheme_statement: ($) =>
+      seq(
+        tokalias($, 'colorscheme'),
+        optional(
+          alias(
+            repeat1(
+              choice(
+                /[A-Za-z0-9]/,
+                /[/._+,#$%~=-]/,
+                // Include windows characters
+                /[\\{}\[\]:@!]/,
+              )
+            ),
+            $.name
+          ),
+        ),
+      ),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
     ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),
