@@ -185,6 +185,10 @@
             "named": true
           },
           {
+            "type": "runtime_statement",
+            "named": true
+          },
+          {
             "type": "set_statement",
             "named": true
           },
@@ -569,6 +573,10 @@
         },
         {
           "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "runtime_statement",
           "named": true
         },
         {
@@ -1764,6 +1772,21 @@
     "fields": {}
   },
   {
+    "type": "filenames",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "filename",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "filetype_statement",
     "named": true,
     "fields": {},
@@ -2096,6 +2119,10 @@
         },
         {
           "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "runtime_statement",
           "named": true
         },
         {
@@ -3677,6 +3704,29 @@
     }
   },
   {
+    "type": "runtime_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "filenames",
+          "named": true
+        },
+        {
+          "type": "where",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "scoped_identifier",
     "named": true,
     "fields": {},
@@ -3820,6 +3870,10 @@
         },
         {
           "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "runtime_statement",
           "named": true
         },
         {
@@ -4059,6 +4113,10 @@
         },
         {
           "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "runtime_statement",
           "named": true
         },
         {
@@ -5353,6 +5411,11 @@
     }
   },
   {
+    "type": "where",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "while_loop",
     "named": true,
     "fields": {
@@ -5643,7 +5706,23 @@
     "named": false
   },
   {
+    "type": "ALL",
+    "named": false
+  },
+  {
     "type": "NONE",
+    "named": false
+  },
+  {
+    "type": "OPT",
+    "named": false
+  },
+  {
+    "type": "PACK",
+    "named": false
+  },
+  {
+    "type": "START",
     "named": false
   },
   {
@@ -6252,6 +6331,10 @@
   },
   {
     "type": "ruby",
+    "named": false
+  },
+  {
+    "type": "runtime",
     "named": false
   },
   {

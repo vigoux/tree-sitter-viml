@@ -203,6 +203,10 @@
             {
               "type": "SYMBOL",
               "name": "filetype_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "runtime_statement"
             }
           ]
         }
@@ -341,6 +345,87 @@
         {
           "type": "SYMBOL",
           "name": "command_name"
+        }
+      ]
+    },
+    "_runtime_where": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "START"
+        },
+        {
+          "type": "STRING",
+          "value": "OPT"
+        },
+        {
+          "type": "STRING",
+          "value": "PACK"
+        },
+        {
+          "type": "STRING",
+          "value": "ALL"
+        }
+      ]
+    },
+    "runtime_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_runtime"
+              },
+              "named": false,
+              "value": "runtime"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_runtime_where"
+              },
+              "named": true,
+              "value": "where"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SYMBOL",
+              "name": "filename"
+            }
+          },
+          "named": true,
+          "value": "filenames"
         }
       ]
     },
@@ -486,24 +571,8 @@
             {
               "type": "ALIAS",
               "content": {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": "[A-Za-z0-9]"
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "[/._+,#$%~=-]"
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "[\\\\{}\\[\\]:@!]"
-                    }
-                  ]
-                }
+                "type": "SYMBOL",
+                "name": "filename"
               },
               "named": true,
               "value": "name"
@@ -4829,29 +4898,8 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "REPEAT1",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[A-Za-z0-9]"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[/._+,#$%~=-]"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[\\\\{}\\[\\]:@!]"
-                }
-              ]
-            }
-          },
-          "named": true,
-          "value": "filename"
+          "type": "SYMBOL",
+          "name": "filename"
         }
       ]
     },
@@ -6577,6 +6625,97 @@
         ]
       }
     },
+    "filename": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[A-Za-z0-9]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[/._+,#$%~=-]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[\\\\{}\\[\\]:@!]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[*]"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "\\"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[A-Za-z0-9]"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[/._+,#$%~=-]"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[\\\\{}\\[\\]:@!]"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[*]"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "\\"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
     "pattern_multi": {
       "type": "CHOICE",
       "members": [
@@ -7245,6 +7384,10 @@
     {
       "type": "SYMBOL",
       "name": "_delcommand"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_runtime"
     }
   ],
   "inline": [],
