@@ -138,6 +138,7 @@ module.exports = grammar({
         $.colorscheme_statement,
         $.comclear_statement,
         $.delcommand_statement,
+        $.filetype_statement,
       )),
 
     return_statement: ($) =>
@@ -155,6 +156,22 @@ module.exports = grammar({
       maybe_bang($, tokalias($, 'global')),
       $._separator_first, $.pattern, $._separator,
       $._statement),
+
+    _filetype_state: ($) => choice('on', 'off'),
+    filetype_statement: ($) =>
+      seq(
+        'filetype',
+        optional(
+          choice(
+            seq(
+              optional('plugin'),
+              optional('indent'),
+              alias($._filetype_state, $.state)
+            ),
+            'detect',
+          ),
+        ),
+      ),
 
     colorscheme_statement: ($) =>
       seq(
