@@ -91,6 +91,7 @@ module.exports = grammar({
     $._colorscheme,
     $._comclear,
     $._delcommand,
+    $._runtime,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -139,6 +140,7 @@ module.exports = grammar({
         $.comclear_statement,
         $.delcommand_statement,
         $.filetype_statement,
+        $.runtime_statement,
       )),
 
     return_statement: ($) =>
@@ -151,6 +153,21 @@ module.exports = grammar({
 
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
     delcommand_statement: ($) => seq(tokalias($, 'delcommand'), $.command_name),
+
+    _runtime_where: ($) =>
+      choice(
+        'START',
+        'OPT',
+        'PACK',
+        'ALL',
+      ),
+    runtime_statement: ($) =>
+      seq(
+        maybe_bang($, tokalias($, 'runtime')),
+        optional(alias($._runtime_where, $.where)),
+        alias(repeat1($.filename), $.filenames),
+      ),
+
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
@@ -176,19 +193,7 @@ module.exports = grammar({
     colorscheme_statement: ($) =>
       seq(
         tokalias($, 'colorscheme'),
-        optional(
-          alias(
-            repeat1(
-              choice(
-                /[A-Za-z0-9]/,
-                /[/._+,#$%~=-]/,
-                // Include windows characters
-                /[\\{}\[\]:@!]/,
-              )
-            ),
-            $.name
-          ),
-        ),
+        optional(alias($.filename, $.name)),
       ),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
@@ -761,18 +766,7 @@ module.exports = grammar({
         'include',
         // Here we can't have pattern and `@` is mandatory
         optional(field('grouplist', seq('@', $.hl_group))),
-        // Use default :h isfname
-        alias(
-          repeat1(
-            choice(
-              /[A-Za-z0-9]/,
-              /[/._+,#$%~=-]/,
-              // Include windows characters
-              /[\\{}\[\]:@!]/,
-            )
-          ),
-          $.filename
-        ),
+        $.filename,
       ),
 
 
@@ -1001,6 +995,36 @@ module.exports = grammar({
           '(',
           optional(commaSep1($._expression)),
           ')',
+        ),
+      ),
+
+    // Use default :h isfname
+    filename: ($) =>
+      seq(
+        // First character of a filename is not immediate
+        choice(
+          /[A-Za-z0-9]/,
+          /[/._+,#$%~=-]/,
+          // Include windows characters
+          /[\\{}\[\]:@!]/,
+          // Allow wildcard
+          /[*]/,
+          // Escaped character
+          seq('\\', /./),
+        ),
+        repeat(
+          choice(
+            ...[
+              /[A-Za-z0-9]/,
+              /[/._+,#$%~=-]/,
+              // Include windows characters
+              /[\\{}\[\]:@!]/,
+              // Allow wildcard
+              /[*]/,
+              // Escaped character
+              seq('\\', /./),
+            ].map(token.immediate),
+          ),
         ),
       ),
 
