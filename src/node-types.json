@@ -121,6 +121,10 @@
             "named": true
           },
           {
+            "type": "filetype_statement",
+            "named": true
+          },
+          {
             "type": "for_loop",
             "named": true
           },
@@ -501,6 +505,10 @@
         },
         {
           "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "filetype_statement",
           "named": true
         },
         {
@@ -1646,6 +1654,21 @@
     "fields": {}
   },
   {
+    "type": "filetype_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "state",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "finally_statement",
     "named": true,
     "fields": {},
@@ -1895,6 +1918,10 @@
         },
         {
           "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "filetype_statement",
           "named": true
         },
         {
@@ -3618,6 +3645,10 @@
           "named": true
         },
         {
+          "type": "filetype_statement",
+          "named": true
+        },
+        {
           "type": "for_loop",
           "named": true
         },
@@ -3850,6 +3881,10 @@
         },
         {
           "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "filetype_statement",
           "named": true
         },
         {
@@ -4261,6 +4296,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "state",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "stopinsert_statement",
@@ -5693,6 +5733,10 @@
     "named": false
   },
   {
+    "type": "detect",
+    "named": false
+  },
+  {
     "type": "dict",
     "named": false
   },
@@ -5763,6 +5807,10 @@
   {
     "type": "file",
     "named": true
+  },
+  {
+    "type": "filetype",
+    "named": false
   },
   {
     "type": "finally",
@@ -5866,6 +5914,10 @@
   },
   {
     "type": "include",
+    "named": false
+  },
+  {
+    "type": "indent",
     "named": false
   },
   {
@@ -6038,6 +6090,10 @@
   },
   {
     "type": "perl",
+    "named": false
+  },
+  {
+    "type": "plugin",
     "named": false
   },
   {
