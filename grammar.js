@@ -93,6 +93,7 @@ module.exports = grammar({
     $._delcommand,
     $._runtime,
     $._wincmd,
+    $._sign,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -143,6 +144,7 @@ module.exports = grammar({
         $.filetype_statement,
         $.runtime_statement,
         $.wincmd_statement,
+        $.sign_statement,
       )),
 
     return_statement: ($) =>
@@ -443,6 +445,8 @@ module.exports = grammar({
 
     spread: ($) => '...',
 
+    _printable: ($) => /[a-z0-9!"#$%&'()*+,./:;<=>?@\[\]^_`{|}~-]/,
+
     // :h 10.3
 
     mark: ($) => /'./,
@@ -623,21 +627,21 @@ module.exports = grammar({
       ),
 
     // :h :syntax
-    _syn_enable: ($) => syn_sub(choice('enable', 'on', 'off', 'reset')),
+    _syn_enable: ($) => sub_cmd(choice('enable', 'on', 'off', 'reset')),
 
-    _syn_case: ($) => syn_sub('case', optional(choice('match', 'ignore'))),
+    _syn_case: ($) => sub_cmd('case', optional(choice('match', 'ignore'))),
 
     _syn_spell: ($) =>
-      syn_sub('spell', optional(choice('toplevel', 'notoplevel', 'default'))),
+      sub_cmd('spell', optional(choice('toplevel', 'notoplevel', 'default'))),
 
     _syn_foldlevel: ($) =>
-      syn_sub('foldlevel', optional(choice('start', 'minimum'))),
+      sub_cmd('foldlevel', optional(choice('start', 'minimum'))),
 
     _syn_iskeyword: ($) =>
-      syn_sub('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
+      sub_cmd('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
 
     _syn_conceal: ($) =>
-      syn_sub('conceal', optional(choice('on', 'off'))),
+      sub_cmd('conceal', optional(choice('on', 'off'))),
 
     // :h :syn-arguments
 
@@ -649,41 +653,41 @@ module.exports = grammar({
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
       choice(
-        syn_arg('conceal'),
-        syn_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
-        syn_arg('contained'),
+        key_val_arg('conceal'),
+        key_val_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
+        key_val_arg('contained'),
         // FIXME: allow regex of hlgroups
-        syn_arg('containedin', optional($.hl_groups)),
-        syn_arg('nextgroup', optional($.hl_groups)),
-        syn_arg('transparent'),
-        syn_arg('skipwhite'),
-        syn_arg('skipnl'),
-        syn_arg('skipempty'),
+        key_val_arg('containedin', optional($.hl_groups)),
+        key_val_arg('nextgroup', optional($.hl_groups)),
+        key_val_arg('transparent'),
+        key_val_arg('skipwhite'),
+        key_val_arg('skipnl'),
+        key_val_arg('skipempty'),
       ),
 
     _syn_arguments_match: ($) =>
       choice(
         $._syn_arguments_keyword,
-        syn_arg('contains', optional($.hl_groups)),
-        syn_arg('fold'),
-        syn_arg('display'),
-        syn_arg('extend'),
-        syn_arg('keepend'),
-        syn_arg('excludenl'),
+        key_val_arg('contains', optional($.hl_groups)),
+        key_val_arg('fold'),
+        key_val_arg('display'),
+        key_val_arg('extend'),
+        key_val_arg('keepend'),
+        key_val_arg('excludenl'),
       ),
 
     _syn_arguments_region: ($) =>
       choice(
         $._syn_arguments_match,
-        syn_arg('matchgroup', optional($.hl_groups)),
-        syn_arg('oneline'),
-        syn_arg('concealends'),
+        key_val_arg('matchgroup', optional($.hl_groups)),
+        key_val_arg('oneline'),
+        key_val_arg('concealends'),
       ),
 
     _syn_arguments_cluster: ($) => choice(
-      syn_arg('contains', optional($.hl_groups)),
-      syn_arg('add', optional($.hl_groups)),
-      syn_arg('remove', optional($.hl_groups)),
+      key_val_arg('contains', optional($.hl_groups)),
+      key_val_arg('add', optional($.hl_groups)),
+      key_val_arg('remove', optional($.hl_groups)),
     ),
 
     _syn_pattern_offset: ($) =>
@@ -715,7 +719,7 @@ module.exports = grammar({
       ),
 
     _syn_keyword: ($) =>
-      syn_sub(
+      sub_cmd(
         'keyword',
         $.hl_group,
         repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
@@ -728,7 +732,7 @@ module.exports = grammar({
       ),
 
     _syn_match: ($) =>
-      syn_sub(
+      sub_cmd(
         'match',
         $.hl_group,
         repeat(alias($._syn_arguments_match, $.syntax_argument)),
@@ -742,7 +746,7 @@ module.exports = grammar({
     _syn_region_end: ($) => syn_region_arg($, 'end'),
 
     _syn_region: ($) =>
-      syn_sub(
+      sub_cmd(
         'region',
         $.hl_group,
         repeat(alias($._syn_arguments_region, $.syntax_argument)),
@@ -764,14 +768,14 @@ module.exports = grammar({
       ),
 
     _syn_cluster: ($) =>
-      syn_sub(
+      sub_cmd(
         'cluster',
         $.hl_group,
         repeat(alias($._syn_arguments_cluster, $.syntax_argument)),
       ),
 
     _syn_include: ($) =>
-      syn_sub(
+      sub_cmd(
         'include',
         // Here we can't have pattern and `@` is mandatory
         optional(field('grouplist', seq('@', $.hl_group))),
@@ -780,9 +784,9 @@ module.exports = grammar({
 
 
     // :h syn-sync
-    _syn_sync_lines: ($) => syn_arg(choice('minlines', 'maxlines'), /[0-9]+/),
+    _syn_sync_lines: ($) => key_val_arg(choice('minlines', 'maxlines'), /[0-9]+/),
     _syn_sync: ($) =>
-      syn_sub(
+      sub_cmd(
         'sync',
         choice(
           syn_sync_method('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
@@ -819,13 +823,13 @@ module.exports = grammar({
       ),
 
     _syn_list: ($) =>
-      syn_sub(
+      sub_cmd(
         'list',
         optional(maybe_at($, $.hl_group)),
       ),
 
     _syn_clear: ($) =>
-      syn_sub(
+      sub_cmd(
         'clear',
         optional(maybe_at($, $.hl_group)),
       ),
@@ -851,6 +855,36 @@ module.exports = grammar({
             $._syn_list,
             $._syn_clear,
           ),
+        ),
+      ),
+
+    // :h sign
+
+    _sign_name: ($) => /[a-zA-Z0-9]+/,
+
+    _sign_define_arg_text: ($) => seq($._printable, optional($._printable)),
+    _sign_define_argument: ($) =>
+      choice(
+        // FIXME: use filename node when filename is merged
+        key_val_arg('icon', optional($.filename)),
+        key_val_arg('linehl', optional($.hl_group)),
+        key_val_arg('numhl', optional($.hl_group)),
+        key_val_arg('text', optional(alias($._sign_define_arg_text, $.text))),
+        key_val_arg('texthl', optional($.hl_group)),
+      ),
+
+    _sign_define: ($) =>
+      sub_cmd(
+        'define',
+        field('name', $.identifier),
+        repeat(alias($._sign_define_argument, $.sign_argument)),
+      ),
+
+    sign_statement: ($) =>
+      seq(
+        tokalias($, 'sign'),
+        choice(
+          $._sign_define,
         ),
       ),
 
@@ -1153,7 +1187,7 @@ function hl_key_val(left, right) {
   return seq(field('key', left), token.immediate('='), field('val', right));
 }
 
-function syn_sub(sub, ...args) {
+function sub_cmd(sub, ...args) {
   if (args.length > 0) {
     return seq(field('sub', sub), ...args);
   } else {
@@ -1161,7 +1195,7 @@ function syn_sub(sub, ...args) {
   }
 }
 
-function syn_arg(arg, ...args) {
+function key_val_arg(arg, ...args) {
   if (args.length > 0)
     return seq(field('name', arg), token.immediate('='), field('val', ...args));
   else
@@ -1169,7 +1203,7 @@ function syn_arg(arg, ...args) {
 }
 
 function syn_region_arg($, name) {
-  return seq(syn_arg(name, $._syn_hl_pattern), commaSep(alias($._syn_pattern_offset, $.pattern_offset)));
+  return seq(key_val_arg(name, $._syn_hl_pattern), commaSep(alias($._syn_pattern_offset, $.pattern_offset)));
 }
 
 function syn_sync_method(arg, ...args) {

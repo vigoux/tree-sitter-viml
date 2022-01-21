@@ -197,6 +197,10 @@
             "named": true
           },
           {
+            "type": "sign_statement",
+            "named": true
+          },
+          {
             "type": "silent_statement",
             "named": true
           },
@@ -589,6 +593,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "sign_statement",
           "named": true
         },
         {
@@ -2139,6 +2147,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "sign_statement",
           "named": true
         },
         {
@@ -3897,6 +3909,10 @@
           "named": true
         },
         {
+          "type": "sign_statement",
+          "named": true
+        },
+        {
           "type": "silent_statement",
           "named": true
         },
@@ -4014,6 +4030,92 @@
       "types": [
         {
           "type": "set_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sign_argument",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "icon",
+            "named": false
+          },
+          {
+            "type": "linehl",
+            "named": false
+          },
+          {
+            "type": "numhl",
+            "named": false
+          },
+          {
+            "type": "text",
+            "named": false
+          },
+          {
+            "type": "texthl",
+            "named": false
+          }
+        ]
+      },
+      "val": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "filename",
+            "named": true
+          },
+          {
+            "type": "hl_group",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sign_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "sub": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "define",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "sign_argument",
           "named": true
         }
       ]
@@ -4141,6 +4243,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "sign_statement",
           "named": true
         },
         {
@@ -5108,6 +5214,11 @@
     }
   },
   {
+    "type": "text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "throw_statement",
     "named": true,
     "fields": {},
@@ -5957,6 +6068,10 @@
     "named": false
   },
   {
+    "type": "define",
+    "named": false
+  },
+  {
     "type": "delcommand",
     "named": false
   },
@@ -6121,6 +6236,10 @@
     "named": false
   },
   {
+    "type": "icon",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -6202,6 +6321,10 @@
   },
   {
     "type": "linecont",
+    "named": false
+  },
+  {
+    "type": "linehl",
     "named": false
   },
   {
@@ -6290,6 +6413,10 @@
   },
   {
     "type": "notoplevel",
+    "named": false
+  },
+  {
+    "type": "numhl",
     "named": false
   },
   {
@@ -6393,6 +6520,10 @@
     "named": false
   },
   {
+    "type": "sign",
+    "named": false
+  },
+  {
     "type": "silent",
     "named": false
   },
@@ -6462,6 +6593,14 @@
   },
   {
     "type": "syntax",
+    "named": false
+  },
+  {
+    "type": "text",
+    "named": false
+  },
+  {
+    "type": "texthl",
     "named": false
   },
   {

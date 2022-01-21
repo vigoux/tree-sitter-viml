@@ -81,6 +81,7 @@ enum TokenType {
   DELCOMMAND,
   RUNTIME,
   WINCMD,
+  SIGN,
   TOKENTYPE_NR,
 };
 
@@ -145,6 +146,7 @@ keyword keywords[] = {
   KEYWORD(DELCOMMAND, "delc", "ommand", false),
   KEYWORD(RUNTIME, "ru", "ntime", false),
   KEYWORD(WINCMD, "winc", "md", false),
+  KEYWORD(SIGN, "sig", "n", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
