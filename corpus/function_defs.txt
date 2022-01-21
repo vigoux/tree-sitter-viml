@@ -70,6 +70,42 @@ end
         (integer_literal)))))
 
 ================================================================================
+Function with args
+================================================================================
+
+function foo(a, b)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Function with default args
+================================================================================
+
+function foo(a, b = 10)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (identifier)
+      parameters: (parameters
+        (identifier)
+        (default_parameter
+          name: (identifier)
+          value: (integer_literal))))))
+
+================================================================================
 Function with args and spread
 ================================================================================
 
