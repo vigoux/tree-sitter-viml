@@ -82,3 +82,20 @@ runtime plugin/plug*/*.vim
   (runtime_statement
     (filenames
       (filename))))
+
+================================================================================
+Runtime with white-space
+================================================================================
+
+runtime plugin/\ .vim
+runtime plugin/plug/plug\ in.vim
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (runtime_statement
+    (filenames
+      (filename)))
+  (runtime_statement
+    (filenames
+      (filename))))
