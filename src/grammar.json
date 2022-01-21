@@ -207,6 +207,10 @@
             {
               "type": "SYMBOL",
               "name": "runtime_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "wincmd_statement"
             }
           ]
         }
@@ -426,6 +430,40 @@
           },
           "named": true,
           "value": "filenames"
+        }
+      ]
+    },
+    "wincmd_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "integer_literal"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_wincmd"
+          },
+          "named": false,
+          "value": "wincmd"
+        },
+        {
+          "type": "FIELD",
+          "name": "action",
+          "content": {
+            "type": "PATTERN",
+            "value": "[a-zA-Z=]"
+          }
         }
       ]
     },
@@ -7388,6 +7426,10 @@
     {
       "type": "SYMBOL",
       "name": "_runtime"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_wincmd"
     }
   ],
   "inline": [],

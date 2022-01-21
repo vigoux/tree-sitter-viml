@@ -92,6 +92,7 @@ module.exports = grammar({
     $._comclear,
     $._delcommand,
     $._runtime,
+    $._wincmd,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -141,6 +142,7 @@ module.exports = grammar({
         $.delcommand_statement,
         $.filetype_statement,
         $.runtime_statement,
+        $.wincmd_statement,
       )),
 
     return_statement: ($) =>
@@ -168,6 +170,13 @@ module.exports = grammar({
         alias(repeat1($.filename), $.filenames),
       ),
 
+
+    wincmd_statement: ($) =>
+      seq(
+        optional($.integer_literal),
+        tokalias($, 'wincmd'),
+        field('action', /[a-zA-Z=]/),
+      ),
 
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
