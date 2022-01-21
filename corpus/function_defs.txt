@@ -106,6 +106,46 @@ end
           value: (integer_literal))))))
 
 ================================================================================
+Function only default
+================================================================================
+
+function foo(a=1, b=2)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (identifier)
+      parameters: (parameters
+        (default_parameter
+          name: (identifier)
+          value: (integer_literal))
+        (default_parameter
+          name: (identifier)
+          value: (integer_literal))))))
+
+================================================================================
+Function default spread
+================================================================================
+
+function foo(a=1, ...)
+end
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (identifier)
+      parameters: (parameters
+        (default_parameter
+          name: (identifier)
+          value: (integer_literal))
+        (spread)))))
+
+================================================================================
 Function with args and spread
 ================================================================================
 

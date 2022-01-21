@@ -400,23 +400,27 @@ module.exports = grammar({
     parameters: ($) => 
       seq(
         '(',
-        commaSep($._parameter),
+        choice(
+          $.spread,
+          seq(
+            commaSep($.default_parameter),
+            optional(seq(',', $.spread)),
+          ),
+          seq(
+            commaSep($.identifier),
+            optional(seq(',', commaSep($.default_parameter))),
+            optional(seq(',', $.spread)),
+          ),
+        ),
         ')',
       ),
 
-    _parameter: ($) => 
-      choice(
-        $.identifier,
-        $.default_parameter,
-        $.spread,
-      ),
-
     default_parameter: ($) =>
-        seq(
-          field('name', $.identifier),
-          '=',
-          field('value', $._expression),
-        ),
+      seq(
+        field('name', $.identifier),
+        '=',
+        field('value', $._expression),
+      ),
 
 
     bang: ($) => '!',
