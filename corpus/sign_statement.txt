@@ -1,0 +1,35 @@
+================================================================================
+Sign define
+================================================================================
+
+sign define ASignName icon=/usr/bin/sign.bmp
+sign define AnotherSign linehl=hl1 numhl=hl2 texthl=hl3
+sig  define Assigned text= numhl=
+sign define signEverywhere text=>> numhl=h4
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement
+    name: (identifier)
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    name: (identifier)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (hl_group)))
+  (sign_statement
+    name: (identifier)
+    (sign_argument)
+    (sign_argument))
+  (sign_statement
+    name: (identifier)
+    (sign_argument
+      val: (text))
+    (sign_argument
+      val: (hl_group))))
+
