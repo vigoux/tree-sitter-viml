@@ -45,3 +45,20 @@ sign undefine ASignName
   (sign_statement
     name: (identifier)))
 
+================================================================================
+Sign list
+================================================================================
+
+sign list
+sign list 11
+sign list Sign11
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement)
+  (sign_statement
+    name: (integer_literal))
+  (sign_statement
+    name: (identifier)))
+
