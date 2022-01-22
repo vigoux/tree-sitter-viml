@@ -860,7 +860,7 @@ module.exports = grammar({
 
     // :h sign
 
-    _sign_name: ($) => /[a-zA-Z0-9]+/,
+    _sign_name: ($) => choice($.integer_literal, $.identifier),
 
     _sign_define_arg_text: ($) => seq($._printable, optional($._printable)),
     _sign_define_argument: ($) =>
@@ -876,14 +876,20 @@ module.exports = grammar({
     _sign_define: ($) =>
       sub_cmd(
         'define',
-        field('name', $.identifier),
+        field('name', $._sign_name),
         repeat(alias($._sign_define_argument, $.sign_argument)),
       ),
 
     _sign_undefine: ($) =>
       sub_cmd(
         'undefine',
-        field('name', $.identifier),
+        field('name', $._sign_name),
+      ),
+
+    _sign_list: ($) =>
+      sub_cmd(
+        'list',
+        optional(field('name', $._sign_name)),
       ),
 
     sign_statement: ($) =>
@@ -892,6 +898,7 @@ module.exports = grammar({
         choice(
           $._sign_define,
           $._sign_undefine,
+          $._sign_list,
         ),
       ),
 

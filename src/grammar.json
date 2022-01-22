@@ -5403,8 +5403,17 @@
       ]
     },
     "_sign_name": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9]+"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "integer_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
     },
     "_sign_define_arg_text": {
       "type": "SEQ",
@@ -5633,7 +5642,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "_sign_name"
           }
         },
         {
@@ -5666,8 +5675,37 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "_sign_name"
           }
+        }
+      ]
+    },
+    "_sign_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "sub",
+          "content": {
+            "type": "STRING",
+            "value": "list"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_sign_name"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -5693,6 +5731,10 @@
             {
               "type": "SYMBOL",
               "name": "_sign_undefine"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_sign_list"
             }
           ]
         }

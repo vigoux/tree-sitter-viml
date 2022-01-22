@@ -4091,10 +4091,14 @@
     "fields": {
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
             "named": true
           }
         ]
@@ -4105,6 +4109,10 @@
         "types": [
           {
             "type": "define",
+            "named": false
+          },
+          {
+            "type": "list",
             "named": false
           },
           {
