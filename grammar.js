@@ -880,11 +880,18 @@ module.exports = grammar({
         repeat(alias($._sign_define_argument, $.sign_argument)),
       ),
 
+    _sign_undefine: ($) =>
+      sub_cmd(
+        'undefine',
+        field('name', $.identifier),
+      ),
+
     sign_statement: ($) =>
       seq(
         tokalias($, 'sign'),
         choice(
           $._sign_define,
+          $._sign_undefine,
         ),
       ),
 

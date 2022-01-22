@@ -4106,6 +4106,10 @@
           {
             "type": "define",
             "named": false
+          },
+          {
+            "type": "undefine",
+            "named": false
           }
         ]
       }
@@ -6625,6 +6629,10 @@
   },
   {
     "type": "try",
+    "named": false
+  },
+  {
+    "type": "undefine",
     "named": false
   },
   {

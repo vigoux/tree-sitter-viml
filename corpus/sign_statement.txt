@@ -33,3 +33,15 @@ sign define signEverywhere text=>> numhl=h4
     (sign_argument
       val: (hl_group))))
 
+================================================================================
+Sign undefine
+================================================================================
+
+sign undefine ASignName
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement
+    name: (identifier)))
+

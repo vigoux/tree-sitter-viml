@@ -5650,6 +5650,27 @@
         }
       ]
     },
+    "_sign_undefine": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "sub",
+          "content": {
+            "type": "STRING",
+            "value": "undefine"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        }
+      ]
+    },
     "sign_statement": {
       "type": "SEQ",
       "members": [
@@ -5668,6 +5689,10 @@
             {
               "type": "SYMBOL",
               "name": "_sign_define"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_sign_undefine"
             }
           ]
         }
