@@ -62,3 +62,134 @@ sign list Sign11
   (sign_statement
     name: (identifier)))
 
+================================================================================
+Sign place place
+================================================================================
+
+sign place 5 line=3 name=sign1 file=a.py
+sign place 6 group=g2 line=2 name=sign2 file=x.py
+sign place 9 group=g2 priority=50 line=5
+      \ name=sign1 file=a.py
+
+sign place 10 line=99 name=sign3
+sign place 10 line=99 name=sign3 buffer=3
+
+sign place 23 name=sign1 file=/path/to/edit.py
+
+sign place 23 name=sign1
+sign place 23 name=sign1 buffer=7
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (identifier)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (integer_literal))
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (identifier)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (identifier))
+    (sign_argument
+      val: (integer_literal))))
+
+================================================================================
+Sign place list
+================================================================================
+
+sign place file=/path/to/edit.txt
+sign place group=g1 file=/path/to/edit.txt
+sign place group=* file=/path/to/edit.txt
+
+sign place buffer=1
+sign place group=g2 buffer=1
+sign place group=* buffer=2
+
+sign place group=g3
+sign place group=*
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    (sign_argument
+      val: (hl_group)))
+  (sign_statement
+    (sign_argument
+      val: (wildcard))))

@@ -892,6 +892,40 @@ module.exports = grammar({
         optional(field('name', $._sign_name)),
       ),
 
+    // :h sign-place
+    _sign_place_place_argument: ($) =>
+      choice(
+        key_val_arg('line', $.integer_literal),
+        key_val_arg('name', $._sign_name),
+        key_val_arg('buffer', $.integer_literal),
+        key_val_arg('group', $.hl_group),
+        key_val_arg('priority', $.integer_literal),
+        key_val_arg('file', $.filename),
+      ),
+    _sign_place_place: ($) =>
+      seq(
+        field('id', $.integer_literal),
+        repeat1(alias($._sign_place_place_argument, $.sign_argument)),
+      ),
+    // :h sign-place-list
+    _sign_place_list_argument: ($) =>
+      choice(
+        // TODO: replace with proper filename when merged
+        key_val_arg('file', $.filename),
+        key_val_arg('buffer', $.integer_literal),
+        key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+      ),
+    _sign_place_list: ($) =>
+      repeat1(alias($._sign_place_list_argument, $.sign_argument)),
+    _sign_place: ($) =>
+      sub_cmd(
+        'place',
+        choice(
+          $._sign_place_place,
+          $._sign_place_list,
+        ),
+      ),
+
     sign_statement: ($) =>
       seq(
         tokalias($, 'sign'),
@@ -899,6 +933,7 @@ module.exports = grammar({
           $._sign_define,
           $._sign_undefine,
           $._sign_list,
+          $._sign_place,
         ),
       ),
 

@@ -4044,7 +4044,23 @@
         "required": true,
         "types": [
           {
+            "type": "buffer",
+            "named": false
+          },
+          {
+            "type": "file",
+            "named": false
+          },
+          {
+            "type": "group",
+            "named": false
+          },
+          {
             "type": "icon",
+            "named": false
+          },
+          {
+            "type": "line",
             "named": false
           },
           {
@@ -4052,7 +4068,15 @@
             "named": false
           },
           {
+            "type": "name",
+            "named": false
+          },
+          {
             "type": "numhl",
+            "named": false
+          },
+          {
+            "type": "priority",
             "named": false
           },
           {
@@ -4078,7 +4102,19 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
             "type": "text",
+            "named": true
+          },
+          {
+            "type": "wildcard",
             "named": true
           }
         ]
@@ -4089,6 +4125,16 @@
     "type": "sign_statement",
     "named": true,
     "fields": {
+      "id": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "integer_literal",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": false,
@@ -4113,6 +4159,10 @@
           },
           {
             "type": "list",
+            "named": false
+          },
+          {
+            "type": "place",
             "named": false
           },
           {
@@ -5980,6 +6030,10 @@
     "named": false
   },
   {
+    "type": "buffer",
+    "named": false
+  },
+  {
     "type": "call",
     "named": false
   },
@@ -6161,6 +6215,10 @@
   },
   {
     "type": "file",
+    "named": false
+  },
+  {
+    "type": "file",
     "named": true
   },
   {
@@ -6205,6 +6263,10 @@
   },
   {
     "type": "global",
+    "named": false
+  },
+  {
+    "type": "group",
     "named": false
   },
   {
@@ -6328,6 +6390,10 @@
     "named": false
   },
   {
+    "type": "line",
+    "named": false
+  },
+  {
     "type": "linebreaks",
     "named": false
   },
@@ -6400,6 +6466,10 @@
     "named": false
   },
   {
+    "type": "name",
+    "named": false
+  },
+  {
     "type": "nextgroup",
     "named": false
   },
@@ -6460,7 +6530,15 @@
     "named": false
   },
   {
+    "type": "place",
+    "named": false
+  },
+  {
     "type": "plugin",
+    "named": false
+  },
+  {
+    "type": "priority",
     "named": false
   },
   {
@@ -6678,6 +6756,10 @@
   {
     "type": "while",
     "named": false
+  },
+  {
+    "type": "wildcard",
+    "named": true
   },
   {
     "type": "wincmd",
