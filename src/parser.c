@@ -13,7 +13,7 @@
 #pragma GCC optimize ("O0")
 #endif
 
-#define LANGUAGE_VERSION 14
+#define LANGUAGE_VERSION 13
 #define STATE_COUNT 1458
 #define LARGE_STATE_COUNT 141
 #define SYMBOL_COUNT 462
@@ -67673,7 +67673,6 @@ extern const TSLanguage *tree_sitter_vim(void) {
       tree_sitter_vim_external_scanner_serialize,
       tree_sitter_vim_external_scanner_deserialize,
     },
-    .primary_state_ids = ts_primary_state_ids,
   };
   return &language;
 }

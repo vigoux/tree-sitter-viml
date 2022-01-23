@@ -1,5 +1,5 @@
 all:
-	tree-sitter generate --abi=latest
+	tree-sitter generate --abi=13
 	tree-sitter test
 
 run: all
