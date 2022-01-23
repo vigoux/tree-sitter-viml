@@ -4162,6 +4162,10 @@
             "named": false
           },
           {
+            "type": "jump",
+            "named": false
+          },
+          {
             "type": "list",
             "named": false
           },
@@ -6223,11 +6227,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
@@ -6378,16 +6382,20 @@
     "named": false
   },
   {
+    "type": "jump",
+    "named": false
+  },
+  {
     "type": "keepend",
     "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "lc",
