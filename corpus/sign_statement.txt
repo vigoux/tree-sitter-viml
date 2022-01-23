@@ -193,3 +193,127 @@ sign place group=*
   (sign_statement
     (sign_argument
       val: (wildcard))))
+
+================================================================================
+Sign unplace
+================================================================================
+
+sign unplace 1 file=/path/to/exec.lua
+sign unplace 2 group=g1 file=/path/to/exec.lua
+sign unplace 3 group=* file=/path/to/exec.lua
+sign unplace * file=/path/to/exec.lua
+sign unplace * group=g2 file=/path/to/exec.lua
+sign unplace * group=* file=/path/to/exec.lua
+
+sign unplace 4 buffer=10
+sign unplace 5 group=g3 buffer=11
+sign unplace 6 group=* buffer=12
+sign unplace * buffer=13
+sign unplace * group=g4 buffer=14
+sign unplace * group=* buffer=15
+
+sign unplace 7
+sign unplace 8 group=g5
+sign unplace 9 group=*
+sign unplace *
+sign unplace * group=g6
+sign unplace * group=*
+
+sign unplace
+sign unplace group=g7
+sign unplace group=*
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (filename)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (hl_group))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (wildcard))
+    (sign_argument
+      val: (integer_literal)))
+  (sign_statement
+    id: (integer_literal))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (hl_group)))
+  (sign_statement
+    id: (integer_literal)
+    (sign_argument
+      val: (wildcard)))
+  (sign_statement
+    id: (wildcard))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (hl_group)))
+  (sign_statement
+    id: (wildcard)
+    (sign_argument
+      val: (wildcard)))
+  (sign_statement)
+  (sign_statement
+    (sign_argument
+      val: (hl_group)))
+  (sign_statement
+    (sign_argument
+      val: (wildcard))))

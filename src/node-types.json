@@ -4132,6 +4132,10 @@
           {
             "type": "integer_literal",
             "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
           }
         ]
       },
@@ -4167,6 +4171,10 @@
           },
           {
             "type": "undefine",
+            "named": false
+          },
+          {
+            "type": "unplace",
             "named": false
           }
         ]
@@ -6215,11 +6223,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -6731,6 +6739,10 @@
   },
   {
     "type": "unlet",
+    "named": false
+  },
+  {
+    "type": "unplace",
     "named": false
   },
   {

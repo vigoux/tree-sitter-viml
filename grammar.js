@@ -926,6 +926,32 @@ module.exports = grammar({
         ),
       ),
 
+    _sign_unplace_cursor_argument: ($) =>
+      key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+    _sign_unplace_cursor: ($) =>
+      alias($._sign_unplace_cursor_argument, $.sign_argument),
+    _sign_unplace_id_argument: ($) =>
+      choice(
+        key_val_arg('file', $.filename),
+        key_val_arg('buffer', $.integer_literal),
+        key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+      ),
+    _sign_unplace_id: ($) =>
+      seq(
+        field('id', choice($.integer_literal, alias('*', $.wildcard))),
+        repeat(alias($._sign_unplace_id_argument, $.sign_argument)),
+      ),
+    _sign_unplace: ($) =>
+      sub_cmd(
+        'unplace',
+        optional(
+          choice(
+            $._sign_unplace_cursor,
+            $._sign_unplace_id,
+          ),
+        ),
+      ),
+
     sign_statement: ($) =>
       seq(
         tokalias($, 'sign'),
@@ -934,6 +960,7 @@ module.exports = grammar({
           $._sign_undefine,
           $._sign_list,
           $._sign_place,
+          $._sign_unplace,
         ),
       ),
 
