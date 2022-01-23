@@ -952,6 +952,19 @@ module.exports = grammar({
         ),
       ),
 
+    _sign_jump_argument: ($) =>
+      choice(
+        key_val_arg('file', $.filename),
+        key_val_arg('buffer', $.integer_literal),
+        key_val_arg('group', $.hl_group),
+      ),
+    _sign_jump: ($) =>
+      sub_cmd(
+        'jump',
+        field('id', choice($.integer_literal, alias('*', $.wildcard))),
+        repeat(alias($._sign_jump_argument, $.sign_argument)),
+      ),
+
     sign_statement: ($) =>
       seq(
         tokalias($, 'sign'),
@@ -961,6 +974,7 @@ module.exports = grammar({
           $._sign_list,
           $._sign_place,
           $._sign_unplace,
+          $._sign_jump,
         ),
       ),
 
