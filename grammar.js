@@ -445,7 +445,7 @@ module.exports = grammar({
 
     spread: ($) => '...',
 
-    _printable: ($) => /[a-z0-9!"#$%&'()*+,./:;<=>?@\[\]^_`{|}~-]/,
+    _printable: ($) => /[^\t\n\v\f\r]/,
 
     // :h 10.3
 
