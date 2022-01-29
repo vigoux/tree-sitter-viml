@@ -87,6 +87,7 @@ module.exports = grammar({
     $._setlocal,
     $._startinsert,
     $._stopinsert,
+    $._source,
     $._global,
     $._colorscheme,
     $._comclear,
@@ -137,6 +138,7 @@ module.exports = grammar({
         $.startinsert_statement,
         $.stopinsert_statement,
         $.user_command,
+        $.source_statement,
         $.global_statement,
         $.colorscheme_statement,
         $.comclear_statement,
@@ -148,15 +150,15 @@ module.exports = grammar({
       )),
 
     return_statement: ($) =>
-      seq(tokalias($, 'return'), optional($._expression)),
+      command($, 'return', optional($._expression)),
 
-    normal_statement: ($) => command($, 'normal', alias(/.*/, $.commands)),
+    normal_statement: ($) => range_command($, 'normal', alias(/.*/, $.commands)),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
     comclear_statement: ($) => tokalias($, "comclear"),
 
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
-    delcommand_statement: ($) => seq(tokalias($, 'delcommand'), $.command_name),
+    delcommand_statement: ($) => command($, 'delcommand', $.command_name),
 
     _runtime_where: ($) =>
       choice(
@@ -180,6 +182,9 @@ module.exports = grammar({
         field('action', /[a-zA-Z=]/),
       ),
 
+    source_statement: ($) =>
+      bang_range_command($, 'source', optional(field('file', $.filename))),
+
     global_statement: ($) => seq(
       maybe_bang($, tokalias($, 'global')),
       $._separator_first, $.pattern, $._separator,
@@ -202,15 +207,12 @@ module.exports = grammar({
       ),
 
     colorscheme_statement: ($) =>
-      seq(
-        tokalias($, 'colorscheme'),
-        optional(alias($.filename, $.name)),
-      ),
+      command($, 'colorscheme', optional(alias($.filename, $.name))),
 
     lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
-    ruby_statement: ($) => seq(tokalias($, 'ruby'), choice($.chunk, $.script)),
+    ruby_statement: ($) => command($, 'ruby', choice($.chunk, $.script)),
     python_statement: ($) =>
-      seq(tokalias($, 'python'), choice($.chunk, $.script)),
+      command($, 'python', choice($.chunk, $.script)),
     perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
 
     chunk: ($) => /[^\n]+/,
@@ -288,7 +290,7 @@ module.exports = grammar({
       seq('finally', alias(optional($._separated_statements), $.body)),
 
     throw_statement: ($) =>
-      seq(tokalias($, 'throw'), $._expression),
+      command($, 'throw', $._expression),
 
     autocmd_statement: ($) =>
       seq(
@@ -382,7 +384,7 @@ module.exports = grammar({
     echomsg_statement: ($) => echo_variant($, 'echomsg'),
 
     execute_statement: ($) =>
-      seq(tokalias($, 'execute'), repeat1($._expression)),
+      command($, 'execute', repeat1($._expression)),
 
     silent_statement: ($) =>
       seq(maybe_bang($, tokalias($, 'silent')), $._statement),
@@ -835,8 +837,7 @@ module.exports = grammar({
       ),
 
     syntax_statement: ($) =>
-      seq(
-        tokalias($, 'syntax'),
+      command($, 'syntax',
         // `:syntax` = `:syntax list`
         optional(
           choice(
@@ -1228,9 +1229,24 @@ function tokalias(gram, name) {
   return alias(gram['_' + name], name);
 }
 
-function command($, cmd, ...args) {
+function range_command($, cmd, ...args) {
   return seq(
     optional(field('range', alias($._range, $.range))),
+    tokalias($, cmd),
+    ...args,
+  );
+}
+
+function bang_range_command($, cmd, ...args) {
+  return seq(
+    optional(field('range', alias($._range, $.range))),
+    maybe_bang($, tokalias($, cmd)),
+    ...args,
+  );
+}
+
+function command($, cmd, ...args) {
+  return seq(
     tokalias($, cmd),
     ...args,
   );
@@ -1261,11 +1277,11 @@ function bin_left_right(left, operator, right) {
 }
 
 function echo_variant($, cmd) {
-  return seq(tokalias($, cmd), repeat($._expression));
+  return command($, cmd, repeat($._expression));
 }
 
 function set_variant($, cmd) {
-  return seq(tokalias($, cmd), sep1($.set_item, ' '));
+  return command($, cmd, sep1($.set_item, ' '));
 }
 
 function any_order(...args) {
