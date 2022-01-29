@@ -186,6 +186,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "source_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "global_statement"
             },
             {
@@ -468,6 +472,74 @@
             "type": "PATTERN",
             "value": "[a-zA-Z=]"
           }
+        }
+      ]
+    },
+    "source_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "range",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_range"
+                },
+                "named": true,
+                "value": "range"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_source"
+              },
+              "named": false,
+              "value": "source"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "file",
+              "content": {
+                "type": "SYMBOL",
+                "name": "filename"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -8500,6 +8572,10 @@
     {
       "type": "SYMBOL",
       "name": "_stopinsert"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_source"
     },
     {
       "type": "SYMBOL",

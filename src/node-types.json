@@ -205,6 +205,10 @@
             "named": true
           },
           {
+            "type": "source_statement",
+            "named": true
+          },
+          {
             "type": "startinsert_statement",
             "named": true
           },
@@ -601,6 +605,10 @@
         },
         {
           "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "source_statement",
           "named": true
         },
         {
@@ -2155,6 +2163,10 @@
         },
         {
           "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "source_statement",
           "named": true
         },
         {
@@ -3917,6 +3929,10 @@
           "named": true
         },
         {
+          "type": "source_statement",
+          "named": true
+        },
+        {
           "type": "startinsert_statement",
           "named": true
         },
@@ -4332,6 +4348,10 @@
           "named": true
         },
         {
+          "type": "source_statement",
+          "named": true
+        },
+        {
           "type": "startinsert_statement",
           "named": true
         },
@@ -4656,6 +4676,42 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "source_statement",
+    "named": true,
+    "fields": {
+      "file": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "filename",
+            "named": true
+          }
+        ]
+      },
+      "range": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "range",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -6235,11 +6291,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -6663,6 +6719,10 @@
   },
   {
     "type": "snoremap",
+    "named": false
+  },
+  {
+    "type": "source",
     "named": false
   },
   {
