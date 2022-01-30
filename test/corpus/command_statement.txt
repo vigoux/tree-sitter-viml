@@ -1,0 +1,66 @@
+================================================================================
+Command alone
+================================================================================
+
+com
+command
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (command_statement)
+  (command_statement))
+
+================================================================================
+Command with name
+================================================================================
+
+com List
+command ListCmd
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (command_statement
+    name: (command_name))
+  (command_statement
+    name: (command_name)))
+
+================================================================================
+Command with repl
+================================================================================
+
+command Test call Test()
+command ListCmd Echo error
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (command_statement
+    name: (command_name)
+    repl: (command))
+  (command_statement
+    name: (command_name)
+    repl: (command)))
+
+================================================================================
+Command with attribute
+================================================================================
+
+command -nargs=1 Error echoerr <args>
+com -nargs=1 -bang -complete=customlist,EditFileComplete Test call Test()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (command_statement
+    (command_attribute)
+    name: (command_name)
+    repl: (command))
+  (command_statement
+    (command_attribute)
+    (command_attribute)
+    (command_attribute
+      (identifier))
+    name: (command_name)
+    repl: (command)))

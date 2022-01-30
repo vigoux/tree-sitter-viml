@@ -64,17 +64,18 @@ typedef enum {
   SOURCE = 62,
   GLOBAL = 63,
   COLORSCHEME = 64,
-  COMCLEAR = 65,
-  DELCOMMAND = 66,
-  RUNTIME = 67,
-  WINCMD = 68,
-  SIGN = 69,
-  FILETYPE = 70,
-  LET = 71,
-  UNLET = 72,
-  CALL = 73,
-  BREAK = 74,
-  CONTINUE = 75,
+  COMMAND = 65,
+  COMCLEAR = 66,
+  DELCOMMAND = 67,
+  RUNTIME = 68,
+  WINCMD = 69,
+  SIGN = 70,
+  FILETYPE = 71,
+  LET = 72,
+  UNLET = 73,
+  CALL = 74,
+  BREAK = 75,
+  CONTINUE = 76,
   UNKNOWN_COMMAND
 } kwid;
 
@@ -402,6 +403,11 @@ keyword keywords[] = {
   [COLORSCHEME] = {
     .mandat = "colo",
     .opt = "rscheme",
+    .ignore_comments_after = false
+  },
+  [COMMAND] = {
+    .mandat = "com",
+    .opt = "mand",
     .ignore_comments_after = false
   },
   [COMCLEAR] = {
