@@ -128,6 +128,10 @@
             "named": true
           },
           {
+            "type": "command_statement",
+            "named": true
+          },
+          {
             "type": "const_statement",
             "named": true
           },
@@ -623,6 +627,10 @@
           "named": true
         },
         {
+          "type": "command_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -1068,7 +1076,7 @@
     "fields": {
       "filter": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "filter_command",
@@ -1102,6 +1110,69 @@
       "types": [
         {
           "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "scoped_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "command_name",
+            "named": true
+          }
+        ]
+      },
+      "repl": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "command",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "command_attribute",
           "named": true
         }
       ]
@@ -2741,6 +2812,10 @@
           "named": true
         },
         {
+          "type": "command_statement",
+          "named": true
+        },
+        {
           "type": "const_statement",
           "named": true
         },
@@ -4073,6 +4148,10 @@
           "named": true
         },
         {
+          "type": "command_statement",
+          "named": true
+        },
+        {
           "type": "const_statement",
           "named": true
         },
@@ -5119,6 +5198,10 @@
           "named": true
         },
         {
+          "type": "command_statement",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -5617,6 +5700,10 @@
         },
         {
           "type": "comclear_statement",
+          "named": true
+        },
+        {
+          "type": "command_statement",
           "named": true
         },
         {
@@ -7385,6 +7472,30 @@
     "named": false
   },
   {
+    "type": "-addr=",
+    "named": false
+  },
+  {
+    "type": "-bang",
+    "named": false
+  },
+  {
+    "type": "-complete=",
+    "named": false
+  },
+  {
+    "type": "-count=",
+    "named": false
+  },
+  {
+    "type": "-nargs=",
+    "named": false
+  },
+  {
+    "type": "-range",
+    "named": false
+  },
+  {
     "type": ".",
     "named": false
   },
@@ -7573,6 +7684,14 @@
     "named": false
   },
   {
+    "type": "arglist",
+    "named": false
+  },
+  {
+    "type": "arguments",
+    "named": false
+  },
+  {
     "type": "au_event",
     "named": true
   },
@@ -7591,6 +7710,14 @@
   {
     "type": "bang",
     "named": true
+  },
+  {
+    "type": "bar",
+    "named": false
+  },
+  {
+    "type": "behave",
+    "named": false
   },
   {
     "type": "bg",
@@ -7614,6 +7741,10 @@
   },
   {
     "type": "buffer",
+    "named": false
+  },
+  {
+    "type": "buffers",
     "named": false
   },
   {
@@ -7665,11 +7796,19 @@
     "named": false
   },
   {
+    "type": "color",
+    "named": false
+  },
+  {
     "type": "colorscheme",
     "named": false
   },
   {
     "type": "comclear",
+    "named": false
+  },
+  {
+    "type": "command",
     "named": false
   },
   {
@@ -7683,6 +7822,10 @@
   {
     "type": "comment",
     "named": true
+  },
+  {
+    "type": "compiler",
+    "named": false
   },
   {
     "type": "conceal",
@@ -7821,6 +7964,10 @@
     "named": false
   },
   {
+    "type": "cscope",
+    "named": false
+  },
+  {
     "type": "cterm",
     "named": false
   },
@@ -7834,6 +7981,14 @@
   },
   {
     "type": "culhl",
+    "named": false
+  },
+  {
+    "type": "custom",
+    "named": false
+  },
+  {
+    "type": "customlist",
     "named": false
   },
   {
@@ -7854,6 +8009,10 @@
   },
   {
     "type": "dict",
+    "named": false
+  },
+  {
+    "type": "dir",
     "named": false
   },
   {
@@ -7921,6 +8080,10 @@
     "named": false
   },
   {
+    "type": "environment",
+    "named": false
+  },
+  {
     "type": "euc-cn",
     "named": false
   },
@@ -7941,11 +8104,19 @@
     "named": false
   },
   {
+    "type": "even",
+    "named": false
+  },
+  {
     "type": "excludenl",
     "named": false
   },
   {
     "type": "execute",
+    "named": false
+  },
+  {
+    "type": "expression",
     "named": false
   },
   {
@@ -7962,6 +8133,10 @@
   },
   {
     "type": "file",
+    "named": false
+  },
+  {
+    "type": "file",
     "named": true
   },
   {
@@ -7969,12 +8144,16 @@
     "named": false
   },
   {
-    "type": "filetype",
-    "named": true
+    "type": "file_in_path",
+    "named": false
   },
   {
     "type": "filetype",
     "named": false
+  },
+  {
+    "type": "filetype",
+    "named": true
   },
   {
     "type": "finally",
@@ -8049,7 +8228,15 @@
     "named": false
   },
   {
+    "type": "help",
+    "named": false
+  },
+  {
     "type": "highlight",
+    "named": false
+  },
+  {
+    "type": "history",
     "named": false
   },
   {
@@ -8201,6 +8388,14 @@
     "named": false
   },
   {
+    "type": "loaded_buffers",
+    "named": false
+  },
+  {
+    "type": "local",
+    "named": false
+  },
+  {
     "type": "lua",
     "named": false
   },
@@ -8210,6 +8405,14 @@
   },
   {
     "type": "map",
+    "named": false
+  },
+  {
+    "type": "mapclear",
+    "named": false
+  },
+  {
+    "type": "mapping",
     "named": false
   },
   {
@@ -8234,6 +8437,14 @@
   },
   {
     "type": "me",
+    "named": false
+  },
+  {
+    "type": "menu",
+    "named": false
+  },
+  {
+    "type": "messages",
     "named": false
   },
   {
@@ -8305,7 +8516,19 @@
     "named": false
   },
   {
+    "type": "option",
+    "named": false
+  },
+  {
     "type": "options",
+    "named": false
+  },
+  {
+    "type": "other",
+    "named": false
+  },
+  {
+    "type": "packadd",
     "named": false
   },
   {
@@ -8333,6 +8556,10 @@
     "named": false
   },
   {
+    "type": "quickfix",
+    "named": false
+  },
+  {
     "type": "range",
     "named": false
   },
@@ -8347,6 +8574,10 @@
   {
     "type": "register",
     "named": true
+  },
+  {
+    "type": "register",
+    "named": false
   },
   {
     "type": "remove",
@@ -8398,6 +8629,10 @@
   },
   {
     "type": "setlocal",
+    "named": false
+  },
+  {
+    "type": "shellcmd",
     "named": false
   },
   {
@@ -8485,7 +8720,23 @@
     "named": false
   },
   {
+    "type": "syntime",
+    "named": false
+  },
+  {
     "type": "t_",
+    "named": false
+  },
+  {
+    "type": "tabs",
+    "named": false
+  },
+  {
+    "type": "tag",
+    "named": false
+  },
+  {
+    "type": "tag_listfiles",
     "named": false
   },
   {
@@ -8585,6 +8836,10 @@
     "named": false
   },
   {
+    "type": "user",
+    "named": false
+  },
+  {
     "type": "utf-16",
     "named": false
   },
@@ -8613,6 +8868,10 @@
     "named": true
   },
   {
+    "type": "var",
+    "named": false
+  },
+  {
     "type": "vi",
     "named": false
   },
@@ -8638,6 +8897,10 @@
   },
   {
     "type": "wincmd",
+    "named": false
+  },
+  {
+    "type": "windows",
     "named": false
   },
   {

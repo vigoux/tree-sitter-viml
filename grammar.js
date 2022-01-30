@@ -70,6 +70,7 @@ const KEYWORDS = [
   [ "SOURCE", ["so", "urce", false],],
   [ "GLOBAL", ["g", "lobal", false],],
   [ "COLORSCHEME", ["colo", "rscheme", false],],
+  [ "COMMAND", ["com", "mand", false],],
   [ "COMCLEAR", ["comc", "lear", false],],
   [ "DELCOMMAND", ["delc", "ommand", false],],
   [ "RUNTIME", ["ru", "ntime", false],],
@@ -218,6 +219,7 @@ module.exports = grammar({
     $._source,
     $._global,
     $._colorscheme,
+    $._command,
     $._comclear,
     $._delcommand,
     $._runtime,
@@ -285,6 +287,7 @@ module.exports = grammar({
         $.source_statement,
         $.global_statement,
         $.colorscheme_statement,
+        $.command_statement,
         $.comclear_statement,
         $.delcommand_statement,
         $.filetype_statement,
@@ -395,7 +398,93 @@ module.exports = grammar({
 
     comclear_statement: ($) => tokalias($, "comclear"),
 
+    // :h :command
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
+
+    _command_attribute_completion_behavior: ($) =>
+      choice(
+        ...[
+          'arglist',
+          'augroup',
+          'buffer',
+          'behave',
+          'color',
+          'command',
+          'compiler',
+          'cscope',
+          'dir',
+          'environment',
+          'even',
+          'expression',
+          'file',
+          'file_in_path',
+          'filetype',
+          'function',
+          'help',
+          'highlight',
+          'history',
+          'local',
+          'lua',
+          'mapclear',
+          'mapping',
+          'menu',
+          'messages',
+          'option',
+          'packadd',
+          'shellcmd',
+          'sign',
+          'syntax',
+          'syntime',
+          'tag',
+          'tag_listfiles',
+          'user',
+          'var',
+        ].map(token.immediate),
+        seq(token.immediate('custom'), token.immediate(','), $._ident),
+        seq(token.immediate('customlist'), token.immediate(','), $._ident),
+      ),
+    _command_attribute_address_behavior: ($) =>
+      choice(
+        ...[
+          'lines',
+          'arguments',
+          'buffers',
+          'loaded_buffers',
+          'windows',
+          'tabs',
+          'quickfix',
+          'other',
+        ].map(token.immediate),
+      ),
+    _command_attribute: ($) =>
+      choice(
+        seq('-nargs=', token.immediate(/[01*?+]/)),
+        seq('-complete=', $._command_attribute_completion_behavior),
+        seq('-range', optional(seq(token.immediate('='), token.immediate(/%|[0-9]+/)))),
+        seq('-count=', token.immediate(/[0-9]+/)),
+        seq('-addr=', $._command_attribute_address_behavior),
+        '-bang',
+        'bar',
+        'register',
+        'buffer',
+      ),
+    command_statement: ($) =>
+      seq(
+        maybe_bang($, tokalias($, 'command')),
+        // `:command` alone list all user-defined command
+        optional(
+          choice(
+            field('name', $.command_name),
+            seq(
+              repeat(alias($._command_attribute, $.command_attribute)),
+              field('name', $.command_name),
+              // FIXME: find a way to parse the command replacement text
+              field('repl', alias(/.*/, $.command)),
+            ),
+          ),
+        ),
+      ),
+
     delcommand_statement: ($) => command($, 'delcommand', $.command_name),
 
     _runtime_where: ($) =>
