@@ -38,16 +38,23 @@ command ListCmd Echo error
 (script_file
   (command_statement
     name: (command_name)
-    repl: (command))
+    repl: (command
+      (call_statement
+        (call_expression
+          function: (identifier)))))
   (command_statement
     name: (command_name)
-    repl: (command)))
+    repl: (command
+      (user_command
+        (command_name)
+        (arguments
+          (command_argument))))))
 
 ================================================================================
 Command with attribute
 ================================================================================
 
-command -nargs=1 Error echoerr <args>
+command -nargs=1 Error echo "There is an error"
 com -nargs=1 -bang -complete=customlist,EditFileComplete Test call Test()
 
 --------------------------------------------------------------------------------
@@ -56,11 +63,16 @@ com -nargs=1 -bang -complete=customlist,EditFileComplete Test call Test()
   (command_statement
     (command_attribute)
     name: (command_name)
-    repl: (command))
+    repl: (command
+      (echo_statement
+        (string_literal)))) 
   (command_statement
     (command_attribute)
     (command_attribute)
     (command_attribute
       (identifier))
     name: (command_name)
-    repl: (command)))
+    repl: (command
+      (call_statement
+        (call_expression
+          function: (identifier))))))
