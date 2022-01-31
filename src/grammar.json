@@ -1434,8 +1434,8 @@
                       "content": {
                         "type": "ALIAS",
                         "content": {
-                          "type": "PATTERN",
-                          "value": ".*"
+                          "type": "SYMBOL",
+                          "name": "_statement"
                         },
                         "named": true,
                         "value": "command"

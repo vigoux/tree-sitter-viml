@@ -478,8 +478,7 @@ module.exports = grammar({
             seq(
               repeat(alias($._command_attribute, $.command_attribute)),
               field('name', $.command_name),
-              // FIXME: find a way to parse the command replacement text
-              field('repl', alias(/.*/, $.command)),
+              field('repl', alias($._statement, $.command)),
             ),
           ),
         ),
