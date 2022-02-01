@@ -43,6 +43,7 @@ module.exports = grammar({
     $.scope,
     $.string_literal,
     $.comment,
+    $._bang_filter,
     $._function,
     $._endfunction,
     $._endfor,
@@ -133,6 +134,7 @@ module.exports = grammar({
         $.register_statement,
         $.map_statement,
         $.augroup_statement,
+        $.bang_filter_statement,
         $.highlight_statement,
         $.syntax_statement,
         $.startinsert_statement,
@@ -314,6 +316,43 @@ module.exports = grammar({
 
     au_event: ($) => /[A-Z][a-zA-Z]+/,
     au_event_list: ($) => commaSep1($.au_event),
+
+    // :h filter
+    _bang_filter_bangs: ($) =>
+      seq(
+        $.bang,
+        optional($.bang),
+      ),
+    _bang_filter_command_argument: ($) =>
+      choice(
+        seq(
+          choice(
+            /\S/,
+            seq('\\', /./),
+          ),
+          repeat(
+            choice(
+              ...[
+                /\S/,
+                seq('\\', /./),
+              ].map(token.immediate)
+            ),
+          ),
+        ),
+        $.string_literal,
+      ),
+    _bang_filter_command: ($) =>
+      seq(
+        field('filter', alias($.filename, $.filter_command)),
+        optional($.bang),
+        repeat(alias($._bang_filter_command_argument, $.command_argument)),
+      ),
+    bang_filter_statement: ($) =>
+      seq(
+        field('range', alias($._range, $.range)),
+        alias($._bang_filter_bangs, $.bangs),
+        alias($._bang_filter_command, $.command),
+      ),
 
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
