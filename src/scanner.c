@@ -30,6 +30,7 @@ enum TokenType {
   SCOPE,
   STRING,
   COMMENT,
+  BANG_FILTER,
   // Many many many many keywords that are impossible to lex otherwise
   FUNCTION,
   ENDFUNCTION, // For some reason any other end works
@@ -445,6 +446,13 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     advance(lexer, false);
     s->ignore_comments = false;
     lexer->result_symbol = SEP;
+    return true;
+  }
+
+  if (valid_symbols[BANG_FILTER] && lexer->lookahead == '!') {
+    advance(lexer, false);
+    s->ignore_comments = true;
+    lexer->result_symbol = BANG_FILTER;
     return true;
   }
 

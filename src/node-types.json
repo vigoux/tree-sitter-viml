@@ -93,6 +93,10 @@
             "named": true
           },
           {
+            "type": "bang_filter_statement",
+            "named": true
+          },
+          {
             "type": "call_statement",
             "named": true
           },
@@ -270,6 +274,51 @@
     "type": "bang",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "bang_filter_statement",
+    "named": true,
+    "fields": {
+      "range": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "range",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bangs",
+          "named": true
+        },
+        {
+          "type": "command",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bangs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "binary_operation",
@@ -489,6 +538,10 @@
         },
         {
           "type": "autocmd_statement",
+          "named": true
+        },
+        {
+          "type": "bang_filter_statement",
           "named": true
         },
         {
@@ -813,6 +866,36 @@
     "type": "comclear_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "command",
+    "named": true,
+    "fields": {
+      "filter": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "filter_command",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "command_argument",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "command_argument",
@@ -1826,6 +1909,11 @@
     }
   },
   {
+    "type": "filter_command",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "finally_statement",
     "named": true,
     "fields": {},
@@ -2047,6 +2135,10 @@
         },
         {
           "type": "bang",
+          "named": true
+        },
+        {
+          "type": "bang_filter_statement",
           "named": true
         },
         {
@@ -3813,6 +3905,10 @@
           "named": true
         },
         {
+          "type": "bang_filter_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -4233,6 +4329,10 @@
         },
         {
           "type": "bang",
+          "named": true
+        },
+        {
+          "type": "bang_filter_statement",
           "named": true
         },
         {
@@ -6291,11 +6391,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
