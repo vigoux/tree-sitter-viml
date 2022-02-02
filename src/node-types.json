@@ -197,6 +197,10 @@
             "named": true
           },
           {
+            "type": "shell_command_statement",
+            "named": true
+          },
+          {
             "type": "silent_statement",
             "named": true
           },
@@ -589,6 +593,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "shell_command_statement",
           "named": true
         },
         {
@@ -2139,6 +2147,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "shell_command_statement",
           "named": true
         },
         {
@@ -3897,6 +3909,10 @@
           "named": true
         },
         {
+          "type": "shell_command_statement",
+          "named": true
+        },
+        {
           "type": "silent_statement",
           "named": true
         },
@@ -4014,6 +4030,25 @@
       "types": [
         {
           "type": "set_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "shell_command_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "command",
           "named": true
         }
       ]
@@ -4141,6 +4176,10 @@
         },
         {
           "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "shell_command_statement",
           "named": true
         },
         {
@@ -5909,6 +5948,10 @@
     "named": false
   },
   {
+    "type": "command",
+    "named": true
+  },
+  {
     "type": "command_name",
     "named": true
   },
@@ -6182,11 +6225,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "lc",

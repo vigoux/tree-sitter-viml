@@ -140,6 +140,7 @@ module.exports = grammar({
         $.colorscheme_statement,
         $.comclear_statement,
         $.delcommand_statement,
+        $.shell_command_statement,
         $.filetype_statement,
         $.runtime_statement,
         $.wincmd_statement,
@@ -155,6 +156,16 @@ module.exports = grammar({
 
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
     delcommand_statement: ($) => seq(tokalias($, 'delcommand'), $.command_name),
+
+    // :h :!
+    shell_command_statement: ($) =>
+      seq(
+        $.bang,
+        choice(
+          $.bang,
+          alias(/.*/, $.command),
+        ),
+      ),
 
     _runtime_where: ($) =>
       choice(

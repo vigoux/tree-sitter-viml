@@ -202,6 +202,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "shell_command_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "filetype_statement"
             },
             {
@@ -349,6 +353,33 @@
         {
           "type": "SYMBOL",
           "name": "command_name"
+        }
+      ]
+    },
+    "shell_command_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "bang"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "bang"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": ".*"
+              },
+              "named": true,
+              "value": "command"
+            }
+          ]
         }
       ]
     },
