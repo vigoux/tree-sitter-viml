@@ -202,3 +202,28 @@ let list = [
     (list
       (string_literal)
       (string_literal))))
+
+================================================================================
+Registers
+================================================================================
+
+let @a = "some text"
+let current_line = @.
+let unamed_register = @@
+let other_unamed_register = @@
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (register)
+    (string_literal))
+  (let_statement
+    (identifier)
+    (register))
+  (let_statement
+    (identifier)
+    (register))
+  (let_statement
+    (identifier)
+    (register)))
