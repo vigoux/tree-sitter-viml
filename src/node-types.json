@@ -2407,6 +2407,14 @@
             "named": false
           },
           {
+            "type": "<",
+            "named": false
+          },
+          {
+            "type": ">",
+            "named": false
+          },
+          {
             "type": "NONE",
             "named": false
           },
@@ -2437,10 +2445,6 @@
           {
             "type": "italic",
             "named": false
-          },
-          {
-            "type": "keycode",
-            "named": true
           },
           {
             "type": "nocombine",
@@ -6391,11 +6395,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
