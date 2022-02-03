@@ -568,48 +568,54 @@ module.exports = grammar({
         ),
       ),
 
-    // All keycodes should be match case insensitively
+    // All keycodes should be match case insensitively (this makes it awful to read)
     _keycode_in: ($) =>
       choice(
         ...[
-          /[Nn][Uu][Ll]/,
-          /[Bb][Ss]/,
-          /[Tt][aA][bB]/,
-          /[Nn][Ll]/,
-          /[Cc][Rr]/,
-          /[Rr][eE][tT][uU][rR][nN]/,
-          /[kK]?[Ee][nN][tT][eE][rR]/,
-          /[Ee][sS][cC]/,
-          /[Ss][pP][aA][cC][eE]/,
-          /[lL][tT]/,
-          /[Bb][sS][lL][aA][sS][hH]/,
-          /[Bb][aA][rR]/,
-          /[kK]?[Dd][eE][lL]/,
-          /[xX]?[Cc][Ss][Ii]/,
-          /[Ee][Oo][Ll]/,
-          /[Ii][gG][nN][oO][rR][eE]/,
-          /[Nn][Oo][Pp]/,
-          /([kK]|([SsCc]-))?[Uu][pP]/,
-          /([kK]|([SsCc]-))?[Dd][oO][wW][nN]/,
-          /([kK]|([SsCc]-))?[Ll][eE][fF][tT]/,
-          /([kK]|([SsCc]-))?[Rr][iI][gG][hH][tT]/,
-          /([Ss]-)?[Ff][0-9]{1,2}/,
-          /[Hh][eE][lL][pP]/,
-          /[Uu][nN][dD][oO]/,
-          /[Ii][nN][sS][eE][rR][tT]/,
-          /[kK]?[Hh][oO][mM][eE]/,
-          /[kK]?[Ee][nN][dD]/,
-          /[kK]?[Pp][aA][gG][eE][Uu][pP]/,
-          /[kK]?[Pp][aA][gG][eE][Dd][oO][wW][nN]/,
-          /[kK][Pp][lL][uU][sS]/,
-          /[kK][Mm][iI][nN][uU][sS]/,
-          /[kK][Mm][uU][lL][tT][iI][pP][lL][yY]/,
-          /[kK][Dd][iI][vV][iI][dD][eE]/,
-          /[kK][Pp][oO][iI][nN][tT]/,
-          /[kK][Cc][oO][mM][mM][aA]/,
-          /[kK][Ee][qQ][uU][aA][lL]/,
-          /[kK][0-9]/,
-          /([SsCcMmAaDd]-)+\S/,
+          /[Nn][Uu][Ll]/,                             // Nul
+          /[Bb][Ss]/,                                 // BS
+          /[Tt][aA][bB]/,                             // Tab
+          /[Nn][Ll]/,                                 // NL
+          /[Cc][Rr]/,                                 // CR
+          /[Rr][eE][tT][uU][rR][nN]/,                 // Return
+          /[kK]?[Ee][nN][tT][eE][rR]/,                // [k]Enter
+          /[Ee][sS][cC]/,                             // Esc
+          /[Ss][pP][aA][cC][eE]/,                     // Space
+          /[lL][tT]/,                                 // lt
+          /[Bb][sS][lL][aA][sS][hH]/,                 // Bslash
+          /[Bb][aA][rR]/,                             // Bar
+          /[kK]?[Dd][eE][lL]/,                        // [k]Del
+          /[xX]?[Cc][Ss][Ii]/,                        // [x]CSI
+          /[Ee][Oo][Ll]/,                             // EOL
+          /[Ii][gG][nN][oO][rR][eE]/,                 // Ignore
+          /[Nn][Oo][Pp]/,                             // Nop
+          /([kK]|([SsCc]-))?[Uu][pP]/,                // [k|S-|C-]Up
+          /([kK]|([SsCc]-))?[Dd][oO][wW][nN]/,        // [k|S-|C-]Down
+          /([kK]|([SsCc]-))?[Ll][eE][fF][tT]/,        // [k|S-|C-]Left
+          /([kK]|([SsCc]-))?[Rr][iI][gG][hH][tT]/,    // [k|S-|C-]Right
+          /([SsCc]-)?[Ll][eE][fF][tT][Mm][oO][uU][sS][eE]/,     // <S|C>-LeftMouse
+          /([SsCc]-)?[Rr][iI][gG][hH][tT][Mm][oO][uU][sS][eE]/, // <S|C>-RightMouse
+          /([Ss]-)?[Ff][0-9]{1,2}/,                   // [S-]F<1-12>
+          /[Hh][eE][lL][pP]/,                         // Help
+          /[Uu][nN][dD][oO]/,                         // Undo
+          /[Ii][nN][sS][eE][rR][tT]/,                 // Insert
+          /[kK]?[Hh][oO][mM][eE]/,                    // [k]Home
+          /[kK]?[Ee][nN][dD]/,                        // [k]End
+          /[kK]?[Pp][aA][gG][eE][Uu][pP]/,            // [k]PageUp
+          /[kK]?[Pp][aA][gG][eE][Dd][oO][wW][nN]/,    // [k]PageDown
+          /[kK][Pp][lL][uU][sS]/,                     // kPlus
+          /[kK][Mm][iI][nN][uU][sS]/,                 // kMinus
+          /[kK][Mm][uU][lL][tT][iI][pP][lL][yY]/,     // kMultiply
+          /[kK][Dd][iI][vV][iI][dD][eE]/,             // kDivide
+          /[kK][Pp][oO][iI][nN][tT]/,                 // kPoint
+          /[kK][Cc][oO][mM][mM][aA]/,                 // kComma
+          /[kK][Ee][qQ][uU][aA][lL]/,                 // kEqual
+          /[kK][0-9]/,                                // k<0-9>
+          /(([SsCcMmAaDd]|[Aa][lL][tT])-)+\S/,        // (<S|C|M|A|D|Alt>-)+...
+          /([Ll][oO][cC][aA][lL])?[Ll][eE][aA][dD][eE][rR]/,  // [Local]Leader
+          /[Ss][Ii][Dd]/,                             // SID
+          /[Pp][lL][uU][gG]/,                         // Plug
+          /([Ss]-)?[Cc][hH][aA][rR]-(0[0-7]+|0[xX][0-9a-fA-F]+|[0-9]+)+/, // [S-]Char-...
         ].map(token.immediate),
       ),
     _immediate_keycode: ($) =>
