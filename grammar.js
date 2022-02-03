@@ -568,14 +568,63 @@ module.exports = grammar({
         ),
       ),
 
-    _keycode_in: ($) => seq(token.immediate(/C-\S/), token.immediate('>')),
-
+    // All keycodes should be match case insensitively
+    _keycode_in: ($) =>
+      choice(
+        ...[
+          /[Nn][Uu][Ll]/,
+          /[Bb][Ss]/,
+          /[Tt][aA][bB]/,
+          /[Nn][Ll]/,
+          /[Cc][Rr]/,
+          /[Rr][eE][tT][uU][rR][nN]/,
+          /[kK]?[Ee][nN][tT][eE][rR]/,
+          /[Ee][sS][cC]/,
+          /[Ss][pP][aA][cC][eE]/,
+          /[lL][tT]/,
+          /[Bb][sS][lL][aA][sS][hH]/,
+          /[Bb][aA][rR]/,
+          /[kK]?[Dd][eE][lL]/,
+          /[xX]?[Cc][Ss][Ii]/,
+          /[Ee][Oo][Ll]/,
+          /[Ii][gG][nN][oO][rR][eE]/,
+          /[Nn][Oo][Pp]/,
+          /([kK]|([SsCc]-))?[Uu][pP]/,
+          /([kK]|([SsCc]-))?[Dd][oO][wW][nN]/,
+          /([kK]|([SsCc]-))?[Ll][eE][fF][tT]/,
+          /([kK]|([SsCc]-))?[Rr][iI][gG][hH][tT]/,
+          /([Ss]-)?[Ff][0-9]{1,2}/,
+          /[Hh][eE][lL][pP]/,
+          /[Uu][nN][dD][oO]/,
+          /[Ii][nN][sS][eE][rR][tT]/,
+          /[kK]?[Hh][oO][mM][eE]/,
+          /[kK]?[Ee][nN][dD]/,
+          /[kK]?[Pp][aA][gG][eE][Uu][pP]/,
+          /[kK]?[Pp][aA][gG][eE][Dd][oO][wW][nN]/,
+          /[kK][Pp][lL][uU][sS]/,
+          /[kK][Mm][iI][nN][uU][sS]/,
+          /[kK][Mm][uU][lL][tT][iI][pP][lL][yY]/,
+          /[kK][Dd][iI][vV][iI][dD][eE]/,
+          /[kK][Pp][oO][iI][nN][tT]/,
+          /[kK][Cc][oO][mM][mM][aA]/,
+          /[kK][Ee][qQ][uU][aA][lL]/,
+          /[kK][0-9]/,
+          /([SsCcMmAaDd]-)+\S/,
+        ].map(token.immediate),
+      ),
     _immediate_keycode: ($) =>
-      alias(seq(token.immediate('<'), $._keycode_in), $.keycode),
-    keycode: ($) => seq('<', $._keycode_in),
+      seq(token.immediate('<'), $._keycode_in, token.immediate('>')),
+    keycode: ($) => seq('<', $._keycode_in, token.immediate('>')),
 
-    _map_lhs: ($) => keys($, /[^\n ]+/),
-    _map_rhs: ($) => keys($, /[^\s|]([^|\n]|\\\|)*/),
+    _map_lhs: ($) => keys($, /\S/),
+    _map_rhs: ($) => keys($, /[^\s|]/, /[^|\n]/),
+      // choice(
+        // seq(
+        //   choice(':', alias(/<CMD>/, $.keycode)),
+        //   $._statement, optional(seq('\|', $._statement)),
+        //   alias(/<CR>/, $.keycode)
+        // ),
+      // ),
 
     // :h :highlight
 
@@ -1358,9 +1407,21 @@ function syn_sync_method(arg, ...args) {
 }
 
 
-function keys($, allowed) {
+function keys($, allowed_first, allowed_after=allowed_first) {
   return seq(
-    choice(allowed, $.keycode),
-    repeat(choice(token.immediate(allowed), $._immediate_keycode)),
+    choice(
+      allowed_first,
+      '<',
+      seq('\\', /./),
+      $.keycode,
+    ),
+    repeat(
+      choice(
+        token.immediate(allowed_after),
+        token.immediate('<'),
+        seq(token.immediate('\\'), token.immediate(/./)),
+        alias($._immediate_keycode, $.keycode),
+      ),
+    )
   );
 }
