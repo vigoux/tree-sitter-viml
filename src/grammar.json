@@ -138,7 +138,19 @@
             },
             {
               "type": "SYMBOL",
+              "name": "echon_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "echohl_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "echomsg_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "echoerr_statement"
             },
             {
               "type": "SYMBOL",
@@ -2202,6 +2214,45 @@
         }
       ]
     },
+    "echon_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_echon"
+          },
+          "named": false,
+          "value": "echon"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        }
+      ]
+    },
+    "echohl_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_echohl"
+          },
+          "named": false,
+          "value": "echohl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hl_group"
+        }
+      ]
+    },
     "echomsg_statement": {
       "type": "SEQ",
       "members": [
@@ -2213,6 +2264,27 @@
           },
           "named": false,
           "value": "echomsg"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        }
+      ]
+    },
+    "echoerr_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_echoerr"
+          },
+          "named": false,
+          "value": "echoerr"
         },
         {
           "type": "REPEAT",
@@ -9280,7 +9352,19 @@
     },
     {
       "type": "SYMBOL",
+      "name": "_echon"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_echohl"
+    },
+    {
+      "type": "SYMBOL",
       "name": "_echomsg"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_echoerr"
     },
     {
       "type": "SYMBOL",

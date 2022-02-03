@@ -60,7 +60,10 @@ module.exports = grammar({
     $._autocmd,
     $._silent,
     $._echo,
+    $._echon,
+    $._echohl,
     $._echomsg,
+    $._echoerr,
     $._map,
     $._nmap,
     $._vmap,
@@ -129,7 +132,10 @@ module.exports = grammar({
         $.call_statement,
         $.execute_statement,
         $.echo_statement,
+        $.echon_statement,
+        $.echohl_statement,
         $.echomsg_statement,
+        $.echoerr_statement,
         $.try_statement,
         $.throw_statement,
         $.autocmd_statement,
@@ -452,7 +458,10 @@ module.exports = grammar({
     call_statement: ($) => seq('call', $.call_expression),
 
     echo_statement: ($) => echo_variant($, 'echo'),
+    echon_statement: ($) => echo_variant($, 'echon'),
+    echohl_statement: ($) => seq(tokalias($, 'echohl'), $.hl_group),
     echomsg_statement: ($) => echo_variant($, 'echomsg'),
+    echoerr_statement: ($) => echo_variant($, 'echoerr'),
 
     execute_statement: ($) =>
       command($, 'execute', repeat1($._expression)),
