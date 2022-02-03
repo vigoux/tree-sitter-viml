@@ -865,12 +865,12 @@ module.exports = grammar({
     _sign_define_arg_text: ($) => seq($._printable, optional($._printable)),
     _sign_define_argument: ($) =>
       choice(
-        // FIXME: use filename node when filename is merged
         key_val_arg('icon', optional($.filename)),
         key_val_arg('linehl', optional($.hl_group)),
         key_val_arg('numhl', optional($.hl_group)),
         key_val_arg('text', optional(alias($._sign_define_arg_text, $.text))),
         key_val_arg('texthl', optional($.hl_group)),
+        key_val_arg('culhl', optional($.hl_group)),
       ),
 
     _sign_define: ($) =>
@@ -910,7 +910,6 @@ module.exports = grammar({
     // :h sign-place-list
     _sign_place_list_argument: ($) =>
       choice(
-        // TODO: replace with proper filename when merged
         key_val_arg('file', $.filename),
         key_val_arg('buffer', $.integer_literal),
         key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
