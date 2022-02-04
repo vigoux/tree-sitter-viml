@@ -298,3 +298,19 @@ endfunction
     (body
       (echo_statement
         (string_literal)))))
+
+================================================================================
+function with curly-brace
+================================================================================
+
+fun my_func_{func_end}()
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier
+        (identifier))
+      (parameters))))

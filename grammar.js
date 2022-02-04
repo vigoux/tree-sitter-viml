@@ -23,7 +23,7 @@ PREC = {
 module.exports = grammar({
   name: 'vim',
 
-  word: ($) => $.identifier,
+  word: ($) => $.keyword,
 
   conflicts: ($) => [
     [$.binary_operation, $.unary_operation, $.field_expression],
@@ -367,12 +367,36 @@ module.exports = grammar({
         alias(token.immediate(/[a-zA-Z_](\w|#)*/), $.identifier),
         alias(token.immediate(/[0-9]+/), $.integer_literal))),
 
-    identifier: ($) => /[a-zA-Z_](\w|#)*/,
-
+    _curly_braces_name_expression: ($) =>
+      seq(
+        '{',
+        $._expression,
+        '}'
+      ),
+    _immediate_curly_braces_name_expression: ($) =>
+      seq(
+        token.immediate('{'),
+        $._expression,
+        '}'
+      ),
+    identifier: ($) =>
+      seq(
+        choice(
+          /[a-zA-Z_]/,
+          $._curly_braces_name_expression,
+        ),
+        repeat(
+          choice(
+            token.immediate(/(\w|#)+/),
+            $._immediate_curly_braces_name_expression,
+          ),
+        ),
+      ),
     _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
 
-    _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
+    keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
+    _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
     let_statement: ($) =>
       seq(
         'let',

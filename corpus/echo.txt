@@ -77,3 +77,26 @@ echomsg "foobar"
 (script_file
   (echomsg_statement
     (string_literal)))
+
+================================================================================
+echo curly-braces
+================================================================================
+
+echo my_{adverb}_{adjective}_message
+echo my_{ad{end_of_word}}_message
+echo c{foo}d
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (echo_statement
+    (identifier
+      (identifier)
+      (identifier)))
+  (echo_statement
+    (identifier
+      (identifier
+        (identifier))))
+  (echo_statement
+    (identifier
+      (identifier))))
