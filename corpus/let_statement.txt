@@ -187,3 +187,30 @@ let l:foo = get(a:, 3)
       (identifier)
       (scope_dict)
       (integer_literal))))
+
+================================================================================
+Let curly-braces identifier
+================================================================================
+
+let foo_{bar}_baz = "text"
+let foo_{bar}_baz_{buz} = "text"
+let nested_{iden{&opt}}_id = "text"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier
+      (identifier))
+    (string_literal))
+  (let_statement
+    (identifier
+      (identifier)
+      (identifier))
+    (string_literal))
+  (let_statement
+    (identifier
+      (identifier
+        (option
+          (option_name))))
+    (string_literal)))
