@@ -1014,7 +1014,7 @@
           "name": "action",
           "content": {
             "type": "PATTERN",
-            "value": "[a-zA-Z=]"
+            "value": "[a-zA-Z=<>]"
           }
         }
       ]

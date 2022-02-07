@@ -10215,7 +10215,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 517:
       if (lookahead == '\t' ||
           lookahead == ' ') SKIP(517)
-      if (lookahead == '=' ||
+      if (('<' <= lookahead && lookahead <= '>') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(705);
       END_STATE();

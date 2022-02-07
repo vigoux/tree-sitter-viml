@@ -310,7 +310,7 @@ module.exports = grammar({
       seq(
         optional($.integer_literal),
         tokalias($, 'wincmd'),
-        field('action', /[a-zA-Z=]/),
+        field('action', /[a-zA-Z=<>]/),
       ),
 
     source_statement: ($) =>
