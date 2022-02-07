@@ -367,6 +367,10 @@ bool try_lex_keyword(char *possible, keyword keyword) {
     }
   }
 
+  // The mandatory part is not complete
+  if (keyword.mandat[i] && !possible[i])
+    return false;
+
   size_t mandat_len = i;
   // Now try lexing optional part
   for (size_t i = 0; keyword.opt[i] && possible[mandat_len + i]; i++) {
