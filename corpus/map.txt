@@ -257,6 +257,7 @@ Map included bar
 
 map a b\|b
 nnoremap a :echo 1\|echo 2<Cr>
+vmap <Leader>a <cmd>echo "statement1"\|echo "statement2"<cr>
 
 --------------------------------------------------------------------------------
 
@@ -267,6 +268,20 @@ nnoremap a :echo 1\|echo 2<Cr>
   (map_statement
     (map_side)
     (map_side
+      (echo_statement
+        (integer_literal))
+      (echo_statement
+        (integer_literal))
+      (keycode)))
+  (map_statement
+    (map_side
+      (keycode))
+    (map_side
+      (keycode)
+      (echo_statement
+        (string_literal))
+      (echo_statement
+        (string_literal))
       (keycode))))
 
 ================================================================================
