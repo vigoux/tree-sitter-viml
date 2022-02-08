@@ -3131,7 +3131,171 @@
       "required": false,
       "types": [
         {
+          "type": "augroup_statement",
+          "named": true
+        },
+        {
+          "type": "autocmd_statement",
+          "named": true
+        },
+        {
+          "type": "bang_filter_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
+          "named": true
+        },
+        {
+          "type": "colorscheme_statement",
+          "named": true
+        },
+        {
+          "type": "comclear_statement",
+          "named": true
+        },
+        {
+          "type": "delcommand_statement",
+          "named": true
+        },
+        {
+          "type": "echo_statement",
+          "named": true
+        },
+        {
+          "type": "echomsg_statement",
+          "named": true
+        },
+        {
+          "type": "execute_statement",
+          "named": true
+        },
+        {
+          "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "global_statement",
+          "named": true
+        },
+        {
+          "type": "highlight_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "lua_statement",
+          "named": true
+        },
+        {
+          "type": "map_statement",
+          "named": true
+        },
+        {
+          "type": "normal_statement",
+          "named": true
+        },
+        {
+          "type": "perl_statement",
+          "named": true
+        },
+        {
+          "type": "python_statement",
+          "named": true
+        },
+        {
+          "type": "range_statement",
+          "named": true
+        },
+        {
+          "type": "register_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "ruby_statement",
+          "named": true
+        },
+        {
+          "type": "runtime_statement",
+          "named": true
+        },
+        {
+          "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "setlocal_statement",
+          "named": true
+        },
+        {
+          "type": "sign_statement",
+          "named": true
+        },
+        {
+          "type": "silent_statement",
+          "named": true
+        },
+        {
+          "type": "source_statement",
+          "named": true
+        },
+        {
+          "type": "startinsert_statement",
+          "named": true
+        },
+        {
+          "type": "stopinsert_statement",
+          "named": true
+        },
+        {
+          "type": "syntax_statement",
+          "named": true
+        },
+        {
+          "type": "throw_statement",
+          "named": true
+        },
+        {
+          "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unlet_statement",
+          "named": true
+        },
+        {
+          "type": "user_command",
+          "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
+        },
+        {
+          "type": "wincmd_statement",
           "named": true
         }
       ]
@@ -6395,11 +6559,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
@@ -6559,11 +6723,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "lc",

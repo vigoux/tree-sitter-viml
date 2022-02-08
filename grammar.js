@@ -623,14 +623,15 @@ module.exports = grammar({
     keycode: ($) => seq('<', $._keycode_in, token.immediate('>')),
 
     _map_lhs: ($) => keys($, /\S/),
-    _map_rhs: ($) => keys($, /[^\s|]/, /[^|\n]/),
-      // choice(
-        // seq(
-        //   choice(':', alias(/<CMD>/, $.keycode)),
-        //   $._statement, optional(seq('\|', $._statement)),
-        //   alias(/<CR>/, $.keycode)
-        // ),
-      // ),
+    _map_rhs: ($) =>
+      choice(
+        keys($, /[^\s|]/, /[^|\n]/),
+        seq(
+          choice(':', alias(/<[Cc][Mm][Dd]>/, $.keycode)),
+          $._statement, optional(seq('\\|', $._statement)),
+          alias(/<[Cc][Rr]>/, $.keycode)
+        ),
+      ),
 
     // :h :highlight
 
@@ -1298,7 +1299,7 @@ module.exports = grammar({
       sep1($._pattern_concat, '\\&'),
 
     pattern: ($) =>
-      sep1($._pattern_branch, '\\|'),
+      prec.left(sep1($._pattern_branch, '\\|')),
 
     env_variable: ($) => seq('$', $.identifier),
 
