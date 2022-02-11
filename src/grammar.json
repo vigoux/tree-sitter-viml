@@ -6211,6 +6211,10 @@
         }
       ]
     },
+    "_syn_keyword_identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9\\[\\]_-]+"
+    },
     "_syn_keyword": {
       "type": "SEQ",
       "members": [
@@ -6241,8 +6245,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z0-9\\[\\]_]+"
+            "type": "SYMBOL",
+            "name": "_syn_keyword_identifier"
           },
           "named": true,
           "value": "keyword"
@@ -6264,8 +6268,8 @@
               {
                 "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "[a-zA-Z0-9\\[\\]_]+"
+                  "type": "SYMBOL",
+                  "name": "_syn_keyword_identifier"
                 },
                 "named": true,
                 "value": "keyword"

@@ -1036,16 +1036,17 @@ module.exports = grammar({
         ),
       ),
 
+    _syn_keyword_identifier: ($) => /[a-zA-Z0-9\[\]_-]+/,
     _syn_keyword: ($) =>
       sub_cmd(
         'keyword',
         $.hl_group,
         repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
         // The list of keyword cannot be empty, but we can have arguments anywhere on the line
-        alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
+        alias($._syn_keyword_identifier, $.keyword),
         repeat(choice(
           alias($._syn_arguments_keyword, $.syntax_argument),
-          alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
+          alias($._syn_keyword_identifier, $.keyword),
         )),
       ),
 
