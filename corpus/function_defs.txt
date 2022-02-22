@@ -312,5 +312,6 @@ endfunction
   (function_definition
     (function_declaration
       (identifier
-        (identifier))
+        (curly_braces_name
+          (identifier)))
       (parameters))))

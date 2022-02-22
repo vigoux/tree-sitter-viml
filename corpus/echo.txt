@@ -94,21 +94,29 @@ echo c{foo}d
 (script_file
   (echo_statement
     (identifier
-      (identifier)
-      (identifier)))
-  (echo_statement
-    (identifier
-      (identifier
+      (curly_braces_name
+        (identifier))
+      (curly_braces_name
         (identifier))))
   (echo_statement
     (identifier
-      (identifier)))
+      (curly_braces_name
+        (identifier
+          (curly_braces_name
+            (identifier))))))
   (echo_statement
     (identifier
-      (identifier)))
+      (curly_braces_name
+        (identifier))))
   (echo_statement
     (identifier
-      (identifier)))
+      (curly_braces_name
+        (identifier))))
   (echo_statement
     (identifier
-      (identifier))))
+      (curly_braces_name
+        (identifier))))
+  (echo_statement
+    (identifier
+      (curly_braces_name
+        (identifier)))))

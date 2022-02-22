@@ -383,12 +383,12 @@ module.exports = grammar({
       seq(
         choice(
           /[a-zA-Z_]/,
-          $._curly_braces_name_expression,
+          alias($._curly_braces_name_expression, $.curly_braces_name),
         ),
         repeat(
           choice(
             token.immediate(/(\w|#)+/),
-            $._immediate_curly_braces_name_expression,
+            alias($._immediate_curly_braces_name_expression, $.curly_braces_name),
           ),
         ),
       ),

@@ -26,7 +26,8 @@ call function_{name}(ab, bc, cd)
   (call_statement
     (call_expression
       (identifier
-        (identifier))
+        (curly_braces_name
+          (identifier)))
       (identifier)
       (identifier)
       (identifier))))

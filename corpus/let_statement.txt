@@ -201,16 +201,21 @@ let nested_{iden{&opt}}_id = "text"
 (script_file
   (let_statement
     (identifier
-      (identifier))
+      (curly_braces_name
+        (identifier)))
     (string_literal))
   (let_statement
     (identifier
-      (identifier)
-      (identifier))
+      (curly_braces_name
+        (identifier))
+      (curly_braces_name
+        (identifier)))
     (string_literal))
   (let_statement
     (identifier
-      (identifier
-        (option
-          (option_name))))
+      (curly_braces_name
+        (identifier
+          (curly_braces_name
+            (option
+              (option_name))))))
     (string_literal)))

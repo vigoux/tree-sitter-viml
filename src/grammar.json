@@ -1714,8 +1714,13 @@
               "value": "[a-zA-Z_]"
             },
             {
-              "type": "SYMBOL",
-              "name": "_curly_braces_name_expression"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_curly_braces_name_expression"
+              },
+              "named": true,
+              "value": "curly_braces_name"
             }
           ]
         },
@@ -1732,8 +1737,13 @@
                 }
               },
               {
-                "type": "SYMBOL",
-                "name": "_immediate_curly_braces_name_expression"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_immediate_curly_braces_name_expression"
+                },
+                "named": true,
+                "value": "curly_braces_name"
               }
             ]
           }
