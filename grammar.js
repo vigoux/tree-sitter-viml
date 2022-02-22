@@ -189,7 +189,7 @@ module.exports = grammar({
 
     scope_dict: ($) => choice($._scope_dict, 'a:'),
 
-    normal_statement: ($) => range_command($, 'normal', alias(/.*/, $.commands)),
+    normal_statement: ($) => bang_range_command($, 'normal', alias(/ .*/, $.commands)),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
     comclear_statement: ($) => tokalias($, "comclear"),
