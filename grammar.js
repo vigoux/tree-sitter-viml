@@ -654,7 +654,7 @@ module.exports = grammar({
     _syn_arguments_keyword: ($) =>
       choice(
         key_val_arg('conceal'),
-        key_val_arg('cchar', optional(token.immediate(/[^\t\n\v\f\r]/))),
+        key_val_arg('cchar', $._printable),
         key_val_arg('contained'),
         // FIXME: allow regex of hlgroups
         key_val_arg('containedin', optional($.hl_groups)),
