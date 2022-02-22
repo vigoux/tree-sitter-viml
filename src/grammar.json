@@ -3902,19 +3902,8 @@
               "type": "FIELD",
               "name": "val",
               "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "IMMEDIATE_TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[^\\t\\n\\v\\f\\r]"
-                    }
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_printable"
               }
             }
           ]
