@@ -312,3 +312,28 @@ map ><cr> >g>v<cr>
       (keycode))
     (map_side
       (keycode))))
+
+================================================================================
+Map with modifiers
+================================================================================
+
+map <C-s-CR> :echo new<CR>
+map <C-s-a> :echo new<CR>
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side
+      (keycode))
+    (map_side
+      (echo_statement
+        (identifier))
+      (keycode)))
+  (map_statement
+    (map_side
+      (keycode))
+    (map_side
+      (echo_statement
+        (identifier))
+      (keycode))))

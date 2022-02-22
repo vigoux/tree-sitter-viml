@@ -3254,6 +3254,13 @@
         }
       ]
     },
+    "_keycode_modifier": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "([SsCcMmAaDd]|[Aa][lL][tT])-"
+      }
+    },
     "_keycode_in": {
       "type": "CHOICE",
       "members": [
@@ -3534,13 +3541,6 @@
           "type": "IMMEDIATE_TOKEN",
           "content": {
             "type": "PATTERN",
-            "value": "(([SsCcMmAaDd]|[Aa][lL][tT])-)+\\S"
-          }
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
             "value": "([Ll][oO][cC][aA][lL])?[Ll][eE][aA][dD][eE][rR]"
           }
         },
@@ -3564,6 +3564,31 @@
             "type": "PATTERN",
             "value": "([Ss]-)?[Cc][hH][aA][rR]-(0[0-7]+|0[xX][0-9a-fA-F]+|[0-9]+)+"
           }
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_keycode_modifier"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\S"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_keycode_in"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -8722,7 +8747,7 @@
             },
             {
               "type": "PATTERN",
-              "value": "[/._+,#$%~=-]"
+              "value": "[\\/._+,#$%~=-]"
             },
             {
               "type": "PATTERN",
@@ -8763,7 +8788,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[/._+,#$%~=-]"
+                  "value": "[\\/._+,#$%~=-]"
                 }
               },
               {
@@ -9046,7 +9071,7 @@
     },
     "register": {
       "type": "PATTERN",
-      "value": "@[\"0-9a-zA-Z:.%#=*+_/-@]"
+      "value": "@[\"0-9a-zA-Z:.%#=*+_\\/-@]"
     },
     "option": {
       "type": "SEQ",
