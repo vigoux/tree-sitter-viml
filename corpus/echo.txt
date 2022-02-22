@@ -84,6 +84,9 @@ echo curly-braces
 
 echo my_{adverb}_{adjective}_message
 echo my_{ad{end_of_word}}_message
+echo {foo}bar
+echo baz{foo}
+echo {foo}
 echo c{foo}d
 
 --------------------------------------------------------------------------------
@@ -97,6 +100,15 @@ echo c{foo}d
     (identifier
       (identifier
         (identifier))))
+  (echo_statement
+    (identifier
+      (identifier)))
+  (echo_statement
+    (identifier
+      (identifier)))
+  (echo_statement
+    (identifier
+      (identifier)))
   (echo_statement
     (identifier
       (identifier))))
