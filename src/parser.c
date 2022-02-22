@@ -1044,8 +1044,8 @@ static const char * const ts_symbol_names[] = {
   [sym_bang_filter_statement] = "bang_filter_statement",
   [sym_scoped_identifier] = "scoped_identifier",
   [sym_argument] = "argument",
-  [sym__curly_braces_name_expression] = "_curly_braces_name_expression",
-  [sym__immediate_curly_braces_name_expression] = "_immediate_curly_braces_name_expression",
+  [sym__curly_braces_name_expression] = "curly_braces_name",
+  [sym__immediate_curly_braces_name_expression] = "curly_braces_name",
   [sym_identifier] = "identifier",
   [sym__ident] = "_ident",
   [sym__let_operator] = "_let_operator",
@@ -1646,7 +1646,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_scoped_identifier] = sym_scoped_identifier,
   [sym_argument] = sym_argument,
   [sym__curly_braces_name_expression] = sym__curly_braces_name_expression,
-  [sym__immediate_curly_braces_name_expression] = sym__immediate_curly_braces_name_expression,
+  [sym__immediate_curly_braces_name_expression] = sym__curly_braces_name_expression,
   [sym_identifier] = sym_identifier,
   [sym__ident] = sym__ident,
   [sym__let_operator] = sym__let_operator,
@@ -3504,11 +3504,11 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [sym__curly_braces_name_expression] = {
-    .visible = false,
+    .visible = true,
     .named = true,
   },
   [sym__immediate_curly_braces_name_expression] = {
-    .visible = false,
+    .visible = true,
     .named = true,
   },
   [sym_identifier] = {
