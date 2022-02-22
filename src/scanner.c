@@ -99,7 +99,7 @@ typedef struct {
 
 keyword keywords[] = {
   KEYWORD(FUNCTION, "fu", "nction", false),
-  KEYWORD(ENDFUNCTION, "end", "function", false),
+  KEYWORD(ENDFUNCTION, "endf", "unction", false),
   KEYWORD(ENDFOR, "endfo", "r", false),
   KEYWORD(ENDWHILE, "endw", "hile", false),
   KEYWORD(ENDIF, "en", "dif", false),
