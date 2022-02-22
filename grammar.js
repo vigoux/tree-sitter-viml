@@ -611,6 +611,7 @@ module.exports = grammar({
       ),
 
     // All keycodes should be match case insensitively (this makes it awful to read)
+    _keycode_modifier: ($) => token.immediate(/([SsCcMmAaDd]|[Aa][lL][tT])-/),
     _keycode_in: ($) =>
       choice(
         ...[
@@ -653,12 +654,12 @@ module.exports = grammar({
           /[kK][Cc][oO][mM][mM][aA]/,                 // kComma
           /[kK][Ee][qQ][uU][aA][lL]/,                 // kEqual
           /[kK][0-9]/,                                // k<0-9>
-          /(([SsCcMmAaDd]|[Aa][lL][tT])-)+\S/,        // (<S|C|M|A|D|Alt>-)+...
           /([Ll][oO][cC][aA][lL])?[Ll][eE][aA][dD][eE][rR]/,  // [Local]Leader
           /[Ss][Ii][Dd]/,                             // SID
           /[Pp][lL][uU][gG]/,                         // Plug
           /([Ss]-)?[Cc][hH][aA][rR]-(0[0-7]+|0[xX][0-9a-fA-F]+|[0-9]+)+/, // [S-]Char-...
         ].map(token.immediate),
+        seq($._keycode_modifier, choice(token.immediate(/\S/), $._keycode_in)),        // (<S|C|M|A|D|Alt>-)+...
       ),
     _immediate_keycode: ($) =>
       seq(token.immediate('<'), $._keycode_in, token.immediate('>')),
