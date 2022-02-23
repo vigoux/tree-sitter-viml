@@ -1368,22 +1368,24 @@ function tokalias(gram, name) {
   return alias(gram['_' + name], name);
 }
 
+function _cmd_range($) {
+  return seq(field('range', alias($._range, $.range)), optional(':'))
+}
 function range_command($, cmd, ...args) {
   return seq(
-    optional(field('range', alias($._range, $.range))),
+    optional(_cmd_range($)),
     tokalias($, cmd),
     ...args,
   );
 }
-
 function bang_range_command($, cmd, ...args) {
   return seq(
-    optional(field('range', alias($._range, $.range))),
-    maybe_bang($, tokalias($, cmd)),
+    optional(_cmd_range($)),
+    tokalias($, cmd),
+    optional($.bang),
     ...args,
   );
 }
-
 function command($, cmd, ...args) {
   return seq(
     tokalias($, cmd),
