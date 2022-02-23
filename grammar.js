@@ -58,6 +58,7 @@ module.exports = grammar({
     $._catch,
     $._finally,
     $._endtry,
+    $._const,
     $._normal,
     $._return,
     $._perl,
@@ -131,6 +132,7 @@ module.exports = grammar({
         $.function_definition,
         $.let_statement,
         $.unlet_statement,
+        $.const_statement,
         $.set_statement,
         $.setlocal_statement,
         $.return_statement,
@@ -264,7 +266,7 @@ module.exports = grammar({
     for_loop: ($) =>
       seq(
         'for',
-        field('variable', choice($._ident, $.list)),
+        field('variable', choice($._ident, $.list_assignment)),
         'in',
         field('iter', $._expression),
         alias(optional($._separated_statements), $.body),
@@ -425,9 +427,15 @@ module.exports = grammar({
     keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
-    let_statement: ($) =>
+    _global_scope: ($) => 'g:',
+    _assignment_variable: ($) =>
+      choice(
+        $.identifier,
+        $.scope_dict,
+      ),
+
+    _let_assignment: ($) =>
       seq(
-        tokalias($, 'let'),
         choice(
           $._ident,
           $.env_variable,
@@ -435,10 +443,36 @@ module.exports = grammar({
           $.option,
           $.index_expression,
           $.field_expression,
-          $.list,
+          $.list_assignment,
         ),
         $._let_operator,
         $._expression,
+      ),
+    let_statement: ($) =>
+      seq(
+        tokalias($, 'let'),
+        choice(
+          $._let_assignment,
+          repeat($._assignment_variable),
+        )
+      ),
+
+    _const_assignment: ($) =>
+      seq(
+        choice(
+          $._ident,
+          $.list_assignment,
+        ),
+        '=',
+        $._expression,
+      ),
+    const_statement: ($) =>
+      command($,
+        'const',
+        choice(
+          $._const_assignment,
+          repeat($._assignment_variable),
+        )
       ),
 
     option_name: ($) => choice(/[a-z]+/, seq('t_', /[a-zA-Z0-9]+/)),
@@ -1245,6 +1279,8 @@ module.exports = grammar({
       ),
 
     list: ($) => seq('[', commaSep($._expression), optional(','), ']'),
+    // Trailing commas are not allowed in assignments, but `; <ident>` are
+    list_assignment: ($) => seq('[', commaSep($._expression), optional(seq(';', $._expression)), ']'),
 
     index_expression: ($) =>
       prec(
