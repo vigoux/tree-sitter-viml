@@ -1036,7 +1036,24 @@ module.exports = grammar({
         ),
       ),
 
-    _syn_keyword_identifier: ($) => /[a-zA-Z0-9\[\]_-]+/,
+    // Any ascii non-blanck printable character (no unicode)
+    _syn_keyword_identifier: ($) =>
+        choice(
+          seq(/[!-~]/, repeat(token.immediate(/[!-~]/))),
+          seq(
+            choice(
+              'conceal',
+              'contained',
+              'transparent',
+              'skipwhite',
+              'skipnl',
+              'skipempty',
+            ),
+            token.immediate('['),
+            repeat(token.immediate(/[!-~]/)),
+            token.immediate(']'),
+          ),
+        ),
     _syn_keyword: ($) =>
       sub_cmd(
         'keyword',
