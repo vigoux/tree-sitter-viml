@@ -186,30 +186,15 @@ Lists
 ================================================================================
 
 let list = ['a', 'b']
-let list = ['a', 'b',]
+
 let list = [
   \ 'a',
   \ 'b'
   \]
 
-let list = [
-  \ 'a',
-  \ 'b',
-  \]
-
 --------------------------------------------------------------------------------
 
 (script_file
-  (let_statement
-    (identifier)
-    (list
-      (string_literal)
-      (string_literal)))
-  (let_statement
-    (identifier)
-    (list
-      (string_literal)
-      (string_literal)))
   (let_statement
     (identifier)
     (list
