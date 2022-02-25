@@ -23,7 +23,7 @@ enum TokenType {
   CMD_SEPARATOR,
   LINE_CONTINUATION,
   EMBEDDED_SCRIPT_START,
-  EMDEDDED_SCRIPT_END,
+  EMBEDDED_SCRIPT_END,
   SEP_FIRST,
   SEP,
   SCOPE_DICT,
@@ -521,10 +521,17 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[EMBEDDED_SCRIPT_START] && lexer->lookahead == '<') {
     lexer->result_symbol = EMBEDDED_SCRIPT_START;
     return try_lex_script_start(s, lexer);
-  } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
+  } else if (valid_symbols[EMBEDDED_SCRIPT_END]) {
     if (s->marker_len == 0) {
-      // This must be an error
-      // FIXME: check for `.` instead
+      // Either an error or an empty marker, which means terminated
+      // by a line containing only a dot
+      if (lexer->lookahead == '.') {
+        advance(lexer, false);
+        if (lexer->lookahead == '\n') {
+          lexer->result_symbol = EMBEDDED_SCRIPT_END;
+          return true;
+        }
+      }
       return false;
     }
 
@@ -537,7 +544,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
 
     // Found the end marker
-    lexer->result_symbol = EMDEDDED_SCRIPT_END;
+    lexer->result_symbol = EMBEDDED_SCRIPT_END;
     s->marker_len = 0;
     memset(s->script_marker, '\0', SCRIPT_MARKER_LEN);
 
