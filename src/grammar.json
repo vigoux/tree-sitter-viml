@@ -718,7 +718,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "script"
+              "name": "_script_definition"
             }
           ]
         }
@@ -745,7 +745,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "script"
+              "name": "_script_definition"
             }
           ]
         }
@@ -772,7 +772,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "script"
+              "name": "_script_definition"
             }
           ]
         }
@@ -794,7 +794,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "script"
+              "name": "_script_definition"
             }
           ]
         }
@@ -826,6 +826,13 @@
       ]
     },
     "script": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_script_line"
+      }
+    },
+    "_script_definition": {
       "type": "SEQ",
       "members": [
         {
@@ -837,11 +844,16 @@
           "name": "_cmd_separator"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_script_line"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "script"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",

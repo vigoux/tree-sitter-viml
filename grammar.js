@@ -211,21 +211,24 @@ module.exports = grammar({
     colorscheme_statement: ($) =>
       command($, 'colorscheme', optional(alias($.filename, $.name))),
 
-    lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
-    ruby_statement: ($) => command($, 'ruby', choice($.chunk, $.script)),
+    lua_statement: ($) => seq('lua', choice($.chunk, $._script_definition)),
+    ruby_statement: ($) => command($, 'ruby', choice($.chunk, $._script_definition)),
     python_statement: ($) =>
-      command($, 'python', choice($.chunk, $.script)),
-    perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
+      command($, 'python', choice($.chunk, $._script_definition)),
+    perl_statement: ($) => seq('perl', choice($.chunk, $._script_definition)),
 
     chunk: ($) => /[^\n]+/,
 
     _script_line: ($) => seq(optional($.chunk), '\n'),
 
     script: ($) =>
+      repeat1($._script_line),
+
+    _script_definition: ($) =>
       seq(
         $._embedded_script_start,
         $._cmd_separator,
-        repeat($._script_line),
+        optional($.script),
         $._embedded_script_end,
       ),
 

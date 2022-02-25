@@ -524,6 +524,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
   } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
     if (s->marker_len == 0) {
       // This must be an error
+      // FIXME: check for `.` instead
       return false;
     }
 
