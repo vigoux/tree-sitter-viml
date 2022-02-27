@@ -28,6 +28,7 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.binary_operation, $.unary_operation, $.field_expression],
     [$.binary_operation, $.field_expression],
+    [$.list, $._pattern_atom],
   ],
 
   externals: ($) => [
@@ -506,7 +507,7 @@ module.exports = grammar({
     _range_explicit: ($) =>
       seq(
         field('start', $._range_marker),
-        optional(seq(',', field('end', $._range_marker))),
+        optional(seq(choice(',', ';'), field('end', $._range_marker))),
       ),
 
     _range_marker: ($) =>
@@ -515,7 +516,8 @@ module.exports = grammar({
         $.current_line,
         $.next_line,
         $.last_line,
-        $.pattern,
+        seq('/', $.pattern, optional(token.immediate('/'))),
+        seq('?', $.pattern, optional(token.immediate('?'))),
         $.previous_pattern,
         $.mark,
       ),

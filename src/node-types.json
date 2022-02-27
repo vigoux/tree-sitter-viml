@@ -3723,9 +3723,17 @@
     "named": true,
     "fields": {
       "end": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
           {
             "type": "current_line",
             "named": true
@@ -3757,9 +3765,17 @@
         ]
       },
       "start": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
           {
             "type": "current_line",
             "named": true
@@ -3807,9 +3823,17 @@
     "named": true,
     "fields": {
       "end": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
           {
             "type": "current_line",
             "named": true
@@ -3841,9 +3865,17 @@
         ]
       },
       "start": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "/",
+            "named": false
+          },
+          {
+            "type": "?",
+            "named": false
+          },
           {
             "type": "current_line",
             "named": true
@@ -6219,6 +6251,10 @@
     "named": false
   },
   {
+    "type": ";",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -6584,11 +6620,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
@@ -6748,11 +6784,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",
