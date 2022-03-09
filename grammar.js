@@ -39,7 +39,7 @@ module.exports = grammar({
     $._embedded_script_end,
     $._separator_first,
     $._separator,
-    $.scope_dict,
+    $._scope_dict,
     $.scope,
     $.string_literal,
     $.comment,
@@ -153,6 +153,8 @@ module.exports = grammar({
 
     return_statement: ($) =>
       command($, 'return', optional($._expression)),
+
+    scope_dict: ($) => choice($._scope_dict, 'a:'),
 
     normal_statement: ($) => range_command($, 'normal', alias(/.*/, $.commands)),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
@@ -357,7 +359,10 @@ module.exports = grammar({
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
 
-    argument: ($) => seq('a:', choice($.identifier, $.integer_literal)),
+    argument: ($) => seq('a:',
+      choice(
+        alias(token.immediate(/[a-zA-Z_](\w|#)*/), $.identifier),
+        alias(token.immediate(/[0-9]+/), $.integer_literal))),
 
     identifier: ($) => /[a-zA-Z_](\w|#)*/,
 

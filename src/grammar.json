@@ -254,6 +254,19 @@
         }
       ]
     },
+    "scope_dict": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_scope_dict"
+        },
+        {
+          "type": "STRING",
+          "value": "a:"
+        }
+      ]
+    },
     "normal_statement": {
       "type": "SEQ",
       "members": [
@@ -1622,12 +1635,28 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "identifier"
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[a-zA-Z_](\\w|#)*"
+                }
+              },
+              "named": true,
+              "value": "identifier"
             },
             {
-              "type": "SYMBOL",
-              "name": "integer_literal"
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[0-9]+"
+                }
+              },
+              "named": true,
+              "value": "integer_literal"
             }
           ]
         }
@@ -9018,7 +9047,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "scope_dict"
+      "name": "_scope_dict"
     },
     {
       "type": "SYMBOL",

@@ -4023,6 +4023,11 @@
     }
   },
   {
+    "type": "scope_dict",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "scoped_identifier",
     "named": true,
     "fields": {},
@@ -6559,11 +6564,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -6939,10 +6944,6 @@
   },
   {
     "type": "scope",
-    "named": true
-  },
-  {
-    "type": "scope_dict",
     "named": true
   },
   {

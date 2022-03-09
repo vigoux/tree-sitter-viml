@@ -169,3 +169,21 @@ let &g:path = &g:path . ',/usr/local/include'
         (scope)
         (option_name))
       (string_literal))))
+
+================================================================================
+Let argument scope
+================================================================================
+
+let l:foo = get(a:, 3)
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier))
+    (call_expression
+      (identifier)
+      (scope_dict)
+      (integer_literal))))
