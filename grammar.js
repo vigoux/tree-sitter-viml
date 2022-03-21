@@ -33,7 +33,7 @@ module.exports = grammar({
   externals: ($) => [
     $._no,
     $._inv,
-    $._cmd_separator,
+    $._newline_or_pipe,
     $._line_continuation,
     $._embedded_script_start,
     $._embedded_script_end,
@@ -103,8 +103,10 @@ module.exports = grammar({
   rules: {
     script_file: ($) => optional($._separated_statements),
 
+    _cmd_separator: ($) => choice($._newline_or_pipe, $.comment),
+
     _separated_statements: ($) => repeat1(
-      seq(optional($._statement), choice($._cmd_separator, $.comment))
+      seq(optional($._statement), $._cmd_separator)
     ),
 
     _statement: ($) => seq(repeat(':'), choice(
@@ -226,7 +228,7 @@ module.exports = grammar({
     script: ($) =>
       seq(
         $._embedded_script_start,
-        $._cmd_separator,
+        $._newline_or_pipe,
         repeat($._script_line),
         $._embedded_script_end,
       ),

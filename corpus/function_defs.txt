@@ -278,3 +278,23 @@ endfunction
       (parameters))
     (body
       (return_statement))))
+
+================================================================================
+Function def with comment
+================================================================================
+
+fun foo() " This is function foo
+  echo "bar"
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      (identifier)
+      (parameters))
+    (comment)
+    (body
+      (echo_statement
+        (string_literal)))))

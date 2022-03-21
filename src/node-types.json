@@ -841,6 +841,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "pattern",
           "named": true
         }
@@ -2111,6 +2115,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "function_declaration",
           "named": true
         }
@@ -2598,6 +2606,10 @@
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -5733,6 +5745,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "finally_statement",
           "named": true
         }
@@ -6053,11 +6069,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         }
       ]
