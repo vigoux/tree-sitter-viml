@@ -287,6 +287,10 @@
           "named": true
         },
         {
+          "type": "augroup_name",
+          "named": true
+        },
+        {
           "type": "bang",
           "named": true
         },
