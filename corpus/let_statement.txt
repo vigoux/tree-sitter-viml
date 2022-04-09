@@ -120,6 +120,7 @@ let l:efm = &errorformat
 let &path = &path . ',/usr/local/include'
 let &l:path = &l:path . ',/usr/local/include'
 let &g:path = &g:path . ',/usr/local/include'
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
 
 --------------------------------------------------------------------------------
 
@@ -168,7 +169,11 @@ let &g:path = &g:path . ',/usr/local/include'
       (option
         (scope)
         (option_name))
-      (string_literal))))
+      (string_literal)))
+  (let_statement
+    (option
+      (option_name))
+    (string_literal)))
 
 ================================================================================
 Let argument scope

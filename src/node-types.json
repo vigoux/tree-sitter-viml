@@ -3959,6 +3959,11 @@
     }
   },
   {
+    "type": "option_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "parameters",
     "named": true,
     "fields": {},
@@ -7022,11 +7027,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -7182,11 +7187,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "lc",
@@ -7327,10 +7332,6 @@
   {
     "type": "onoremap",
     "named": false
-  },
-  {
-    "type": "option_name",
-    "named": true
   },
   {
     "type": "perl",
@@ -7490,6 +7491,10 @@
   },
   {
     "type": "syntax",
+    "named": false
+  },
+  {
+    "type": "t_",
     "named": false
   },
   {
