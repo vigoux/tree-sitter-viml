@@ -420,7 +420,7 @@ module.exports = grammar({
         $._expression,
       ),
 
-    option_name: ($) => /[a-z]+/,
+    option_name: ($) => choice(/[a-z]+/, seq('t_', /[a-zA-Z0-9]+/)),
 
     no_option: ($) => seq($._no, $.option_name),
 
