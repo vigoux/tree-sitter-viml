@@ -308,6 +308,7 @@ module.exports = grammar({
     autocmd_statement: ($) =>
       seq(
         maybe_bang($, tokalias($, 'autocmd')),
+        optional(alias($.identifier, $.augroup_name)),
         optional(
           seq(
             $.au_event_list,

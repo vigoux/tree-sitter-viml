@@ -181,3 +181,20 @@ au BufWinEnter term://* echo "foo"
     (pattern)
     (echo_statement
       (string_literal))))
+
+================================================================================
+Autocommand with group
+================================================================================
+
+au augroup_name BufWinEnter term://* echo "foo"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (augroup_name)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (echo_statement
+      (string_literal))))
