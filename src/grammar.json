@@ -811,7 +811,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_lua"
+          },
+          "named": false,
           "value": "lua"
         },
         {
@@ -887,7 +892,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_perl"
+          },
+          "named": false,
           "value": "perl"
         },
         {
@@ -9535,6 +9545,14 @@
     {
       "type": "SYMBOL",
       "name": "_return"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_perl"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_lua"
     },
     {
       "type": "SYMBOL",
