@@ -220,7 +220,6 @@ delc CommandName
   (delcommand_statement
     (command_name)))
 
-
 ================================================================================
 Colon in commands
 ================================================================================
@@ -242,3 +241,18 @@ autocmd InsertLeave * :set norelnu
       (set_item
         (no_option
           (option_name))))))
+
+================================================================================
+Unknown builtin command
+================================================================================
+
+foo bar baz
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (unknown_builtin_statement
+    (unknown_command_name)
+    (arguments
+      (command_argument)
+      (command_argument))))
