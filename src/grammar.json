@@ -1958,10 +1958,6 @@
         }
       ]
     },
-    "_global_scope": {
-      "type": "STRING",
-      "value": "g:"
-    },
     "_assignment_variable": {
       "type": "CHOICE",
       "members": [

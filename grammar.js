@@ -427,7 +427,6 @@ module.exports = grammar({
     keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
-    _global_scope: ($) => 'g:',
     _assignment_variable: ($) =>
       choice(
         $.identifier,
