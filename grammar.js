@@ -100,6 +100,7 @@ module.exports = grammar({
     $._runtime,
     $._wincmd,
     $._sign,
+    $.unknown_command_name,
   ],
 
   extras: ($) => [$._line_continuation, /[\t ]/],
@@ -148,7 +149,6 @@ module.exports = grammar({
         $.syntax_statement,
         $.startinsert_statement,
         $.stopinsert_statement,
-        $.user_command,
         $.source_statement,
         $.global_statement,
         $.colorscheme_statement,
@@ -158,7 +158,15 @@ module.exports = grammar({
         $.runtime_statement,
         $.wincmd_statement,
         $.sign_statement,
+        $.unknown_builtin_statement,
+        $.user_command,
       )),
+
+    unknown_builtin_statement: ($) =>
+      seq(
+        maybe_bang($, $.unknown_command_name),
+        alias(repeat($.command_argument), $.arguments),
+      ),
 
     return_statement: ($) =>
       command($, 'return', optional($._expression)),
