@@ -50,6 +50,9 @@ module.exports = grammar({
     $._endfor,
     $._endwhile,
     $._endif,
+    $._try,
+    $._catch,
+    $._finally,
     $._endtry,
     $._normal,
     $._return,
@@ -291,7 +294,7 @@ module.exports = grammar({
 
     try_statement: ($) =>
       seq(
-        'try',
+        tokalias($, 'try'),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         repeat($.catch_statement),
@@ -303,14 +306,14 @@ module.exports = grammar({
 
     catch_statement: ($) =>
       seq(
-        'catch',
+        tokalias($, 'catch'),
         optional(alias($._au_pattern, $.pattern)),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
       ),
 
     finally_statement: ($) =>
-      seq('finally', alias(optional($._separated_statements), $.body)),
+      seq(tokalias($, 'finally'), alias(optional($._separated_statements), $.body)),
 
     throw_statement: ($) =>
       command($, 'throw', $._expression),
