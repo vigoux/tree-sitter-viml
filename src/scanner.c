@@ -93,6 +93,7 @@ enum TokenType {
   FILETYPE,
   LET,
   UNLET,
+  CALL,
   UNKNOWN_COMMAND,
   TOKENTYPE_NR,
 };
@@ -169,6 +170,7 @@ keyword keywords[] = {
   KEYWORD(FILETYPE, "filet", "ype", false),
   KEYWORD(LET, "let", "", false),
   KEYWORD(UNLET, "unl", "et", false),
+  KEYWORD(CALL, "cal", "l", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

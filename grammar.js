@@ -106,6 +106,7 @@ module.exports = grammar({
     $._filetype,
     $._let,
     $._unlet,
+    $._call,
     $.unknown_command_name,
   ],
 
@@ -470,7 +471,7 @@ module.exports = grammar({
     unlet_statement: ($) =>
       seq(maybe_bang($, tokalias($, 'unlet')), repeat1($._expression)),
 
-    call_statement: ($) => seq('call', $.call_expression),
+    call_statement: ($) => seq(tokalias($, 'call'), $.call_expression),
 
     echo_statement: ($) => echo_variant($, 'echo'),
     echon_statement: ($) => echo_variant($, 'echon'),
