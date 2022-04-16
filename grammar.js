@@ -49,6 +49,9 @@ module.exports = grammar({
     $._endfunction,
     $._endfor,
     $._endwhile,
+    $._if,
+    $._elseif,
+    $._else,
     $._endif,
     $._try,
     $._catch,
@@ -276,7 +279,7 @@ module.exports = grammar({
 
     if_statement: ($) =>
       seq(
-        'if',
+        tokalias($, 'if'),
         field('condition', $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
@@ -287,12 +290,12 @@ module.exports = grammar({
 
     elseif_statement: ($) =>
       seq(
-        'elseif',
+        tokalias($, 'elseif'),
         field('condition', $._expression),
         alias(optional($._separated_statements), $.body),
       ),
 
-    else_statement: ($) => seq('else', alias(optional($._separated_statements), $.body)),
+    else_statement: ($) => seq(tokalias($, 'else'), alias(optional($._separated_statements), $.body)),
 
     try_statement: ($) =>
       seq(
@@ -404,7 +407,7 @@ module.exports = grammar({
     identifier: ($) =>
       seq(
         choice(
-          /[a-zA-Z_]/,
+          /[a-zA-Z_]+/,
           alias($._curly_braces_name_expression, $.curly_braces_name),
         ),
         repeat(

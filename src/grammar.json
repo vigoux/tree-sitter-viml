@@ -1069,7 +1069,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_if"
+          },
+          "named": false,
           "value": "if"
         },
         {
@@ -1135,7 +1140,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_elseif"
+          },
+          "named": false,
           "value": "elseif"
         },
         {
@@ -1169,7 +1179,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_else"
+          },
+          "named": false,
           "value": "else"
         },
         {
@@ -1831,7 +1846,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "[a-zA-Z_]"
+              "value": "[a-zA-Z_]+"
             },
             {
               "type": "ALIAS",
@@ -9471,6 +9486,18 @@
     {
       "type": "SYMBOL",
       "name": "_endwhile"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_if"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_elseif"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_else"
     },
     {
       "type": "SYMBOL",
