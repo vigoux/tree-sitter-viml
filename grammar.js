@@ -48,6 +48,7 @@ module.exports = grammar({
     $._function,
     $._endfunction,
     $._endfor,
+    $._while,
     $._endwhile,
     $._if,
     $._elseif,
@@ -270,7 +271,7 @@ module.exports = grammar({
 
     while_loop: ($) =>
       seq(
-        'while',
+        tokalias($, 'while'),
         field('condition', $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
