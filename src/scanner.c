@@ -91,6 +91,7 @@ enum TokenType {
   WINCMD,
   SIGN,
   FILETYPE,
+  LET,
   UNLET,
   UNKNOWN_COMMAND,
   TOKENTYPE_NR,
@@ -166,6 +167,7 @@ keyword keywords[] = {
   KEYWORD(WINCMD, "winc", "md", false),
   KEYWORD(SIGN, "sig", "n", false),
   KEYWORD(FILETYPE, "filet", "ype", false),
+  KEYWORD(LET, "let", "", false),
   KEYWORD(UNLET, "unl", "et", false),
 };
 

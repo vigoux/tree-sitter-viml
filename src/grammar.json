@@ -1928,7 +1928,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_let"
+          },
+          "named": false,
           "value": "let"
         },
         {
@@ -9681,6 +9686,10 @@
     {
       "type": "SYMBOL",
       "name": "_filetype"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_let"
     },
     {
       "type": "SYMBOL",
