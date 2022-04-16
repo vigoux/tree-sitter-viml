@@ -60,6 +60,8 @@ module.exports = grammar({
     $._endtry,
     $._normal,
     $._return,
+    $._perl,
+    $._lua,
     $._ruby,
     $._python,
     $._throw,
@@ -241,11 +243,11 @@ module.exports = grammar({
     colorscheme_statement: ($) =>
       command($, 'colorscheme', optional(alias($.filename, $.name))),
 
-    lua_statement: ($) => seq('lua', choice($.chunk, $.script)),
+    lua_statement: ($) => command($, 'lua', choice($.chunk, $.script)),
     ruby_statement: ($) => command($, 'ruby', choice($.chunk, $.script)),
     python_statement: ($) =>
       command($, 'python', choice($.chunk, $.script)),
-    perl_statement: ($) => seq('perl', choice($.chunk, $.script)),
+    perl_statement: ($) => command($, 'perl', choice($.chunk, $.script)),
 
     chunk: ($) => /[^\n]+/,
 
