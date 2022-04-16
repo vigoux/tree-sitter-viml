@@ -87,6 +87,7 @@ enum TokenType {
   RUNTIME,
   WINCMD,
   SIGN,
+  UNKNOWN_COMMAND,
   TOKENTYPE_NR,
 };
 
@@ -594,12 +595,18 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     keyword[i] = '\0';
 
     // Now really try to find the keyword
-    for (enum TokenType t = TRIE_START; t < TOKENTYPE_NR; t++) {
+    for (enum TokenType t = TRIE_START; t < UNKNOWN_COMMAND; t++) {
       if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - TRIE_START])) {
         lexer->result_symbol = t;
         s->ignore_comments = keywords[t - TRIE_START].ignore_comments_after;
         return true;
       }
+    }
+
+    // This is quite possibly a keyword, we just don't know which one yet
+    if (valid_symbols[UNKNOWN_COMMAND]) {
+      lexer->result_symbol = UNKNOWN_COMMAND;
+      return true;
     }
 #undef KEYWORD_SIZE
   }

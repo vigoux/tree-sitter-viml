@@ -202,10 +202,6 @@
             },
             {
               "type": "SYMBOL",
-              "name": "user_command"
-            },
-            {
-              "type": "SYMBOL",
               "name": "source_statement"
             },
             {
@@ -239,8 +235,54 @@
             {
               "type": "SYMBOL",
               "name": "sign_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "unknown_builtin_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "user_command"
             }
           ]
+        }
+      ]
+    },
+    "unknown_builtin_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "unknown_command_name"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "bang"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "command_argument"
+            }
+          },
+          "named": true,
+          "value": "arguments"
         }
       ]
     },
@@ -9598,6 +9640,10 @@
     {
       "type": "SYMBOL",
       "name": "_sign"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "unknown_command_name"
     }
   ],
   "inline": [],

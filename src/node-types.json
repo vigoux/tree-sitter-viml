@@ -260,6 +260,10 @@
             "named": true
           },
           {
+            "type": "unknown_builtin_statement",
+            "named": true
+          },
+          {
             "type": "unlet_statement",
             "named": true
           },
@@ -725,6 +729,10 @@
         },
         {
           "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_builtin_statement",
           "named": true
         },
         {
@@ -2633,6 +2641,10 @@
           "named": true
         },
         {
+          "type": "unknown_builtin_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         },
@@ -3665,6 +3677,10 @@
           "named": true
         },
         {
+          "type": "unknown_builtin_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         },
@@ -4653,6 +4669,10 @@
           "named": true
         },
         {
+          "type": "unknown_builtin_statement",
+          "named": true
+        },
+        {
           "type": "unlet_statement",
           "named": true
         },
@@ -5085,6 +5105,10 @@
         },
         {
           "type": "try_statement",
+          "named": true
+        },
+        {
+          "type": "unknown_builtin_statement",
           "named": true
         },
         {
@@ -6272,6 +6296,29 @@
         },
         {
           "type": "unary_operation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unknown_builtin_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arguments",
+          "named": true
+        },
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "unknown_command_name",
           "named": true
         }
       ]
@@ -7540,6 +7587,10 @@
   {
     "type": "underline",
     "named": false
+  },
+  {
+    "type": "unknown_command_name",
+    "named": true
   },
   {
     "type": "unlet",
