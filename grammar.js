@@ -101,6 +101,7 @@ module.exports = grammar({
     $._wincmd,
     $._sign,
     $._filetype,
+    $._unlet,
     $.unknown_command_name,
   ],
 
@@ -463,7 +464,7 @@ module.exports = grammar({
     setlocal_statement: ($) => set_variant($, 'setlocal'),
 
     unlet_statement: ($) =>
-      seq(maybe_bang($, 'unlet'), repeat1($._expression)),
+      seq(maybe_bang($, tokalias($, 'unlet')), repeat1($._expression)),
 
     call_statement: ($) => seq('call', $.call_expression),
 

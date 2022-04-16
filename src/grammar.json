@@ -2265,7 +2265,12 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_unlet"
+              },
+              "named": false,
               "value": "unlet"
             },
             {
@@ -9649,6 +9654,10 @@
     {
       "type": "SYMBOL",
       "name": "_filetype"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_unlet"
     },
     {
       "type": "SYMBOL",
