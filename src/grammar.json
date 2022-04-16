@@ -1022,7 +1022,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_while"
+          },
+          "named": false,
           "value": "while"
         },
         {
@@ -9482,6 +9487,10 @@
     {
       "type": "SYMBOL",
       "name": "_endfor"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_while"
     },
     {
       "type": "SYMBOL",

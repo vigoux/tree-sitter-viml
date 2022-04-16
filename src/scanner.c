@@ -35,6 +35,7 @@ enum TokenType {
   FUNCTION,
   ENDFUNCTION, // For some reason any other end works
   ENDFOR,
+  WHILE,
   ENDWHILE,
   IF,
   ELSEIF,
@@ -115,6 +116,7 @@ keyword keywords[] = {
   KEYWORD(FUNCTION, "fu", "nction", false),
   KEYWORD(ENDFUNCTION, "endf", "unction", false),
   KEYWORD(ENDFOR, "endfo", "r", false),
+  KEYWORD(WHILE, "wh", "ile", false),
   KEYWORD(ENDWHILE, "endw", "hile", false),
   KEYWORD(IF, "if", "", false),
   KEYWORD(ELSEIF, "elsei", "f", false),
