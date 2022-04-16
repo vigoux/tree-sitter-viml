@@ -88,6 +88,7 @@ enum TokenType {
   WINCMD,
   SIGN,
   FILETYPE,
+  UNLET,
   UNKNOWN_COMMAND,
   TOKENTYPE_NR,
 };
@@ -159,6 +160,7 @@ keyword keywords[] = {
   KEYWORD(WINCMD, "winc", "md", false),
   KEYWORD(SIGN, "sig", "n", false),
   KEYWORD(FILETYPE, "filet", "ype", false),
+  KEYWORD(UNLET, "unl", "et", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {
