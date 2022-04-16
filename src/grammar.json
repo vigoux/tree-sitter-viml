@@ -711,7 +711,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_filetype"
+          },
+          "named": false,
           "value": "filetype"
         },
         {
@@ -9640,6 +9645,10 @@
     {
       "type": "SYMBOL",
       "name": "_sign"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_filetype"
     },
     {
       "type": "SYMBOL",

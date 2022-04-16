@@ -87,6 +87,7 @@ enum TokenType {
   RUNTIME,
   WINCMD,
   SIGN,
+  FILETYPE,
   UNKNOWN_COMMAND,
   TOKENTYPE_NR,
 };
@@ -157,6 +158,7 @@ keyword keywords[] = {
   KEYWORD(RUNTIME, "ru", "ntime", false),
   KEYWORD(WINCMD, "winc", "md", false),
   KEYWORD(SIGN, "sig", "n", false),
+  KEYWORD(FILETYPE, "filet", "ype", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

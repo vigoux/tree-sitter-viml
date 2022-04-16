@@ -100,6 +100,7 @@ module.exports = grammar({
     $._runtime,
     $._wincmd,
     $._sign,
+    $._filetype,
     $.unknown_command_name,
   ],
 
@@ -214,7 +215,7 @@ module.exports = grammar({
     _filetype_state: ($) => choice('on', 'off'),
     filetype_statement: ($) =>
       seq(
-        'filetype',
+        tokalias($, 'filetype'),
         optional(
           choice(
             seq(
