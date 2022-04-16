@@ -104,6 +104,7 @@ module.exports = grammar({
     $._wincmd,
     $._sign,
     $._filetype,
+    $._let,
     $._unlet,
     $.unknown_command_name,
   ],
@@ -419,7 +420,7 @@ module.exports = grammar({
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
     let_statement: ($) =>
       seq(
-        'let',
+        tokalias($, 'let'),
         choice(
           $._ident,
           $.env_variable,
