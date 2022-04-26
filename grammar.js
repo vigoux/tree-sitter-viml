@@ -47,6 +47,7 @@ module.exports = grammar({
     $._bang_filter,
     $._function,
     $._endfunction,
+    $._for,
     $._endfor,
     $._while,
     $._endwhile,
@@ -265,7 +266,7 @@ module.exports = grammar({
 
     for_loop: ($) =>
       seq(
-        'for',
+        tokalias($, 'for'),
         field('variable', choice($._ident, $.list_assignment)),
         'in',
         field('iter', $._expression),
