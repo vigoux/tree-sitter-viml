@@ -34,6 +34,7 @@ enum TokenType {
   // Many many many many keywords that are impossible to lex otherwise
   FUNCTION,
   ENDFUNCTION, // For some reason any other end works
+  FOR,
   ENDFOR,
   WHILE,
   ENDWHILE,
@@ -118,6 +119,7 @@ typedef struct {
 keyword keywords[] = {
   KEYWORD(FUNCTION, "fu", "nction", false),
   KEYWORD(ENDFUNCTION, "endf", "unction", false),
+  KEYWORD(FOR, "for", "", false),
   KEYWORD(ENDFOR, "endfo", "r", false),
   KEYWORD(WHILE, "wh", "ile", false),
   KEYWORD(ENDWHILE, "endw", "hile", false),

@@ -972,7 +972,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_for"
+          },
+          "named": false,
           "value": "for"
         },
         {
@@ -9654,6 +9659,10 @@
     {
       "type": "SYMBOL",
       "name": "_endfunction"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_for"
     },
     {
       "type": "SYMBOL",
