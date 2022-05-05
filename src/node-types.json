@@ -240,6 +240,10 @@
             "named": true
           },
           {
+            "type": "setfiletype_statement",
+            "named": true
+          },
+          {
             "type": "setlocal_statement",
             "named": true
           },
@@ -728,6 +732,10 @@
         },
         {
           "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "setfiletype_statement",
           "named": true
         },
         {
@@ -2449,6 +2457,21 @@
     }
   },
   {
+    "type": "filetypes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "filetype",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "filter_command",
     "named": true,
     "fields": {}
@@ -2823,6 +2846,10 @@
         },
         {
           "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "setfiletype_statement",
           "named": true
         },
         {
@@ -4150,6 +4177,10 @@
           "named": true
         },
         {
+          "type": "setfiletype_statement",
+          "named": true
+        },
+        {
           "type": "setlocal_statement",
           "named": true
         },
@@ -5183,6 +5214,10 @@
           "named": true
         },
         {
+          "type": "setfiletype_statement",
+          "named": true
+        },
+        {
           "type": "setlocal_statement",
           "named": true
         },
@@ -5316,6 +5351,25 @@
       "types": [
         {
           "type": "set_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "setfiletype_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fallback",
+          "named": true
+        },
+        {
+          "type": "filetypes",
           "named": true
         }
       ]
@@ -5650,6 +5704,10 @@
         },
         {
           "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "setfiletype_statement",
           "named": true
         },
         {
@@ -7862,7 +7920,15 @@
     "named": false
   },
   {
+    "type": "fallback",
+    "named": true
+  },
+  {
     "type": "fg",
+    "named": false
+  },
+  {
+    "type": "file",
     "named": false
   },
   {
@@ -7870,8 +7936,8 @@
     "named": true
   },
   {
-    "type": "file",
-    "named": false
+    "type": "filetype",
+    "named": true
   },
   {
     "type": "filetype",
@@ -8288,6 +8354,10 @@
   {
     "type": "set_value",
     "named": true
+  },
+  {
+    "type": "setfiletype",
+    "named": false
   },
   {
     "type": "setlocal",

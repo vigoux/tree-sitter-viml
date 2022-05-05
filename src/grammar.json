@@ -198,6 +198,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "setfiletype_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "startinsert_statement"
             },
             {
@@ -439,6 +443,85 @@
           },
           "named": true,
           "value": "commands"
+        }
+      ]
+    },
+    "filetype": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z][a-zA-Z_-]*"
+    },
+    "_filetype_immediate": {
+      "type": "ALIAS",
+      "content": {
+        "type": "IMMEDIATE_TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "[a-zA-Z][a-zA-Z_-]*"
+        }
+      },
+      "named": true,
+      "value": "filetype"
+    },
+    "filetypes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "filetype"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "."
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_filetype_immediate"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "setfiletype_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_setfiletype"
+          },
+          "named": false,
+          "value": "setfiletype"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "FALLBACK"
+              },
+              "named": true,
+              "value": "fallback"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "filetypes"
         }
       ]
     },
@@ -10430,6 +10513,10 @@
     {
       "type": "SYMBOL",
       "name": "_setlocal"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_setfiletype"
     },
     {
       "type": "SYMBOL",
