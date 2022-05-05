@@ -103,6 +103,8 @@ module.exports = grammar({
     $._set,
     $._setlocal,
     $._setfiletype,
+    $._browse,
+    $._options,
     $._startinsert,
     $._stopinsert,
     $._scriptencoding,
@@ -169,6 +171,7 @@ module.exports = grammar({
         $.highlight_statement,
         $.syntax_statement,
         $.setfiletype_statement,
+        $.options_statement,
         $.startinsert_statement,
         $.stopinsert_statement,
         $.scriptencoding_statement,
@@ -210,6 +213,11 @@ module.exports = grammar({
         'setfiletype',
         optional(alias('FALLBACK', $.fallback)),
         $.filetypes
+      ),
+    options_statement: ($) =>
+      choice(
+        command($, 'browse', tokalias($, 'set')),
+        command($, 'options'),
       ),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),

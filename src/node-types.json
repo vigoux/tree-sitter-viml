@@ -204,6 +204,10 @@
             "named": true
           },
           {
+            "type": "options_statement",
+            "named": true
+          },
+          {
             "type": "perl_statement",
             "named": true
           },
@@ -696,6 +700,10 @@
         },
         {
           "type": "normal_statement",
+          "named": true
+        },
+        {
+          "type": "options_statement",
           "named": true
         },
         {
@@ -2809,6 +2817,10 @@
           "named": true
         },
         {
+          "type": "options_statement",
+          "named": true
+        },
+        {
           "type": "pattern",
           "named": true
         },
@@ -4141,6 +4153,10 @@
           "named": true
         },
         {
+          "type": "options_statement",
+          "named": true
+        },
+        {
           "type": "perl_statement",
           "named": true
         },
@@ -4524,6 +4540,11 @@
   },
   {
     "type": "option_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "options_statement",
     "named": true,
     "fields": {}
   },
@@ -5178,6 +5199,10 @@
           "named": true
         },
         {
+          "type": "options_statement",
+          "named": true
+        },
+        {
           "type": "perl_statement",
           "named": true
         },
@@ -5668,6 +5693,10 @@
         },
         {
           "type": "normal_statement",
+          "named": true
+        },
+        {
+          "type": "options_statement",
           "named": true
         },
         {
@@ -7580,6 +7609,10 @@
     "named": false
   },
   {
+    "type": "browse",
+    "named": false
+  },
+  {
     "type": "buffer",
     "named": false
   },
@@ -7929,11 +7962,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -8101,11 +8134,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "koi8",
@@ -8269,6 +8302,10 @@
   },
   {
     "type": "onoremap",
+    "named": false
+  },
+  {
+    "type": "options",
     "named": false
   },
   {
