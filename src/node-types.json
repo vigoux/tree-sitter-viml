@@ -224,6 +224,10 @@
             "named": true
           },
           {
+            "type": "scriptencoding_statement",
+            "named": true
+          },
+          {
             "type": "set_statement",
             "named": true
           },
@@ -697,6 +701,10 @@
         },
         {
           "type": "runtime_statement",
+          "named": true
+        },
+        {
+          "type": "scriptencoding_statement",
           "named": true
         },
         {
@@ -2320,6 +2328,11 @@
     }
   },
   {
+    "type": "fileencoding",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "filename",
     "named": true,
     "fields": {}
@@ -2705,6 +2718,10 @@
         },
         {
           "type": "runtime_statement",
+          "named": true
+        },
+        {
+          "type": "scriptencoding_statement",
           "named": true
         },
         {
@@ -3843,6 +3860,10 @@
           "named": true
         },
         {
+          "type": "scriptencoding_statement",
+          "named": true
+        },
+        {
           "type": "set_statement",
           "named": true
         },
@@ -4843,6 +4864,10 @@
           "named": true
         },
         {
+          "type": "scriptencoding_statement",
+          "named": true
+        },
+        {
           "type": "set_statement",
           "named": true
         },
@@ -4900,6 +4925,21 @@
         },
         {
           "type": "wincmd_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scriptencoding_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "fileencoding",
           "named": true
         }
       ]
@@ -5283,6 +5323,10 @@
         },
         {
           "type": "runtime_statement",
+          "named": true
+        },
+        {
+          "type": "scriptencoding_statement",
           "named": true
         },
         {
@@ -7067,6 +7111,10 @@
     "named": false
   },
   {
+    "type": "ansi",
+    "named": false
+  },
+  {
     "type": "au_event",
     "named": true
   },
@@ -7084,6 +7132,10 @@
   },
   {
     "type": "bg",
+    "named": false
+  },
+  {
+    "type": "big5",
     "named": false
   },
   {
@@ -7112,6 +7164,10 @@
   },
   {
     "type": "ccomment",
+    "named": false
+  },
+  {
+    "type": "chinese",
     "named": false
   },
   {
@@ -7180,6 +7236,114 @@
   },
   {
     "type": "contains",
+    "named": false
+  },
+  {
+    "type": "cp1250",
+    "named": false
+  },
+  {
+    "type": "cp1251",
+    "named": false
+  },
+  {
+    "type": "cp1253",
+    "named": false
+  },
+  {
+    "type": "cp1254",
+    "named": false
+  },
+  {
+    "type": "cp1255",
+    "named": false
+  },
+  {
+    "type": "cp1256",
+    "named": false
+  },
+  {
+    "type": "cp1257",
+    "named": false
+  },
+  {
+    "type": "cp1258",
+    "named": false
+  },
+  {
+    "type": "cp437",
+    "named": false
+  },
+  {
+    "type": "cp737",
+    "named": false
+  },
+  {
+    "type": "cp775",
+    "named": false
+  },
+  {
+    "type": "cp850",
+    "named": false
+  },
+  {
+    "type": "cp852",
+    "named": false
+  },
+  {
+    "type": "cp855",
+    "named": false
+  },
+  {
+    "type": "cp857",
+    "named": false
+  },
+  {
+    "type": "cp860",
+    "named": false
+  },
+  {
+    "type": "cp861",
+    "named": false
+  },
+  {
+    "type": "cp862",
+    "named": false
+  },
+  {
+    "type": "cp863",
+    "named": false
+  },
+  {
+    "type": "cp865",
+    "named": false
+  },
+  {
+    "type": "cp866",
+    "named": false
+  },
+  {
+    "type": "cp869",
+    "named": false
+  },
+  {
+    "type": "cp874",
+    "named": false
+  },
+  {
+    "type": "cp932",
+    "named": false
+  },
+  {
+    "type": "cp936",
+    "named": false
+  },
+  {
+    "type": "cp949",
+    "named": false
+  },
+  {
+    "type": "cp950",
     "named": false
   },
   {
@@ -7276,6 +7440,22 @@
   },
   {
     "type": "endwhile",
+    "named": false
+  },
+  {
+    "type": "euc-cn",
+    "named": false
+  },
+  {
+    "type": "euc-jp",
+    "named": false
+  },
+  {
+    "type": "euc-kr",
+    "named": false
+  },
+  {
+    "type": "euc-tw",
     "named": false
   },
   {
@@ -7443,7 +7623,15 @@
     "named": false
   },
   {
+    "type": "iso",
+    "named": false
+  },
+  {
     "type": "italic",
+    "named": false
+  },
+  {
+    "type": "japan",
     "named": false
   },
   {
@@ -7461,6 +7649,18 @@
   {
     "type": "keyword",
     "named": true
+  },
+  {
+    "type": "koi8",
+    "named": false
+  },
+  {
+    "type": "korea",
+    "named": false
+  },
+  {
+    "type": "latin1",
+    "named": false
   },
   {
     "type": "lc",
@@ -7508,6 +7708,10 @@
   },
   {
     "type": "lua",
+    "named": false
+  },
+  {
+    "type": "macroman",
     "named": false
   },
   {
@@ -7615,6 +7819,10 @@
     "named": false
   },
   {
+    "type": "prc",
+    "named": false
+  },
+  {
     "type": "priority",
     "named": false
   },
@@ -7671,6 +7879,10 @@
     "named": true
   },
   {
+    "type": "scriptencoding",
+    "named": false
+  },
+  {
     "type": "set",
     "named": false
   },
@@ -7688,6 +7900,10 @@
   },
   {
     "type": "silent",
+    "named": false
+  },
+  {
+    "type": "sjis",
     "named": false
   },
   {
@@ -7767,6 +7983,10 @@
     "named": false
   },
   {
+    "type": "taiwan",
+    "named": false
+  },
+  {
     "type": "text",
     "named": false
   },
@@ -7799,6 +8019,34 @@
     "named": false
   },
   {
+    "type": "ucs-2",
+    "named": false
+  },
+  {
+    "type": "ucs-21e",
+    "named": false
+  },
+  {
+    "type": "ucs-2be",
+    "named": false
+  },
+  {
+    "type": "ucs-4",
+    "named": false
+  },
+  {
+    "type": "ucs-4be",
+    "named": false
+  },
+  {
+    "type": "ucs-4le",
+    "named": false
+  },
+  {
+    "type": "ucs2be",
+    "named": false
+  },
+  {
     "type": "undefine",
     "named": false
   },
@@ -7811,6 +8059,10 @@
     "named": false
   },
   {
+    "type": "unicode",
+    "named": false
+  },
+  {
     "type": "unknown_command_name",
     "named": true
   },
@@ -7820,6 +8072,30 @@
   },
   {
     "type": "unplace",
+    "named": false
+  },
+  {
+    "type": "utf-16",
+    "named": false
+  },
+  {
+    "type": "utf-16le",
+    "named": false
+  },
+  {
+    "type": "utf-32",
+    "named": false
+  },
+  {
+    "type": "utf-32le",
+    "named": false
+  },
+  {
+    "type": "utf-8",
+    "named": false
+  },
+  {
+    "type": "utf8",
     "named": false
   },
   {

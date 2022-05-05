@@ -206,6 +206,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "scriptencoding_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "source_statement"
             },
             {
@@ -436,6 +440,273 @@
       },
       "named": false,
       "value": "stopinsert"
+    },
+    "fileencoding": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "latin1"
+        },
+        {
+          "type": "STRING",
+          "value": "iso"
+        },
+        {
+          "type": "STRING",
+          "value": "koi8"
+        },
+        {
+          "type": "STRING",
+          "value": "koi8"
+        },
+        {
+          "type": "STRING",
+          "value": "macroman"
+        },
+        {
+          "type": "STRING",
+          "value": "cp437"
+        },
+        {
+          "type": "STRING",
+          "value": "cp737"
+        },
+        {
+          "type": "STRING",
+          "value": "cp775"
+        },
+        {
+          "type": "STRING",
+          "value": "cp850"
+        },
+        {
+          "type": "STRING",
+          "value": "cp852"
+        },
+        {
+          "type": "STRING",
+          "value": "cp855"
+        },
+        {
+          "type": "STRING",
+          "value": "cp857"
+        },
+        {
+          "type": "STRING",
+          "value": "cp860"
+        },
+        {
+          "type": "STRING",
+          "value": "cp861"
+        },
+        {
+          "type": "STRING",
+          "value": "cp862"
+        },
+        {
+          "type": "STRING",
+          "value": "cp863"
+        },
+        {
+          "type": "STRING",
+          "value": "cp865"
+        },
+        {
+          "type": "STRING",
+          "value": "cp866"
+        },
+        {
+          "type": "STRING",
+          "value": "cp869"
+        },
+        {
+          "type": "STRING",
+          "value": "cp874"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1250"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1251"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1253"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1254"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1255"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1256"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1257"
+        },
+        {
+          "type": "STRING",
+          "value": "cp1258"
+        },
+        {
+          "type": "STRING",
+          "value": "cp932"
+        },
+        {
+          "type": "STRING",
+          "value": "euc-jp"
+        },
+        {
+          "type": "STRING",
+          "value": "sjis"
+        },
+        {
+          "type": "STRING",
+          "value": "cp949"
+        },
+        {
+          "type": "STRING",
+          "value": "euc-kr"
+        },
+        {
+          "type": "STRING",
+          "value": "cp936"
+        },
+        {
+          "type": "STRING",
+          "value": "euc-cn"
+        },
+        {
+          "type": "STRING",
+          "value": "cp950"
+        },
+        {
+          "type": "STRING",
+          "value": "big5"
+        },
+        {
+          "type": "STRING",
+          "value": "euc-tw"
+        },
+        {
+          "type": "STRING",
+          "value": "utf-8"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-2"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-21e"
+        },
+        {
+          "type": "STRING",
+          "value": "utf-16"
+        },
+        {
+          "type": "STRING",
+          "value": "utf-16le"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-4"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-4le"
+        },
+        {
+          "type": "STRING",
+          "value": "ansi"
+        },
+        {
+          "type": "STRING",
+          "value": "japan"
+        },
+        {
+          "type": "STRING",
+          "value": "korea"
+        },
+        {
+          "type": "STRING",
+          "value": "prc"
+        },
+        {
+          "type": "STRING",
+          "value": "chinese"
+        },
+        {
+          "type": "STRING",
+          "value": "taiwan"
+        },
+        {
+          "type": "STRING",
+          "value": "utf8"
+        },
+        {
+          "type": "STRING",
+          "value": "unicode"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs2be"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-2be"
+        },
+        {
+          "type": "STRING",
+          "value": "ucs-4be"
+        },
+        {
+          "type": "STRING",
+          "value": "utf-32"
+        },
+        {
+          "type": "STRING",
+          "value": "utf-32le"
+        },
+        {
+          "type": "STRING",
+          "value": "default"
+        }
+      ]
+    },
+    "scriptencoding_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_scriptencoding"
+          },
+          "named": false,
+          "value": "scriptencoding"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "fileencoding"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "comclear_statement": {
       "type": "ALIAS",
@@ -9096,7 +9367,7 @@
             },
             {
               "type": "PATTERN",
-              "value": "[\\/._+,#$%~=-]"
+              "value": "[/._+,#$%~=-]"
             },
             {
               "type": "PATTERN",
@@ -9137,7 +9408,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[\\/._+,#$%~=-]"
+                  "value": "[/._+,#$%~=-]"
                 }
               },
               {
@@ -9420,7 +9691,7 @@
     },
     "register": {
       "type": "PATTERN",
-      "value": "@[\"0-9a-zA-Z:.%#=*+_\\/-@]"
+      "value": "@[\"0-9a-zA-Z:.%#=*+_/-@]"
     },
     "option": {
       "type": "SEQ",
@@ -9895,6 +10166,10 @@
     {
       "type": "SYMBOL",
       "name": "_stopinsert"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_scriptencoding"
     },
     {
       "type": "SYMBOL",
