@@ -102,6 +102,7 @@ module.exports = grammar({
     $._syntax,
     $._set,
     $._setlocal,
+    $._setfiletype,
     $._startinsert,
     $._stopinsert,
     $._scriptencoding,
@@ -167,6 +168,7 @@ module.exports = grammar({
         $.bang_filter_statement,
         $.highlight_statement,
         $.syntax_statement,
+        $.setfiletype_statement,
         $.startinsert_statement,
         $.stopinsert_statement,
         $.scriptencoding_statement,
@@ -200,6 +202,15 @@ module.exports = grammar({
     scope_dict: ($) => choice($._scope_dict, 'a:'),
 
     normal_statement: ($) => bang_range_command($, 'normal', alias(/ .*/, $.commands)),
+    filetype: ($) => /[a-zA-Z][a-zA-Z_-]*/,
+    _filetype_immediate: ($) => alias(token.immediate(/[a-zA-Z][a-zA-Z_-]*/), $.filetype),
+    filetypes: ($) => seq($.filetype, repeat(seq(token.immediate('.'), $._filetype_immediate))),
+    setfiletype_statement: ($) =>
+      command($,
+        'setfiletype',
+        optional(alias('FALLBACK', $.fallback)),
+        $.filetypes
+      ),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
 

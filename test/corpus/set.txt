@@ -302,3 +302,26 @@ set foldexpr=foo()
     (set_item
       (option_name)
       (set_value))))
+
+================================================================================
+Setfiletype
+================================================================================
+
+setfiletype c
+setfiletype c.doxygen
+setf FALLBACK d
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (setfiletype_statement
+    (filetypes
+      (filetype)))
+  (setfiletype_statement
+    (filetypes
+      (filetype)
+      (filetype)))
+  (setfiletype_statement
+    (fallback)
+    (filetypes
+      (filetype))))
