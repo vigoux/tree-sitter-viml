@@ -195,7 +195,7 @@ module.exports = grammar({
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
 
-    fileencoding: ($) =>
+    encoding: ($) =>
       choice(
         'latin1',
         'iso',
@@ -257,7 +257,7 @@ module.exports = grammar({
         'utf-32le',
         'default',
       ),
-    scriptencoding_statement: ($) => command($, 'scriptencoding', optional($.fileencoding)),
+    scriptencoding_statement: ($) => command($, 'scriptencoding', optional($.encoding)),
 
     comclear_statement: ($) => tokalias($, "comclear"),
 

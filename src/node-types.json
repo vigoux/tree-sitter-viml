@@ -2028,6 +2028,11 @@
     }
   },
   {
+    "type": "encoding",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "env_variable",
     "named": true,
     "fields": {},
@@ -2326,11 +2331,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "fileencoding",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "filename",
@@ -4939,7 +4939,7 @@
       "required": false,
       "types": [
         {
-          "type": "fileencoding",
+          "type": "encoding",
           "named": true
         }
       ]
