@@ -428,6 +428,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -519,6 +523,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -846,6 +854,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -1044,6 +1056,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -1132,6 +1148,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -1261,6 +1281,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -1394,6 +1418,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -1485,6 +1513,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -1580,6 +1612,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -1668,6 +1704,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -1777,6 +1817,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -1865,6 +1909,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -1979,6 +2027,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -2104,6 +2156,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -2203,6 +2259,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -2294,6 +2354,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -2449,6 +2513,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -3060,6 +3128,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -3182,6 +3254,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -3273,6 +3349,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -3388,6 +3468,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -3488,6 +3572,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -3576,6 +3664,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -3670,6 +3762,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -3702,6 +3798,135 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "literal_dictionary",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "literal_dictionary_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "literal_dictionary_entry",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "literal_key",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "argument",
+            "named": true
+          },
+          {
+            "type": "binary_operation",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "dictionnary",
+            "named": true
+          },
+          {
+            "type": "env_variable",
+            "named": true
+          },
+          {
+            "type": "field_expression",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "lambda_expression",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
+            "type": "option",
+            "named": true
+          },
+          {
+            "type": "register",
+            "named": true
+          },
+          {
+            "type": "scope_dict",
+            "named": true
+          },
+          {
+            "type": "scoped_identifier",
+            "named": true
+          },
+          {
+            "type": "slice_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "unary_operation",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -4084,6 +4309,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -4609,6 +4838,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -5457,6 +5690,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -5551,6 +5788,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -5642,6 +5883,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -6126,6 +6371,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -6217,6 +6466,10 @@
           },
           {
             "type": "list",
+            "named": true
+          },
+          {
+            "type": "literal_dictionary",
             "named": true
           },
           {
@@ -6314,6 +6567,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -6408,6 +6665,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -6529,6 +6790,10 @@
           "named": true
         },
         {
+          "type": "literal_dictionary",
+          "named": true
+        },
+        {
           "type": "option",
           "named": true
         },
@@ -6644,6 +6909,10 @@
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "literal_dictionary",
           "named": true
         },
         {
@@ -6774,6 +7043,10 @@
             "named": true
           },
           {
+            "type": "literal_dictionary",
+            "named": true
+          },
+          {
             "type": "option",
             "named": true
           },
@@ -6860,6 +7133,10 @@
   },
   {
     "type": "#",
+    "named": false
+  },
+  {
+    "type": "#{",
     "named": false
   },
   {
@@ -7697,6 +7974,10 @@
   {
     "type": "list",
     "named": false
+  },
+  {
+    "type": "literal_key",
+    "named": true
   },
   {
     "type": "lmap",
