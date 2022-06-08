@@ -1255,6 +1255,7 @@ module.exports = grammar({
           $.option,
           $.lambda_expression,
           $.dictionnary,
+          $.literal_dictionary,
         ),
       ),
 
@@ -1481,6 +1482,15 @@ module.exports = grammar({
 
     dictionnary: ($) =>
       seq('{', commaSep($.dictionnary_entry), optional(','), '}'),
+
+    // :h literal-Dict
+    literal_dictionary_entry: ($) =>
+      seq(field('key', $.literal_key), ':', field('value', $._expression)),
+
+    literal_key: ($) => /[0-9a-zA-Z_-]+/,
+
+    literal_dictionary: ($) =>
+      seq('#{', commaSep($.literal_dictionary_entry), optional(','), '}'),
 
     // :h lambda
     lambda_expression: ($) =>
