@@ -9805,7 +9805,7 @@
         }
       ]
     },
-    "literal_dictionary_entry": {
+    "_literal_dictionary_entry": {
       "type": "SEQ",
       "members": [
         {
@@ -9849,7 +9849,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "literal_dictionary_entry"
+                  "name": "_literal_dictionary_entry"
                 },
                 {
                   "type": "REPEAT",
@@ -9862,7 +9862,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "literal_dictionary_entry"
+                        "name": "_literal_dictionary_entry"
                       }
                     ]
                   }
