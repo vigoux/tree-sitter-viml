@@ -3803,25 +3803,10 @@
   {
     "type": "literal_dictionary",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "literal_dictionary_entry",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "literal_dictionary_entry",
-    "named": true,
     "fields": {
       "key": {
-        "multiple": false,
-        "required": true,
+        "multiple": true,
+        "required": false,
         "types": [
           {
             "type": "literal_key",
@@ -3831,7 +3816,7 @@
       },
       "value": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "(",
