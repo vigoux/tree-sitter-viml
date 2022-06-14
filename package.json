@@ -11,9 +11,9 @@
   "author": "Thomas Vigouroux",
   "license": "Apache-2.0",
   "dependencies": {
-    "nan": "^2.15.0"
+    "nan": "^2.16.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.0"
+    "tree-sitter-cli": "^0.20.6"
   }
 }
