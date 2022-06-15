@@ -230,3 +230,37 @@ let other_unamed_register = @@
   (let_statement
     (identifier)
     (register)))
+
+================================================================================
+Literal dictionaries
+================================================================================
+
+let mydict = #{zero: 0, one_key: 1, two-key: 2, 333: 3}
+call extend(mydict, #{
+  \blue: "#0000ff",
+  \red: "#ff0000",
+\})
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (literal_dictionary
+      key: (literal_key)
+      value: (integer_literal)
+      key: (literal_key)
+      value: (integer_literal)
+      key: (literal_key)
+      value: (integer_literal)
+      key: (literal_key)
+      value: (integer_literal)))
+  (call_statement
+    (call_expression
+      function: (identifier)
+      (identifier)
+      (literal_dictionary
+        key: (literal_key)
+        value: (string_literal)
+        key: (literal_key)
+        value: (string_literal)))))
