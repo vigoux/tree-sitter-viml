@@ -315,3 +315,91 @@ endfunction
         (curly_braces_name
           (identifier)))
       (parameters))))
+
+================================================================================
+Basic anonymous function
+================================================================================
+
+function mydict.return_thing()
+  return 'thing'
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (field_expression
+        value: (identifier)
+        field: (identifier))
+      parameters: (parameters))
+    (body
+      (return_statement
+        (string_literal)))))
+
+================================================================================
+Anonymous function with curly-brace
+================================================================================
+
+function {some_dict}.len()
+  return len(self)
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (field_expression
+        value: (identifier
+          (curly_braces_name
+            (identifier)))
+        field: (identifier))
+      parameters: (parameters))
+    (body
+      (return_statement
+        (call_expression
+          function: (identifier)
+          (identifier))))))
+
+================================================================================
+Anonymous function bound to a script-local variable
+================================================================================
+
+function <SID>var.field()
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (field_expression
+        value: (scoped_identifier
+          (scope)
+          (identifier))
+        field: (identifier))
+      parameters: (parameters))))
+
+================================================================================
+Anonymous function bound to an element of a list
+================================================================================
+
+func persons[0].full_name()
+  return 'Ms. Jackson'
+endfunc
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (field_expression
+        value: (index_expression
+          value: (identifier)
+          index: (integer_literal))
+        field: (identifier))
+      parameters: (parameters))
+    (body
+      (return_statement
+        (string_literal)))))
