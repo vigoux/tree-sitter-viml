@@ -264,3 +264,50 @@ call extend(mydict, #{
         value: (string_literal)
         key: (literal_key)
         value: (string_literal)))))
+
+================================================================================
+Calling a funcref returned by a function call
+================================================================================
+
+func Foo(cmd) abort
+	return function(a:cmd)
+endfunc
+
+echo Foo('printf')('hello, world')
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (function_declaration
+      name: (identifier)
+      parameters: (parameters
+        (identifier)))
+    (body
+      (return_statement
+        (call_expression
+          function: (identifier)
+          (argument
+            (identifier))))))
+  (echo_statement
+    (call_expression
+      function: (call_expression
+        function: (identifier)
+        (string_literal))
+      (string_literal))))
+
+================================================================================
+Calling a funcref contained in a list
+================================================================================
+
+echo foo[0]('bar')
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (echo_statement
+    (call_expression
+      function: (index_expression
+        value: (identifier)
+        index: (integer_literal))
+      (string_literal))))
