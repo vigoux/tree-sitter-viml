@@ -613,9 +613,12 @@ module.exports = grammar({
       ),
 
     function_declaration: ($) =>
-      seq(
-        field('name', $._ident),
+      prec(
+        PREC.CALL,
+        seq(
+        field('name', choice($._ident, $.field_expression)),
         field('parameters', $.parameters),
+        )
       ),
 
     parameters: ($) => 
@@ -1380,7 +1383,7 @@ module.exports = grammar({
         seq(
           field('value', $._expression),
           token.immediate('.'),
-          field('field', $._expression),
+          field('field', $.identifier),
         ),
       ),
 
@@ -1388,7 +1391,7 @@ module.exports = grammar({
       prec(
         PREC.CALL,
         seq(
-          field('function', $._ident),
+          field('function', $._expression),
           '(',
           optional(commaSep1($._expression)),
           ')',
