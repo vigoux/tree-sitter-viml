@@ -314,11 +314,6 @@
     }
   },
   {
-    "type": "bang",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "bang_filter_statement",
     "named": true,
     "fields": {
@@ -7389,6 +7384,10 @@
     "named": false
   },
   {
+    "type": "bang",
+    "named": true
+  },
+  {
     "type": "bg",
     "named": false
   },
@@ -7734,11 +7733,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
