@@ -403,3 +403,29 @@ endfunc
     (body
       (return_statement
         (string_literal)))))
+
+================================================================================
+Function definitions with bang
+================================================================================
+
+function! Fn_1() abort
+endfunction
+
+function! s:fn_2() abort
+endfunction
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (function_definition
+    (bang)
+    (function_declaration
+      name: (identifier)
+      parameters: (parameters)))
+  (function_definition
+    (bang)
+    (function_declaration
+      name: (scoped_identifier
+        (scope)
+        (identifier))
+      parameters: (parameters))))
