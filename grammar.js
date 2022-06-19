@@ -616,8 +616,8 @@ module.exports = grammar({
       prec(
         PREC.CALL,
         seq(
-        field('name', choice($._ident, $.field_expression)),
-        field('parameters', $.parameters),
+          field('name', choice($._ident, $.field_expression)),
+          field('parameters', $.parameters),
         )
       ),
 
@@ -647,7 +647,8 @@ module.exports = grammar({
       ),
 
 
-    bang: ($) => '!',
+    // :h :_!
+    bang: ($) => token.immediate('!'),
 
     at: ($) => '@',
 
