@@ -25,9 +25,9 @@ print(string.format("Current line [%d] has %d bytes",
 EOF
 
 
-lua << EOF
+lua <<
 require("nvim-autopairs").setup()
-EOF
+.
 
 --------------------------------------------------------------------------------
 
