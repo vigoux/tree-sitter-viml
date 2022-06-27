@@ -607,6 +607,10 @@
           "named": true
         },
         {
+          "type": "chunk",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -1125,6 +1129,10 @@
         },
         {
           "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "heredoc",
           "named": true
         },
         {
@@ -2881,6 +2889,21 @@
     }
   },
   {
+    "type": "heredoc",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "highlight_statement",
     "named": true,
     "fields": {
@@ -3570,6 +3593,10 @@
         },
         {
           "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "heredoc",
           "named": true
         },
         {
@@ -4968,11 +4995,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "chunk",
+          "type": "body",
           "named": true
         }
       ]
@@ -7967,11 +7994,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "koi8",

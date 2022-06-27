@@ -287,3 +287,35 @@ let nested_{iden{&opt}}_id = "text"
             (option
               (option_name))))))
     (string_literal)))
+
+================================================================================
+Let heredoc
+================================================================================
+
+let var1 =<< END
+Sample text 1
+    Sample text 2
+Sample text 3
+END
+
+let data =<< trim DATA
+  1 2 3 4
+  5 6 7 8
+DATA
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (heredoc
+      (body
+        (chunk)
+        (chunk)
+        (chunk))))
+  (let_statement
+    (identifier)
+    (heredoc
+      (body
+        (chunk)
+        (chunk)))))
