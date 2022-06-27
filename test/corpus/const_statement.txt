@@ -44,3 +44,25 @@ const [fleh, b, c] = [1, 2, 3]
       (integer_literal)
       (integer_literal))))
 
+================================================================================
+Const heredoc
+================================================================================
+
+const [first; rest] =<< trim END
+  if ok
+    echo 'done'
+  endif
+END
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (const_statement
+    (list_assignment
+      (identifier)
+      (identifier))
+    (heredoc
+      (body
+        (chunk)
+        (chunk)
+        (chunk)))))

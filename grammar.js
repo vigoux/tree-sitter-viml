@@ -36,8 +36,9 @@ module.exports = grammar({
     $._inv,
     $._newline_or_pipe,
     $._line_continuation,
-    $._embedded_script_start,
-    $._embedded_script_end,
+    $._script_heredoc_start,
+    $._let_heredoc_start,
+    $._heredoc_end,
     $._separator_first,
     $._separator,
     $._scope_dict,
@@ -332,10 +333,9 @@ module.exports = grammar({
 
     script: ($) =>
       seq(
-        $._embedded_script_start,
-        $._newline_or_pipe,
-        repeat($._script_line),
-        $._embedded_script_end,
+        $._script_heredoc_start,
+        alias(repeat($._script_line), $.body),
+        $._heredoc_end,
       ),
 
     for_loop: ($) =>
@@ -519,8 +519,13 @@ module.exports = grammar({
           $.field_expression,
           $.list_assignment,
         ),
-        $._let_operator,
-        $._expression,
+        choice(
+          seq(
+            $._let_operator,
+            $._expression,
+          ),
+          alias($.let_heredoc, $.heredoc),
+        ),
       ),
     let_statement: ($) =>
       seq(
@@ -537,8 +542,13 @@ module.exports = grammar({
           $._ident,
           $.list_assignment,
         ),
-        '=',
-        $._expression,
+        choice(
+          seq(
+            '=',
+            $._expression,
+          ),
+          alias($.let_heredoc, $.heredoc),
+        )
       ),
     const_statement: ($) =>
       command($,
@@ -547,6 +557,13 @@ module.exports = grammar({
           $._const_assignment,
           repeat($._assignment_variable),
         )
+      ),
+
+    let_heredoc: ($) =>
+      seq(
+        $._let_heredoc_start,
+        alias(repeat($._script_line), $.body),
+        $._heredoc_end,
       ),
 
     option_name: ($) => choice(/[a-z]+/, seq('t_', /[a-zA-Z0-9]+/)),

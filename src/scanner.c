@@ -7,14 +7,14 @@
 #include <stdbool.h>
 
 #define IS_SPACE_TABS(char) ((char) == ' ' || (char) == '\t')
-#define SCRIPT_MARKER_LEN 32
+#define HEREDOC_MARKER_LEN 32
 
 typedef struct {
   // The EOF markers (but they can be whatever so lex that correctly)
   char separator;
   bool ignore_comments;
   uint8_t marker_len;
-  char script_marker[SCRIPT_MARKER_LEN];
+  char heredoc_marker[HEREDOC_MARKER_LEN];
 } Scanner;
 
 enum TokenType {
@@ -22,8 +22,9 @@ enum TokenType {
   INV,
   CMD_SEPARATOR,
   LINE_CONTINUATION,
-  EMBEDDED_SCRIPT_START,
-  EMDEDDED_SCRIPT_END,
+  SCRIPT_HEREDOC_START,
+  LET_HEREDOC_START,
+  HEREDOC_END,
   SEP_FIRST,
   SEP,
   SCOPE_DICT,
@@ -200,7 +201,7 @@ void *tree_sitter_vim_external_scanner_create() {
   s->separator = '\0';
   s->marker_len = 0;
   s->ignore_comments = false;
-  memset(s->script_marker, '\0', SCRIPT_MARKER_LEN);
+  memset(s->heredoc_marker, '\0', HEREDOC_MARKER_LEN);
 
   return (void *)s;
 }
@@ -230,7 +231,7 @@ unsigned int tree_sitter_vim_external_scanner_serialize(void *payload,
   buffer[SC_IGNORE_COMMENTS] = s->ignore_comments;
   buffer[SC_MARK_LEN] = s->marker_len;
 
-  strncpy(buffer + SC_MARK, s->script_marker, s->marker_len);
+  strncpy(buffer + SC_MARK, s->heredoc_marker, s->marker_len);
 
   return s->marker_len + SC_MARK;
 }
@@ -249,10 +250,10 @@ void tree_sitter_vim_external_scanner_deserialize(void *payload,
 
   // Sanity check, just to be sure
   assert(s->marker_len + SC_MARK == length);
-  assert(s->marker_len < SCRIPT_MARKER_LEN);
+  assert(s->marker_len < HEREDOC_MARKER_LEN);
 
   if (s->marker_len > 0) {
-    strncpy(s->script_marker, buffer + SC_MARK, s->marker_len);
+    strncpy(s->heredoc_marker, buffer + SC_MARK, s->marker_len);
   }
 }
 
@@ -278,16 +279,18 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
   return true;
 }
 
-bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
+bool try_lex_heredoc_start(Scanner *scanner, TSLexer *lexer, const bool is_let_heredoc)
 {
-  if (scanner->script_marker[0] != '\0') {
-    // There must be an error
-    return false;
-  }
   char marker[UINT8_MAX] = { '\0' };
   uint16_t marker_len = 0;
 
-  // Lex <<
+  if (is_let_heredoc) {
+    if (lexer->lookahead != '=') {
+      return false;
+    }
+    advance(lexer, false);
+  }
+
   for(size_t j = 0; j < 2; j++) {
     if (lexer->lookahead != '<') {
       return false;
@@ -296,20 +299,41 @@ bool try_lex_script_start(Scanner *scanner, TSLexer *lexer)
   }
   skip_space_tabs(lexer);
 
+  // TODO: Put :let-heredoc parameters (trim, eval, etc.) into a separate node
+  if (is_let_heredoc) {
+    while (iswlower(lexer->lookahead)) {
+      do {
+        advance(lexer, false);
+      } while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead && lexer->lookahead != '\n');
+      skip_space_tabs(lexer);
+    }
+  }
+
   // We should be at the start of the script marker
-  while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead && lexer->lookahead != '\n' && marker_len < SCRIPT_MARKER_LEN) {
+  // Note that :let-heredocs do not allow for spaces in the endmarker
+  while ((!is_let_heredoc || !IS_SPACE_TABS(lexer->lookahead)) && lexer->lookahead && lexer->lookahead != '\n' && marker_len < HEREDOC_MARKER_LEN) {
     marker[marker_len] = lexer->lookahead;
     marker_len++;
     advance(lexer, false);
   }
 
-  if (marker_len == SCRIPT_MARKER_LEN) {
+  if (marker_len == HEREDOC_MARKER_LEN) {
     return false;
   }
 
-  strncpy(scanner->script_marker, marker, marker_len);
+  // Ensure that a space wasn't found in the endmarker
+  if (is_let_heredoc) {
+    if (lexer->lookahead != '\n') {
+      skip_space_tabs(lexer);
+    }
+    if (lexer->lookahead != '\n' && lexer->lookahead != '\0') {
+      return false;
+    }
+  }
+
+  strncpy(scanner->heredoc_marker, marker, marker_len);
   scanner->marker_len = marker_len;
-  scanner->script_marker[scanner->marker_len] = '\0';
+  memset(scanner->heredoc_marker + marker_len, '\0', HEREDOC_MARKER_LEN - marker_len);
 
   return true;
 }
@@ -564,18 +588,32 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     return true;
   }
 
-  // Script starts and ends
-  if (valid_symbols[EMBEDDED_SCRIPT_START] && lexer->lookahead == '<') {
-    lexer->result_symbol = EMBEDDED_SCRIPT_START;
-    return try_lex_script_start(s, lexer);
-  } else if (valid_symbols[EMDEDDED_SCRIPT_END]) {
+  if (scope_correct(lexer) && (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE])) {
+    if (lex_scope(lexer)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Heredoc starts and ends
+  if (valid_symbols[SCRIPT_HEREDOC_START] && lexer->lookahead == '<') {
+    lexer->result_symbol = SCRIPT_HEREDOC_START;
+    return try_lex_heredoc_start(s, lexer, false);
+  } else if (valid_symbols[LET_HEREDOC_START]) {
+    if (try_lex_heredoc_start(s, lexer, true)) {
+      lexer->result_symbol = LET_HEREDOC_START;
+      return true;
+    }
+    return false;
+  } else if (valid_symbols[HEREDOC_END]) {
     if (s->marker_len == 0) {
       // This must be an error
       return false;
     }
 
     for (size_t i = 0; i < s->marker_len; i++) {
-      if (s->script_marker[i] != lexer->lookahead) {
+      if (s->heredoc_marker[i] != lexer->lookahead) {
         return false;
       } else {
         advance(lexer, false);
@@ -583,19 +621,11 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
 
     // Found the end marker
-    lexer->result_symbol = EMDEDDED_SCRIPT_END;
+    lexer->result_symbol = HEREDOC_END;
     s->marker_len = 0;
-    memset(s->script_marker, '\0', SCRIPT_MARKER_LEN);
+    memset(s->heredoc_marker, '\0', HEREDOC_MARKER_LEN);
 
     return true;
-  }
-
-  if (scope_correct(lexer) && (valid_symbols[SCOPE_DICT] || valid_symbols[SCOPE])) {
-    if (lex_scope(lexer)) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   if (valid_symbols[COMMENT] && !valid_symbols[STRING]
