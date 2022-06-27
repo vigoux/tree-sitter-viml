@@ -331,6 +331,11 @@ bool try_lex_heredoc_start(Scanner *scanner, TSLexer *lexer, const bool is_let_h
     }
   }
 
+  // When no endmarker is specified, the default endmarker is '.'
+  if (!is_let_heredoc && marker_len == 0) {
+    strncpy(marker, ".", marker_len = 1);
+  }
+
   strncpy(scanner->heredoc_marker, marker, marker_len);
   scanner->marker_len = marker_len;
   memset(scanner->heredoc_marker + marker_len, '\0', HEREDOC_MARKER_LEN - marker_len);
