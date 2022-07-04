@@ -5,7 +5,7 @@
   "main": "bindings/node",
   "scripts": {
     "build": "tree-sitter generate",
-    "test": "tree-sitter test",
+    "test": "tree-sitter test && ./scripts/test.py",
     "parse": "tree-sitter parse"
   },
   "author": "Thomas Vigouroux",
