@@ -151,6 +151,8 @@
 (pattern) @string.special
 (pattern_multi) @string.regex
 (filename) @string
+(let_statement (heredoc (body) @string))
+(const_statement (heredoc (body) @string))
 ((scoped_identifier
   (scope) @_scope . (identifier) @boolean)
  (#eq? @_scope "v:")
