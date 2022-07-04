@@ -15,5 +15,12 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
-  }
+  },
+  "tree-sitter": [
+    {
+      "file-types": [
+        "vim"
+      ]
+    }
+  ]
 }
