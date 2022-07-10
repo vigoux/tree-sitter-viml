@@ -103,6 +103,8 @@ enum TokenType {
   LET,
   UNLET,
   CALL,
+  BREAK,
+  CONTINUE,
   UNKNOWN_COMMAND,
   TOKENTYPE_NR,
 };
@@ -189,6 +191,8 @@ keyword keywords[] = {
   KEYWORD(LET, "let", "", false),
   KEYWORD(UNLET, "unl", "et", false),
   KEYWORD(CALL, "cal", "l", false),
+  KEYWORD(BREAK, "brea", "k", false),
+  KEYWORD(CONTINUE, "con", "tinue", false),
 };
 
 void *tree_sitter_vim_external_scanner_create() {

@@ -112,6 +112,10 @@
             "named": true
           },
           {
+            "type": "break_statement",
+            "named": true
+          },
+          {
             "type": "call_statement",
             "named": true
           },
@@ -125,6 +129,10 @@
           },
           {
             "type": "const_statement",
+            "named": true
+          },
+          {
+            "type": "continue_statement",
             "named": true
           },
           {
@@ -591,6 +599,10 @@
           "named": true
         },
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -608,6 +620,10 @@
         },
         {
           "type": "const_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -772,6 +788,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "break_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "call_expression",
@@ -1168,6 +1189,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "curly_braces_name",
@@ -2664,6 +2690,10 @@
           "named": true
         },
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -2677,6 +2707,10 @@
         },
         {
           "type": "const_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -3945,6 +3979,10 @@
           "named": true
         },
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -3958,6 +3996,10 @@
         },
         {
           "type": "const_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -4957,6 +4999,10 @@
           "named": true
         },
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -4974,6 +5020,10 @@
         },
         {
           "type": "const_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -5423,6 +5473,10 @@
           "named": true
         },
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -5436,6 +5490,10 @@
         },
         {
           "type": "const_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
           "named": true
         },
         {
@@ -7400,6 +7458,10 @@
     "named": false
   },
   {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "buffer",
     "named": false
   },
@@ -7493,6 +7555,10 @@
   },
   {
     "type": "contains",
+    "named": false
+  },
+  {
+    "type": "continue",
     "named": false
   },
   {
@@ -7733,11 +7799,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -7901,11 +7967,11 @@
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "koi8",
