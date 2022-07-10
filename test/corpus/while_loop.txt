@@ -53,3 +53,35 @@ endwhile
       (let_statement
         (identifier)
         (identifier)))))
+
+================================================================================
+While loop with continue statement
+================================================================================
+
+while 0
+  continue
+endwhile
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (while_loop
+    condition: (integer_literal)
+    (body
+      (continue_statement))))
+
+================================================================================
+While loop with break
+================================================================================
+
+while 1
+  break
+endwhile
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (while_loop
+    condition: (integer_literal)
+    (body
+      (break_statement))))
