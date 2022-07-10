@@ -116,6 +116,8 @@ module.exports = grammar({
     $._let,
     $._unlet,
     $._call,
+    $._break,
+    $._continue,
     $.unknown_command_name,
   ],
 
@@ -176,6 +178,8 @@ module.exports = grammar({
         $.runtime_statement,
         $.wincmd_statement,
         $.sign_statement,
+        $.break_statement,
+        $.continue_statement,
         $.unknown_builtin_statement,
         $.user_command,
       )),
@@ -188,6 +192,9 @@ module.exports = grammar({
 
     return_statement: ($) =>
       command($, 'return', optional($._expression)),
+
+    break_statement: ($) => command($, 'break'),
+    continue_statement: ($) => command($, 'continue'),
 
     scope_dict: ($) => choice($._scope_dict, 'a:'),
 
