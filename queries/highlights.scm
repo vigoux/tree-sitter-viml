@@ -25,6 +25,8 @@
   "in"
   "while"
   "endwhile"
+  "break"
+  "continue"
 ] @repeat
 
 [
