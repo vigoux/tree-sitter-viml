@@ -2474,6 +2474,22 @@
           "name": "_let_heredoc_start"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comment"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "REPEAT",

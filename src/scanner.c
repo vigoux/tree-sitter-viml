@@ -323,6 +323,7 @@ bool try_lex_heredoc_start(Scanner *scanner, TSLexer *lexer, const bool is_let_h
 
   // Ensure that a space wasn't found in the endmarker
   if (is_let_heredoc) {
+    lexer->mark_end(lexer);
     if (lexer->lookahead != '\n') {
       skip_space_tabs(lexer);
     }
@@ -623,6 +624,11 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
       } else {
         advance(lexer, false);
       }
+    }
+
+    // Ensure there aren't any remaining characters in the line
+    if (lexer->lookahead != '\0' && lexer->lookahead != '\n') {
+      return false;
     }
 
     // Found the end marker

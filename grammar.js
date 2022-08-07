@@ -562,6 +562,8 @@ module.exports = grammar({
     let_heredoc: ($) =>
       seq(
         $._let_heredoc_start,
+        optional($.comment),
+        '\n',
         alias(repeat($._script_line), $.body),
         $._heredoc_end,
       ),
