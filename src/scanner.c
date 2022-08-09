@@ -22,8 +22,8 @@ enum TokenType {
   INV,
   CMD_SEPARATOR,
   LINE_CONTINUATION,
-  SCRIPT_HEREDOC_START,
-  LET_HEREDOC_START,
+  SCRIPT_HEREDOC_MARKER,
+  LET_HEREDOC_MARKER,
   HEREDOC_END,
   SEP_FIRST,
   SEP,
@@ -279,34 +279,13 @@ bool check_prefix(TSLexer *lexer, char *preffix, unsigned int preffix_len,
   return true;
 }
 
-bool try_lex_heredoc_start(Scanner *scanner, TSLexer *lexer, const bool is_let_heredoc)
+bool try_lex_heredoc_marker(Scanner *scanner, TSLexer *lexer, const bool is_let_heredoc)
 {
   char marker[UINT8_MAX] = { '\0' };
   uint16_t marker_len = 0;
 
-  if (is_let_heredoc) {
-    if (lexer->lookahead != '=') {
-      return false;
-    }
-    advance(lexer, false);
-  }
-
-  for(size_t j = 0; j < 2; j++) {
-    if (lexer->lookahead != '<') {
-      return false;
-    }
-    advance(lexer, false);
-  }
-  skip_space_tabs(lexer);
-
-  // TODO: Put :let-heredoc parameters (trim, eval, etc.) into a separate node
-  if (is_let_heredoc) {
-    while (iswlower(lexer->lookahead)) {
-      do {
-        advance(lexer, false);
-      } while (!IS_SPACE_TABS(lexer->lookahead) && lexer->lookahead && lexer->lookahead != '\n');
-      skip_space_tabs(lexer);
-    }
+  if (iswlower(lexer->lookahead) && is_let_heredoc) {
+    return false;
   }
 
   // We should be at the start of the script marker
@@ -317,24 +296,8 @@ bool try_lex_heredoc_start(Scanner *scanner, TSLexer *lexer, const bool is_let_h
     advance(lexer, false);
   }
 
-  if (marker_len == HEREDOC_MARKER_LEN) {
+  if (marker_len == HEREDOC_MARKER_LEN || marker_len == 0) {
     return false;
-  }
-
-  // Ensure that a space wasn't found in the endmarker
-  if (is_let_heredoc) {
-    lexer->mark_end(lexer);
-    if (lexer->lookahead != '\n') {
-      skip_space_tabs(lexer);
-    }
-    if (lexer->lookahead != '\n' && lexer->lookahead != '\0') {
-      return false;
-    }
-  }
-
-  // When no endmarker is specified, the default endmarker is '.'
-  if (!is_let_heredoc && marker_len == 0) {
-    strncpy(marker, ".", marker_len = 1);
   }
 
   strncpy(scanner->heredoc_marker, marker, marker_len);
@@ -602,28 +565,20 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
   }
 
-  // Heredoc starts and ends
-  if (valid_symbols[SCRIPT_HEREDOC_START] && lexer->lookahead == '<') {
-    lexer->result_symbol = SCRIPT_HEREDOC_START;
-    return try_lex_heredoc_start(s, lexer, false);
-  } else if (valid_symbols[LET_HEREDOC_START]) {
-    if (try_lex_heredoc_start(s, lexer, true)) {
-      lexer->result_symbol = LET_HEREDOC_START;
-      return true;
-    }
-    return false;
-  } else if (valid_symbols[HEREDOC_END]) {
-    if (s->marker_len == 0) {
-      // This must be an error
-      return false;
-    }
+  if (valid_symbols[SCRIPT_HEREDOC_MARKER]) {
+    lexer->result_symbol = SCRIPT_HEREDOC_MARKER;
+    return try_lex_heredoc_marker(s, lexer, false);
+  }
+  if (valid_symbols[LET_HEREDOC_MARKER]) {
+    lexer->result_symbol = LET_HEREDOC_MARKER;
+    return try_lex_heredoc_marker(s, lexer, true);
+  }
+  if (valid_symbols[HEREDOC_END]) {
+    uint8_t marker_len = s->marker_len != 0 ? s->marker_len : 1;
+    char *marker = s->marker_len != 0 ? s->heredoc_marker : ".";
 
-    for (size_t i = 0; i < s->marker_len; i++) {
-      if (s->heredoc_marker[i] != lexer->lookahead) {
-        return false;
-      } else {
-        advance(lexer, false);
-      }
+    if (!check_prefix(lexer, marker, marker_len, HEREDOC_END)) {
+      return false;
     }
 
     // Ensure there aren't any remaining characters in the line
@@ -632,7 +587,6 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     }
 
     // Found the end marker
-    lexer->result_symbol = HEREDOC_END;
     s->marker_len = 0;
     memset(s->heredoc_marker, '\0', HEREDOC_MARKER_LEN);
 

@@ -34,16 +34,13 @@ require("nvim-autopairs").setup()
 (script_file
   (lua_statement
     (script
-      (body
-        (chunk)
-        (chunk)
-        (chunk)
-        (chunk)
-        (chunk))))
+      (marker_definition)
+      (body)
+      (endmarker)))
   (lua_statement
     (script
-      (body
-        (chunk)))))
+      (body)
+      (endmarker))))
 
 ================================================================================
 Python chunk

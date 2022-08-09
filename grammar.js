@@ -36,8 +36,8 @@ module.exports = grammar({
     $._inv,
     $._newline_or_pipe,
     $._line_continuation,
-    $._script_heredoc_start,
-    $._let_heredoc_start,
+    $._script_heredoc_marker,
+    $._let_heredoc_marker,
     $._heredoc_end,
     $._separator_first,
     $._separator,
@@ -327,15 +327,16 @@ module.exports = grammar({
       command($, 'python', choice($.chunk, $.script)),
     perl_statement: ($) => command($, 'perl', choice($.chunk, $.script)),
 
-    chunk: ($) => /[^\n]+/,
+    chunk: ($) => /(<[^<]|[^\s<])[^\n]*/,
 
-    _script_line: ($) => seq(optional($.chunk), '\n'),
+    _heredoc_line: ($) => /[^\n]*\n/,
 
     script: ($) =>
       seq(
-        $._script_heredoc_start,
-        alias(repeat($._script_line), $.body),
-        $._heredoc_end,
+        '<<',
+        choice(alias($._script_heredoc_marker, $.marker_definition), '\n'),
+        alias(repeat($._heredoc_line), $.body),
+        alias($._heredoc_end, $.endmarker),
       ),
 
     for_loop: ($) =>
@@ -561,12 +562,16 @@ module.exports = grammar({
 
     let_heredoc: ($) =>
       seq(
-        $._let_heredoc_start,
+        '=<<',
+        repeat(alias($._let_heredoc_parameter, $.parameter)),
+        alias($._let_heredoc_marker, $.marker_definition),
         optional($.comment),
         '\n',
-        alias(repeat($._script_line), $.body),
-        $._heredoc_end,
+        alias(repeat($._heredoc_line), $.body),
+        alias($._heredoc_end, $.endmarker),
       ),
+
+    _let_heredoc_parameter: ($) => /[a-z]\S*/,
 
     option_name: ($) => choice(/[a-z]+/, seq('t_', /[a-zA-Z0-9]+/)),
 
