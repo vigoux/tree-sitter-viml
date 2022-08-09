@@ -309,16 +309,16 @@ DATA
   (let_statement
     (identifier)
     (heredoc
-      (body
-        (chunk)
-        (chunk)
-        (chunk))))
+      (marker_definition)
+      (body)
+      (endmarker)))
   (let_statement
     (identifier)
     (heredoc
-      (body
-        (chunk)
-        (chunk)))))
+      (parameter)
+      (marker_definition)
+      (body)
+      (endmarker))))
 
 ================================================================================
 Let heredoc with comment
@@ -335,7 +335,7 @@ W
   (let_statement
     (identifier)
     (heredoc
+      (marker_definition)
       (comment)
-      (body
-        (chunk)
-        (chunk)))))
+      (body)
+      (endmarker))))

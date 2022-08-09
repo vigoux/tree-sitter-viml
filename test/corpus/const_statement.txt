@@ -62,7 +62,7 @@ END
       (identifier)
       (identifier))
     (heredoc
-      (body
-        (chunk)
-        (chunk)
-        (chunk)))))
+      (parameter)
+      (marker_definition)
+      (body)
+      (endmarker))))

@@ -607,10 +607,6 @@
           "named": true
         },
         {
-          "type": "chunk",
-          "named": true
-        },
-        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -2894,7 +2890,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "body",
@@ -2902,6 +2898,18 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "endmarker",
+          "named": true
+        },
+        {
+          "type": "marker_definition",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         }
       ]
@@ -4999,11 +5007,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "endmarker",
+          "named": true
+        },
+        {
+          "type": "marker_definition",
           "named": true
         }
       ]
@@ -7309,6 +7325,10 @@
     "named": false
   },
   {
+    "type": "<<",
+    "named": false
+  },
+  {
     "type": "<=",
     "named": false
   },
@@ -7338,6 +7358,10 @@
   },
   {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "=<<",
     "named": false
   },
   {
@@ -7789,6 +7813,10 @@
     "named": false
   },
   {
+    "type": "endmarker",
+    "named": true
+  },
+  {
     "type": "endtry",
     "named": false
   },
@@ -7830,11 +7858,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "filetype",
@@ -8081,6 +8109,10 @@
     "named": true
   },
   {
+    "type": "marker_definition",
+    "named": true
+  },
+  {
     "type": "match",
     "named": false
   },
@@ -8163,6 +8195,10 @@
   {
     "type": "onoremap",
     "named": false
+  },
+  {
+    "type": "parameter",
+    "named": true
   },
   {
     "type": "perl",
