@@ -525,7 +525,7 @@ module.exports = grammar({
             $._let_operator,
             $._expression,
           ),
-          alias($.let_heredoc, $.heredoc),
+          alias($._let_heredoc, $.heredoc),
         ),
       ),
     let_statement: ($) =>
@@ -548,7 +548,7 @@ module.exports = grammar({
             '=',
             $._expression,
           ),
-          alias($.let_heredoc, $.heredoc),
+          alias($._let_heredoc, $.heredoc),
         )
       ),
     const_statement: ($) =>
@@ -560,7 +560,7 @@ module.exports = grammar({
         )
       ),
 
-    let_heredoc: ($) =>
+    _let_heredoc: ($) =>
       seq(
         '=<<',
         repeat(alias($._let_heredoc_parameter, $.parameter)),
