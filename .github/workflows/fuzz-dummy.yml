@@ -1,0 +1,14 @@
+name: Fuzz parser
+on:
+  # Triggers the workflow on push or pull request events but only when changing the external-scanner
+  push:
+    paths-ignore:
+      - src/scanner.c
+  pull_request:
+    paths-ignore:
+      - src/scanner.c
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No build required"'
