@@ -2358,7 +2358,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "let_heredoc"
+                "name": "_let_heredoc"
               },
               "named": true,
               "value": "heredoc"
@@ -2433,7 +2433,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "let_heredoc"
+                "name": "_let_heredoc"
               },
               "named": true,
               "value": "heredoc"
@@ -2472,7 +2472,7 @@
         }
       ]
     },
-    "let_heredoc": {
+    "_let_heredoc": {
       "type": "SEQ",
       "members": [
         {
