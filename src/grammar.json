@@ -2540,8 +2540,17 @@
       ]
     },
     "_let_heredoc_parameter": {
-      "type": "PATTERN",
-      "value": "[a-z]\\S*"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "trim"
+        },
+        {
+          "type": "STRING",
+          "value": "eval"
+        }
+      ]
     },
     "option_name": {
       "type": "CHOICE",

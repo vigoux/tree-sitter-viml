@@ -153,8 +153,7 @@
 (filename) @string
 (let_statement (heredoc (body) @string))
 (const_statement (heredoc (body) @string))
-((heredoc (parameter) @keyword (#any-of? @keyword "trim" "eval")))
-((heredoc (parameter) @error (#not-any-of? @error "trim" "eval")))
+((heredoc (parameter) @keyword))
 ((scoped_identifier
   (scope) @_scope . (identifier) @boolean)
  (#eq? @_scope "v:")

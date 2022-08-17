@@ -571,7 +571,8 @@ module.exports = grammar({
         alias($._heredoc_end, $.endmarker),
       ),
 
-    _let_heredoc_parameter: ($) => /[a-z]\S*/,
+    // :h :let-heredoc
+    _let_heredoc_parameter: ($) => choice('trim', 'eval'),
 
     option_name: ($) => choice(/[a-z]+/, seq('t_', /[a-zA-Z0-9]+/)),
 
