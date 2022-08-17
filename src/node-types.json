@@ -4497,6 +4497,11 @@
     "fields": {}
   },
   {
+    "type": "parameter",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "parameters",
     "named": true,
     "fields": {},
@@ -7841,6 +7846,10 @@
     "named": false
   },
   {
+    "type": "eval",
+    "named": false
+  },
+  {
     "type": "excludenl",
     "named": false
   },
@@ -7858,11 +7867,11 @@
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
@@ -8197,10 +8206,6 @@
     "named": false
   },
   {
-    "type": "parameter",
-    "named": true
-  },
-  {
     "type": "perl",
     "named": false
   },
@@ -8406,6 +8411,10 @@
   },
   {
     "type": "transparent",
+    "named": false
+  },
+  {
+    "type": "trim",
     "named": false
   },
   {
