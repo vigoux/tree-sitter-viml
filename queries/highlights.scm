@@ -151,8 +151,7 @@
 (pattern) @string.special
 (pattern_multi) @string.regex
 (filename) @string
-(let_statement (heredoc (body) @string))
-(const_statement (heredoc (body) @string))
+(heredoc (body) @string)
 ((heredoc (parameter) @keyword))
 ((scoped_identifier
   (scope) @_scope . (identifier) @boolean)
