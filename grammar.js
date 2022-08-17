@@ -327,7 +327,7 @@ module.exports = grammar({
       command($, 'python', choice($.chunk, $.script)),
     perl_statement: ($) => command($, 'perl', choice($.chunk, $.script)),
 
-    chunk: ($) => /(<[^<]|[^\s<])[^\n]*/,
+    chunk: ($) => /<|(<[^\n<]|[^\s<])[^\n]*/,
 
     _heredoc_line: ($) => /[^\n]*\n/,
 

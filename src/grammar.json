@@ -1240,7 +1240,7 @@
     },
     "chunk": {
       "type": "PATTERN",
-      "value": "(<[^<]|[^\\s<])[^\\n]*"
+      "value": "<|(<[^\\n<]|[^\\s<])[^\\n]*"
     },
     "_heredoc_line": {
       "type": "PATTERN",
