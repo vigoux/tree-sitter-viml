@@ -9,6 +9,7 @@ on:
       - src/scanner.c
 jobs:
   build:
+    name: Skip parser fuzzing
     runs-on: ubuntu-latest
     steps:
       - run: 'echo "No build required"'
