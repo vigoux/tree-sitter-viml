@@ -1,3 +1,4 @@
+src/keywords.h linguist-generated
 src/parser.c linguist-generated
 src/grammar.json linguist-generated
 src/node-types.json linguist-generated
