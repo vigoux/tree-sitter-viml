@@ -17,6 +17,14 @@ typedef struct {
   char heredoc_marker[HEREDOC_MARKER_LEN];
 } Scanner;
 
+typedef struct {
+  char * mandat;               /// Mandatory part of the command
+  char * opt;                  /// Optional part of the command
+  bool ignore_comments_after;  /// Ignore comments until EOL
+} keyword;
+
+#include "keywords.h"
+
 enum TokenType {
   NO,
   INV,
@@ -32,174 +40,9 @@ enum TokenType {
   STRING,
   COMMENT,
   BANG_FILTER,
-  // Many many many many keywords that are impossible to lex otherwise
-  FUNCTION,
-  ENDFUNCTION, // For some reason any other end works
-  FOR,
-  ENDFOR,
-  WHILE,
-  ENDWHILE,
-  IF,
-  ELSEIF,
-  ELSE,
-  ENDIF,
-  TRY,
-  CATCH,
-  FINALLY,
-  ENDTRY,
-  CONST,
-  NORMAL,
-  RETURN,
-  PERL,
-  LUA,
-  RUBY,
-  PYTHON,
-  THROW,
-  EXECUTE,
-  AUTOCMD,
-  SILENT,
-  ECHO,
-  ECHON,
-  ECHOHL,
-  ECHOMSG,
-  ECHOERR,
-  MAP,
-  NMAP,
-  VMAP,
-  XMAP,
-  SMAP,
-  OMAP,
-  IMAP,
-  LMAP,
-  CMAP,
-  TMAP,
-  NOREMAP,
-  NNOREMAP,
-  VNOREMAP,
-  XNOREMAP,
-  SNOREMAP,
-  ONOREMAP,
-  INOREMAP,
-  LNOREMAP,
-  CNOREMAP,
-  TNOREMAP,
-  AUGROUP,
-  HIGHLIGHT,
-  DEFAULT, // highlight def[fault]
-  SYNTAX,
-  SET,
-  SETLOCAL,
-  SETFILETYPE,
-  BROWSE,
-  OPTIONS,
-  STARTINSERT,
-  STOPINSERT,
-  SCRIPTENCODING,
-  SOURCE,
-  GLOBAL,
-  COLORSCHEME,
-  COMCLEAR,
-  DELCOMMAND,
-  RUNTIME,
-  WINCMD,
-  SIGN,
-  FILETYPE,
-  LET,
-  UNLET,
-  CALL,
-  BREAK,
-  CONTINUE,
-  UNKNOWN_COMMAND,
-  TOKENTYPE_NR,
-};
-
-#define TRIE_START (COMMENT + 1)
-
-typedef struct {
-  char * mandat;               /// Mandatory part of the command
-  char * opt;                  /// Optional part of the command
-  bool ignore_comments_after;  /// Ignore comments until EOL
-} keyword;
-
-#define KEYWORD(tk, m, opt, i) [tk - TRIE_START] = { (m), (opt), (i) }
-
-keyword keywords[] = {
-  KEYWORD(FUNCTION, "fu", "nction", false),
-  KEYWORD(ENDFUNCTION, "endf", "unction", false),
-  KEYWORD(FOR, "for", "", false),
-  KEYWORD(ENDFOR, "endfo", "r", false),
-  KEYWORD(WHILE, "wh", "ile", false),
-  KEYWORD(ENDWHILE, "endw", "hile", false),
-  KEYWORD(IF, "if", "", false),
-  KEYWORD(ELSEIF, "elsei", "f", false),
-  KEYWORD(ELSE, "el", "se", false),
-  KEYWORD(ENDIF, "en", "dif", false),
-  KEYWORD(TRY, "try", "", false),
-  KEYWORD(CATCH, "cat", "ch", false),
-  KEYWORD(FINALLY, "fina", "lly", false),
-  KEYWORD(ENDTRY, "endt", "ry", false),
-  KEYWORD(CONST, "cons", "t", false),
-  KEYWORD(NORMAL, "norm", "al", false),
-  KEYWORD(RETURN, "retu", "rn", false),
-  KEYWORD(PERL, "perl", "", false),
-  KEYWORD(LUA, "lua", "", false),
-  KEYWORD(RUBY, "rub", "y", false),
-  KEYWORD(PYTHON, "py", "thon", false),
-  KEYWORD(THROW, "th", "row", false),
-  KEYWORD(EXECUTE, "exe", "cute", false),
-  KEYWORD(AUTOCMD, "au", "tocmd", false),
-  KEYWORD(SILENT, "sil", "ent", false),
-  KEYWORD(ECHO, "ec", "ho", true),
-  KEYWORD(ECHON, "echon", "", true),
-  KEYWORD(ECHOHL, "echoh", "l", false),
-  KEYWORD(ECHOMSG, "echom", "sg", true),
-  KEYWORD(ECHOERR, "echoe", "rr", true),
-  KEYWORD(MAP, "map", "", true),
-  KEYWORD(NMAP, "nm", "ap", true),
-  KEYWORD(VMAP, "vm", "ap", true),
-  KEYWORD(XMAP, "xm", "ap", true),
-  KEYWORD(SMAP, "smap", "", true),
-  KEYWORD(OMAP, "om", "ap", true),
-  KEYWORD(IMAP, "im", "ap", true),
-  KEYWORD(LMAP, "lm", "ap", true),
-  KEYWORD(CMAP, "cm", "ap", true),
-  KEYWORD(TMAP, "tma", "p", true),
-  KEYWORD(NOREMAP, "no", "remap", true),
-  KEYWORD(NNOREMAP, "nn", "oremap", true),
-  KEYWORD(VNOREMAP, "vn", "oremap", true),
-  KEYWORD(XNOREMAP, "xn", "oremap", true),
-  KEYWORD(SNOREMAP, "snor", "emap", true),
-  KEYWORD(ONOREMAP, "ono", "remap", true),
-  KEYWORD(INOREMAP, "ino", "remap", true),
-  KEYWORD(LNOREMAP, "ln", "oremap", true),
-  KEYWORD(CNOREMAP, "cno", "remap", true),
-  KEYWORD(TNOREMAP, "tno", "remap", true),
-  KEYWORD(AUGROUP, "aug", "roup", true),
-  KEYWORD(HIGHLIGHT, "hi", "ghlight", false),
-  KEYWORD(DEFAULT, "def", "ault", false),
-  KEYWORD(SYNTAX, "sy", "ntax", false),
-  KEYWORD(SET, "se", "t", false),
-  KEYWORD(SETLOCAL, "setl", "ocal", false),
-  KEYWORD(SETFILETYPE, "setf", "iletype", false),
-  KEYWORD(BROWSE, "bro", "wse", false),
-  KEYWORD(OPTIONS, "opt", "ions", false),
-  KEYWORD(STARTINSERT, "star", "tinsert", false),
-  KEYWORD(STOPINSERT, "stopi", "nsert", false),
-  KEYWORD(SCRIPTENCODING, "scripte", "ncoding", false),
-  KEYWORD(SOURCE, "so", "urce", false),
-  KEYWORD(GLOBAL, "g", "lobal", false),
-  KEYWORD(COLORSCHEME, "colo", "rscheme", false),
-  KEYWORD(COMCLEAR, "comc", "lear", false),
-  KEYWORD(DELCOMMAND, "delc", "ommand", false),
-  KEYWORD(RUNTIME, "ru", "ntime", false),
-  KEYWORD(WINCMD, "winc", "md", false),
-  KEYWORD(SIGN, "sig", "n", false),
-  KEYWORD(FILETYPE, "filet", "ype", false),
-  KEYWORD(LET, "let", "", false),
-  KEYWORD(UNLET, "unl", "et", false),
-  KEYWORD(CALL, "cal", "l", false),
-  KEYWORD(BREAK, "brea", "k", false),
-  KEYWORD(CONTINUE, "con", "tinue", false),
+  // Many many many many keywords that are impossible to lex otherwise, see
+  // src/keywords.h
+  KEYWORDS_BASE
 };
 
 void *tree_sitter_vim_external_scanner_create() {
@@ -632,17 +475,17 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     keyword[i] = '\0';
 
     // Now really try to find the keyword
-    for (enum TokenType t = TRIE_START; t < UNKNOWN_COMMAND; t++) {
-      if (valid_symbols[t] && try_lex_keyword(keyword, keywords[t - TRIE_START])) {
-        lexer->result_symbol = t;
-        s->ignore_comments = keywords[t - TRIE_START].ignore_comments_after;
+    for (kwid t = FUNCTION; t < UNKNOWN_COMMAND; t++) {
+      if (valid_symbols[t + KEYWORDS_BASE] && try_lex_keyword(keyword, keywords[t])) {
+        lexer->result_symbol = t + KEYWORDS_BASE;
+        s->ignore_comments = keywords[t].ignore_comments_after;
         return true;
       }
     }
 
     // This is quite possibly a keyword, we just don't know which one yet
-    if (valid_symbols[UNKNOWN_COMMAND]) {
-      lexer->result_symbol = UNKNOWN_COMMAND;
+    if (valid_symbols[UNKNOWN_COMMAND + KEYWORDS_BASE]) {
+      lexer->result_symbol = UNKNOWN_COMMAND + KEYWORDS_BASE;
       return true;
     }
 #undef KEYWORD_SIZE

@@ -1,5 +1,112 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
+// keywords.h file generation
+const fs = require('fs');
+const KEYWORDS_FILE = "src/keywords.h";
+
+const KEYWORDS = [
+  [ "FUNCTION", ["fu", "nction", false]],
+  [ "ENDFUNCTION", ["endf", "unction", false],],
+  [ "FOR", ["for", "", false],],
+  [ "ENDFOR", ["endfo", "r", false],],
+  [ "WHILE", ["wh", "ile", false],],
+  [ "ENDWHILE", ["endw", "hile", false],],
+  [ "IF", ["if", "", false],],
+  [ "ELSEIF", ["elsei", "f", false],],
+  [ "ELSE", ["el", "se", false],],
+  [ "ENDIF", ["en", "dif", false],],
+  [ "TRY", ["try", "", false],],
+  [ "CATCH", ["cat", "ch", false],],
+  [ "FINALLY", ["fina", "lly", false],],
+  [ "ENDTRY", ["endt", "ry", false],],
+  [ "CONST", ["cons", "t", false],],
+  [ "NORMAL", ["norm", "al", false],],
+  [ "RETURN", ["retu", "rn", false],],
+  [ "PERL", ["perl", "", false],],
+  [ "LUA", ["lua", "", false],],
+  [ "RUBY", ["rub", "y", false],],
+  [ "PYTHON", ["py", "thon", false],],
+  [ "THROW", ["th", "row", false],],
+  [ "EXECUTE", ["exe", "cute", false],],
+  [ "AUTOCMD", ["au", "tocmd", false],],
+  [ "SILENT", ["sil", "ent", false],],
+  [ "ECHO", ["ec", "ho", true],],
+  [ "ECHON", ["echon", "", true],],
+  [ "ECHOHL", ["echoh", "l", false],],
+  [ "ECHOMSG", ["echom", "sg", true],],
+  [ "ECHOERR", ["echoe", "rr", true],],
+  [ "MAP", ["map", "", true],],
+  [ "NMAP", ["nm", "ap", true],],
+  [ "VMAP", ["vm", "ap", true],],
+  [ "XMAP", ["xm", "ap", true],],
+  [ "SMAP", ["smap", "", true],],
+  [ "OMAP", ["om", "ap", true],],
+  [ "IMAP", ["im", "ap", true],],
+  [ "LMAP", ["lm", "ap", true],],
+  [ "CMAP", ["cm", "ap", true],],
+  [ "TMAP", ["tma", "p", true],],
+  [ "NOREMAP", ["no", "remap", true],],
+  [ "VNOREMAP", ["nn", "oremap", true],],
+  [ "NNOREMAP", ["vn", "oremap", true],],
+  [ "XNOREMAP", ["xn", "oremap", true],],
+  [ "SNOREMAP", ["snor", "emap", true],],
+  [ "ONOREMAP", ["ono", "remap", true],],
+  [ "INOREMAP", ["ino", "remap", true],],
+  [ "LNOREMAP", ["ln", "oremap", true],],
+  [ "CNOREMAP", ["cno", "remap", true],],
+  [ "TNOREMAP", ["tno", "remap", true],],
+  [ "AUGROUP", ["aug", "roup", true],],
+  [ "HIGHLIGHT", ["hi", "ghlight", false],],
+  [ "DEFAULT", ["def", "ault", false]], // highlight def[ault],
+  [ "SYNTAX", ["sy", "ntax", false],],
+  [ "SET", ["se", "t", false],],
+  [ "SETLOCAL", ["setl", "ocal", false],],
+  [ "SETFILETYPE", ["setf", "iletype", false],],
+  [ "BROWSE", ["bro", "wse", false],],
+  [ "OPTIONS", ["opt", "ions", false],],
+  [ "STARTINSERT", ["star", "tinsert", false],],
+  [ "STOPINSERT", ["stopi", "nsert", false],],
+  [ "SCRIPTENCODING", ["scripte", "ncoding", false],],
+  [ "SOURCE", ["so", "urce", false],],
+  [ "GLOBAL", ["g", "lobal", false],],
+  [ "COLORSCHEME", ["colo", "rscheme", false],],
+  [ "COMCLEAR", ["comc", "lear", false],],
+  [ "DELCOMMAND", ["delc", "ommand", false],],
+  [ "RUNTIME", ["ru", "ntime", false],],
+  [ "WINCMD", ["winc", "md", false],],
+  [ "SIGN", ["sig", "n", false],],
+  [ "FILETYPE", ["filet", "ype", false],],
+  [ "LET", ["let", "", false],],
+  [ "UNLET", ["unl", "et", false],],
+  [ "CALL", ["cal", "l", false],],
+  [ "BREAK", ["brea", "k", false],],
+  [ "CONTINUE", ["con", "tinue", false],],
+];
+
+fs.writeFileSync(KEYWORDS_FILE, `typedef enum {
+`, (err) => {});
+
+for (const [index, [kname, _]] of KEYWORDS.entries()) {
+  fs.appendFileSync(KEYWORDS_FILE, `  ${kname} = ${index},\n`, (err) => {});
+}
+
+fs.appendFileSync(KEYWORDS_FILE, `  UNKNOWN_COMMAND
+} kwid;
+
+keyword keywords[] = {
+`, (err) => {});
+
+for (const [kname, [mandat, opt, ica]] of KEYWORDS) {
+  fs.appendFileSync(KEYWORDS_FILE, `  [${kname}] = {
+    .mandat = "${mandat}",
+    .opt = "${opt}",
+    .ignore_comments_after = ${ica}
+  },
+`, (err) => {});
+}
+
+fs.appendFileSync(KEYWORDS_FILE, "};", (err) => {})
+
 const MAP_OPTIONS = any_order(
   '<buffer>',
   '<nowait>',
@@ -8,7 +115,7 @@ const MAP_OPTIONS = any_order(
   '<script>',
 );
 
-PREC = {
+const PREC = {
   TERNARY: 1, //=> expr ? expr : expr
   OR: 2, //=> or
   AND: 3, //=> and
