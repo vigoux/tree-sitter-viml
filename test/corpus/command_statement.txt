@@ -61,16 +61,19 @@ com -nargs=1 -bang -complete=customlist,EditFileComplete Test call Test()
 
 (script_file
   (command_statement
-    (command_attribute)
+  (command_attribute
+    value: (integer_literal))
     name: (command_name)
     repl: (command
       (echo_statement
         (string_literal)))) 
   (command_statement
-    (command_attribute)
+    (command_attribute
+      value: (integer_literal))
     (command_attribute)
     (command_attribute
-      (identifier))
+      value: (behavior
+        (identifier)))
     name: (command_name)
     repl: (command
       (call_statement

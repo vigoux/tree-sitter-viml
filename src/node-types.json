@@ -379,6 +379,29 @@
     }
   },
   {
+    "type": "behavior",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "scoped_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_operation",
     "named": true,
     "fields": {
@@ -1326,24 +1349,71 @@
   {
     "type": "command_attribute",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "argument",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "scoped_identifier",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "-addr",
+            "named": false
+          },
+          {
+            "type": "-bang",
+            "named": false
+          },
+          {
+            "type": "-bar",
+            "named": false
+          },
+          {
+            "type": "-buffer",
+            "named": false
+          },
+          {
+            "type": "-complete",
+            "named": false
+          },
+          {
+            "type": "-count",
+            "named": false
+          },
+          {
+            "type": "-keepscript",
+            "named": false
+          },
+          {
+            "type": "-nargs",
+            "named": false
+          },
+          {
+            "type": "-range",
+            "named": false
+          },
+          {
+            "type": "-register",
+            "named": false
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "behavior",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "pattern_multi",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -7680,7 +7750,7 @@
     "named": false
   },
   {
-    "type": "-addr=",
+    "type": "-addr",
     "named": false
   },
   {
@@ -7688,19 +7758,35 @@
     "named": false
   },
   {
-    "type": "-complete=",
+    "type": "-bar",
     "named": false
   },
   {
-    "type": "-count=",
+    "type": "-buffer",
     "named": false
   },
   {
-    "type": "-nargs=",
+    "type": "-complete",
+    "named": false
+  },
+  {
+    "type": "-count",
+    "named": false
+  },
+  {
+    "type": "-keepscript",
+    "named": false
+  },
+  {
+    "type": "-nargs",
     "named": false
   },
   {
     "type": "-range",
+    "named": false
+  },
+  {
+    "type": "-register",
     "named": false
   },
   {
@@ -7918,10 +8004,6 @@
   {
     "type": "bang",
     "named": true
-  },
-  {
-    "type": "bar",
-    "named": false
   },
   {
     "type": "behave",
@@ -8348,10 +8430,6 @@
     "named": true
   },
   {
-    "type": "file",
-    "named": false
-  },
-  {
     "type": "file_in_path",
     "named": false
   },
@@ -8529,11 +8607,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "koi8",
@@ -8782,10 +8860,6 @@
   {
     "type": "register",
     "named": true
-  },
-  {
-    "type": "register",
-    "named": false
   },
   {
     "type": "remove",

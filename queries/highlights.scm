@@ -72,6 +72,7 @@
   "perl"
   "python"
   "highlight"
+  "command"
   "delcommand"
   "comclear"
   "colorscheme"
@@ -133,6 +134,13 @@
   "link"
   "clear"
 ] @keyword)
+
+;; Command command
+
+(command_attribute name: _ @property)
+(command_attribute
+  value: (behavior
+    (identifier)? @function) @constant)
 
 ;; Runtime command
 
