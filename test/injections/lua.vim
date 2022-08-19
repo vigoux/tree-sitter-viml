@@ -1,9 +1,9 @@
-" Last Change: 2022 Jul 04
+" Last Change: 2022 Aug 19
 
 lua foo = load("print('hello, world')")
-  " ^ lua
+"   ^ lua
 
 lua << END
 foo()
--- <- lua
 END
+"  ^ lua

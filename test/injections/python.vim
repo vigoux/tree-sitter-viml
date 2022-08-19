@@ -1,9 +1,9 @@
-" Last Change: 2022 Jul 04
+" Last Change: 2022 Aug 19
 
 python foo = lambda: print('hello, world')
      " ^ python
 
 python << END
 foo()
-# <- python
 END
+"   ^ python
