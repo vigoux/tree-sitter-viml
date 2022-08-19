@@ -456,17 +456,30 @@ module.exports = grammar({
           'other',
         ].map(token.immediate),
       ),
-    _command_attribute: ($) =>
+
+    _command_attribute_nargs_value: ($) =>
       choice(
-        seq('-nargs=', token.immediate(/[01*?+]/)),
-        seq('-complete=', $._command_attribute_completion_behavior),
-        seq('-range', optional(seq(token.immediate('='), token.immediate(/%|[0-9]+/)))),
-        seq('-count=', token.immediate(/[0-9]+/)),
-        seq('-addr=', $._command_attribute_address_behavior),
-        '-bang',
-        'bar',
-        'register',
-        'buffer',
+        alias(token.immediate(/[01]/), $.integer_literal),
+        alias(token.immediate(/[*?+]/), $.pattern_multi),
+      ),
+    _command_attribute_range_value: ($) =>
+      choice(
+        alias(token.immediate(/[0-9]+/), $.integer_literal),
+        alias(token.immediate(/%/), $.pattern_multi),
+      ),
+
+    command_attribute: ($) =>
+      choice(
+        seq(field('name', '-nargs'), token.immediate('='), field('value', $._command_attribute_nargs_value)),
+        seq(field('name', '-complete'), token.immediate('='), field('value', alias($._command_attribute_completion_behavior, $.behavior))),
+        seq(field('name', '-range'), optional(seq(token.immediate('='), field('value', $._command_attribute_range_value)))),
+        seq(field('name', '-count'), token.immediate('='), field('value', alias(token.immediate(/[0-9]+/), $.integer_literal))),
+        seq(field('name', '-addr'), token.immediate('='), field('value', alias($._command_attribute_address_behavior, $.behavior))),
+        field('name', '-bang'),
+        field('name', '-bar'),
+        field('name', '-register'),
+        field('name', '-buffer'),
+        field('name', '-keepscript'),
       ),
     command_statement: ($) =>
       seq(
@@ -476,7 +489,7 @@ module.exports = grammar({
           choice(
             field('name', $.command_name),
             seq(
-              repeat(alias($._command_attribute, $.command_attribute)),
+              repeat($.command_attribute),
               field('name', $.command_name),
               field('repl', alias($._statement, $.command)),
             ),
