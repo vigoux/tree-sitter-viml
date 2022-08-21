@@ -147,6 +147,44 @@ syn keyword vimSetting transparent skipwhite skipnl skipempty tag
     (keyword)))
 
 ================================================================================
+Syntax keyword special characters
+================================================================================
+
+syntax keyword   Type   conceal int long contained char= cchar=.
+syntax keyword   Type   conceal int long3 contained this<>strange
+syntax keyword   Type   conceal transparent[]
+syntax keyword   Type   conceal nextgro[p]][opt] contained[] wired{keyword
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword)
+    (keyword)
+    (syntax_argument)
+    (keyword)
+    (syntax_argument))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword)
+    (keyword)
+    (syntax_argument)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword))
+  (syntax_statement
+    (hl_group)
+    (syntax_argument)
+    (keyword)
+    (keyword)
+    (keyword)))
+
+================================================================================
 Syntax match
 ================================================================================
 

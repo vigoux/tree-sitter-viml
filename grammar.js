@@ -1143,16 +1143,34 @@ module.exports = grammar({
         ),
       ),
 
+    // Any ascii non-blanck printable character (no unicode)
+    _syn_keyword_identifier: ($) =>
+        choice(
+          seq(/[!-~]/, repeat(token.immediate(/[!-~]/))),
+          seq(
+            choice(
+              'conceal',
+              'contained',
+              'transparent',
+              'skipwhite',
+              'skipnl',
+              'skipempty',
+            ),
+            token.immediate('['),
+            repeat(token.immediate(/[!-~]/)),
+            token.immediate(']'),
+          ),
+        ),
     _syn_keyword: ($) =>
       sub_cmd(
         'keyword',
         $.hl_group,
         repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
         // The list of keyword cannot be empty, but we can have arguments anywhere on the line
-        alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
+        alias($._syn_keyword_identifier, $.keyword),
         repeat(choice(
           alias($._syn_arguments_keyword, $.syntax_argument),
-          alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
+          alias($._syn_keyword_identifier, $.keyword),
         )),
       ),
 

@@ -6211,6 +6211,88 @@
         }
       ]
     },
+    "_syn_keyword_identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[!-~]"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[!-~]"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "conceal"
+                },
+                {
+                  "type": "STRING",
+                  "value": "contained"
+                },
+                {
+                  "type": "STRING",
+                  "value": "transparent"
+                },
+                {
+                  "type": "STRING",
+                  "value": "skipwhite"
+                },
+                {
+                  "type": "STRING",
+                  "value": "skipnl"
+                },
+                {
+                  "type": "STRING",
+                  "value": "skipempty"
+                }
+              ]
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "["
+              }
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[!-~]"
+                }
+              }
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "]"
+              }
+            }
+          ]
+        }
+      ]
+    },
     "_syn_keyword": {
       "type": "SEQ",
       "members": [
@@ -6241,8 +6323,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[a-zA-Z0-9\\[\\]_]+"
+            "type": "SYMBOL",
+            "name": "_syn_keyword_identifier"
           },
           "named": true,
           "value": "keyword"
@@ -6264,8 +6346,8 @@
               {
                 "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "[a-zA-Z0-9\\[\\]_]+"
+                  "type": "SYMBOL",
+                  "name": "_syn_keyword_identifier"
                 },
                 "named": true,
                 "value": "keyword"

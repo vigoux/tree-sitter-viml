@@ -3511,6 +3511,11 @@
     "fields": {}
   },
   {
+    "type": "keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "lambda_expression",
     "named": true,
     "fields": {},
@@ -7962,19 +7967,19 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
-  },
-  {
-    "type": "filetype",
     "named": true
   },
   {
     "type": "filetype",
     "named": false
+  },
+  {
+    "type": "filetype",
+    "named": true
   },
   {
     "type": "finally",
@@ -8135,10 +8140,6 @@
   {
     "type": "keyword",
     "named": false
-  },
-  {
-    "type": "keyword",
-    "named": true
   },
   {
     "type": "koi8",
