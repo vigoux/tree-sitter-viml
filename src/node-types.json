@@ -1396,7 +1396,7 @@
           }
         ]
       },
-      "value": {
+      "val": {
         "multiple": false,
         "required": false,
         "types": [

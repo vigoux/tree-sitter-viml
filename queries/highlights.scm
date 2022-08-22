@@ -139,7 +139,7 @@
 
 (command_attribute name: _ @property)
 (command_attribute
-  value: (behavior
+  val: (behavior
     (identifier)? @function) @constant)
 
 ;; Runtime command
