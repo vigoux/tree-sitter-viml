@@ -10400,7 +10400,7 @@
             },
             {
               "type": "PATTERN",
-              "value": "[\\/._+,#$%~=-]"
+              "value": "[/._+,#$%~=-]"
             },
             {
               "type": "PATTERN",
@@ -10441,7 +10441,7 @@
                 "type": "IMMEDIATE_TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[\\/._+,#$%~=-]"
+                  "value": "[/._+,#$%~=-]"
                 }
               },
               {
@@ -10724,7 +10724,7 @@
     },
     "register": {
       "type": "PATTERN",
-      "value": "@[\"0-9a-zA-Z:.%#=*+_\\/-@]"
+      "value": "@[\"0-9a-zA-Z:.%#=*+_/-@]"
     },
     "option": {
       "type": "SEQ",
