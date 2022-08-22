@@ -465,21 +465,23 @@ module.exports = grammar({
     _command_attribute_range_value: ($) =>
       choice(
         alias(token.immediate(/[0-9]+/), $.integer_literal),
-        alias(token.immediate(/%/), $.pattern_multi),
+        alias(token.immediate('%'), $.pattern_multi),
       ),
 
     command_attribute: ($) =>
       choice(
-        seq(field('name', '-nargs'), token.immediate('='), field('value', $._command_attribute_nargs_value)),
-        seq(field('name', '-complete'), token.immediate('='), field('value', alias($._command_attribute_completion_behavior, $.behavior))),
-        seq(field('name', '-range'), optional(seq(token.immediate('='), field('value', $._command_attribute_range_value)))),
-        seq(field('name', '-count'), token.immediate('='), field('value', alias(token.immediate(/[0-9]+/), $.integer_literal))),
-        seq(field('name', '-addr'), token.immediate('='), field('value', alias($._command_attribute_address_behavior, $.behavior))),
-        field('name', '-bang'),
-        field('name', '-bar'),
-        field('name', '-register'),
-        field('name', '-buffer'),
-        field('name', '-keepscript'),
+        key_val_arg('-nargs', $._command_attribute_nargs_value),
+        key_val_arg('-complete', alias($._command_attribute_completion_behavior, $.behavior)),
+        key_val_arg('-range', $._command_attribute_range_value),
+        key_val_arg('-range'),
+        key_val_arg('-count', alias(token.immediate(/[0-9]+/), $.integer_literal)),
+        key_val_arg('-count'),
+        key_val_arg('-addr', alias($._command_attribute_address_behavior, $.behavior)),
+        key_val_arg('-bang'),
+        key_val_arg('-bar'),
+        key_val_arg('-register'),
+        key_val_arg('-buffer'),
+        key_val_arg('-keepscript'),
       ),
     command_statement: ($) =>
       seq(
