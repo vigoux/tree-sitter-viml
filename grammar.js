@@ -1,4 +1,5 @@
 /// <reference types="tree-sitter-cli/dsl" />
+const utils = require("./rules/utils");
 
 const MAP_OPTIONS = any_order(
   "<buffer>",
@@ -127,14 +128,15 @@ module.exports = grammar({
 
     unknown_builtin_statement: ($) =>
       seq(
-        maybe_bang($, $.unknown_command_name),
+        utils.maybe_bang($, $.unknown_command_name),
         alias(repeat($.command_argument), $.arguments)
       ),
 
-    return_statement: ($) => command($, "return", optional($._expression)),
+    return_statement: ($) =>
+      utils.command($, "return", optional($._expression)),
 
-    break_statement: ($) => command($, "break"),
-    continue_statement: ($) => command($, "continue"),
+    break_statement: ($) => utils.command($, "break"),
+    continue_statement: ($) => utils.command($, "continue"),
 
     scope_dict: ($) => choice($._scope_dict, "a:"),
 
@@ -146,16 +148,20 @@ module.exports = grammar({
     filetypes: ($) =>
       seq($.filetype, repeat(seq(token.immediate("."), $._filetype_immediate))),
     setfiletype_statement: ($) =>
-      command(
+      utils.command(
         $,
         "setfiletype",
         optional(alias("FALLBACK", $.fallback)),
         $.filetypes
       ),
     options_statement: ($) =>
-      choice(command($, "browse", keyword($, "set")), command($, "options")),
-    startinsert_statement: ($) => maybe_bang($, keyword($, "startinsert")),
-    stopinsert_statement: ($) => keyword($, "stopinsert"),
+      choice(
+        utils.command($, "browse", utils.keyword($, "set")),
+        utils.command($, "options")
+      ),
+    startinsert_statement: ($) =>
+      utils.maybe_bang($, utils.keyword($, "startinsert")),
+    stopinsert_statement: ($) => utils.keyword($, "stopinsert"),
 
     encoding: ($) =>
       choice(
@@ -220,130 +226,19 @@ module.exports = grammar({
         "default"
       ),
     scriptencoding_statement: ($) =>
-      command($, "scriptencoding", optional($.encoding)),
+      utils.command($, "scriptencoding", optional($.encoding)),
 
-    comclear_statement: ($) => keyword($, "comclear"),
-
-    // :h :command
-    command_name: ($) => /[A-Z][A-Za-z0-9]*/,
-
-    _command_attribute_completion_behavior: ($) =>
-      choice(
-        ...[
-          "arglist",
-          "augroup",
-          "buffer",
-          "behave",
-          "color",
-          "command",
-          "compiler",
-          "cscope",
-          "dir",
-          "environment",
-          "even",
-          "expression",
-          "file",
-          "file_in_path",
-          "filetype",
-          "function",
-          "help",
-          "highlight",
-          "history",
-          "local",
-          "lua",
-          "mapclear",
-          "mapping",
-          "menu",
-          "messages",
-          "option",
-          "packadd",
-          "shellcmd",
-          "sign",
-          "syntax",
-          "syntime",
-          "tag",
-          "tag_listfiles",
-          "user",
-          "var",
-        ].map((name) => cmd_attr_behavior_key_val(name)),
-        cmd_attr_behavior_key_val("custom", $._ident),
-        cmd_attr_behavior_key_val("customlist", $._ident)
-      ),
-    _command_attribute_address_behavior: ($) =>
-      choice(
-        ...[
-          "lines",
-          "arguments",
-          "buffers",
-          "loaded_buffers",
-          "windows",
-          "tabs",
-          "quickfix",
-          "other",
-        ].map((name) => cmd_attr_behavior_key_val(name))
-      ),
-
-    _command_attribute_nargs_value: ($) =>
-      choice(
-        alias(token.immediate(/[01]/), $.integer_literal),
-        alias(token.immediate(/[*?+]/), $.pattern_multi)
-      ),
-    _command_attribute_range_value: ($) =>
-      choice(
-        alias(token.immediate(/[0-9]+/), $.integer_literal),
-        alias(token.immediate("%"), $.pattern_multi)
-      ),
-
-    command_attribute: ($) =>
-      choice(
-        key_val_arg("-nargs", $._command_attribute_nargs_value),
-        key_val_arg(
-          "-complete",
-          alias($._command_attribute_completion_behavior, $.behavior)
-        ),
-        key_val_arg("-range", $._command_attribute_range_value),
-        key_val_arg("-range"),
-        key_val_arg(
-          "-count",
-          alias(token.immediate(/[0-9]+/), $.integer_literal)
-        ),
-        key_val_arg("-count"),
-        key_val_arg(
-          "-addr",
-          alias($._command_attribute_address_behavior, $.behavior)
-        ),
-        key_val_arg("-bang"),
-        key_val_arg("-bar"),
-        key_val_arg("-register"),
-        key_val_arg("-buffer"),
-        key_val_arg("-keepscript")
-      ),
-    command_statement: ($) =>
-      seq(
-        maybe_bang($, keyword($, "command")),
-        // `:command` alone list all user-defined command
-        optional(
-          choice(
-            field("name", $.command_name),
-            seq(
-              repeat($.command_attribute),
-              field("name", $.command_name),
-              field("repl", alias($._statement, $.command))
-            )
-          )
-        )
-      ),
-
-    delcommand_statement: ($) => command($, "delcommand", $.command_name),
-
-    cnext_statement: ($) => maybe_bang($, keyword($, "cnext")),
+    cnext_statement: ($) => utils.maybe_bang($, utils.keyword($, "cnext")),
     cprevious_statement: ($) =>
-      maybe_bang($, choice(keyword($, "cprevious"), keyword($, "cNext"))),
+      utils.maybe_bang(
+        $,
+        choice(utils.keyword($, "cprevious"), utils.keyword($, "cNext"))
+      ),
 
     _runtime_where: ($) => choice("START", "OPT", "PACK", "ALL"),
     runtime_statement: ($) =>
       seq(
-        maybe_bang($, keyword($, "runtime")),
+        utils.maybe_bang($, utils.keyword($, "runtime")),
         optional(alias($._runtime_where, $.where)),
         alias(repeat1($.filename), $.filenames)
       ),
@@ -351,7 +246,7 @@ module.exports = grammar({
     wincmd_statement: ($) =>
       seq(
         optional($.integer_literal),
-        keyword($, "wincmd"),
+        utils.keyword($, "wincmd"),
         field("action", /[a-zA-Z=<>]/)
       ),
 
@@ -360,7 +255,7 @@ module.exports = grammar({
 
     global_statement: ($) =>
       seq(
-        maybe_bang($, keyword($, "global")),
+        utils.maybe_bang($, utils.keyword($, "global")),
         $._separator_first,
         $.pattern,
         $._separator,
@@ -370,7 +265,7 @@ module.exports = grammar({
     _filetype_state: ($) => choice("on", "off"),
     filetype_statement: ($) =>
       seq(
-        keyword($, "filetype"),
+        utils.keyword($, "filetype"),
         optional(
           choice(
             seq(
@@ -384,12 +279,13 @@ module.exports = grammar({
       ),
 
     colorscheme_statement: ($) =>
-      command($, "colorscheme", optional(alias($.filename, $.name))),
+      utils.command($, "colorscheme", optional(alias($.filename, $.name))),
 
-    lua_statement: ($) => command($, "lua", choice($.chunk, $.script)),
-    ruby_statement: ($) => command($, "ruby", choice($.chunk, $.script)),
-    python_statement: ($) => command($, "python", choice($.chunk, $.script)),
-    perl_statement: ($) => command($, "perl", choice($.chunk, $.script)),
+    lua_statement: ($) => utils.command($, "lua", choice($.chunk, $.script)),
+    ruby_statement: ($) => utils.command($, "ruby", choice($.chunk, $.script)),
+    python_statement: ($) =>
+      utils.command($, "python", choice($.chunk, $.script)),
+    perl_statement: ($) => utils.command($, "perl", choice($.chunk, $.script)),
 
     chunk: ($) => /<|(<[^\n<]|[^\s<])[^\n]*/,
 
@@ -405,60 +301,63 @@ module.exports = grammar({
 
     for_loop: ($) =>
       seq(
-        keyword($, "for"),
+        utils.keyword($, "for"),
         field("variable", choice($._ident, $.list_assignment)),
         "in",
         field("iter", $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
-        keyword($, "endfor")
+        utils.keyword($, "endfor")
       ),
 
     while_loop: ($) =>
       seq(
-        keyword($, "while"),
+        utils.keyword($, "while"),
         field("condition", $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
-        keyword($, "endwhile")
+        utils.keyword($, "endwhile")
       ),
 
     if_statement: ($) =>
       seq(
-        keyword($, "if"),
+        utils.keyword($, "if"),
         field("condition", $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
-        keyword($, "endif")
+        utils.keyword($, "endif")
       ),
 
     elseif_statement: ($) =>
       seq(
-        keyword($, "elseif"),
+        utils.keyword($, "elseif"),
         field("condition", $._expression),
         alias(optional($._separated_statements), $.body)
       ),
 
     else_statement: ($) =>
-      seq(keyword($, "else"), alias(optional($._separated_statements), $.body)),
+      seq(
+        utils.keyword($, "else"),
+        alias(optional($._separated_statements), $.body)
+      ),
 
     try_statement: ($) =>
       seq(
-        keyword($, "try"),
+        utils.keyword($, "try"),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
-        keyword($, "endtry")
+        utils.keyword($, "endtry")
       ),
 
     _au_pattern: ($) => choice(/\/.*\//, /\?.*\?/),
 
     catch_statement: ($) =>
       seq(
-        keyword($, "catch"),
+        utils.keyword($, "catch"),
         optional(alias($._au_pattern, $.pattern)),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body)
@@ -466,15 +365,15 @@ module.exports = grammar({
 
     finally_statement: ($) =>
       seq(
-        keyword($, "finally"),
+        utils.keyword($, "finally"),
         alias(optional($._separated_statements), $.body)
       ),
 
-    throw_statement: ($) => command($, "throw", $._expression),
+    throw_statement: ($) => utils.command($, "throw", $._expression),
 
     autocmd_statement: ($) =>
       seq(
-        maybe_bang($, keyword($, "autocmd")),
+        utils.maybe_bang($, utils.keyword($, "autocmd")),
         optional(alias($.identifier, $.augroup_name)),
         optional(
           seq(
@@ -489,7 +388,7 @@ module.exports = grammar({
 
     augroup_statement: ($) =>
       seq(
-        maybe_bang($, keyword($, "augroup")),
+        utils.maybe_bang($, utils.keyword($, "augroup")),
         alias($.identifier, $.augroup_name)
       ),
 
@@ -575,7 +474,7 @@ module.exports = grammar({
       ),
     let_statement: ($) =>
       seq(
-        keyword($, "let"),
+        utils.keyword($, "let"),
         choice($._let_assignment, repeat($._assignment_variable))
       ),
 
@@ -585,7 +484,7 @@ module.exports = grammar({
         choice(seq("=", $._expression), alias($._let_heredoc, $.heredoc))
       ),
     const_statement: ($) =>
-      command(
+      utils.command(
         $,
         "const",
         choice($._const_assignment, repeat($._assignment_variable))
@@ -639,17 +538,21 @@ module.exports = grammar({
     setlocal_statement: ($) => set_variant($, "setlocal"),
 
     unlet_statement: ($) =>
-      seq(maybe_bang($, keyword($, "unlet")), repeat1($._expression)),
+      seq(
+        utils.maybe_bang($, utils.keyword($, "unlet")),
+        repeat1($._expression)
+      ),
 
-    call_statement: ($) => seq(keyword($, "call"), $.call_expression),
+    call_statement: ($) => seq(utils.keyword($, "call"), $.call_expression),
 
     echo_statement: ($) => echo_variant($, "echo"),
     echon_statement: ($) => echo_variant($, "echon"),
-    echohl_statement: ($) => seq(keyword($, "echohl"), $.hl_group),
+    echohl_statement: ($) => seq(utils.keyword($, "echohl"), $.hl_group),
     echomsg_statement: ($) => echo_variant($, "echomsg"),
     echoerr_statement: ($) => echo_variant($, "echoerr"),
 
-    execute_statement: ($) => command($, "execute", repeat1($._expression)),
+    execute_statement: ($) =>
+      utils.command($, "execute", repeat1($._expression)),
 
     silent_statement: ($) => command_modifier($, "silent", true),
     vertical_statement: ($) => command_modifier($, "vertical", false),
@@ -658,19 +561,19 @@ module.exports = grammar({
 
     aboveleft_statement: ($) =>
       seq(
-        choice(keyword($, "leftabove"), keyword($, "aboveleft")),
+        choice(utils.keyword($, "leftabove"), utils.keyword($, "aboveleft")),
         $._statement
       ),
 
     belowright_statement: ($) =>
       seq(
-        choice(keyword($, "rightbelow"), keyword($, "belowright")),
+        choice(utils.keyword($, "rightbelow"), utils.keyword($, "belowright")),
         $._statement
       ),
 
     user_command: ($) =>
       seq(
-        maybe_bang($, $.command_name),
+        utils.maybe_bang($, $.command_name),
         alias(repeat($.command_argument), $.arguments)
       ),
 
@@ -678,14 +581,14 @@ module.exports = grammar({
 
     function_definition: ($) =>
       seq(
-        maybe_bang($, keyword($, "function")),
+        utils.maybe_bang($, utils.keyword($, "function")),
         $.function_declaration,
         any_order("dict", "range", "abort", "closure"),
         $._cmd_separator,
 
         alias(optional($._separated_statements), $.body),
 
-        keyword($, "endfunction")
+        utils.keyword($, "endfunction")
       ),
 
     function_declaration: ($) =>
@@ -784,7 +687,7 @@ module.exports = grammar({
               "lnoremap",
               "cnoremap",
               "tnoremap",
-            ].map((name) => keyword($, name))
+            ].map((name) => utils.keyword($, name))
           )
         ),
         MAP_OPTIONS,
@@ -878,7 +781,7 @@ module.exports = grammar({
 
     _hl_body_link: ($) =>
       seq(
-        optional(keyword($, "default")),
+        optional(utils.keyword($, "default")),
         "link",
         field("from", $.hl_group),
         field("to", $.hl_group)
@@ -958,7 +861,11 @@ module.exports = grammar({
       ),
 
     _hl_body_keys: ($) =>
-      seq(optional(keyword($, "default")), $.hl_group, repeat1($.hl_attribute)),
+      seq(
+        optional(utils.keyword($, "default")),
+        $.hl_group,
+        repeat1($.hl_attribute)
+      ),
 
     _hl_body: ($) =>
       choice(
@@ -969,7 +876,10 @@ module.exports = grammar({
       ),
 
     highlight_statement: ($) =>
-      seq(maybe_bang($, keyword($, "highlight")), optional($._hl_body)),
+      seq(
+        utils.maybe_bang($, utils.keyword($, "highlight")),
+        optional($._hl_body)
+      ),
 
     // :h :syntax
     _syn_enable: ($) => sub_cmd(choice("enable", "on", "off", "reset")),
@@ -999,42 +909,42 @@ module.exports = grammar({
     // FIXME: find better names for rules (_syn_arguments_[basic|match|region])
     _syn_arguments_keyword: ($) =>
       choice(
-        key_val_arg("conceal"),
-        key_val_arg("cchar", $._printable),
-        key_val_arg("contained"),
+        utils.key_val_arg("conceal"),
+        utils.key_val_arg("cchar", $._printable),
+        utils.key_val_arg("contained"),
         // FIXME: allow regex of hlgroups
-        key_val_arg("containedin", optional($.hl_groups)),
-        key_val_arg("nextgroup", optional($.hl_groups)),
-        key_val_arg("transparent"),
-        key_val_arg("skipwhite"),
-        key_val_arg("skipnl"),
-        key_val_arg("skipempty")
+        utils.key_val_arg("containedin", optional($.hl_groups)),
+        utils.key_val_arg("nextgroup", optional($.hl_groups)),
+        utils.key_val_arg("transparent"),
+        utils.key_val_arg("skipwhite"),
+        utils.key_val_arg("skipnl"),
+        utils.key_val_arg("skipempty")
       ),
 
     _syn_arguments_match: ($) =>
       choice(
         $._syn_arguments_keyword,
-        key_val_arg("contains", optional($.hl_groups)),
-        key_val_arg("fold"),
-        key_val_arg("display"),
-        key_val_arg("extend"),
-        key_val_arg("keepend"),
-        key_val_arg("excludenl")
+        utils.key_val_arg("contains", optional($.hl_groups)),
+        utils.key_val_arg("fold"),
+        utils.key_val_arg("display"),
+        utils.key_val_arg("extend"),
+        utils.key_val_arg("keepend"),
+        utils.key_val_arg("excludenl")
       ),
 
     _syn_arguments_region: ($) =>
       choice(
         $._syn_arguments_match,
-        key_val_arg("matchgroup", optional($.hl_groups)),
-        key_val_arg("oneline"),
-        key_val_arg("concealends")
+        utils.key_val_arg("matchgroup", optional($.hl_groups)),
+        utils.key_val_arg("oneline"),
+        utils.key_val_arg("concealends")
       ),
 
     _syn_arguments_cluster: ($) =>
       choice(
-        key_val_arg("contains", optional($.hl_groups)),
-        key_val_arg("add", optional($.hl_groups)),
-        key_val_arg("remove", optional($.hl_groups))
+        utils.key_val_arg("contains", optional($.hl_groups)),
+        utils.key_val_arg("add", optional($.hl_groups)),
+        utils.key_val_arg("remove", optional($.hl_groups))
       ),
 
     _syn_pattern_offset: ($) =>
@@ -1120,7 +1030,7 @@ module.exports = grammar({
 
     // :h syn-sync
     _syn_sync_lines: ($) =>
-      key_val_arg(choice("minlines", "maxlines"), /[0-9]+/),
+      utils.key_val_arg(choice("minlines", "maxlines"), /[0-9]+/),
     _syn_sync: ($) =>
       sub_cmd(
         "sync",
@@ -1162,7 +1072,7 @@ module.exports = grammar({
     _syn_clear: ($) => sub_cmd("clear", optional(maybe_at($, $.hl_group))),
 
     syntax_statement: ($) =>
-      command(
+      utils.command(
         $,
         "syntax",
         // `:syntax` = `:syntax list`
@@ -1193,12 +1103,15 @@ module.exports = grammar({
     _sign_define_arg_text: ($) => seq($._printable, optional($._printable)),
     _sign_define_argument: ($) =>
       choice(
-        key_val_arg("icon", optional($.filename)),
-        key_val_arg("linehl", optional($.hl_group)),
-        key_val_arg("numhl", optional($.hl_group)),
-        key_val_arg("text", optional(alias($._sign_define_arg_text, $.text))),
-        key_val_arg("texthl", optional($.hl_group)),
-        key_val_arg("culhl", optional($.hl_group))
+        utils.key_val_arg("icon", optional($.filename)),
+        utils.key_val_arg("linehl", optional($.hl_group)),
+        utils.key_val_arg("numhl", optional($.hl_group)),
+        utils.key_val_arg(
+          "text",
+          optional(alias($._sign_define_arg_text, $.text))
+        ),
+        utils.key_val_arg("texthl", optional($.hl_group)),
+        utils.key_val_arg("culhl", optional($.hl_group))
       ),
 
     _sign_define: ($) =>
@@ -1215,12 +1128,12 @@ module.exports = grammar({
     // :h sign-place
     _sign_place_place_argument: ($) =>
       choice(
-        key_val_arg("line", $.integer_literal),
-        key_val_arg("name", $._sign_name),
-        key_val_arg("buffer", $.integer_literal),
-        key_val_arg("group", $.hl_group),
-        key_val_arg("priority", $.integer_literal),
-        key_val_arg("file", $.filename)
+        utils.key_val_arg("line", $.integer_literal),
+        utils.key_val_arg("name", $._sign_name),
+        utils.key_val_arg("buffer", $.integer_literal),
+        utils.key_val_arg("group", $.hl_group),
+        utils.key_val_arg("priority", $.integer_literal),
+        utils.key_val_arg("file", $.filename)
       ),
     _sign_place_place: ($) =>
       seq(
@@ -1230,9 +1143,9 @@ module.exports = grammar({
     // :h sign-place-list
     _sign_place_list_argument: ($) =>
       choice(
-        key_val_arg("file", $.filename),
-        key_val_arg("buffer", $.integer_literal),
-        key_val_arg(
+        utils.key_val_arg("file", $.filename),
+        utils.key_val_arg("buffer", $.integer_literal),
+        utils.key_val_arg(
           "group",
           choice($.hl_group, alias(token.immediate("*"), $.wildcard))
         )
@@ -1243,7 +1156,7 @@ module.exports = grammar({
       sub_cmd("place", choice($._sign_place_place, $._sign_place_list)),
 
     _sign_unplace_cursor_argument: ($) =>
-      key_val_arg(
+      utils.key_val_arg(
         "group",
         choice($.hl_group, alias(token.immediate("*"), $.wildcard))
       ),
@@ -1251,9 +1164,9 @@ module.exports = grammar({
       alias($._sign_unplace_cursor_argument, $.sign_argument),
     _sign_unplace_id_argument: ($) =>
       choice(
-        key_val_arg("file", $.filename),
-        key_val_arg("buffer", $.integer_literal),
-        key_val_arg(
+        utils.key_val_arg("file", $.filename),
+        utils.key_val_arg("buffer", $.integer_literal),
+        utils.key_val_arg(
           "group",
           choice($.hl_group, alias(token.immediate("*"), $.wildcard))
         )
@@ -1271,9 +1184,9 @@ module.exports = grammar({
 
     _sign_jump_argument: ($) =>
       choice(
-        key_val_arg("file", $.filename),
-        key_val_arg("buffer", $.integer_literal),
-        key_val_arg("group", $.hl_group)
+        utils.key_val_arg("file", $.filename),
+        utils.key_val_arg("buffer", $.integer_literal),
+        utils.key_val_arg("group", $.hl_group)
       ),
     _sign_jump: ($) =>
       sub_cmd(
@@ -1284,7 +1197,7 @@ module.exports = grammar({
 
     sign_statement: ($) =>
       seq(
-        keyword($, "sign"),
+        utils.keyword($, "sign"),
         choice(
           $._sign_define,
           $._sign_undefine,
@@ -1542,17 +1455,15 @@ module.exports = grammar({
     // :h lambda
     lambda_expression: ($) =>
       seq("{", commaSep($.identifier), "->", $._expression, "}"),
+
+    ...require("./rules/command"),
   },
 });
 
-function keyword(gram, name) {
-  return alias(gram["_" + name], name);
-}
-
 function command_modifier($, name, bang) {
-  let inner = keyword($, name);
+  let inner = utils.keyword($, name);
   if (bang) {
-    inner = maybe_bang($, inner);
+    inner = utils.maybe_bang($, inner);
   }
   return seq(inner, $._statement);
 }
@@ -1561,22 +1472,15 @@ function _cmd_range($) {
   return seq(field("range", alias($._range, $.range)), optional(":"));
 }
 function range_command($, cmd, ...args) {
-  return seq(optional(_cmd_range($)), keyword($, cmd), ...args);
+  return seq(optional(_cmd_range($)), utils.keyword($, cmd), ...args);
 }
 function bang_range_command($, cmd, ...args) {
   return seq(
     optional(_cmd_range($)),
-    keyword($, cmd),
+    utils.keyword($, cmd),
     optional($.bang),
     ...args
   );
-}
-function command($, cmd, ...args) {
-  return seq(keyword($, cmd), ...args);
-}
-
-function maybe_bang($, cmd_name) {
-  return seq(cmd_name, optional($.bang));
 }
 
 function maybe_at($, rule) {
@@ -1600,11 +1504,11 @@ function bin_left_right(left, operator, right) {
 }
 
 function echo_variant($, cmd) {
-  return command($, cmd, repeat($._expression));
+  return utils.command($, cmd, repeat($._expression));
 }
 
 function set_variant($, cmd) {
-  return command($, cmd, sep1($.set_item, " "));
+  return utils.command($, cmd, sep1($.set_item, " "));
 }
 
 function any_order(...args) {
@@ -1615,18 +1519,6 @@ function hl_key_val(left, right) {
   return seq(field("key", left), token.immediate("="), field("val", right));
 }
 
-function cmd_attr_behavior_key_val(left, ...right) {
-  if (right.length > 0) {
-    return seq(
-      field("name", token.immediate(left)),
-      token.immediate(","),
-      field("val", ...right)
-    );
-  } else {
-    return field("name", token.immediate(left));
-  }
-}
-
 function sub_cmd(sub, ...args) {
   if (args.length > 0) {
     return seq(field("sub", sub), ...args);
@@ -1635,15 +1527,9 @@ function sub_cmd(sub, ...args) {
   }
 }
 
-function key_val_arg(arg, ...args) {
-  if (args.length > 0)
-    return seq(field("name", arg), token.immediate("="), field("val", ...args));
-  else return field("name", arg);
-}
-
 function syn_region_arg($, name) {
   return seq(
-    key_val_arg(name, $._syn_hl_pattern),
+    utils.key_val_arg(name, $._syn_hl_pattern),
     commaSep(alias($._syn_pattern_offset, $.pattern_offset))
   );
 }
