@@ -14,7 +14,7 @@ are:
 To add a new command, you only need to modify the [grammar] and the
 [keywords file], by doing the following:
 
-1. Add the following in the [keywords file]:
+1. Add the following in the [keywords file], in the `KEYWORDS` object:
 ```js
 <UPPERCASE UNIQUE NAME> = {
   mandat = "<mandatory part of the command>",
@@ -22,9 +22,9 @@ To add a new command, you only need to modify the [grammar] and the
   ignore_comments_after = true|false <whether the parser needs to ignore comments after this command>
 }
 ```
-2. Add a new rule named `<command name>_statement` in the grammar,
+2. Add a new rule named `<command name>_statement` in the [grammar],
    and add it to the `statement` rule. To use the command keyword in
-   the grammar, do `keyword($, "<command name>")`.
+   the grammar, use `utils.keyword($, "<command name>")`.
 3. Add a test for your command in a custom file in the `test/corpus`
    directory.
 4. Add highlighting for this command in [the highlight query], and

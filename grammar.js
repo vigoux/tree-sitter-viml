@@ -48,7 +48,7 @@ module.exports = grammar({
       $.string_literal,
       $.comment,
       $._bang_filter,
-    ].concat(make_keywords($, require("./keywords"))),
+    ].concat(require("./keywords").keywords($)),
 
   extras: ($) => [$._line_continuation, /[\t ]/],
 
@@ -1551,54 +1551,4 @@ function keys($, allowed_first, allowed_after = allowed_first) {
       )
     )
   );
-}
-
-function make_keywords($, keywords) {
-  const fs = require("fs");
-  const KEYWORDS_FILE = "src/keywords.h";
-
-  let rules = [];
-
-  fs.writeFileSync(
-    KEYWORDS_FILE,
-    `typedef enum {
-`,
-    (err) => {}
-  );
-
-  for (const [kname, infos] of Object.entries(keywords)) {
-    fs.appendFileSync(
-      KEYWORDS_FILE,
-      `  ${kname} = ${rules.length},\n`,
-      (err) => {}
-    );
-    rules.push($["_" + infos.mandat + infos.opt]);
-  }
-
-  fs.appendFileSync(
-    KEYWORDS_FILE,
-    `  UNKNOWN_COMMAND
-} kwid;
-
-keyword keywords[] = {
-`,
-    (err) => {}
-  );
-  rules.push($.unknown_command_name);
-
-  for (const [kname, infos] of Object.entries(keywords)) {
-    fs.appendFileSync(
-      KEYWORDS_FILE,
-      `  [${kname}] = {
-    .mandat = "${infos.mandat}",
-    .opt = "${infos.opt}",
-    .ignore_comments_after = ${infos.ignore_comments_after}
-  },\n`,
-      (err) => {}
-    );
-  }
-
-  fs.appendFileSync(KEYWORDS_FILE, "};", (err) => {});
-
-  return rules;
 }
