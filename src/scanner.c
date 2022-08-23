@@ -463,7 +463,7 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
     advance(lexer, false);
 
     size_t i = 1;
-    for (; i < KEYWORD_SIZE && iswlower(lexer->lookahead); i++) {
+    for (; i < KEYWORD_SIZE && iswalpha(lexer->lookahead); i++) {
       keyword[i] = lexer->lookahead;
       advance(lexer, false);
     }
