@@ -95,7 +95,7 @@ com -nargs=* -bang -complete=customlist,EditFileComplete Test call Test()
     (command_attribute)
     (command_attribute
       val: (behavior
-        (identifier)))
+        val: (identifier)))
     name: (command_name)
     repl: (command
       (call_statement

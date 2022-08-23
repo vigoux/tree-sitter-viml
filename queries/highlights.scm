@@ -145,10 +145,11 @@
 
 ;; Command command
 
-(command_attribute name: _ @property)
 (command_attribute
+  name: _ @property
   val: (behavior
-    (identifier)? @function) @constant)
+    name: _ @constant
+    val: (identifier)? @function)?)
 
 ;; Runtime command
 
