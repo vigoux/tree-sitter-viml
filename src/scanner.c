@@ -302,7 +302,7 @@ bool lex_scope(TSLexer *lexer) {
     }
     advance(lexer, false);
 
-    if (iswalnum(lexer->lookahead)) {
+    if (iswalnum(lexer->lookahead) || lexer->lookahead == '{') {
       lexer->result_symbol = SCOPE;
     } else {
       lexer->result_symbol = SCOPE_DICT;

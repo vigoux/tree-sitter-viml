@@ -356,3 +356,21 @@ let foo = "a" =~? "b"
       (string_literal)
       (match_case)
       (string_literal))))
+
+================================================================================
+Scoped identifier with brace expansion
+================================================================================
+
+let s:{a:foo} = 32
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (scoped_identifier
+      (scope)
+      (identifier
+        (curly_braces_name
+          (argument
+            (identifier)))))
+    (integer_literal)))
