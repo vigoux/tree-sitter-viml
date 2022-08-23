@@ -1,4 +1,4 @@
-" Last Change: 2022 Jul 04
+" Last Change: 2022 Aug 23
 
 let a = "foo"
 " <- keyword
@@ -10,3 +10,12 @@ let a{b + 10} = a:bar
 "       ^ operator
 "         ^ number
 "               ^ namespace
+
+cnext
+" <- keyword
+
+cNext
+" <- keyword
+
+cprevious
+" <- keyword

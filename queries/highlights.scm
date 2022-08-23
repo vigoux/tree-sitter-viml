@@ -81,6 +81,16 @@
   "global"
   "runtime"
   "wincmd"
+  "cnext"
+  "cprevious"
+  "cNext"
+  "vertical"
+  "leftabove"
+  "aboveleft"
+  "rightbelow"
+  "belowright"
+  "topleft"
+  "botright"
 ] @keyword
 (map_statement cmd: _ @keyword)
 [ 
