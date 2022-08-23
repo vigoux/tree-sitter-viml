@@ -7,8 +7,8 @@
     "build": "tree-sitter generate",
     "test": "tree-sitter test && ./scripts/test.py",
     "parse": "tree-sitter parse",
-    "lint": "prettier --check grammar.js",
-    "format": "prettier --write grammar.js"
+    "lint": "prettier --check grammar.js keywords.js",
+    "format": "prettier --write grammar.js keywords.js"
   },
   "author": "Thomas Vigouroux",
   "license": "Apache-2.0",

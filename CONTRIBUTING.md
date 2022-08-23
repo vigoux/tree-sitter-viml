@@ -6,9 +6,8 @@ There is still quite a lot to do, and the main axes of improvements
 are:
 
 - Add support for more builtin commands: the list of currently
-  supported builtin commands can be found in the [scanner file]
-- Add support for language constructs: like `let` variants for
-  unpacking.
+  supported builtin commands can be found in the [keywords file]
+- Add support for language constructs.
 
 ## Adding a new builtin command
 
@@ -55,3 +54,4 @@ your own, using the `$._cmd_separator` rule.
 [grammar]: ./grammar.js
 [the highlight query]: ./queries/highlights.scm
 [the highlight tests]: ./test/highlight/
+[keywords file]: ./keywords.js
