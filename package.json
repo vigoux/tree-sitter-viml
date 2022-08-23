@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tree-sitter generate",
     "test": "tree-sitter test && ./scripts/test.py",
-    "parse": "tree-sitter parse"
+    "parse": "tree-sitter parse",
+    "lint": "prettier --check grammar.js"
   },
   "author": "Thomas Vigouroux",
   "license": "Apache-2.0",
@@ -14,7 +15,8 @@
     "nan": "^2.16.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.6"
+    "tree-sitter-cli": "^0.20.6",
+    "prettier": "^2.7.1"
   },
   "tree-sitter": [
     {
