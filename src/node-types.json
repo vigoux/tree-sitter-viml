@@ -10103,11 +10103,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file_in_path",
@@ -10115,11 +10115,11 @@
   },
   {
     "type": "filetype",
-    "named": true
+    "named": false
   },
   {
     "type": "filetype",
-    "named": false
+    "named": true
   },
   {
     "type": "finally",
