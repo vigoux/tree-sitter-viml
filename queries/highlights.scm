@@ -204,6 +204,7 @@
   "/="
   "%="
   ".="
+  "..="
 ] @operator
 
 ; Some characters have different meanings based on the context
