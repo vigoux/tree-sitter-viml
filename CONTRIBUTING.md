@@ -19,21 +19,29 @@ the following:
    call, add the following in the dictionnary argument:
 ```js
 <UPPERCASE UNIQUE NAME> = {
-  rule = $._<rule name>,
   mandat = "<mandatory part of the command>",
   opt = "<optional part of the command>",
   ignore_comments_after = true|false <whether the parser needs to ignore comments after this command>
 }
 ```
 2. Add a new rule named `<command name>_statement` in the grammar,
-   and add it to the `statement` rule. To use the command keyword, do
-   `tokalias($, "<command name>")`.
+   and add it to the `statement` rule. To use the command keyword in
+   the grammar, do `keyword($, "<command name>")`.
 3. Add a test for your command in a custom file in the `test/corpus`
    directory.
 4. Add highlighting for this command in [the highlight query], and
    test it in [the highlight tests].
 
 Then open a pull request, and you'll be good to go !
+
+Some notes on how this all works internally: we generate the keywords
+so that they can be used in the external scanner. To avoid to much
+hastle, and ensure the synchronisation between the grammar and the
+external scanner, some things must be done correctly. The `<UPPERCASE UNIQUE NAME>`
+is actually the name of the token on the C side.
+We create, for each keyword in the grammar, a hidden _external rule_
+named `"_" + mandat + opt`, and thus the `<command name>` mentionned
+above is actually `mandat + opt`.
 
 ## Adding new language constructs
 

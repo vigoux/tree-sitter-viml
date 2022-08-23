@@ -53,481 +53,401 @@ module.exports = grammar({
           mandat: "fu",
           opt: "nction",
           ignore_comments_after: false,
-          rule_name: $._function,
         },
         ENDFUNCTION: {
           mandat: "endf",
           opt: "unction",
           ignore_comments_after: false,
-          rule_name: $._endfunction,
         },
         FOR: {
           mandat: "for",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._for,
         },
         ENDFOR: {
           mandat: "endfo",
           opt: "r",
           ignore_comments_after: false,
-          rule_name: $._endfor,
         },
         WHILE: {
           mandat: "wh",
           opt: "ile",
           ignore_comments_after: false,
-          rule_name: $._while,
         },
         ENDWHILE: {
           mandat: "endw",
           opt: "hile",
           ignore_comments_after: false,
-          rule_name: $._endwhile,
         },
         IF: {
           mandat: "if",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._if,
         },
         ELSEIF: {
           mandat: "elsei",
           opt: "f",
           ignore_comments_after: false,
-          rule_name: $._elseif,
         },
         ELSE: {
           mandat: "el",
           opt: "se",
           ignore_comments_after: false,
-          rule_name: $._else,
         },
         ENDIF: {
           mandat: "en",
           opt: "dif",
           ignore_comments_after: false,
-          rule_name: $._endif,
         },
         TRY: {
           mandat: "try",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._try,
         },
         CATCH: {
           mandat: "cat",
           opt: "ch",
           ignore_comments_after: false,
-          rule_name: $._catch,
         },
         CNEXT: {
           mandat: "cn",
           opt: "ext",
           ignore_comments_after: false,
-          rule_name: $._cnext,
         },
         CPREVIOUS: {
           mandat: "cp",
           opt: "revious",
           ignore_comments_after: false,
-          rule_name: $._cprevious,
         },
         CNNEXT: {
           mandat: "cN",
           opt: "ext",
           ignore_comments_after: false,
-          rule_name: $._cNext,
         },
         FINALLY: {
           mandat: "fina",
           opt: "lly",
           ignore_comments_after: false,
-          rule_name: $._finally,
         },
         ENDTRY: {
           mandat: "endt",
           opt: "ry",
           ignore_comments_after: false,
-          rule_name: $._endtry,
         },
         CONST: {
           mandat: "cons",
           opt: "t",
           ignore_comments_after: false,
-          rule_name: $._const,
         },
         NORMAL: {
           mandat: "norm",
           opt: "al",
           ignore_comments_after: false,
-          rule_name: $._normal,
         },
         RETURN: {
           mandat: "retu",
           opt: "rn",
           ignore_comments_after: false,
-          rule_name: $._return,
         },
         PERL: {
           mandat: "perl",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._perl,
         },
         LUA: {
           mandat: "lua",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._lua,
         },
         RUBY: {
           mandat: "rub",
           opt: "y",
           ignore_comments_after: false,
-          rule_name: $._ruby,
         },
         PYTHON: {
           mandat: "py",
           opt: "thon",
           ignore_comments_after: false,
-          rule_name: $._python,
         },
         THROW: {
           mandat: "th",
           opt: "row",
           ignore_comments_after: false,
-          rule_name: $._throw,
         },
         EXECUTE: {
           mandat: "exe",
           opt: "cute",
           ignore_comments_after: false,
-          rule_name: $._execute,
         },
         AUTOCMD: {
           mandat: "au",
           opt: "tocmd",
           ignore_comments_after: false,
-          rule_name: $._autocmd,
         },
         SILENT: {
           mandat: "sil",
           opt: "ent",
           ignore_comments_after: false,
-          rule_name: $._silent,
         },
         ECHO: {
           mandat: "ec",
           opt: "ho",
           ignore_comments_after: true,
-          rule_name: $._echo,
         },
         ECHON: {
           mandat: "echon",
           opt: "",
           ignore_comments_after: true,
-          rule_name: $._echon,
         },
         ECHOHL: {
           mandat: "echoh",
           opt: "l",
           ignore_comments_after: false,
-          rule_name: $._echohl,
         },
         ECHOMSG: {
           mandat: "echom",
           opt: "sg",
           ignore_comments_after: true,
-          rule_name: $._echomsg,
         },
         ECHOERR: {
           mandat: "echoe",
           opt: "rr",
           ignore_comments_after: true,
-          rule_name: $._echoerr,
         },
         MAP: {
           mandat: "map",
           opt: "",
           ignore_comments_after: true,
-          rule_name: $._map,
         },
         NMAP: {
           mandat: "nm",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._nmap,
         },
         VMAP: {
           mandat: "vm",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._vmap,
         },
         XMAP: {
           mandat: "xm",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._xmap,
         },
         SMAP: {
           mandat: "smap",
           opt: "",
           ignore_comments_after: true,
-          rule_name: $._smap,
         },
         OMAP: {
           mandat: "om",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._omap,
         },
         IMAP: {
           mandat: "im",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._imap,
         },
         LMAP: {
           mandat: "lm",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._lmap,
         },
         CMAP: {
           mandat: "cm",
           opt: "ap",
           ignore_comments_after: true,
-          rule_name: $._cmap,
         },
         TMAP: {
           mandat: "tma",
           opt: "p",
           ignore_comments_after: true,
-          rule_name: $._tmap,
         },
         NOREMAP: {
           mandat: "no",
           opt: "remap",
           ignore_comments_after: true,
-          rule_name: $._noremap,
         },
         VNOREMAP: {
           mandat: "nn",
           opt: "oremap",
           ignore_comments_after: true,
-          rule_name: $._vnoremap,
         },
         NNOREMAP: {
           mandat: "vn",
           opt: "oremap",
           ignore_comments_after: true,
-          rule_name: $._nnoremap,
         },
         XNOREMAP: {
           mandat: "xn",
           opt: "oremap",
           ignore_comments_after: true,
-          rule_name: $._xnoremap,
         },
         SNOREMAP: {
           mandat: "snor",
           opt: "emap",
           ignore_comments_after: true,
-          rule_name: $._snoremap,
         },
         ONOREMAP: {
           mandat: "ono",
           opt: "remap",
           ignore_comments_after: true,
-          rule_name: $._onoremap,
         },
         INOREMAP: {
           mandat: "ino",
           opt: "remap",
           ignore_comments_after: true,
-          rule_name: $._inoremap,
         },
         LNOREMAP: {
           mandat: "ln",
           opt: "oremap",
           ignore_comments_after: true,
-          rule_name: $._lnoremap,
         },
         CNOREMAP: {
           mandat: "cno",
           opt: "remap",
           ignore_comments_after: true,
-          rule_name: $._cnoremap,
         },
         TNOREMAP: {
           mandat: "tno",
           opt: "remap",
           ignore_comments_after: true,
-          rule_name: $._tnoremap,
         },
         AUGROUP: {
           mandat: "aug",
           opt: "roup",
           ignore_comments_after: true,
-          rule_name: $._augroup,
         },
         HIGHLIGHT: {
           mandat: "hi",
           opt: "ghlight",
           ignore_comments_after: false,
-          rule_name: $._highlight,
         },
         DEFAULT: {
           mandat: "def",
           opt: "ault",
           ignore_comments_after: false,
-          rule_name: $._default,
         }, // highlight def[ault },
         SYNTAX: {
           mandat: "sy",
           opt: "ntax",
           ignore_comments_after: false,
-          rule_name: $._syntax,
         },
         SET: {
           mandat: "se",
           opt: "t",
           ignore_comments_after: false,
-          rule_name: $._set,
         },
         SETLOCAL: {
           mandat: "setl",
           opt: "ocal",
           ignore_comments_after: false,
-          rule_name: $._setlocal,
         },
         SETFILETYPE: {
           mandat: "setf",
           opt: "iletype",
           ignore_comments_after: false,
-          rule_name: $._setfiletype,
         },
         BROWSE: {
           mandat: "bro",
           opt: "wse",
           ignore_comments_after: false,
-          rule_name: $._browse,
         },
         OPTIONS: {
           mandat: "opt",
           opt: "ions",
           ignore_comments_after: false,
-          rule_name: $._options,
         },
         STARTINSERT: {
           mandat: "star",
           opt: "tinsert",
           ignore_comments_after: false,
-          rule_name: $._startinsert,
         },
         STOPINSERT: {
           mandat: "stopi",
           opt: "nsert",
           ignore_comments_after: false,
-          rule_name: $._stopinsert,
         },
         SCRIPTENCODING: {
           mandat: "scripte",
           opt: "ncoding",
           ignore_comments_after: false,
-          rule_name: $._scriptencoding,
         },
         SOURCE: {
           mandat: "so",
           opt: "urce",
           ignore_comments_after: false,
-          rule_name: $._source,
         },
         GLOBAL: {
           mandat: "g",
           opt: "lobal",
           ignore_comments_after: false,
-          rule_name: $._global,
         },
         COLORSCHEME: {
           mandat: "colo",
           opt: "rscheme",
           ignore_comments_after: false,
-          rule_name: $._colorscheme,
         },
         COMMAND: {
           mandat: "com",
           opt: "mand",
           ignore_comments_after: false,
-          rule_name: $._command,
         },
         COMCLEAR: {
           mandat: "comc",
           opt: "lear",
           ignore_comments_after: false,
-          rule_name: $._comclear,
         },
         DELCOMMAND: {
           mandat: "delc",
           opt: "ommand",
           ignore_comments_after: false,
-          rule_name: $._delcommand,
         },
         RUNTIME: {
           mandat: "ru",
           opt: "ntime",
           ignore_comments_after: false,
-          rule_name: $._runtime,
         },
         WINCMD: {
           mandat: "winc",
           opt: "md",
           ignore_comments_after: false,
-          rule_name: $._wincmd,
         },
         SIGN: {
           mandat: "sig",
           opt: "n",
           ignore_comments_after: false,
-          rule_name: $._sign,
         },
         FILETYPE: {
           mandat: "filet",
           opt: "ype",
           ignore_comments_after: false,
-          rule_name: $._filetype,
         },
         LET: {
           mandat: "let",
           opt: "",
           ignore_comments_after: false,
-          rule_name: $._let,
         },
         UNLET: {
           mandat: "unl",
           opt: "et",
           ignore_comments_after: false,
-          rule_name: $._unlet,
         },
         CALL: {
           mandat: "cal",
           opt: "l",
           ignore_comments_after: false,
-          rule_name: $._call,
         },
         BREAK: {
           mandat: "brea",
           opt: "k",
           ignore_comments_after: false,
-          rule_name: $._break,
         },
         CONTINUE: {
           mandat: "con",
           opt: "tinue",
           ignore_comments_after: false,
-          rule_name: $._continue,
         },
       })
     ),
@@ -631,9 +551,9 @@ module.exports = grammar({
         $.filetypes
       ),
     options_statement: ($) =>
-      choice(command($, "browse", tokalias($, "set")), command($, "options")),
-    startinsert_statement: ($) => maybe_bang($, tokalias($, "startinsert")),
-    stopinsert_statement: ($) => tokalias($, "stopinsert"),
+      choice(command($, "browse", keyword($, "set")), command($, "options")),
+    startinsert_statement: ($) => maybe_bang($, keyword($, "startinsert")),
+    stopinsert_statement: ($) => keyword($, "stopinsert"),
 
     encoding: ($) =>
       choice(
@@ -700,7 +620,7 @@ module.exports = grammar({
     scriptencoding_statement: ($) =>
       command($, "scriptencoding", optional($.encoding)),
 
-    comclear_statement: ($) => tokalias($, "comclear"),
+    comclear_statement: ($) => keyword($, "comclear"),
 
     // :h :command
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
@@ -798,7 +718,7 @@ module.exports = grammar({
       ),
     command_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "command")),
+        maybe_bang($, keyword($, "command")),
         // `:command` alone list all user-defined command
         optional(
           choice(
@@ -814,14 +734,14 @@ module.exports = grammar({
 
     delcommand_statement: ($) => command($, "delcommand", $.command_name),
 
-    cnext_statement: ($) => maybe_bang($, tokalias($, "cnext")),
+    cnext_statement: ($) => maybe_bang($, keyword($, "cnext")),
     cprevious_statement: ($) =>
-      maybe_bang($, choice(tokalias($, "cprevious"), tokalias($, "cNext"))),
+      maybe_bang($, choice(keyword($, "cprevious"), keyword($, "cNext"))),
 
     _runtime_where: ($) => choice("START", "OPT", "PACK", "ALL"),
     runtime_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "runtime")),
+        maybe_bang($, keyword($, "runtime")),
         optional(alias($._runtime_where, $.where)),
         alias(repeat1($.filename), $.filenames)
       ),
@@ -829,7 +749,7 @@ module.exports = grammar({
     wincmd_statement: ($) =>
       seq(
         optional($.integer_literal),
-        tokalias($, "wincmd"),
+        keyword($, "wincmd"),
         field("action", /[a-zA-Z=<>]/)
       ),
 
@@ -838,7 +758,7 @@ module.exports = grammar({
 
     global_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "global")),
+        maybe_bang($, keyword($, "global")),
         $._separator_first,
         $.pattern,
         $._separator,
@@ -848,7 +768,7 @@ module.exports = grammar({
     _filetype_state: ($) => choice("on", "off"),
     filetype_statement: ($) =>
       seq(
-        tokalias($, "filetype"),
+        keyword($, "filetype"),
         optional(
           choice(
             seq(
@@ -883,62 +803,59 @@ module.exports = grammar({
 
     for_loop: ($) =>
       seq(
-        tokalias($, "for"),
+        keyword($, "for"),
         field("variable", choice($._ident, $.list_assignment)),
         "in",
         field("iter", $._expression),
         alias(optional($._separated_statements), $.body),
-        tokalias($, "endfor")
+        keyword($, "endfor")
       ),
 
     while_loop: ($) =>
       seq(
-        tokalias($, "while"),
+        keyword($, "while"),
         field("condition", $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
-        tokalias($, "endwhile")
+        keyword($, "endwhile")
       ),
 
     if_statement: ($) =>
       seq(
-        tokalias($, "if"),
+        keyword($, "if"),
         field("condition", $._expression),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         repeat($.elseif_statement),
         optional($.else_statement),
-        tokalias($, "endif")
+        keyword($, "endif")
       ),
 
     elseif_statement: ($) =>
       seq(
-        tokalias($, "elseif"),
+        keyword($, "elseif"),
         field("condition", $._expression),
         alias(optional($._separated_statements), $.body)
       ),
 
     else_statement: ($) =>
-      seq(
-        tokalias($, "else"),
-        alias(optional($._separated_statements), $.body)
-      ),
+      seq(keyword($, "else"), alias(optional($._separated_statements), $.body)),
 
     try_statement: ($) =>
       seq(
-        tokalias($, "try"),
+        keyword($, "try"),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         repeat($.catch_statement),
         optional($.finally_statement),
-        tokalias($, "endtry")
+        keyword($, "endtry")
       ),
 
     _au_pattern: ($) => choice(/\/.*\//, /\?.*\?/),
 
     catch_statement: ($) =>
       seq(
-        tokalias($, "catch"),
+        keyword($, "catch"),
         optional(alias($._au_pattern, $.pattern)),
         $._cmd_separator,
         alias(optional($._separated_statements), $.body)
@@ -946,7 +863,7 @@ module.exports = grammar({
 
     finally_statement: ($) =>
       seq(
-        tokalias($, "finally"),
+        keyword($, "finally"),
         alias(optional($._separated_statements), $.body)
       ),
 
@@ -954,7 +871,7 @@ module.exports = grammar({
 
     autocmd_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "autocmd")),
+        maybe_bang($, keyword($, "autocmd")),
         optional(alias($.identifier, $.augroup_name)),
         optional(
           seq(
@@ -969,7 +886,7 @@ module.exports = grammar({
 
     augroup_statement: ($) =>
       seq(
-        maybe_bang($, tokalias($, "augroup")),
+        maybe_bang($, keyword($, "augroup")),
         alias($.identifier, $.augroup_name)
       ),
 
@@ -1055,7 +972,7 @@ module.exports = grammar({
       ),
     let_statement: ($) =>
       seq(
-        tokalias($, "let"),
+        keyword($, "let"),
         choice($._let_assignment, repeat($._assignment_variable))
       ),
 
@@ -1119,20 +1036,20 @@ module.exports = grammar({
     setlocal_statement: ($) => set_variant($, "setlocal"),
 
     unlet_statement: ($) =>
-      seq(maybe_bang($, tokalias($, "unlet")), repeat1($._expression)),
+      seq(maybe_bang($, keyword($, "unlet")), repeat1($._expression)),
 
-    call_statement: ($) => seq(tokalias($, "call"), $.call_expression),
+    call_statement: ($) => seq(keyword($, "call"), $.call_expression),
 
     echo_statement: ($) => echo_variant($, "echo"),
     echon_statement: ($) => echo_variant($, "echon"),
-    echohl_statement: ($) => seq(tokalias($, "echohl"), $.hl_group),
+    echohl_statement: ($) => seq(keyword($, "echohl"), $.hl_group),
     echomsg_statement: ($) => echo_variant($, "echomsg"),
     echoerr_statement: ($) => echo_variant($, "echoerr"),
 
     execute_statement: ($) => command($, "execute", repeat1($._expression)),
 
     silent_statement: ($) =>
-      seq(maybe_bang($, tokalias($, "silent")), $._statement),
+      seq(maybe_bang($, keyword($, "silent")), $._statement),
 
     user_command: ($) =>
       seq(
@@ -1144,14 +1061,14 @@ module.exports = grammar({
 
     function_definition: ($) =>
       seq(
-        maybe_bang($, tokalias($, "function")),
+        maybe_bang($, keyword($, "function")),
         $.function_declaration,
         any_order("dict", "range", "abort", "closure"),
         $._cmd_separator,
 
         alias(optional($._separated_statements), $.body),
 
-        tokalias($, "endfunction")
+        keyword($, "endfunction")
       ),
 
     function_declaration: ($) =>
@@ -1250,7 +1167,7 @@ module.exports = grammar({
               "lnoremap",
               "cnoremap",
               "tnoremap",
-            ].map((name) => tokalias($, name))
+            ].map((name) => keyword($, name))
           )
         ),
         MAP_OPTIONS,
@@ -1344,7 +1261,7 @@ module.exports = grammar({
 
     _hl_body_link: ($) =>
       seq(
-        optional(tokalias($, "default")),
+        optional(keyword($, "default")),
         "link",
         field("from", $.hl_group),
         field("to", $.hl_group)
@@ -1424,11 +1341,7 @@ module.exports = grammar({
       ),
 
     _hl_body_keys: ($) =>
-      seq(
-        optional(tokalias($, "default")),
-        $.hl_group,
-        repeat1($.hl_attribute)
-      ),
+      seq(optional(keyword($, "default")), $.hl_group, repeat1($.hl_attribute)),
 
     _hl_body: ($) =>
       choice(
@@ -1439,7 +1352,7 @@ module.exports = grammar({
       ),
 
     highlight_statement: ($) =>
-      seq(maybe_bang($, tokalias($, "highlight")), optional($._hl_body)),
+      seq(maybe_bang($, keyword($, "highlight")), optional($._hl_body)),
 
     // :h :syntax
     _syn_enable: ($) => sub_cmd(choice("enable", "on", "off", "reset")),
@@ -1754,7 +1667,7 @@ module.exports = grammar({
 
     sign_statement: ($) =>
       seq(
-        tokalias($, "sign"),
+        keyword($, "sign"),
         choice(
           $._sign_define,
           $._sign_undefine,
@@ -2020,7 +1933,7 @@ module.exports = grammar({
   },
 });
 
-function tokalias(gram, name) {
+function keyword(gram, name) {
   return alias(gram["_" + name], name);
 }
 
@@ -2028,18 +1941,18 @@ function _cmd_range($) {
   return seq(field("range", alias($._range, $.range)), optional(":"));
 }
 function range_command($, cmd, ...args) {
-  return seq(optional(_cmd_range($)), tokalias($, cmd), ...args);
+  return seq(optional(_cmd_range($)), keyword($, cmd), ...args);
 }
 function bang_range_command($, cmd, ...args) {
   return seq(
     optional(_cmd_range($)),
-    tokalias($, cmd),
+    keyword($, cmd),
     optional($.bang),
     ...args
   );
 }
 function command($, cmd, ...args) {
-  return seq(tokalias($, cmd), ...args);
+  return seq(keyword($, cmd), ...args);
 }
 
 function maybe_bang($, cmd_name) {
@@ -2141,7 +2054,7 @@ function make_keywords($, keywords) {
       `  ${kname} = ${rules.length},\n`,
       (err) => {}
     );
-    rules.push(infos.rule_name);
+    rules.push($["_" + infos.mandat + infos.opt]);
   }
 
   fs.appendFileSync(

@@ -11311,11 +11311,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_vnoremap"
+      "name": "_nnoremap"
     },
     {
       "type": "SYMBOL",
-      "name": "_nnoremap"
+      "name": "_vnoremap"
     },
     {
       "type": "SYMBOL",
