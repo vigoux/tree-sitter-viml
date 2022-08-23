@@ -32,7 +32,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - uses: actions/setup-node@v2.4.0
       - name: Install Dependencies
         run: npm install
@@ -41,3 +40,16 @@ jobs:
         run: |
           npm run build
           npm run test
+  parse-runtime:
+    name: Parse runtime files
+    needs: lint
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+      - name: Install Dependencies
+        run: |
+          npm install
+          apt-get install wget
+      - name: Download and parse runtime files
+        run: |
+          ./scripts/parse_runtime_files.sh
