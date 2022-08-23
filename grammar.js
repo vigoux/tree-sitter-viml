@@ -31,110 +31,488 @@ module.exports = grammar({
     [$.list, $._pattern_atom],
   ],
 
-  externals: ($) => [
-    $._no,
-    $._inv,
-    $._newline_or_pipe,
-    $._line_continuation,
-    $._script_heredoc_marker,
-    $._let_heredoc_marker,
-    $._heredoc_end,
-    $._separator_first,
-    $._separator,
-    $._scope_dict,
-    $.scope,
-    $.string_literal,
-    $.comment,
-    $._bang_filter,
-  ].concat(make_keywords($, {
-    FUNCTION: {
-      mandat: "fu",
-      opt: "nction",
-      ignore_comments_after : false,
-      rule_name: $._function,
-    },
-    ENDFUNCTION: {
-      mandat: "endf",
-      opt: "unction",
-      ignore_comments_after: false,
-      rule_name: $._endfunction,
-    },
-    FOR : { mandat: "for", opt: "", ignore_comments_after: false, rule_name: $._for },
-    ENDFOR : { mandat: "endfo", opt: "r", ignore_comments_after: false, rule_name: $._endfor },
-    WHILE : { mandat: "wh", opt: "ile", ignore_comments_after: false, rule_name: $._while },
-    ENDWHILE : { mandat: "endw", opt: "hile", ignore_comments_after: false, rule_name: $._endwhile },
-    IF : { mandat: "if", opt: "", ignore_comments_after: false, rule_name: $._if },
-    ELSEIF : { mandat: "elsei", opt: "f", ignore_comments_after: false, rule_name: $._elseif },
-    ELSE : { mandat: "el", opt: "se", ignore_comments_after: false, rule_name: $._else },
-    ENDIF : { mandat: "en", opt: "dif", ignore_comments_after: false, rule_name: $._endif },
-    TRY : { mandat: "try", opt: "", ignore_comments_after: false, rule_name: $._try },
-    CATCH : { mandat: "cat", opt: "ch", ignore_comments_after: false, rule_name: $._catch },
-    FINALLY : { mandat: "fina", opt: "lly", ignore_comments_after: false, rule_name: $._finally },
-    ENDTRY : { mandat: "endt", opt: "ry", ignore_comments_after: false, rule_name: $._endtry },
-    CONST : { mandat: "cons", opt: "t", ignore_comments_after: false, rule_name: $._const },
-    NORMAL : { mandat: "norm", opt: "al", ignore_comments_after: false, rule_name: $._normal },
-    RETURN : { mandat: "retu", opt: "rn", ignore_comments_after: false, rule_name: $._return },
-    PERL : { mandat: "perl", opt: "", ignore_comments_after: false, rule_name: $._perl },
-    LUA : { mandat: "lua", opt: "", ignore_comments_after: false, rule_name: $._lua },
-    RUBY : { mandat: "rub", opt: "y", ignore_comments_after: false, rule_name: $._ruby },
-    PYTHON : { mandat: "py", opt: "thon", ignore_comments_after: false, rule_name: $._python },
-    THROW : { mandat: "th", opt: "row", ignore_comments_after: false, rule_name: $._throw },
-    EXECUTE : { mandat: "exe", opt: "cute", ignore_comments_after: false, rule_name: $._execute },
-    AUTOCMD : { mandat: "au", opt: "tocmd", ignore_comments_after: false, rule_name: $._autocmd },
-    SILENT : { mandat: "sil", opt: "ent", ignore_comments_after: false, rule_name: $._silent },
-    ECHO : { mandat: "ec", opt: "ho", ignore_comments_after: true, rule_name: $._echo },
-    ECHON : { mandat: "echon", opt: "", ignore_comments_after: true, rule_name: $._echon },
-    ECHOHL : { mandat: "echoh", opt: "l", ignore_comments_after: false, rule_name: $._echohl },
-    ECHOMSG : { mandat: "echom", opt: "sg", ignore_comments_after: true, rule_name: $._echomsg },
-    ECHOERR : { mandat: "echoe", opt: "rr", ignore_comments_after: true, rule_name: $._echoerr },
-    MAP : { mandat: "map", opt: "", ignore_comments_after: true, rule_name: $._map },
-    NMAP : { mandat: "nm", opt: "ap", ignore_comments_after: true, rule_name: $._nmap },
-    VMAP : { mandat: "vm", opt: "ap", ignore_comments_after: true, rule_name: $._vmap },
-    XMAP : { mandat: "xm", opt: "ap", ignore_comments_after: true, rule_name: $._xmap },
-    SMAP : { mandat: "smap", opt: "", ignore_comments_after: true, rule_name: $._smap },
-    OMAP : { mandat: "om", opt: "ap", ignore_comments_after: true, rule_name: $._omap },
-    IMAP : { mandat: "im", opt: "ap", ignore_comments_after: true, rule_name: $._imap },
-    LMAP : { mandat: "lm", opt: "ap", ignore_comments_after: true, rule_name: $._lmap },
-    CMAP : { mandat: "cm", opt: "ap", ignore_comments_after: true, rule_name: $._cmap },
-    TMAP : { mandat: "tma", opt: "p", ignore_comments_after: true, rule_name: $._tmap },
-    NOREMAP : { mandat: "no", opt: "remap", ignore_comments_after: true, rule_name: $._noremap },
-    VNOREMAP : { mandat: "nn", opt: "oremap", ignore_comments_after: true, rule_name: $._vnoremap },
-    NNOREMAP : { mandat: "vn", opt: "oremap", ignore_comments_after: true, rule_name: $._nnoremap },
-    XNOREMAP : { mandat: "xn", opt: "oremap", ignore_comments_after: true, rule_name: $._xnoremap },
-    SNOREMAP : { mandat: "snor", opt: "emap", ignore_comments_after: true, rule_name: $._snoremap },
-    ONOREMAP : { mandat: "ono", opt: "remap", ignore_comments_after: true, rule_name: $._onoremap },
-    INOREMAP : { mandat: "ino", opt: "remap", ignore_comments_after: true, rule_name: $._inoremap },
-    LNOREMAP : { mandat: "ln", opt: "oremap", ignore_comments_after: true, rule_name: $._lnoremap },
-    CNOREMAP : { mandat: "cno", opt: "remap", ignore_comments_after: true, rule_name: $._cnoremap },
-    TNOREMAP : { mandat: "tno", opt: "remap", ignore_comments_after: true, rule_name: $._tnoremap },
-    AUGROUP : { mandat: "aug", opt: "roup", ignore_comments_after: true, rule_name: $._augroup },
-    HIGHLIGHT : { mandat: "hi", opt: "ghlight", ignore_comments_after: false, rule_name: $._highlight },
-    DEFAULT : { mandat: "def", opt: "ault", ignore_comments_after: false, rule_name: $._default, }, // highlight def[ault },
-    SYNTAX : { mandat: "sy", opt: "ntax", ignore_comments_after: false, rule_name: $._syntax },
-    SET : { mandat: "se", opt: "t", ignore_comments_after: false, rule_name: $._set },
-    SETLOCAL : { mandat: "setl", opt: "ocal", ignore_comments_after: false, rule_name: $._setlocal },
-    SETFILETYPE : { mandat: "setf", opt: "iletype", ignore_comments_after: false, rule_name: $._setfiletype },
-    BROWSE : { mandat: "bro", opt: "wse", ignore_comments_after: false, rule_name: $._browse },
-    OPTIONS : { mandat: "opt", opt: "ions", ignore_comments_after: false, rule_name: $._options },
-    STARTINSERT : { mandat: "star", opt: "tinsert", ignore_comments_after: false, rule_name: $._startinsert },
-    STOPINSERT : { mandat: "stopi", opt: "nsert", ignore_comments_after: false, rule_name: $._stopinsert },
-    SCRIPTENCODING : { mandat: "scripte", opt: "ncoding", ignore_comments_after: false, rule_name: $._scriptencoding },
-    SOURCE : { mandat: "so", opt: "urce", ignore_comments_after: false, rule_name: $._source },
-    GLOBAL : { mandat: "g", opt: "lobal", ignore_comments_after: false, rule_name: $._global },
-    COLORSCHEME : { mandat: "colo", opt: "rscheme", ignore_comments_after: false, rule_name: $._colorscheme },
-    COMMAND : { mandat: "com", opt: "mand", ignore_comments_after: false, rule_name: $._command },
-    COMCLEAR : { mandat: "comc", opt: "lear", ignore_comments_after: false, rule_name: $._comclear },
-    DELCOMMAND : { mandat: "delc", opt: "ommand", ignore_comments_after: false, rule_name: $._delcommand },
-    RUNTIME : { mandat: "ru", opt: "ntime", ignore_comments_after: false, rule_name: $._runtime },
-    WINCMD : { mandat: "winc", opt: "md", ignore_comments_after: false, rule_name: $._wincmd },
-    SIGN : { mandat: "sig", opt: "n", ignore_comments_after: false, rule_name: $._sign },
-    FILETYPE : { mandat: "filet", opt: "ype", ignore_comments_after: false, rule_name: $._filetype },
-    LET : { mandat: "let", opt: "", ignore_comments_after: false, rule_name: $._let },
-    UNLET : { mandat: "unl", opt: "et", ignore_comments_after: false, rule_name: $._unlet },
-    CALL : { mandat: "cal", opt: "l", ignore_comments_after: false, rule_name: $._call },
-    BREAK : { mandat: "brea", opt: "k", ignore_comments_after: false, rule_name: $._break },
-    CONTINUE : { mandat: "con", opt: "tinue", ignore_comments_after: false, rule_name: $._continue },
-  })),
+  externals: ($) =>
+    [
+      $._no,
+      $._inv,
+      $._newline_or_pipe,
+      $._line_continuation,
+      $._script_heredoc_marker,
+      $._let_heredoc_marker,
+      $._heredoc_end,
+      $._separator_first,
+      $._separator,
+      $._scope_dict,
+      $.scope,
+      $.string_literal,
+      $.comment,
+      $._bang_filter,
+    ].concat(
+      make_keywords($, {
+        FUNCTION: {
+          mandat: 'fu',
+          opt: 'nction',
+          ignore_comments_after: false,
+          rule_name: $._function,
+        },
+        ENDFUNCTION: {
+          mandat: 'endf',
+          opt: 'unction',
+          ignore_comments_after: false,
+          rule_name: $._endfunction,
+        },
+        FOR: {
+          mandat: 'for',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._for,
+        },
+        ENDFOR: {
+          mandat: 'endfo',
+          opt: 'r',
+          ignore_comments_after: false,
+          rule_name: $._endfor,
+        },
+        WHILE: {
+          mandat: 'wh',
+          opt: 'ile',
+          ignore_comments_after: false,
+          rule_name: $._while,
+        },
+        ENDWHILE: {
+          mandat: 'endw',
+          opt: 'hile',
+          ignore_comments_after: false,
+          rule_name: $._endwhile,
+        },
+        IF: {
+          mandat: 'if',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._if,
+        },
+        ELSEIF: {
+          mandat: 'elsei',
+          opt: 'f',
+          ignore_comments_after: false,
+          rule_name: $._elseif,
+        },
+        ELSE: {
+          mandat: 'el',
+          opt: 'se',
+          ignore_comments_after: false,
+          rule_name: $._else,
+        },
+        ENDIF: {
+          mandat: 'en',
+          opt: 'dif',
+          ignore_comments_after: false,
+          rule_name: $._endif,
+        },
+        TRY: {
+          mandat: 'try',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._try,
+        },
+        CATCH: {
+          mandat: 'cat',
+          opt: 'ch',
+          ignore_comments_after: false,
+          rule_name: $._catch,
+        },
+        FINALLY: {
+          mandat: 'fina',
+          opt: 'lly',
+          ignore_comments_after: false,
+          rule_name: $._finally,
+        },
+        ENDTRY: {
+          mandat: 'endt',
+          opt: 'ry',
+          ignore_comments_after: false,
+          rule_name: $._endtry,
+        },
+        CONST: {
+          mandat: 'cons',
+          opt: 't',
+          ignore_comments_after: false,
+          rule_name: $._const,
+        },
+        NORMAL: {
+          mandat: 'norm',
+          opt: 'al',
+          ignore_comments_after: false,
+          rule_name: $._normal,
+        },
+        RETURN: {
+          mandat: 'retu',
+          opt: 'rn',
+          ignore_comments_after: false,
+          rule_name: $._return,
+        },
+        PERL: {
+          mandat: 'perl',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._perl,
+        },
+        LUA: {
+          mandat: 'lua',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._lua,
+        },
+        RUBY: {
+          mandat: 'rub',
+          opt: 'y',
+          ignore_comments_after: false,
+          rule_name: $._ruby,
+        },
+        PYTHON: {
+          mandat: 'py',
+          opt: 'thon',
+          ignore_comments_after: false,
+          rule_name: $._python,
+        },
+        THROW: {
+          mandat: 'th',
+          opt: 'row',
+          ignore_comments_after: false,
+          rule_name: $._throw,
+        },
+        EXECUTE: {
+          mandat: 'exe',
+          opt: 'cute',
+          ignore_comments_after: false,
+          rule_name: $._execute,
+        },
+        AUTOCMD: {
+          mandat: 'au',
+          opt: 'tocmd',
+          ignore_comments_after: false,
+          rule_name: $._autocmd,
+        },
+        SILENT: {
+          mandat: 'sil',
+          opt: 'ent',
+          ignore_comments_after: false,
+          rule_name: $._silent,
+        },
+        ECHO: {
+          mandat: 'ec',
+          opt: 'ho',
+          ignore_comments_after: true,
+          rule_name: $._echo,
+        },
+        ECHON: {
+          mandat: 'echon',
+          opt: '',
+          ignore_comments_after: true,
+          rule_name: $._echon,
+        },
+        ECHOHL: {
+          mandat: 'echoh',
+          opt: 'l',
+          ignore_comments_after: false,
+          rule_name: $._echohl,
+        },
+        ECHOMSG: {
+          mandat: 'echom',
+          opt: 'sg',
+          ignore_comments_after: true,
+          rule_name: $._echomsg,
+        },
+        ECHOERR: {
+          mandat: 'echoe',
+          opt: 'rr',
+          ignore_comments_after: true,
+          rule_name: $._echoerr,
+        },
+        MAP: {
+          mandat: 'map',
+          opt: '',
+          ignore_comments_after: true,
+          rule_name: $._map,
+        },
+        NMAP: {
+          mandat: 'nm',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._nmap,
+        },
+        VMAP: {
+          mandat: 'vm',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._vmap,
+        },
+        XMAP: {
+          mandat: 'xm',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._xmap,
+        },
+        SMAP: {
+          mandat: 'smap',
+          opt: '',
+          ignore_comments_after: true,
+          rule_name: $._smap,
+        },
+        OMAP: {
+          mandat: 'om',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._omap,
+        },
+        IMAP: {
+          mandat: 'im',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._imap,
+        },
+        LMAP: {
+          mandat: 'lm',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._lmap,
+        },
+        CMAP: {
+          mandat: 'cm',
+          opt: 'ap',
+          ignore_comments_after: true,
+          rule_name: $._cmap,
+        },
+        TMAP: {
+          mandat: 'tma',
+          opt: 'p',
+          ignore_comments_after: true,
+          rule_name: $._tmap,
+        },
+        NOREMAP: {
+          mandat: 'no',
+          opt: 'remap',
+          ignore_comments_after: true,
+          rule_name: $._noremap,
+        },
+        VNOREMAP: {
+          mandat: 'nn',
+          opt: 'oremap',
+          ignore_comments_after: true,
+          rule_name: $._vnoremap,
+        },
+        NNOREMAP: {
+          mandat: 'vn',
+          opt: 'oremap',
+          ignore_comments_after: true,
+          rule_name: $._nnoremap,
+        },
+        XNOREMAP: {
+          mandat: 'xn',
+          opt: 'oremap',
+          ignore_comments_after: true,
+          rule_name: $._xnoremap,
+        },
+        SNOREMAP: {
+          mandat: 'snor',
+          opt: 'emap',
+          ignore_comments_after: true,
+          rule_name: $._snoremap,
+        },
+        ONOREMAP: {
+          mandat: 'ono',
+          opt: 'remap',
+          ignore_comments_after: true,
+          rule_name: $._onoremap,
+        },
+        INOREMAP: {
+          mandat: 'ino',
+          opt: 'remap',
+          ignore_comments_after: true,
+          rule_name: $._inoremap,
+        },
+        LNOREMAP: {
+          mandat: 'ln',
+          opt: 'oremap',
+          ignore_comments_after: true,
+          rule_name: $._lnoremap,
+        },
+        CNOREMAP: {
+          mandat: 'cno',
+          opt: 'remap',
+          ignore_comments_after: true,
+          rule_name: $._cnoremap,
+        },
+        TNOREMAP: {
+          mandat: 'tno',
+          opt: 'remap',
+          ignore_comments_after: true,
+          rule_name: $._tnoremap,
+        },
+        AUGROUP: {
+          mandat: 'aug',
+          opt: 'roup',
+          ignore_comments_after: true,
+          rule_name: $._augroup,
+        },
+        HIGHLIGHT: {
+          mandat: 'hi',
+          opt: 'ghlight',
+          ignore_comments_after: false,
+          rule_name: $._highlight,
+        },
+        DEFAULT: {
+          mandat: 'def',
+          opt: 'ault',
+          ignore_comments_after: false,
+          rule_name: $._default,
+        }, // highlight def[ault },
+        SYNTAX: {
+          mandat: 'sy',
+          opt: 'ntax',
+          ignore_comments_after: false,
+          rule_name: $._syntax,
+        },
+        SET: {
+          mandat: 'se',
+          opt: 't',
+          ignore_comments_after: false,
+          rule_name: $._set,
+        },
+        SETLOCAL: {
+          mandat: 'setl',
+          opt: 'ocal',
+          ignore_comments_after: false,
+          rule_name: $._setlocal,
+        },
+        SETFILETYPE: {
+          mandat: 'setf',
+          opt: 'iletype',
+          ignore_comments_after: false,
+          rule_name: $._setfiletype,
+        },
+        BROWSE: {
+          mandat: 'bro',
+          opt: 'wse',
+          ignore_comments_after: false,
+          rule_name: $._browse,
+        },
+        OPTIONS: {
+          mandat: 'opt',
+          opt: 'ions',
+          ignore_comments_after: false,
+          rule_name: $._options,
+        },
+        STARTINSERT: {
+          mandat: 'star',
+          opt: 'tinsert',
+          ignore_comments_after: false,
+          rule_name: $._startinsert,
+        },
+        STOPINSERT: {
+          mandat: 'stopi',
+          opt: 'nsert',
+          ignore_comments_after: false,
+          rule_name: $._stopinsert,
+        },
+        SCRIPTENCODING: {
+          mandat: 'scripte',
+          opt: 'ncoding',
+          ignore_comments_after: false,
+          rule_name: $._scriptencoding,
+        },
+        SOURCE: {
+          mandat: 'so',
+          opt: 'urce',
+          ignore_comments_after: false,
+          rule_name: $._source,
+        },
+        GLOBAL: {
+          mandat: 'g',
+          opt: 'lobal',
+          ignore_comments_after: false,
+          rule_name: $._global,
+        },
+        COLORSCHEME: {
+          mandat: 'colo',
+          opt: 'rscheme',
+          ignore_comments_after: false,
+          rule_name: $._colorscheme,
+        },
+        COMMAND: {
+          mandat: 'com',
+          opt: 'mand',
+          ignore_comments_after: false,
+          rule_name: $._command,
+        },
+        COMCLEAR: {
+          mandat: 'comc',
+          opt: 'lear',
+          ignore_comments_after: false,
+          rule_name: $._comclear,
+        },
+        DELCOMMAND: {
+          mandat: 'delc',
+          opt: 'ommand',
+          ignore_comments_after: false,
+          rule_name: $._delcommand,
+        },
+        RUNTIME: {
+          mandat: 'ru',
+          opt: 'ntime',
+          ignore_comments_after: false,
+          rule_name: $._runtime,
+        },
+        WINCMD: {
+          mandat: 'winc',
+          opt: 'md',
+          ignore_comments_after: false,
+          rule_name: $._wincmd,
+        },
+        SIGN: {
+          mandat: 'sig',
+          opt: 'n',
+          ignore_comments_after: false,
+          rule_name: $._sign,
+        },
+        FILETYPE: {
+          mandat: 'filet',
+          opt: 'ype',
+          ignore_comments_after: false,
+          rule_name: $._filetype,
+        },
+        LET: {
+          mandat: 'let',
+          opt: '',
+          ignore_comments_after: false,
+          rule_name: $._let,
+        },
+        UNLET: {
+          mandat: 'unl',
+          opt: 'et',
+          ignore_comments_after: false,
+          rule_name: $._unlet,
+        },
+        CALL: {
+          mandat: 'cal',
+          opt: 'l',
+          ignore_comments_after: false,
+          rule_name: $._call,
+        },
+        BREAK: {
+          mandat: 'brea',
+          opt: 'k',
+          ignore_comments_after: false,
+          rule_name: $._break,
+        },
+        CONTINUE: {
+          mandat: 'con',
+          opt: 'tinue',
+          ignore_comments_after: false,
+          rule_name: $._continue,
+        },
+      }),
+    ),
 
   extras: ($) => [$._line_continuation, /[\t ]/],
 
@@ -143,64 +521,67 @@ module.exports = grammar({
 
     _cmd_separator: ($) => choice($._newline_or_pipe, $.comment),
 
-    _separated_statements: ($) => repeat1(
-      seq(optional($._statement), $._cmd_separator)
-    ),
+    _separated_statements: ($) =>
+      repeat1(seq(optional($._statement), $._cmd_separator)),
 
-    _statement: ($) => seq(repeat(':'), choice(
-        $.function_definition,
-        $.let_statement,
-        $.unlet_statement,
-        $.const_statement,
-        $.set_statement,
-        $.setlocal_statement,
-        $.return_statement,
-        $.normal_statement,
-        $.while_loop,
-        $.for_loop,
-        $.if_statement,
-        $.lua_statement,
-        $.range_statement,
-        $.ruby_statement,
-        $.python_statement,
-        $.perl_statement,
-        $.call_statement,
-        $.execute_statement,
-        $.echo_statement,
-        $.echon_statement,
-        $.echohl_statement,
-        $.echomsg_statement,
-        $.echoerr_statement,
-        $.try_statement,
-        $.throw_statement,
-        $.autocmd_statement,
-        $.silent_statement,
-        $.register_statement,
-        $.map_statement,
-        $.augroup_statement,
-        $.bang_filter_statement,
-        $.highlight_statement,
-        $.syntax_statement,
-        $.setfiletype_statement,
-        $.options_statement,
-        $.startinsert_statement,
-        $.stopinsert_statement,
-        $.scriptencoding_statement,
-        $.source_statement,
-        $.global_statement,
-        $.colorscheme_statement,
-        $.command_statement,
-        $.comclear_statement,
-        $.delcommand_statement,
-        $.filetype_statement,
-        $.runtime_statement,
-        $.wincmd_statement,
-        $.sign_statement,
-        $.break_statement,
-        $.continue_statement,
-        $.unknown_builtin_statement,
-        $.user_command,
-      )),
+    _statement: ($) =>
+      seq(
+        repeat(':'),
+        choice(
+          $.function_definition,
+          $.let_statement,
+          $.unlet_statement,
+          $.const_statement,
+          $.set_statement,
+          $.setlocal_statement,
+          $.return_statement,
+          $.normal_statement,
+          $.while_loop,
+          $.for_loop,
+          $.if_statement,
+          $.lua_statement,
+          $.range_statement,
+          $.ruby_statement,
+          $.python_statement,
+          $.perl_statement,
+          $.call_statement,
+          $.execute_statement,
+          $.echo_statement,
+          $.echon_statement,
+          $.echohl_statement,
+          $.echomsg_statement,
+          $.echoerr_statement,
+          $.try_statement,
+          $.throw_statement,
+          $.autocmd_statement,
+          $.silent_statement,
+          $.register_statement,
+          $.map_statement,
+          $.augroup_statement,
+          $.bang_filter_statement,
+          $.highlight_statement,
+          $.syntax_statement,
+          $.setfiletype_statement,
+          $.options_statement,
+          $.startinsert_statement,
+          $.stopinsert_statement,
+          $.scriptencoding_statement,
+          $.source_statement,
+          $.global_statement,
+          $.colorscheme_statement,
+          $.command_statement,
+          $.comclear_statement,
+          $.delcommand_statement,
+          $.filetype_statement,
+          $.runtime_statement,
+          $.wincmd_statement,
+          $.sign_statement,
+          $.break_statement,
+          $.continue_statement,
+          $.unknown_builtin_statement,
+          $.user_command,
+        ),
+      ),
 
     unknown_builtin_statement: ($) =>
       seq(
@@ -208,29 +589,29 @@ module.exports = grammar({
         alias(repeat($.command_argument), $.arguments),
       ),
 
-    return_statement: ($) =>
-      command($, 'return', optional($._expression)),
+    return_statement: ($) => command($, 'return', optional($._expression)),
 
     break_statement: ($) => command($, 'break'),
     continue_statement: ($) => command($, 'continue'),
 
     scope_dict: ($) => choice($._scope_dict, 'a:'),
 
-    normal_statement: ($) => bang_range_command($, 'normal', alias(/ .*/, $.commands)),
+    normal_statement: ($) =>
+      bang_range_command($, 'normal', alias(/ .*/, $.commands)),
     filetype: ($) => /[a-zA-Z][a-zA-Z_-]*/,
-    _filetype_immediate: ($) => alias(token.immediate(/[a-zA-Z][a-zA-Z_-]*/), $.filetype),
-    filetypes: ($) => seq($.filetype, repeat(seq(token.immediate('.'), $._filetype_immediate))),
+    _filetype_immediate: ($) =>
+      alias(token.immediate(/[a-zA-Z][a-zA-Z_-]*/), $.filetype),
+    filetypes: ($) =>
+      seq($.filetype, repeat(seq(token.immediate('.'), $._filetype_immediate))),
     setfiletype_statement: ($) =>
-      command($,
+      command(
+        $,
         'setfiletype',
         optional(alias('FALLBACK', $.fallback)),
-        $.filetypes
+        $.filetypes,
       ),
     options_statement: ($) =>
-      choice(
-        command($, 'browse', tokalias($, 'set')),
-        command($, 'options'),
-      ),
+      choice(command($, 'browse', tokalias($, 'set')), command($, 'options')),
     startinsert_statement: ($) => maybe_bang($, tokalias($, 'startinsert')),
     stopinsert_statement: ($) => tokalias($, 'stopinsert'),
 
@@ -296,9 +677,10 @@ module.exports = grammar({
         'utf-32le',
         'default',
       ),
-    scriptencoding_statement: ($) => command($, 'scriptencoding', optional($.encoding)),
+    scriptencoding_statement: ($) =>
+      command($, 'scriptencoding', optional($.encoding)),
 
-    comclear_statement: ($) => tokalias($, "comclear"),
+    comclear_statement: ($) => tokalias($, 'comclear'),
 
     // :h :command
     command_name: ($) => /[A-Z][A-Za-z0-9]*/,
@@ -373,12 +755,21 @@ module.exports = grammar({
     command_attribute: ($) =>
       choice(
         key_val_arg('-nargs', $._command_attribute_nargs_value),
-        key_val_arg('-complete', alias($._command_attribute_completion_behavior, $.behavior)),
+        key_val_arg(
+          '-complete',
+          alias($._command_attribute_completion_behavior, $.behavior),
+        ),
         key_val_arg('-range', $._command_attribute_range_value),
         key_val_arg('-range'),
-        key_val_arg('-count', alias(token.immediate(/[0-9]+/), $.integer_literal)),
+        key_val_arg(
+          '-count',
+          alias(token.immediate(/[0-9]+/), $.integer_literal),
+        ),
         key_val_arg('-count'),
-        key_val_arg('-addr', alias($._command_attribute_address_behavior, $.behavior)),
+        key_val_arg(
+          '-addr',
+          alias($._command_attribute_address_behavior, $.behavior),
+        ),
         key_val_arg('-bang'),
         key_val_arg('-bar'),
         key_val_arg('-register'),
@@ -403,20 +794,13 @@ module.exports = grammar({
 
     delcommand_statement: ($) => command($, 'delcommand', $.command_name),
 
-    _runtime_where: ($) =>
-      choice(
-        'START',
-        'OPT',
-        'PACK',
-        'ALL',
-      ),
+    _runtime_where: ($) => choice('START', 'OPT', 'PACK', 'ALL'),
     runtime_statement: ($) =>
       seq(
         maybe_bang($, tokalias($, 'runtime')),
         optional(alias($._runtime_where, $.where)),
         alias(repeat1($.filename), $.filenames),
       ),
-
 
     wincmd_statement: ($) =>
       seq(
@@ -428,10 +812,14 @@ module.exports = grammar({
     source_statement: ($) =>
       bang_range_command($, 'source', optional(field('file', $.filename))),
 
-    global_statement: ($) => seq(
-      maybe_bang($, tokalias($, 'global')),
-      $._separator_first, $.pattern, $._separator,
-      $._statement),
+    global_statement: ($) =>
+      seq(
+        maybe_bang($, tokalias($, 'global')),
+        $._separator_first,
+        $.pattern,
+        $._separator,
+        $._statement,
+      ),
 
     _filetype_state: ($) => choice('on', 'off'),
     filetype_statement: ($) =>
@@ -442,7 +830,7 @@ module.exports = grammar({
             seq(
               optional('plugin'),
               optional('indent'),
-              alias($._filetype_state, $.state)
+              alias($._filetype_state, $.state),
             ),
             'detect',
           ),
@@ -454,8 +842,7 @@ module.exports = grammar({
 
     lua_statement: ($) => command($, 'lua', choice($.chunk, $.script)),
     ruby_statement: ($) => command($, 'ruby', choice($.chunk, $.script)),
-    python_statement: ($) =>
-      command($, 'python', choice($.chunk, $.script)),
+    python_statement: ($) => command($, 'python', choice($.chunk, $.script)),
     perl_statement: ($) => command($, 'perl', choice($.chunk, $.script)),
 
     chunk: ($) => /<|(<[^\n<]|[^\s<])[^\n]*/,
@@ -507,7 +894,11 @@ module.exports = grammar({
         alias(optional($._separated_statements), $.body),
       ),
 
-    else_statement: ($) => seq(tokalias($, 'else'), alias(optional($._separated_statements), $.body)),
+    else_statement: ($) =>
+      seq(
+        tokalias($, 'else'),
+        alias(optional($._separated_statements), $.body),
+      ),
 
     try_statement: ($) =>
       seq(
@@ -530,10 +921,12 @@ module.exports = grammar({
       ),
 
     finally_statement: ($) =>
-      seq(tokalias($, 'finally'), alias(optional($._separated_statements), $.body)),
+      seq(
+        tokalias($, 'finally'),
+        alias(optional($._separated_statements), $.body),
+      ),
 
-    throw_statement: ($) =>
-      command($, 'throw', $._expression),
+    throw_statement: ($) => command($, 'throw', $._expression),
 
     autocmd_statement: ($) =>
       seq(
@@ -560,26 +953,12 @@ module.exports = grammar({
     au_event_list: ($) => commaSep1($.au_event),
 
     // :h filter
-    _bang_filter_bangs: ($) =>
-      seq(
-        $.bang,
-        optional($.bang),
-      ),
+    _bang_filter_bangs: ($) => seq($.bang, optional($.bang)),
     _bang_filter_command_argument: ($) =>
       choice(
         seq(
-          choice(
-            /\S/,
-            seq('\\', /./),
-          ),
-          repeat(
-            choice(
-              ...[
-                /\S/,
-                seq('\\', /./),
-              ].map(token.immediate)
-            ),
-          ),
+          choice(/\S/, seq('\\', /./)),
+          repeat(choice(...[/\S/, seq('\\', /./)].map(token.immediate))),
         ),
         $.string_literal,
       ),
@@ -599,23 +978,18 @@ module.exports = grammar({
     // TODO(vigoux): maybe we should find some names here
     scoped_identifier: ($) => seq($.scope, $.identifier),
 
-    argument: ($) => seq('a:',
-      choice(
-        alias(token.immediate(/[a-zA-Z_](\w|#)*/), $.identifier),
-        alias(token.immediate(/[0-9]+/), $.integer_literal))),
+    argument: ($) =>
+      seq(
+        'a:',
+        choice(
+          alias(token.immediate(/[a-zA-Z_](\w|#)*/), $.identifier),
+          alias(token.immediate(/[0-9]+/), $.integer_literal),
+        ),
+      ),
 
-    _curly_braces_name_expression: ($) =>
-      seq(
-        '{',
-        $._expression,
-        '}'
-      ),
+    _curly_braces_name_expression: ($) => seq('{', $._expression, '}'),
     _immediate_curly_braces_name_expression: ($) =>
-      seq(
-        token.immediate('{'),
-        $._expression,
-        '}'
-      ),
+      seq(token.immediate('{'), $._expression, '}'),
     identifier: ($) =>
       seq(
         choice(
@@ -625,7 +999,10 @@ module.exports = grammar({
         repeat(
           choice(
             token.immediate(/(\w|#)+/),
-            alias($._immediate_curly_braces_name_expression, $.curly_braces_name),
+            alias(
+              $._immediate_curly_braces_name_expression,
+              $.curly_braces_name,
+            ),
           ),
         ),
       ),
@@ -634,11 +1011,7 @@ module.exports = grammar({
     keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
     _let_operator: ($) => choice('=', '+=', '-=', '*=', '/=', '%=', '.='),
-    _assignment_variable: ($) =>
-      choice(
-        $.identifier,
-        $.scope_dict,
-      ),
+    _assignment_variable: ($) => choice($.identifier, $.scope_dict),
 
     _let_assignment: ($) =>
       seq(
@@ -652,43 +1025,26 @@ module.exports = grammar({
           $.list_assignment,
         ),
         choice(
-          seq(
-            $._let_operator,
-            $._expression,
-          ),
+          seq($._let_operator, $._expression),
           alias($._let_heredoc, $.heredoc),
         ),
       ),
     let_statement: ($) =>
       seq(
         tokalias($, 'let'),
-        choice(
-          $._let_assignment,
-          repeat($._assignment_variable),
-        )
+        choice($._let_assignment, repeat($._assignment_variable)),
       ),
 
     _const_assignment: ($) =>
       seq(
-        choice(
-          $._ident,
-          $.list_assignment,
-        ),
-        choice(
-          seq(
-            '=',
-            $._expression,
-          ),
-          alias($._let_heredoc, $.heredoc),
-        )
+        choice($._ident, $.list_assignment),
+        choice(seq('=', $._expression), alias($._let_heredoc, $.heredoc)),
       ),
     const_statement: ($) =>
-      command($,
+      command(
+        $,
         'const',
-        choice(
-          $._const_assignment,
-          repeat($._assignment_variable),
-        )
+        choice($._const_assignment, repeat($._assignment_variable)),
       ),
 
     _let_heredoc: ($) =>
@@ -749,8 +1105,7 @@ module.exports = grammar({
     echomsg_statement: ($) => echo_variant($, 'echomsg'),
     echoerr_statement: ($) => echo_variant($, 'echoerr'),
 
-    execute_statement: ($) =>
-      command($, 'execute', repeat1($._expression)),
+    execute_statement: ($) => command($, 'execute', repeat1($._expression)),
 
     silent_statement: ($) =>
       seq(maybe_bang($, tokalias($, 'silent')), $._statement),
@@ -781,18 +1136,15 @@ module.exports = grammar({
         seq(
           field('name', choice($._ident, $.field_expression)),
           field('parameters', $.parameters),
-        )
+        ),
       ),
 
-    parameters: ($) => 
+    parameters: ($) =>
       seq(
         '(',
         choice(
           $.spread,
-          seq(
-            commaSep($.default_parameter),
-            optional(seq(',', $.spread)),
-          ),
+          seq(commaSep($.default_parameter), optional(seq(',', $.spread))),
           seq(
             commaSep($.identifier),
             optional(seq(',', commaSep($.default_parameter))),
@@ -803,12 +1155,7 @@ module.exports = grammar({
       ),
 
     default_parameter: ($) =>
-      seq(
-        field('name', $.identifier),
-        '=',
-        field('value', $._expression),
-      ),
-
+      seq(field('name', $.identifier), '=', field('value', $._expression)),
 
     // :h :_!
     bang: ($) => token.immediate('!'),
@@ -905,51 +1252,51 @@ module.exports = grammar({
     _keycode_in: ($) =>
       choice(
         ...[
-          /[Nn][Uu][Ll]/,                             // Nul
-          /[Bb][Ss]/,                                 // BS
-          /[Tt][aA][bB]/,                             // Tab
-          /[Nn][Ll]/,                                 // NL
-          /[Cc][Rr]/,                                 // CR
-          /[Rr][eE][tT][uU][rR][nN]/,                 // Return
-          /[kK]?[Ee][nN][tT][eE][rR]/,                // [k]Enter
-          /[Ee][sS][cC]/,                             // Esc
-          /[Ss][pP][aA][cC][eE]/,                     // Space
-          /[lL][tT]/,                                 // lt
-          /[Bb][sS][lL][aA][sS][hH]/,                 // Bslash
-          /[Bb][aA][rR]/,                             // Bar
-          /[kK]?[Dd][eE][lL]/,                        // [k]Del
-          /[xX]?[Cc][Ss][Ii]/,                        // [x]CSI
-          /[Ee][Oo][Ll]/,                             // EOL
-          /[Ii][gG][nN][oO][rR][eE]/,                 // Ignore
-          /[Nn][Oo][Pp]/,                             // Nop
-          /([kK]|([SsCc]-))?[Uu][pP]/,                // [k|S-|C-]Up
-          /([kK]|([SsCc]-))?[Dd][oO][wW][nN]/,        // [k|S-|C-]Down
-          /([kK]|([SsCc]-))?[Ll][eE][fF][tT]/,        // [k|S-|C-]Left
-          /([kK]|([SsCc]-))?[Rr][iI][gG][hH][tT]/,    // [k|S-|C-]Right
-          /([SsCc]-)?[Ll][eE][fF][tT][Mm][oO][uU][sS][eE]/,     // <S|C>-LeftMouse
+          /[Nn][Uu][Ll]/, // Nul
+          /[Bb][Ss]/, // BS
+          /[Tt][aA][bB]/, // Tab
+          /[Nn][Ll]/, // NL
+          /[Cc][Rr]/, // CR
+          /[Rr][eE][tT][uU][rR][nN]/, // Return
+          /[kK]?[Ee][nN][tT][eE][rR]/, // [k]Enter
+          /[Ee][sS][cC]/, // Esc
+          /[Ss][pP][aA][cC][eE]/, // Space
+          /[lL][tT]/, // lt
+          /[Bb][sS][lL][aA][sS][hH]/, // Bslash
+          /[Bb][aA][rR]/, // Bar
+          /[kK]?[Dd][eE][lL]/, // [k]Del
+          /[xX]?[Cc][Ss][Ii]/, // [x]CSI
+          /[Ee][Oo][Ll]/, // EOL
+          /[Ii][gG][nN][oO][rR][eE]/, // Ignore
+          /[Nn][Oo][Pp]/, // Nop
+          /([kK]|([SsCc]-))?[Uu][pP]/, // [k|S-|C-]Up
+          /([kK]|([SsCc]-))?[Dd][oO][wW][nN]/, // [k|S-|C-]Down
+          /([kK]|([SsCc]-))?[Ll][eE][fF][tT]/, // [k|S-|C-]Left
+          /([kK]|([SsCc]-))?[Rr][iI][gG][hH][tT]/, // [k|S-|C-]Right
+          /([SsCc]-)?[Ll][eE][fF][tT][Mm][oO][uU][sS][eE]/, // <S|C>-LeftMouse
           /([SsCc]-)?[Rr][iI][gG][hH][tT][Mm][oO][uU][sS][eE]/, // <S|C>-RightMouse
-          /([Ss]-)?[Ff][0-9]{1,2}/,                   // [S-]F<1-12>
-          /[Hh][eE][lL][pP]/,                         // Help
-          /[Uu][nN][dD][oO]/,                         // Undo
-          /[Ii][nN][sS][eE][rR][tT]/,                 // Insert
-          /[kK]?[Hh][oO][mM][eE]/,                    // [k]Home
-          /[kK]?[Ee][nN][dD]/,                        // [k]End
-          /[kK]?[Pp][aA][gG][eE][Uu][pP]/,            // [k]PageUp
-          /[kK]?[Pp][aA][gG][eE][Dd][oO][wW][nN]/,    // [k]PageDown
-          /[kK][Pp][lL][uU][sS]/,                     // kPlus
-          /[kK][Mm][iI][nN][uU][sS]/,                 // kMinus
-          /[kK][Mm][uU][lL][tT][iI][pP][lL][yY]/,     // kMultiply
-          /[kK][Dd][iI][vV][iI][dD][eE]/,             // kDivide
-          /[kK][Pp][oO][iI][nN][tT]/,                 // kPoint
-          /[kK][Cc][oO][mM][mM][aA]/,                 // kComma
-          /[kK][Ee][qQ][uU][aA][lL]/,                 // kEqual
-          /[kK][0-9]/,                                // k<0-9>
-          /([Ll][oO][cC][aA][lL])?[Ll][eE][aA][dD][eE][rR]/,  // [Local]Leader
-          /[Ss][Ii][Dd]/,                             // SID
-          /[Pp][lL][uU][gG]/,                         // Plug
+          /([Ss]-)?[Ff][0-9]{1,2}/, // [S-]F<1-12>
+          /[Hh][eE][lL][pP]/, // Help
+          /[Uu][nN][dD][oO]/, // Undo
+          /[Ii][nN][sS][eE][rR][tT]/, // Insert
+          /[kK]?[Hh][oO][mM][eE]/, // [k]Home
+          /[kK]?[Ee][nN][dD]/, // [k]End
+          /[kK]?[Pp][aA][gG][eE][Uu][pP]/, // [k]PageUp
+          /[kK]?[Pp][aA][gG][eE][Dd][oO][wW][nN]/, // [k]PageDown
+          /[kK][Pp][lL][uU][sS]/, // kPlus
+          /[kK][Mm][iI][nN][uU][sS]/, // kMinus
+          /[kK][Mm][uU][lL][tT][iI][pP][lL][yY]/, // kMultiply
+          /[kK][Dd][iI][vV][iI][dD][eE]/, // kDivide
+          /[kK][Pp][oO][iI][nN][tT]/, // kPoint
+          /[kK][Cc][oO][mM][mM][aA]/, // kComma
+          /[kK][Ee][qQ][uU][aA][lL]/, // kEqual
+          /[kK][0-9]/, // k<0-9>
+          /([Ll][oO][cC][aA][lL])?[Ll][eE][aA][dD][eE][rR]/, // [Local]Leader
+          /[Ss][Ii][Dd]/, // SID
+          /[Pp][lL][uU][gG]/, // Plug
           /([Ss]-)?[Cc][hH][aA][rR]-(0[0-7]+|0[xX][0-9a-fA-F]+|[0-9]+)+/, // [S-]Char-...
         ].map(token.immediate),
-        seq($._keycode_modifier, choice(token.immediate(/\S/), $._keycode_in)),        // (<S|C|M|A|D|Alt>-)+...
+        seq($._keycode_modifier, choice(token.immediate(/\S/), $._keycode_in)), // (<S|C|M|A|D|Alt>-)+...
       ),
     _immediate_keycode: ($) =>
       seq(token.immediate('<'), $._keycode_in, token.immediate('>')),
@@ -961,8 +1308,9 @@ module.exports = grammar({
         keys($, /[^\s|]/, /[^|\n]/),
         seq(
           choice(':', alias(/<[Cc][Mm][Dd]>/, $.keycode)),
-          $._statement, optional(seq('\\|', $._statement)),
-          alias(/<[Cc][Rr]>/, $.keycode)
+          $._statement,
+          optional(seq('\\|', $._statement)),
+          alias(/<[Cc][Rr]>/, $.keycode),
         ),
       ),
 
@@ -970,7 +1318,13 @@ module.exports = grammar({
 
     hl_group: ($) => /[a-zA-Z0-9_]+/,
 
-    _hl_body_link: ($) => seq(optional(tokalias($, 'default')), 'link', field('from', $.hl_group), field('to', $.hl_group)),
+    _hl_body_link: ($) =>
+      seq(
+        optional(tokalias($, 'default')),
+        'link',
+        field('from', $.hl_group),
+        field('to', $.hl_group),
+      ),
 
     _hl_body_clear: ($) => seq('clear', optional($.hl_group)),
 
@@ -1046,15 +1400,22 @@ module.exports = grammar({
       ),
 
     _hl_body_keys: ($) =>
-      seq(optional(tokalias($, 'default')), $.hl_group, repeat1($.hl_attribute)),
+      seq(
+        optional(tokalias($, 'default')),
+        $.hl_group,
+        repeat1($.hl_attribute),
+      ),
 
-    _hl_body: ($) => choice($._hl_body_clear, $._hl_body_none, $._hl_body_keys, $._hl_body_link),
+    _hl_body: ($) =>
+      choice(
+        $._hl_body_clear,
+        $._hl_body_none,
+        $._hl_body_keys,
+        $._hl_body_link,
+      ),
 
     highlight_statement: ($) =>
-      seq(
-        maybe_bang($, tokalias($, 'highlight')),
-        optional($._hl_body),
-      ),
+      seq(maybe_bang($, tokalias($, 'highlight')), optional($._hl_body)),
 
     // :h :syntax
     _syn_enable: ($) => sub_cmd(choice('enable', 'on', 'off', 'reset')),
@@ -1068,15 +1429,16 @@ module.exports = grammar({
       sub_cmd('foldlevel', optional(choice('start', 'minimum'))),
 
     _syn_iskeyword: ($) =>
-      sub_cmd('iskeyword', optional(choice('clear', alias(/[^ \n]+/, $.value)))),
+      sub_cmd(
+        'iskeyword',
+        optional(choice('clear', alias(/[^ \n]+/, $.value))),
+      ),
 
-    _syn_conceal: ($) =>
-      sub_cmd('conceal', optional(choice('on', 'off'))),
+    _syn_conceal: ($) => sub_cmd('conceal', optional(choice('on', 'off'))),
 
     // :h :syn-arguments
 
-    _syn_hl_pattern: ($) =>
-      seq($._separator_first, $.pattern, $._separator),
+    _syn_hl_pattern: ($) => seq($._separator_first, $.pattern, $._separator),
 
     hl_groups: ($) => commaSep1(maybe_at($, $.hl_group)),
 
@@ -1114,37 +1476,25 @@ module.exports = grammar({
         key_val_arg('concealends'),
       ),
 
-    _syn_arguments_cluster: ($) => choice(
-      key_val_arg('contains', optional($.hl_groups)),
-      key_val_arg('add', optional($.hl_groups)),
-      key_val_arg('remove', optional($.hl_groups)),
-    ),
+    _syn_arguments_cluster: ($) =>
+      choice(
+        key_val_arg('contains', optional($.hl_groups)),
+        key_val_arg('add', optional($.hl_groups)),
+        key_val_arg('remove', optional($.hl_groups)),
+      ),
 
     _syn_pattern_offset: ($) =>
       seq(
         field(
           'what',
           choice(
-            ...[
-              'ms',
-              'me',
-              'hs',
-              'he',
-              'rs',
-              're',
-              'lc',
-            ].map(token.immediate),
+            ...['ms', 'me', 'hs', 'he', 'rs', 're', 'lc'].map(token.immediate),
           ),
         ),
         token.immediate('='),
         field(
           'offset',
-          choice(
-            ...[
-              /[se]([+-][0-9]+)?/,
-              /[0-9]/,
-            ].map(token.immediate),
-          ),
+          choice(...[/[se]([+-][0-9]+)?/, /[0-9]/].map(token.immediate)),
         ),
       ),
 
@@ -1155,10 +1505,12 @@ module.exports = grammar({
         repeat(alias($._syn_arguments_keyword, $.syntax_argument)),
         // The list of keyword cannot be empty, but we can have arguments anywhere on the line
         alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
-        repeat(choice(
-          alias($._syn_arguments_keyword, $.syntax_argument),
-          alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
-        )),
+        repeat(
+          choice(
+            alias($._syn_arguments_keyword, $.syntax_argument),
+            alias(/[a-zA-Z0-9\[\]_]+/, $.keyword),
+          ),
+        ),
       ),
 
     _syn_match: ($) =>
@@ -1212,60 +1564,53 @@ module.exports = grammar({
         $.filename,
       ),
 
-
     // :h syn-sync
-    _syn_sync_lines: ($) => key_val_arg(choice('minlines', 'maxlines'), /[0-9]+/),
+    _syn_sync_lines: ($) =>
+      key_val_arg(choice('minlines', 'maxlines'), /[0-9]+/),
     _syn_sync: ($) =>
       sub_cmd(
         'sync',
         choice(
-          syn_sync_method('linebreaks', token.immediate('='), field('val', token.immediate(/[0-9]+/))),
-          syn_sync_method('fromstart'),
-          syn_sync_method('ccomment', optional($.hl_group), repeat($._syn_sync_lines)),
           syn_sync_method(
-            choice(
-              'lines',
-              'minlines',
-              'maxlines'
-            ),
+            'linebreaks',
+            token.immediate('='),
+            field('val', token.immediate(/[0-9]+/)),
+          ),
+          syn_sync_method('fromstart'),
+          syn_sync_method(
+            'ccomment',
+            optional($.hl_group),
+            repeat($._syn_sync_lines),
+          ),
+          syn_sync_method(
+            choice('lines', 'minlines', 'maxlines'),
             token.immediate('='),
             field('val', token.immediate(/[0-9]+/)),
           ),
           syn_sync_method(
-            choice(
-              'match',
-              'region'
-            ),
+            choice('match', 'region'),
             $.hl_group,
-            optional(
-              seq(
-                choice(
-                  'grouphere',
-                  'groupthere'
-                ),
-                $.hl_group)
-            ),
-            $.pattern
+            optional(seq(choice('grouphere', 'groupthere'), $.hl_group)),
+            $.pattern,
           ),
-          syn_sync_method('linecont', repeat($._syn_sync_lines), $.pattern, repeat($._syn_sync_lines)),
-          syn_sync_method('clear', optional($.hl_group))
+          syn_sync_method(
+            'linecont',
+            repeat($._syn_sync_lines),
+            $.pattern,
+            repeat($._syn_sync_lines),
+          ),
+          syn_sync_method('clear', optional($.hl_group)),
         ),
       ),
 
-    _syn_list: ($) =>
-      sub_cmd(
-        'list',
-        optional(maybe_at($, $.hl_group)),
-      ),
+    _syn_list: ($) => sub_cmd('list', optional(maybe_at($, $.hl_group))),
 
-    _syn_clear: ($) =>
-      sub_cmd(
-        'clear',
-        optional(maybe_at($, $.hl_group)),
-      ),
+    _syn_clear: ($) => sub_cmd('clear', optional(maybe_at($, $.hl_group))),
 
     syntax_statement: ($) =>
-      command($, 'syntax',
+      command(
+        $,
+        'syntax',
         // `:syntax` = `:syntax list`
         optional(
           choice(
@@ -1309,17 +1654,9 @@ module.exports = grammar({
         repeat(alias($._sign_define_argument, $.sign_argument)),
       ),
 
-    _sign_undefine: ($) =>
-      sub_cmd(
-        'undefine',
-        field('name', $._sign_name),
-      ),
+    _sign_undefine: ($) => sub_cmd('undefine', field('name', $._sign_name)),
 
-    _sign_list: ($) =>
-      sub_cmd(
-        'list',
-        optional(field('name', $._sign_name)),
-      ),
+    _sign_list: ($) => sub_cmd('list', optional(field('name', $._sign_name))),
 
     // :h sign-place
     _sign_place_place_argument: ($) =>
@@ -1341,28 +1678,31 @@ module.exports = grammar({
       choice(
         key_val_arg('file', $.filename),
         key_val_arg('buffer', $.integer_literal),
-        key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+        key_val_arg(
+          'group',
+          choice($.hl_group, alias(token.immediate('*'), $.wildcard)),
+        ),
       ),
     _sign_place_list: ($) =>
       repeat1(alias($._sign_place_list_argument, $.sign_argument)),
     _sign_place: ($) =>
-      sub_cmd(
-        'place',
-        choice(
-          $._sign_place_place,
-          $._sign_place_list,
-        ),
-      ),
+      sub_cmd('place', choice($._sign_place_place, $._sign_place_list)),
 
     _sign_unplace_cursor_argument: ($) =>
-      key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+      key_val_arg(
+        'group',
+        choice($.hl_group, alias(token.immediate('*'), $.wildcard)),
+      ),
     _sign_unplace_cursor: ($) =>
       alias($._sign_unplace_cursor_argument, $.sign_argument),
     _sign_unplace_id_argument: ($) =>
       choice(
         key_val_arg('file', $.filename),
         key_val_arg('buffer', $.integer_literal),
-        key_val_arg('group', choice($.hl_group, alias(token.immediate('*'), $.wildcard))),
+        key_val_arg(
+          'group',
+          choice($.hl_group, alias(token.immediate('*'), $.wildcard)),
+        ),
       ),
     _sign_unplace_id: ($) =>
       seq(
@@ -1372,12 +1712,7 @@ module.exports = grammar({
     _sign_unplace: ($) =>
       sub_cmd(
         'unplace',
-        optional(
-          choice(
-            $._sign_unplace_cursor,
-            $._sign_unplace_id,
-          ),
-        ),
+        optional(choice($._sign_unplace_cursor, $._sign_unplace_id)),
       ),
 
     _sign_jump_argument: ($) =>
@@ -1515,7 +1850,8 @@ module.exports = grammar({
 
     list: ($) => seq('[', commaSep($._expression), optional(','), ']'),
     // Trailing commas are not allowed in assignments, but `; <ident>` are
-    list_assignment: ($) => seq('[', commaSep($._expression), optional(seq(';', $._expression)), ']'),
+    list_assignment: ($) =>
+      seq('[', commaSep($._expression), optional(seq(';', $._expression)), ']'),
 
     index_expression: ($) =>
       prec(
@@ -1594,48 +1930,43 @@ module.exports = grammar({
 
     // :h pattern
     pattern_multi: ($) =>
-      choice(
-        '*',
-        /\\[+=?]/,
-        /\\@[!>=]|<[=!]/,
-        /\\\{-?[0-9]*,?[0-9]*}/,
-      ),
+      choice('*', /\\[+=?]/, /\\@[!>=]|<[=!]/, /\\\{-?[0-9]*,?[0-9]*}/),
 
     _pattern_ordinary_atom: ($) =>
       repeat1(
         choice(
           seq(
             '[',
-            repeat(choice(
-              seq('\\', /./), // escaped character
-              /[^\]\n\\]/       // any character besides ']', '\' or '\n'
-            )),
-            ']'
-          ),              // square-bracket-delimited character class
+            repeat(
+              choice(
+                seq('\\', /./), // escaped character
+                /[^\]\n\\]/, // any character besides ']', '\' or '\n'
+              ),
+            ),
+            ']',
+          ), // square-bracket-delimited character class
           seq('\\', /./), // escaped character
-          /[^\\\[\n]/    // any character besides '[', '\' or '\n'
+          /[^\\\[\n]/, // any character besides '[', '\' or '\n'
         ),
       ),
 
     _pattern_atom: ($) =>
-      prec.left(choice(
-        $._pattern_ordinary_atom,
-        seq('\\(', $.pattern, '\\)'),
-        seq('\\%(', $.pattern, '\\)'),
-        seq('\\z(', $.pattern, '\\)'),
-      )),
+      prec.left(
+        choice(
+          $._pattern_ordinary_atom,
+          seq('\\(', $.pattern, '\\)'),
+          seq('\\%(', $.pattern, '\\)'),
+          seq('\\z(', $.pattern, '\\)'),
+        ),
+      ),
 
-    _pattern_piece: ($) =>
-      seq($._pattern_atom, optional($.pattern_multi)),
+    _pattern_piece: ($) => seq($._pattern_atom, optional($.pattern_multi)),
 
-    _pattern_concat: ($) =>
-      repeat1($._pattern_piece),
+    _pattern_concat: ($) => repeat1($._pattern_piece),
 
-    _pattern_branch: ($) =>
-      sep1($._pattern_concat, '\\&'),
+    _pattern_branch: ($) => sep1($._pattern_concat, '\\&'),
 
-    pattern: ($) =>
-      prec.left(sep1($._pattern_branch, '\\|')),
+    pattern: ($) => prec.left(sep1($._pattern_branch, '\\|')),
 
     env_variable: ($) => seq('$', $.identifier),
 
@@ -1670,14 +2001,10 @@ function tokalias(gram, name) {
 }
 
 function _cmd_range($) {
-  return seq(field('range', alias($._range, $.range)), optional(':'))
+  return seq(field('range', alias($._range, $.range)), optional(':'));
 }
 function range_command($, cmd, ...args) {
-  return seq(
-    optional(_cmd_range($)),
-    tokalias($, cmd),
-    ...args,
-  );
+  return seq(optional(_cmd_range($)), tokalias($, cmd), ...args);
 }
 function bang_range_command($, cmd, ...args) {
   return seq(
@@ -1688,10 +2015,7 @@ function bang_range_command($, cmd, ...args) {
   );
 }
 function command($, cmd, ...args) {
-  return seq(
-    tokalias($, cmd),
-    ...args,
-  );
+  return seq(tokalias($, cmd), ...args);
 }
 
 function maybe_bang($, cmd_name) {
@@ -1745,30 +2069,24 @@ function sub_cmd(sub, ...args) {
 function key_val_arg(arg, ...args) {
   if (args.length > 0)
     return seq(field('name', arg), token.immediate('='), field('val', ...args));
-  else
-    return field('name', arg);
+  else return field('name', arg);
 }
 
 function syn_region_arg($, name) {
-  return seq(key_val_arg(name, $._syn_hl_pattern), commaSep(alias($._syn_pattern_offset, $.pattern_offset)));
+  return seq(
+    key_val_arg(name, $._syn_hl_pattern),
+    commaSep(alias($._syn_pattern_offset, $.pattern_offset)),
+  );
 }
 
 function syn_sync_method(arg, ...args) {
-  if (args.length > 0)
-    return seq(field('method', arg), ...args);
-  else
-    return field('method', arg);
+  if (args.length > 0) return seq(field('method', arg), ...args);
+  else return field('method', arg);
 }
 
-
-function keys($, allowed_first, allowed_after=allowed_first) {
+function keys($, allowed_first, allowed_after = allowed_first) {
   return seq(
-    choice(
-      allowed_first,
-      '<',
-      seq('\\', /./),
-      $.keycode,
-    ),
+    choice(allowed_first, '<', seq('\\', /./), $.keycode),
     repeat(
       choice(
         token.immediate(allowed_after),
@@ -1776,40 +2094,56 @@ function keys($, allowed_first, allowed_after=allowed_first) {
         seq(token.immediate('\\'), token.immediate(/./)),
         alias($._immediate_keycode, $.keycode),
       ),
-    )
+    ),
   );
 }
 
 function make_keywords($, keywords) {
   const fs = require('fs');
-  const KEYWORDS_FILE = "src/keywords.h";
+  const KEYWORDS_FILE = 'src/keywords.h';
 
   let rules = [];
 
-  fs.writeFileSync(KEYWORDS_FILE, `typedef enum {
-`, (err) => {});
+  fs.writeFileSync(
+    KEYWORDS_FILE,
+    `typedef enum {
+`,
+    (err) => {},
+  );
 
   for (const [kname, infos] of Object.entries(keywords)) {
-    fs.appendFileSync(KEYWORDS_FILE, `  ${kname} = ${rules.length},\n`, (err) => {});
+    fs.appendFileSync(
+      KEYWORDS_FILE,
+      `  ${kname} = ${rules.length},\n`,
+      (err) => {},
+    );
     rules.push(infos.rule_name);
   }
 
-  fs.appendFileSync(KEYWORDS_FILE, `  UNKNOWN_COMMAND
+  fs.appendFileSync(
+    KEYWORDS_FILE,
+    `  UNKNOWN_COMMAND
 } kwid;
 
 keyword keywords[] = {
-`, (err) => {});
+`,
+    (err) => {},
+  );
   rules.push($.unknown_command_name);
 
   for (const [kname, infos] of Object.entries(keywords)) {
-    fs.appendFileSync(KEYWORDS_FILE, `  [${kname}] = {
+    fs.appendFileSync(
+      KEYWORDS_FILE,
+      `  [${kname}] = {
     .mandat = "${infos.mandat}",
     .opt = "${infos.opt}",
     .ignore_comments_after = ${infos.ignore_comments_after}
-  },\n`, (err) => {});
+  },\n`,
+      (err) => {},
+    );
   }
 
-  fs.appendFileSync(KEYWORDS_FILE, "};", (err) => {})
+  fs.appendFileSync(KEYWORDS_FILE, '};', (err) => {});
 
   return rules;
 }
