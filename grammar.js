@@ -865,8 +865,8 @@ module.exports = grammar({
         keys($, /[^\s|]/, /[^|\n]/),
         seq(
           choice(":", alias(/<[Cc][Mm][Dd]>/, $.keycode)),
-          $._statement,
-          optional(seq("\\|", $._statement)),
+          // :h map_bar
+          sep1($._statement, choice("\\|", alias(/<[Bb][Aa][Rr]>/, $.keycode))),
           alias(/<[Cc][Rr]>/, $.keycode)
         )
       ),

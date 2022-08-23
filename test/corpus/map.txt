@@ -337,3 +337,34 @@ map <C-s-a> :echo new<CR>
       (echo_statement
         (identifier))
       (keycode))))
+
+================================================================================
+Map bar
+================================================================================
+
+map f <cmd>echo "foo" <bar> echo "bar"<CR>
+map f <cmd>echo "foobar" <Bar> echo "foobaz"<CR>
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (map_side
+      (keycode)
+      (echo_statement
+        (string_literal))
+      (keycode)
+      (echo_statement
+        (string_literal))
+      (keycode)))
+  (map_statement
+    (map_side)
+    (map_side
+      (keycode)
+      (echo_statement
+        (string_literal))
+      (keycode)
+      (echo_statement
+        (string_literal))
+      (keycode))))
