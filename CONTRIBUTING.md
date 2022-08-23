@@ -11,11 +11,10 @@ are:
 
 ## Adding a new builtin command
 
-To add a new command, you only need to modify the [grammar], by doing
-the following:
+To add a new command, you only need to modify the [grammar] and the
+[keywords file], by doing the following:
 
-1. In the `extras` key of the grammar, within the `make_keywords`
-   call, add the following in the dictionnary argument:
+1. Add the following in the [keywords file]:
 ```js
 <UPPERCASE UNIQUE NAME> = {
   mandat = "<mandatory part of the command>",
