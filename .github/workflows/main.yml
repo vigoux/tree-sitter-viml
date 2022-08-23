@@ -51,5 +51,7 @@ jobs:
         run: |
           npm install
       - name: Download and parse runtime files
+        env:
+          NVIM_VERSION: "release-0.7"
         run: |
           ./scripts/parse_runtime_files.sh
