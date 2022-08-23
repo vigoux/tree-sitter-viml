@@ -265,9 +265,9 @@ module.exports = grammar({
           "tag_listfiles",
           "user",
           "var",
-        ].map(name => cmd_attr_behavior_key_val(name)),
+        ].map((name) => cmd_attr_behavior_key_val(name)),
         cmd_attr_behavior_key_val("custom", $._ident),
-        cmd_attr_behavior_key_val("customlist", $._ident),
+        cmd_attr_behavior_key_val("customlist", $._ident)
       ),
     _command_attribute_address_behavior: ($) =>
       choice(
@@ -280,7 +280,7 @@ module.exports = grammar({
           "tabs",
           "quickfix",
           "other",
-        ].map(name => cmd_attr_behavior_key_val(name))
+        ].map((name) => cmd_attr_behavior_key_val(name))
       ),
 
     _command_attribute_nargs_value: ($) =>
@@ -1620,9 +1620,15 @@ function hl_key_val(left, right) {
 }
 
 function cmd_attr_behavior_key_val(left, ...right) {
-  if (right.length > 0)
-    return seq(field("name", token.immediate(left)), token.immediate(","), field("val", ...right));
-  else return field("name", token.immediate(left));
+  if (right.length > 0) {
+    return seq(
+      field("name", token.immediate(left)),
+      token.immediate(","),
+      field("val", ...right)
+    );
+  } else {
+    return field("name", token.immediate(left));
+  }
 }
 
 function sub_cmd(sub, ...args) {
