@@ -1092,7 +1092,17 @@
   {
     "type": "cnext_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "colorscheme_statement",
@@ -1596,7 +1606,17 @@
   {
     "type": "cprevious_statement",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "curly_braces_name",

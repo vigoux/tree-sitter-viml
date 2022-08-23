@@ -816,7 +816,7 @@ module.exports = grammar({
 
     cnext_statement: ($) => maybe_bang($, tokalias($, "cnext")),
     cprevious_statement: ($) =>
-      maybe_bang(choice(tokalias($, "cprevious"), tokalias($, "cNext"))),
+      maybe_bang($, choice(tokalias($, "cprevious"), tokalias($, "cNext"))),
 
     _runtime_where: ($) => choice("START", "OPT", "PACK", "ALL"),
     runtime_statement: ($) =>
