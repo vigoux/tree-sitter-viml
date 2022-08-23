@@ -1355,23 +1355,22 @@ module.exports = grammar({
           ["%", PREC.MULTI],
           ["..", PREC.CONCAT],
           [".", PREC.CONCAT],
-          ["is", PREC.COMPARE],
-          ["isnot", PREC.COMPARE],
         ].map(([operator, precedence]) =>
           prec.left(
             precedence,
             bin_left_right($._expression, operator, $._expression)
           )
         ),
-        ...["==", "!=", ">", ">=", "<", "<=", "=~", "!~"].map((operator) =>
-          prec.left(
-            PREC.COMPARE,
-            bin_left_right(
-              $._expression,
-              seq(operator, optional($.match_case)),
-              $._expression
+        ...["==", "!=", ">", ">=", "<", "<=", "=~", "!~", "is", "isnot"].map(
+          (operator) =>
+            prec.left(
+              PREC.COMPARE,
+              bin_left_right(
+                $._expression,
+                seq(operator, optional($.match_case)),
+                $._expression
+              )
             )
-          )
         )
       ),
 

@@ -326,3 +326,33 @@ echo foo[0]('bar')
         value: (identifier)
         index: (integer_literal))
       (string_literal))))
+
+================================================================================
+Comparator matching case
+================================================================================
+
+let a = "a" is# "b"
+let b = 1 isnot? 3
+let foo = "a" =~? "b"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (binary_operation
+      (string_literal)
+      (match_case)
+      (string_literal)))
+  (let_statement
+    (identifier)
+    (binary_operation
+      (integer_literal)
+      (match_case)
+      (integer_literal)))
+  (let_statement
+    (identifier)
+    (binary_operation
+      (string_literal)
+      (match_case)
+      (string_literal))))
