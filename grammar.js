@@ -1,113 +1,5 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
-// keywords.h file generation
-const fs = require('fs');
-const KEYWORDS_FILE = "src/keywords.h";
-
-const KEYWORDS = [
-  [ "FUNCTION", ["fu", "nction", false]],
-  [ "ENDFUNCTION", ["endf", "unction", false],],
-  [ "FOR", ["for", "", false],],
-  [ "ENDFOR", ["endfo", "r", false],],
-  [ "WHILE", ["wh", "ile", false],],
-  [ "ENDWHILE", ["endw", "hile", false],],
-  [ "IF", ["if", "", false],],
-  [ "ELSEIF", ["elsei", "f", false],],
-  [ "ELSE", ["el", "se", false],],
-  [ "ENDIF", ["en", "dif", false],],
-  [ "TRY", ["try", "", false],],
-  [ "CATCH", ["cat", "ch", false],],
-  [ "FINALLY", ["fina", "lly", false],],
-  [ "ENDTRY", ["endt", "ry", false],],
-  [ "CONST", ["cons", "t", false],],
-  [ "NORMAL", ["norm", "al", false],],
-  [ "RETURN", ["retu", "rn", false],],
-  [ "PERL", ["perl", "", false],],
-  [ "LUA", ["lua", "", false],],
-  [ "RUBY", ["rub", "y", false],],
-  [ "PYTHON", ["py", "thon", false],],
-  [ "THROW", ["th", "row", false],],
-  [ "EXECUTE", ["exe", "cute", false],],
-  [ "AUTOCMD", ["au", "tocmd", false],],
-  [ "SILENT", ["sil", "ent", false],],
-  [ "ECHO", ["ec", "ho", true],],
-  [ "ECHON", ["echon", "", true],],
-  [ "ECHOHL", ["echoh", "l", false],],
-  [ "ECHOMSG", ["echom", "sg", true],],
-  [ "ECHOERR", ["echoe", "rr", true],],
-  [ "MAP", ["map", "", true],],
-  [ "NMAP", ["nm", "ap", true],],
-  [ "VMAP", ["vm", "ap", true],],
-  [ "XMAP", ["xm", "ap", true],],
-  [ "SMAP", ["smap", "", true],],
-  [ "OMAP", ["om", "ap", true],],
-  [ "IMAP", ["im", "ap", true],],
-  [ "LMAP", ["lm", "ap", true],],
-  [ "CMAP", ["cm", "ap", true],],
-  [ "TMAP", ["tma", "p", true],],
-  [ "NOREMAP", ["no", "remap", true],],
-  [ "VNOREMAP", ["nn", "oremap", true],],
-  [ "NNOREMAP", ["vn", "oremap", true],],
-  [ "XNOREMAP", ["xn", "oremap", true],],
-  [ "SNOREMAP", ["snor", "emap", true],],
-  [ "ONOREMAP", ["ono", "remap", true],],
-  [ "INOREMAP", ["ino", "remap", true],],
-  [ "LNOREMAP", ["ln", "oremap", true],],
-  [ "CNOREMAP", ["cno", "remap", true],],
-  [ "TNOREMAP", ["tno", "remap", true],],
-  [ "AUGROUP", ["aug", "roup", true],],
-  [ "HIGHLIGHT", ["hi", "ghlight", false],],
-  [ "DEFAULT", ["def", "ault", false]], // highlight def[ault],
-  [ "SYNTAX", ["sy", "ntax", false],],
-  [ "SET", ["se", "t", false],],
-  [ "SETLOCAL", ["setl", "ocal", false],],
-  [ "SETFILETYPE", ["setf", "iletype", false],],
-  [ "BROWSE", ["bro", "wse", false],],
-  [ "OPTIONS", ["opt", "ions", false],],
-  [ "STARTINSERT", ["star", "tinsert", false],],
-  [ "STOPINSERT", ["stopi", "nsert", false],],
-  [ "SCRIPTENCODING", ["scripte", "ncoding", false],],
-  [ "SOURCE", ["so", "urce", false],],
-  [ "GLOBAL", ["g", "lobal", false],],
-  [ "COLORSCHEME", ["colo", "rscheme", false],],
-  [ "COMMAND", ["com", "mand", false],],
-  [ "COMCLEAR", ["comc", "lear", false],],
-  [ "DELCOMMAND", ["delc", "ommand", false],],
-  [ "RUNTIME", ["ru", "ntime", false],],
-  [ "WINCMD", ["winc", "md", false],],
-  [ "SIGN", ["sig", "n", false],],
-  [ "FILETYPE", ["filet", "ype", false],],
-  [ "LET", ["let", "", false],],
-  [ "UNLET", ["unl", "et", false],],
-  [ "CALL", ["cal", "l", false],],
-  [ "BREAK", ["brea", "k", false],],
-  [ "CONTINUE", ["con", "tinue", false],],
-];
-
-fs.writeFileSync(KEYWORDS_FILE, `typedef enum {
-`, (err) => {});
-
-for (const [index, [kname, _]] of KEYWORDS.entries()) {
-  fs.appendFileSync(KEYWORDS_FILE, `  ${kname} = ${index},\n`, (err) => {});
-}
-
-fs.appendFileSync(KEYWORDS_FILE, `  UNKNOWN_COMMAND
-} kwid;
-
-keyword keywords[] = {
-`, (err) => {});
-
-for (const [kname, [mandat, opt, ica]] of KEYWORDS) {
-  fs.appendFileSync(KEYWORDS_FILE, `  [${kname}] = {
-    .mandat = "${mandat}",
-    .opt = "${opt}",
-    .ignore_comments_after = ${ica}
-  },
-`, (err) => {});
-}
-
-fs.appendFileSync(KEYWORDS_FILE, "};", (err) => {})
-
 const MAP_OPTIONS = any_order(
   '<buffer>',
   '<nowait>',
@@ -154,85 +46,95 @@ module.exports = grammar({
     $.string_literal,
     $.comment,
     $._bang_filter,
-    $._function,
-    $._endfunction,
-    $._for,
-    $._endfor,
-    $._while,
-    $._endwhile,
-    $._if,
-    $._elseif,
-    $._else,
-    $._endif,
-    $._try,
-    $._catch,
-    $._finally,
-    $._endtry,
-    $._const,
-    $._normal,
-    $._return,
-    $._perl,
-    $._lua,
-    $._ruby,
-    $._python,
-    $._throw,
-    $._execute,
-    $._autocmd,
-    $._silent,
-    $._echo,
-    $._echon,
-    $._echohl,
-    $._echomsg,
-    $._echoerr,
-    $._map,
-    $._nmap,
-    $._vmap,
-    $._xmap,
-    $._smap,
-    $._omap,
-    $._imap,
-    $._lmap,
-    $._cmap,
-    $._tmap,
-    $._noremap,
-    $._vnoremap,
-    $._nnoremap,
-    $._xnoremap,
-    $._snoremap,
-    $._onoremap,
-    $._inoremap,
-    $._lnoremap,
-    $._cnoremap,
-    $._tnoremap,
-    $._augroup,
-    $._highlight,
-    $._default, // highlight def[ault]
-    $._syntax,
-    $._set,
-    $._setlocal,
-    $._setfiletype,
-    $._browse,
-    $._options,
-    $._startinsert,
-    $._stopinsert,
-    $._scriptencoding,
-    $._source,
-    $._global,
-    $._colorscheme,
-    $._command,
-    $._comclear,
-    $._delcommand,
-    $._runtime,
-    $._wincmd,
-    $._sign,
-    $._filetype,
-    $._let,
-    $._unlet,
-    $._call,
-    $._break,
-    $._continue,
-    $.unknown_command_name,
-  ],
+  ].concat(make_keywords($, {
+    FUNCTION: {
+      mandat: "fu",
+      opt: "nction",
+      ignore_comments_after : false,
+      rule_name: $._function,
+    },
+    ENDFUNCTION: {
+      mandat: "endf",
+      opt: "unction",
+      ignore_comments_after: false,
+      rule_name: $._endfunction,
+    },
+    FOR : { mandat: "for", opt: "", ignore_comments_after: false, rule_name: $._for },
+    ENDFOR : { mandat: "endfo", opt: "r", ignore_comments_after: false, rule_name: $._endfor },
+    WHILE : { mandat: "wh", opt: "ile", ignore_comments_after: false, rule_name: $._while },
+    ENDWHILE : { mandat: "endw", opt: "hile", ignore_comments_after: false, rule_name: $._endwhile },
+    IF : { mandat: "if", opt: "", ignore_comments_after: false, rule_name: $._if },
+    ELSEIF : { mandat: "elsei", opt: "f", ignore_comments_after: false, rule_name: $._elseif },
+    ELSE : { mandat: "el", opt: "se", ignore_comments_after: false, rule_name: $._else },
+    ENDIF : { mandat: "en", opt: "dif", ignore_comments_after: false, rule_name: $._endif },
+    TRY : { mandat: "try", opt: "", ignore_comments_after: false, rule_name: $._try },
+    CATCH : { mandat: "cat", opt: "ch", ignore_comments_after: false, rule_name: $._catch },
+    FINALLY : { mandat: "fina", opt: "lly", ignore_comments_after: false, rule_name: $._finally },
+    ENDTRY : { mandat: "endt", opt: "ry", ignore_comments_after: false, rule_name: $._endtry },
+    CONST : { mandat: "cons", opt: "t", ignore_comments_after: false, rule_name: $._const },
+    NORMAL : { mandat: "norm", opt: "al", ignore_comments_after: false, rule_name: $._normal },
+    RETURN : { mandat: "retu", opt: "rn", ignore_comments_after: false, rule_name: $._return },
+    PERL : { mandat: "perl", opt: "", ignore_comments_after: false, rule_name: $._perl },
+    LUA : { mandat: "lua", opt: "", ignore_comments_after: false, rule_name: $._lua },
+    RUBY : { mandat: "rub", opt: "y", ignore_comments_after: false, rule_name: $._ruby },
+    PYTHON : { mandat: "py", opt: "thon", ignore_comments_after: false, rule_name: $._python },
+    THROW : { mandat: "th", opt: "row", ignore_comments_after: false, rule_name: $._throw },
+    EXECUTE : { mandat: "exe", opt: "cute", ignore_comments_after: false, rule_name: $._execute },
+    AUTOCMD : { mandat: "au", opt: "tocmd", ignore_comments_after: false, rule_name: $._autocmd },
+    SILENT : { mandat: "sil", opt: "ent", ignore_comments_after: false, rule_name: $._silent },
+    ECHO : { mandat: "ec", opt: "ho", ignore_comments_after: true, rule_name: $._echo },
+    ECHON : { mandat: "echon", opt: "", ignore_comments_after: true, rule_name: $._echon },
+    ECHOHL : { mandat: "echoh", opt: "l", ignore_comments_after: false, rule_name: $._echohl },
+    ECHOMSG : { mandat: "echom", opt: "sg", ignore_comments_after: true, rule_name: $._echomsg },
+    ECHOERR : { mandat: "echoe", opt: "rr", ignore_comments_after: true, rule_name: $._echoerr },
+    MAP : { mandat: "map", opt: "", ignore_comments_after: true, rule_name: $._map },
+    NMAP : { mandat: "nm", opt: "ap", ignore_comments_after: true, rule_name: $._nmap },
+    VMAP : { mandat: "vm", opt: "ap", ignore_comments_after: true, rule_name: $._vmap },
+    XMAP : { mandat: "xm", opt: "ap", ignore_comments_after: true, rule_name: $._xmap },
+    SMAP : { mandat: "smap", opt: "", ignore_comments_after: true, rule_name: $._smap },
+    OMAP : { mandat: "om", opt: "ap", ignore_comments_after: true, rule_name: $._omap },
+    IMAP : { mandat: "im", opt: "ap", ignore_comments_after: true, rule_name: $._imap },
+    LMAP : { mandat: "lm", opt: "ap", ignore_comments_after: true, rule_name: $._lmap },
+    CMAP : { mandat: "cm", opt: "ap", ignore_comments_after: true, rule_name: $._cmap },
+    TMAP : { mandat: "tma", opt: "p", ignore_comments_after: true, rule_name: $._tmap },
+    NOREMAP : { mandat: "no", opt: "remap", ignore_comments_after: true, rule_name: $._noremap },
+    VNOREMAP : { mandat: "nn", opt: "oremap", ignore_comments_after: true, rule_name: $._vnoremap },
+    NNOREMAP : { mandat: "vn", opt: "oremap", ignore_comments_after: true, rule_name: $._nnoremap },
+    XNOREMAP : { mandat: "xn", opt: "oremap", ignore_comments_after: true, rule_name: $._xnoremap },
+    SNOREMAP : { mandat: "snor", opt: "emap", ignore_comments_after: true, rule_name: $._snoremap },
+    ONOREMAP : { mandat: "ono", opt: "remap", ignore_comments_after: true, rule_name: $._onoremap },
+    INOREMAP : { mandat: "ino", opt: "remap", ignore_comments_after: true, rule_name: $._inoremap },
+    LNOREMAP : { mandat: "ln", opt: "oremap", ignore_comments_after: true, rule_name: $._lnoremap },
+    CNOREMAP : { mandat: "cno", opt: "remap", ignore_comments_after: true, rule_name: $._cnoremap },
+    TNOREMAP : { mandat: "tno", opt: "remap", ignore_comments_after: true, rule_name: $._tnoremap },
+    AUGROUP : { mandat: "aug", opt: "roup", ignore_comments_after: true, rule_name: $._augroup },
+    HIGHLIGHT : { mandat: "hi", opt: "ghlight", ignore_comments_after: false, rule_name: $._highlight },
+    DEFAULT : { mandat: "def", opt: "ault", ignore_comments_after: false, rule_name: $._default, }, // highlight def[ault },
+    SYNTAX : { mandat: "sy", opt: "ntax", ignore_comments_after: false, rule_name: $._syntax },
+    SET : { mandat: "se", opt: "t", ignore_comments_after: false, rule_name: $._set },
+    SETLOCAL : { mandat: "setl", opt: "ocal", ignore_comments_after: false, rule_name: $._setlocal },
+    SETFILETYPE : { mandat: "setf", opt: "iletype", ignore_comments_after: false, rule_name: $._setfiletype },
+    BROWSE : { mandat: "bro", opt: "wse", ignore_comments_after: false, rule_name: $._browse },
+    OPTIONS : { mandat: "opt", opt: "ions", ignore_comments_after: false, rule_name: $._options },
+    STARTINSERT : { mandat: "star", opt: "tinsert", ignore_comments_after: false, rule_name: $._startinsert },
+    STOPINSERT : { mandat: "stopi", opt: "nsert", ignore_comments_after: false, rule_name: $._stopinsert },
+    SCRIPTENCODING : { mandat: "scripte", opt: "ncoding", ignore_comments_after: false, rule_name: $._scriptencoding },
+    SOURCE : { mandat: "so", opt: "urce", ignore_comments_after: false, rule_name: $._source },
+    GLOBAL : { mandat: "g", opt: "lobal", ignore_comments_after: false, rule_name: $._global },
+    COLORSCHEME : { mandat: "colo", opt: "rscheme", ignore_comments_after: false, rule_name: $._colorscheme },
+    COMMAND : { mandat: "com", opt: "mand", ignore_comments_after: false, rule_name: $._command },
+    COMCLEAR : { mandat: "comc", opt: "lear", ignore_comments_after: false, rule_name: $._comclear },
+    DELCOMMAND : { mandat: "delc", opt: "ommand", ignore_comments_after: false, rule_name: $._delcommand },
+    RUNTIME : { mandat: "ru", opt: "ntime", ignore_comments_after: false, rule_name: $._runtime },
+    WINCMD : { mandat: "winc", opt: "md", ignore_comments_after: false, rule_name: $._wincmd },
+    SIGN : { mandat: "sig", opt: "n", ignore_comments_after: false, rule_name: $._sign },
+    FILETYPE : { mandat: "filet", opt: "ype", ignore_comments_after: false, rule_name: $._filetype },
+    LET : { mandat: "let", opt: "", ignore_comments_after: false, rule_name: $._let },
+    UNLET : { mandat: "unl", opt: "et", ignore_comments_after: false, rule_name: $._unlet },
+    CALL : { mandat: "cal", opt: "l", ignore_comments_after: false, rule_name: $._call },
+    BREAK : { mandat: "brea", opt: "k", ignore_comments_after: false, rule_name: $._break },
+    CONTINUE : { mandat: "con", opt: "tinue", ignore_comments_after: false, rule_name: $._continue },
+  })),
 
   extras: ($) => [$._line_continuation, /[\t ]/],
 
@@ -1876,4 +1778,38 @@ function keys($, allowed_first, allowed_after=allowed_first) {
       ),
     )
   );
+}
+
+function make_keywords($, keywords) {
+  const fs = require('fs');
+  const KEYWORDS_FILE = "src/keywords.h";
+
+  let rules = [];
+
+  fs.writeFileSync(KEYWORDS_FILE, `typedef enum {
+`, (err) => {});
+
+  for (const [kname, infos] of Object.entries(keywords)) {
+    fs.appendFileSync(KEYWORDS_FILE, `  ${kname} = ${rules.length},\n`, (err) => {});
+    rules.push(infos.rule_name);
+  }
+
+  fs.appendFileSync(KEYWORDS_FILE, `  UNKNOWN_COMMAND
+} kwid;
+
+keyword keywords[] = {
+`, (err) => {});
+  rules.push($.unknown_command_name);
+
+  for (const [kname, infos] of Object.entries(keywords)) {
+    fs.appendFileSync(KEYWORDS_FILE, `  [${kname}] = {
+    .mandat = "${infos.mandat}",
+    .opt = "${infos.opt}",
+    .ignore_comments_after = ${infos.ignore_comments_after}
+  },\n`, (err) => {});
+  }
+
+  fs.appendFileSync(KEYWORDS_FILE, "};", (err) => {})
+
+  return rules;
 }

@@ -12,28 +12,38 @@ are:
 
 ## Adding a new builtin command
 
-First, you will need to edit the [scanner file] to include
-your new command:
+To add a new command, you only need to modify the [grammar], by doing
+the following:
 
-1. Add a new `enum` variant with the name of your command in the
-   `TokenType` enum, just before `UNKNOWN_COMMAND`.
-2. Add your keyword in the `keywords[]` variable, using the `KEYWORD`
-   macro, with the arguments:
-   1. The `TokenType` you entered above
-   2. The mandatory part of the command (before the `[]` in the command help)
-   3. The optional part of the command (inside `[]` in the command help)
-   4. Whether text after a `"` isn't ignored (`true`) or is considered as a comment (`false`)
-3. Edit the `grammar.js`:
-   1. Add your command in `externals`, above `$.unknown_command_name`, prefixed by a `_`
-   2. Create your command rule in the grammar; to include the command keyword, do the following : `tokalias($, "command name")`.
-4. Add a test for your command in a custom file in the `test/corpus`
+1. In the `extras` key of the grammar, within the `make_keywords`
+   call, add the following in the dictionnary argument:
+```js
+<UPPERCASE UNIQUE NAME> = {
+  rule = $._<rule name>,
+  mandat = "<mandatory part of the command>",
+  opt = "<optional part of the command>",
+  ignore_comments_after = true|false <whether the parser needs to ignore comments after this command>
+}
+```
+2. Add a new rule named `<command name>_statement` in the grammar,
+   and add it to the `statement` rule. To use the command keyword, do
+   `tokalias($, "<command name>")`.
+3. Add a test for your command in a custom file in the `test/corpus`
    directory.
+4. Add highlighting for this command in [the highlight query], and
+   test it in [the highlight tests].
 
 Then open a pull request, and you'll be good to go !
 
 ## Adding new language constructs
 
 It should be sufficient to just modify the `grammar.js` for that,
-adding the appropriate rule.
+adding the appropriate rules.
+
+Be mindful though that you need to handle the command separators on
+your own, using the `$._cmd_separator` rule.
 
 [scanner file]: ./src/scanner.c
+[grammar]: ./grammar.js
+[the highlight query]: ./queries/highlights.scm
+[the highlight tests]: ./test/highlight/
