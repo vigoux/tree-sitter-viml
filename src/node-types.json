@@ -120,6 +120,10 @@
             "named": true
           },
           {
+            "type": "cnext_statement",
+            "named": true
+          },
+          {
             "type": "colorscheme_statement",
             "named": true
           },
@@ -137,6 +141,10 @@
           },
           {
             "type": "continue_statement",
+            "named": true
+          },
+          {
+            "type": "cprevious_statement",
             "named": true
           },
           {
@@ -642,6 +650,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -663,6 +675,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -1074,6 +1090,11 @@
     }
   },
   {
+    "type": "cnext_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "colorscheme_statement",
     "named": true,
     "fields": {},
@@ -1137,6 +1158,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -1158,6 +1183,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -1561,6 +1590,11 @@
   },
   {
     "type": "continue_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "cprevious_statement",
     "named": true,
     "fields": {}
   },
@@ -3082,6 +3116,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -3099,6 +3137,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -4418,6 +4460,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -4435,6 +4481,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -5468,6 +5518,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -5489,6 +5543,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -5973,6 +6031,10 @@
           "named": true
         },
         {
+          "type": "cnext_statement",
+          "named": true
+        },
+        {
           "type": "colorscheme_statement",
           "named": true
         },
@@ -5990,6 +6052,10 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "cprevious_statement",
           "named": true
         },
         {
@@ -8038,6 +8104,10 @@
     "named": false
   },
   {
+    "type": "cNext",
+    "named": false
+  },
+  {
     "type": "call",
     "named": false
   },
@@ -8079,6 +8149,10 @@
   },
   {
     "type": "cmap",
+    "named": false
+  },
+  {
+    "type": "cnext",
     "named": false
   },
   {
@@ -8251,6 +8325,10 @@
   },
   {
     "type": "cp950",
+    "named": false
+  },
+  {
+    "type": "cprevious",
     "named": false
   },
   {
@@ -8430,6 +8508,10 @@
     "named": true
   },
   {
+    "type": "file",
+    "named": false
+  },
+  {
     "type": "file_in_path",
     "named": false
   },
@@ -8440,6 +8522,10 @@
   {
     "type": "filetype",
     "named": true
+  },
+  {
+    "type": "filetype",
+    "named": false
   },
   {
     "type": "finally",

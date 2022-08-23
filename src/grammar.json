@@ -266,6 +266,14 @@
             },
             {
               "type": "SYMBOL",
+              "name": "cnext_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "cprevious_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "unknown_builtin_statement"
             },
             {
@@ -1624,6 +1632,38 @@
         {
           "type": "SYMBOL",
           "name": "command_name"
+        }
+      ]
+    },
+    "cnext_statement": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_cnext"
+      },
+      "named": false,
+      "value": "cnext"
+    },
+    "cprevious_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_cprevious"
+          },
+          "named": false,
+          "value": "cprevious"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_cNext"
+          },
+          "named": false,
+          "value": "cNext"
         }
       ]
     },
@@ -11106,6 +11146,18 @@
     {
       "type": "SYMBOL",
       "name": "_catch"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cnext"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cprevious"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_cNext"
     },
     {
       "type": "SYMBOL",

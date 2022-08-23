@@ -121,6 +121,24 @@ module.exports = grammar({
           ignore_comments_after: false,
           rule_name: $._catch,
         },
+        CNEXT: {
+          mandat: "cn",
+          opt: "ext",
+          ignore_comments_after: false,
+          rule_name: $._cnext,
+        },
+        CPREVIOUS: {
+          mandat: "cp",
+          opt: "revious",
+          ignore_comments_after: false,
+          rule_name: $._cprevious,
+        },
+        CNNEXT: {
+          mandat: "cN",
+          opt: "ext",
+          ignore_comments_after: false,
+          rule_name: $._cNext,
+        },
         FINALLY: {
           mandat: "fina",
           opt: "lly",
@@ -578,6 +596,8 @@ module.exports = grammar({
           $.sign_statement,
           $.break_statement,
           $.continue_statement,
+          $.cnext_statement,
+          $.cprevious_statement,
           $.unknown_builtin_statement,
           $.user_command
         )
@@ -793,6 +813,10 @@ module.exports = grammar({
       ),
 
     delcommand_statement: ($) => command($, "delcommand", $.command_name),
+
+    cnext_statement: ($) => maybe_bang($, tokalias($, "cnext")),
+    cprevious_statement: ($) =>
+      maybe_bang(choice(tokalias($, "cprevious"), tokalias($, "cNext"))),
 
     _runtime_where: ($) => choice("START", "OPT", "PACK", "ALL"),
     runtime_statement: ($) =>
