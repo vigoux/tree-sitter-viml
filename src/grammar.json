@@ -174,6 +174,26 @@
             },
             {
               "type": "SYMBOL",
+              "name": "vertical_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "belowright_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "aboveleft_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "topleft_statement"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "botright_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "register_statement"
             },
             {
@@ -3982,6 +4002,124 @@
                   "type": "BLANK"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "vertical_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_vertical"
+          },
+          "named": false,
+          "value": "vertical"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "topleft_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_topleft"
+          },
+          "named": false,
+          "value": "topleft"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "botright_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_botright"
+          },
+          "named": false,
+          "value": "botright"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "aboveleft_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_leftabove"
+              },
+              "named": false,
+              "value": "leftabove"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_aboveleft"
+              },
+              "named": false,
+              "value": "aboveleft"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement"
+        }
+      ]
+    },
+    "belowright_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_rightbelow"
+              },
+              "named": false,
+              "value": "rightbelow"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_belowright"
+              },
+              "named": false,
+              "value": "belowright"
             }
           ]
         },
@@ -11452,6 +11590,34 @@
     {
       "type": "SYMBOL",
       "name": "_continue"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_vertical"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_leftabove"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_aboveleft"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_rightbelow"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_belowright"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_topleft"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_botright"
     },
     {
       "type": "SYMBOL",

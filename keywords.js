@@ -399,4 +399,39 @@ module.exports = {
     opt: "tinue",
     ignore_comments_after: false,
   },
+  VERTICAL: {
+    mandat: "vert",
+    opt: "ical",
+    ignore_comments_after: false,
+  },
+  LEFTABOVE: {
+    mandat: "lefta",
+    opt: "bove",
+    ignore_comments_after: false,
+  },
+  ABOVELEFT: {
+    mandat: "abo",
+    opt: "veleft",
+    ignore_comments_after: false,
+  },
+  RIGHTBELOWS: {
+    mandat: "rightb",
+    opt: "elow",
+    ignore_comments_after: false,
+  },
+  BELOWRIGHT: {
+    mandat: "bel",
+    opt: "owright",
+    ignore_comments_after: false,
+  },
+  TOPLEFT: {
+    mandat: "to",
+    opt: "pleft",
+    ignore_comments_after: false,
+  },
+  BOTRIGHT: {
+    mandat: "bo",
+    opt: "tright",
+    ignore_comments_after: false,
+  },
 };

@@ -90,6 +90,11 @@ module.exports = grammar({
           $.throw_statement,
           $.autocmd_statement,
           $.silent_statement,
+          $.vertical_statement,
+          $.belowright_statement,
+          $.aboveleft_statement,
+          $.topleft_statement,
+          $.botright_statement,
           $.register_statement,
           $.map_statement,
           $.augroup_statement,
@@ -645,8 +650,22 @@ module.exports = grammar({
 
     execute_statement: ($) => command($, "execute", repeat1($._expression)),
 
-    silent_statement: ($) =>
-      seq(maybe_bang($, keyword($, "silent")), $._statement),
+    silent_statement: ($) => command_modifier($, "silent", true),
+    vertical_statement: ($) => command_modifier($, "vertical", false),
+    topleft_statement: ($) => command_modifier($, "topleft", false),
+    botright_statement: ($) => command_modifier($, "botright", false),
+
+    aboveleft_statement: ($) =>
+      seq(
+        choice(keyword($, "leftabove"), keyword($, "aboveleft")),
+        $._statement
+      ),
+
+    belowright_statement: ($) =>
+      seq(
+        choice(keyword($, "rightbelow"), keyword($, "belowright")),
+        $._statement
+      ),
 
     user_command: ($) =>
       seq(
@@ -1532,6 +1551,14 @@ module.exports = grammar({
 
 function keyword(gram, name) {
   return alias(gram["_" + name], name);
+}
+
+function command_modifier($, name, bang) {
+  let inner = keyword($, name);
+  if (bang) {
+    inner = maybe_bang($, inner);
+  }
+  return seq(inner, $._statement);
 }
 
 function _cmd_range($) {
