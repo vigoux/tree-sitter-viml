@@ -918,6 +918,24 @@
       "type": "PATTERN",
       "value": "[A-Z][A-Za-z0-9]*"
     },
+    "delcommand_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_delcommand"
+          },
+          "named": false,
+          "value": "delcommand"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_name"
+        }
+      ]
+    },
     "_command_attribute_completion_behavior": {
       "type": "CHOICE",
       "members": [
@@ -1822,24 +1840,6 @@
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "delcommand_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_delcommand"
-          },
-          "named": false,
-          "value": "delcommand"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "command_name"
         }
       ]
     },
