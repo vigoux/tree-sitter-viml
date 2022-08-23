@@ -19,3 +19,7 @@ cNext
 
 cprevious
 " <- keyword
+
+
+unknowncommand
+" <- keyword
