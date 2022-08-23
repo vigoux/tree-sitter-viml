@@ -1,7 +1,7 @@
-const utils = require("./utils");
+const { key_val_arg, keyword, command, bang_command } = require("./utils");
 
 module.exports = {
-  // :h :command
+  // :h user-commands
   command_name: ($) => /[A-Z][A-Za-z0-9]*/,
 
   _command_attribute_completion_behavior: ($) =>
@@ -73,32 +73,32 @@ module.exports = {
 
   command_attribute: ($) =>
     choice(
-      utils.key_val_arg("-nargs", $._command_attribute_nargs_value),
-      utils.key_val_arg(
+      key_val_arg("-nargs", $._command_attribute_nargs_value),
+      key_val_arg(
         "-complete",
         alias($._command_attribute_completion_behavior, $.behavior)
       ),
-      utils.key_val_arg("-range", $._command_attribute_range_value),
-      utils.key_val_arg("-range"),
-      utils.key_val_arg(
+      key_val_arg("-range", $._command_attribute_range_value),
+      key_val_arg("-range"),
+      key_val_arg(
         "-count",
         alias(token.immediate(/[0-9]+/), $.integer_literal)
       ),
-      utils.key_val_arg("-count"),
-      utils.key_val_arg(
+      key_val_arg("-count"),
+      key_val_arg(
         "-addr",
         alias($._command_attribute_address_behavior, $.behavior)
       ),
-      utils.key_val_arg("-bang"),
-      utils.key_val_arg("-bar"),
-      utils.key_val_arg("-register"),
-      utils.key_val_arg("-buffer"),
-      utils.key_val_arg("-keepscript")
+      key_val_arg("-bang"),
+      key_val_arg("-bar"),
+      key_val_arg("-register"),
+      key_val_arg("-buffer"),
+      key_val_arg("-keepscript")
     ),
   command_statement: ($) =>
-    seq(
-      utils.maybe_bang($, utils.keyword($, "command")),
-      // `:command` alone list all user-defined command
+    bang_command(
+      $,
+      "command",
       optional(
         choice(
           field("name", $.command_name),
@@ -111,9 +111,9 @@ module.exports = {
       )
     ),
 
-  comclear_statement: ($) => utils.keyword($, "comclear"),
+  comclear_statement: ($) => keyword($, "comclear"),
 
-  delcommand_statement: ($) => utils.command($, "delcommand", $.command_name),
+  delcommand_statement: ($) => command($, "delcommand", $.command_name),
 };
 
 function cmd_attr_behavior_key_val(left, ...right) {

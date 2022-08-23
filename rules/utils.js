@@ -12,13 +12,47 @@ function keyword(gram, name) {
   return alias(gram["_" + name], name);
 }
 
+function sub_cmd(sub, ...args) {
+  if (args.length > 0) {
+    return seq(field("sub", sub), ...args);
+  } else {
+    return field("sub", sub);
+  }
+}
+
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}
+
+function commaSep1(rule) {
+  return sep1(rule, ",");
+}
+
+function sep1(rule, separator) {
+  return seq(rule, repeat(seq(separator, rule)));
+}
+
+function maybe_at($, rule) {
+  return seq(optional($.at), rule);
+}
+
 function command($, cmd, ...args) {
   return seq(keyword($, cmd), ...args);
 }
 
+function bang_command($, cmd, ...args) {
+  return seq(maybe_bang($, keyword($, cmd)), ...args);
+}
+
 module.exports = {
-  command: command,
-  keyword: keyword,
-  maybe_bang: maybe_bang,
-  key_val_arg: key_val_arg,
+  key_val_arg,
+  maybe_bang,
+  keyword,
+  sub_cmd,
+  commaSep,
+  commaSep1,
+  sep1,
+  maybe_at,
+  command,
+  bang_command,
 };
