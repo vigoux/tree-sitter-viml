@@ -12,8 +12,7 @@ endfor
     (identifier)
     (list
       (integer_literal)
-      (integer_literal))
-    (body)))
+      (integer_literal))))
 
 ================================================================================
 for with list
@@ -35,8 +34,7 @@ endfor
         (integer_literal))
       (list
         (integer_literal)
-        (integer_literal)))
-    (body)))
+        (integer_literal)))))
 
 ================================================================================
 for with list and rest
@@ -60,5 +58,23 @@ endfor
       (list
         (integer_literal)
         (integer_literal)
-        (integer_literal)))
-    (body)))
+        (integer_literal)))))
+
+================================================================================
+For with argument name
+================================================================================
+
+for name in a:method_names
+  echo "foo"
+endfor
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (for_loop
+    (identifier)
+    (argument
+      (identifier))
+    (body
+      (echo_statement
+        (string_literal)))))

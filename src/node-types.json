@@ -4016,11 +4016,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         }
       ]

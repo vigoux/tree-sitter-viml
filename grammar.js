@@ -409,6 +409,7 @@ module.exports = grammar({
         field("variable", choice($._ident, $.list_assignment)),
         "in",
         field("iter", $._expression),
+        $._cmd_separator,
         alias(optional($._separated_statements), $.body),
         keyword($, "endfor")
       ),
