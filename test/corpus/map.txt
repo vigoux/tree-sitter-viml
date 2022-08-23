@@ -187,12 +187,12 @@ map <expr> [a ":\<C-U>" . v:count1 . "prev\<CR>"
   (map_statement
     (map_side)
     (binary_operation
+      (string_literal)
       (binary_operation
-        (string_literal)
         (scoped_identifier
           (scope)
-          (identifier)))
-      (string_literal))))
+          (identifier))
+        (string_literal)))))
 
 ================================================================================
 Quoted non-expr map

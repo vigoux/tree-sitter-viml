@@ -1433,11 +1433,7 @@ module.exports = grammar({
     field_expression: ($) =>
       prec.left(
         PREC.CALL,
-        seq(
-          field("value", $._expression),
-          token.immediate("."),
-          field("field", $.identifier)
-        )
+        seq(field("value", $._expression), ".", field("field", $.identifier))
       ),
 
     call_expression: ($) =>
