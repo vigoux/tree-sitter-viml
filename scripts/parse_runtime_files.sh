@@ -9,5 +9,5 @@ for file in "$FILES"
 do
   echo "Doing $file"
   wget -O "$OUT_PATH" "$BASE_URL/$NVIM_VERSION/runtime/$file"
-  npm run parse -- "$OUT_PATH" || exit 1
+  npm run parse -- --quiet "$OUT_PATH" || exit 1
 done
