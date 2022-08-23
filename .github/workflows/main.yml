@@ -50,7 +50,6 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          apt-get install wget
       - name: Download and parse runtime files
         run: |
           ./scripts/parse_runtime_files.sh
