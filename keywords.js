@@ -438,7 +438,8 @@ const KEYWORDS = {
 
 function make_keywords($) {
   const fs = require("fs");
-  const KEYWORDS_FILE = "src/keywords.h";
+  const path = require("path");
+  const KEYWORDS_FILE = path.join("src", "keywords.h");
 
   let rules = [];
 
