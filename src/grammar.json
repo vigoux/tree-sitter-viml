@@ -5267,6 +5267,68 @@
         }
       ]
     },
+    "_map_rhs_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "<[Cc][Mm][Dd]>"
+          },
+          "named": true,
+          "value": "keycode"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_statement"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "\\|"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "<[Bb][Aa][Rr]>"
+                        },
+                        "named": true,
+                        "value": "keycode"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_statement"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "<[Cc][Rr]>"
+          },
+          "named": true,
+          "value": "keycode"
+        }
+      ]
+    },
     "_map_rhs": {
       "type": "CHOICE",
       "members": [
@@ -5356,75 +5418,8 @@
           ]
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": ":"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "<[Cc][Mm][Dd]>"
-                  },
-                  "named": true,
-                  "value": "keycode"
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_statement"
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "\\|"
-                          },
-                          {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "PATTERN",
-                              "value": "<[Bb][Aa][Rr]>"
-                            },
-                            "named": true,
-                            "value": "keycode"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "_statement"
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "<[Cc][Rr]>"
-              },
-              "named": true,
-              "value": "keycode"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_map_rhs_statement"
         }
       ]
     },

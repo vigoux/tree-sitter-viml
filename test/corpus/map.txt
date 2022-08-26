@@ -256,6 +256,7 @@ Map included bar
 ================================================================================
 
 map a b\|b
+nnoremap a <cmd>echo 1\|echo 2<Cr>
 nnoremap a :echo 1\|echo 2<Cr>
 vmap <Leader>a <cmd>echo "statement1"\|echo "statement2"<cr>
 
@@ -268,10 +269,15 @@ vmap <Leader>a <cmd>echo "statement1"\|echo "statement2"<cr>
   (map_statement
     (map_side)
     (map_side
+      (keycode)
       (echo_statement
         (integer_literal))
       (echo_statement
         (integer_literal))
+      (keycode)))
+  (map_statement
+    (map_side)
+    (map_side
       (keycode)))
   (map_statement
     (map_side
@@ -319,6 +325,8 @@ Map with modifiers
 
 map <C-s-CR> :echo new<CR>
 map <C-s-a> :echo new<CR>
+map <C-s-CR> <cmd>echo new<CR>
+map <C-s-a> <cmd>echo new<CR>
 
 --------------------------------------------------------------------------------
 
@@ -327,6 +335,17 @@ map <C-s-a> :echo new<CR>
     (map_side
       (keycode))
     (map_side
+      (keycode)))
+  (map_statement
+    (map_side
+      (keycode))
+    (map_side
+      (keycode)))
+  (map_statement
+    (map_side
+      (keycode))
+    (map_side
+      (keycode)
       (echo_statement
         (identifier))
       (keycode)))
@@ -334,6 +353,7 @@ map <C-s-a> :echo new<CR>
     (map_side
       (keycode))
     (map_side
+      (keycode)
       (echo_statement
         (identifier))
       (keycode))))
@@ -367,4 +387,25 @@ map f <cmd>echo "foobar" <Bar> echo "foobaz"<CR>
       (keycode)
       (echo_statement
         (string_literal))
+      (keycode))))
+
+================================================================================
+Map with colon
+================================================================================
+
+map f :<C-U><CR>
+map f :<C-P><CR>
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (map_statement
+    (map_side)
+    (map_side
+      (keycode)
+      (keycode)))
+  (map_statement
+    (map_side)
+    (map_side
+      (keycode)
       (keycode))))

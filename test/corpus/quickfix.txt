@@ -23,7 +23,7 @@ cNext
 Mapping with cnext #94
 ================================================================================
 
-nnoremap <leader>cc :cnext<cr>
+nnoremap <leader>cc <cmd>cnext<cr>
 
 --------------------------------------------------------------------------------
 
@@ -32,5 +32,6 @@ nnoremap <leader>cc :cnext<cr>
     (map_side
       (keycode))
     (map_side
+      (keycode)
       (cnext_statement)
       (keycode))))
