@@ -772,16 +772,14 @@ module.exports = grammar({
     keycode: ($) => seq("<", $._keycode_in, token.immediate(">")),
 
     _map_lhs: ($) => keys($, /\S/),
-    _map_rhs: ($) =>
-      choice(
-        keys($, /[^\s|]/, /[^|\n]/),
-        seq(
-          choice(":", alias(/<[Cc][Mm][Dd]>/, $.keycode)),
-          // :h map_bar
-          sep1($._statement, choice("\\|", alias(/<[Bb][Aa][Rr]>/, $.keycode))),
-          alias(/<[Cc][Rr]>/, $.keycode)
-        )
+    _map_rhs_statement: ($) =>
+      seq(
+        alias(/<[Cc][Mm][Dd]>/, $.keycode),
+        // :h map_bar
+        sep1($._statement, choice("\\|", alias(/<[Bb][Aa][Rr]>/, $.keycode))),
+        alias(/<[Cc][Rr]>/, $.keycode)
       ),
+    _map_rhs: ($) => choice(keys($, /[^\s|]/, /[^|\n]/), $._map_rhs_statement),
 
     // :h :highlight
 
