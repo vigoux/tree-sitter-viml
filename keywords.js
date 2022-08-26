@@ -434,6 +434,36 @@ const KEYWORDS = {
     opt: "tright",
     ignore_comments_after: false,
   },
+  EDIT: {
+    mandat: "e",
+    opt: "dit",
+    ignore_comments_after: false,
+  },
+  ENEW: {
+    mandat: "ene",
+    opt: "w",
+    ignore_comments_after: false,
+  },
+  FIND: {
+    mandat: "fin",
+    opt: "d",
+    ignore_comments_after: false,
+  },
+  EX: {
+    mandat: "ex",
+    opt: "",
+    ignore_comments_after: false,
+  },
+  VISUAL: {
+    mandat: "vi",
+    opt: "sual",
+    ignore_comments_after: false,
+  },
+  VIEW: {
+    mandat: "vie",
+    opt: "w",
+    ignore_comments_after: false,
+  },
 };
 
 function make_keywords($) {

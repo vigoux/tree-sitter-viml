@@ -92,11 +92,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -233,6 +249,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -431,11 +455,27 @@
             "named": true
           },
           {
+            "type": "edit_statement",
+            "named": true
+          },
+          {
+            "type": "enew_statement",
+            "named": true
+          },
+          {
+            "type": "ex_statement",
+            "named": true
+          },
+          {
             "type": "execute_statement",
             "named": true
           },
           {
             "type": "filetype_statement",
+            "named": true
+          },
+          {
+            "type": "find_statement",
             "named": true
           },
           {
@@ -572,6 +612,14 @@
           },
           {
             "type": "vertical_statement",
+            "named": true
+          },
+          {
+            "type": "view_statement",
+            "named": true
+          },
+          {
+            "type": "visual_statement",
             "named": true
           },
           {
@@ -956,11 +1004,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -1097,6 +1161,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -1419,11 +1491,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -1560,6 +1648,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -1666,11 +1762,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -1807,6 +1919,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -2204,11 +2324,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -2345,6 +2481,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -3463,6 +3607,37 @@
     }
   },
   {
+    "type": "edit_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "plus_cmd",
+          "named": true
+        },
+        {
+          "type": "plus_plus_opt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "else_statement",
     "named": true,
     "fields": {},
@@ -3597,6 +3772,21 @@
     "fields": {}
   },
   {
+    "type": "enew_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "env_variable",
     "named": true,
     "fields": {},
@@ -3606,6 +3796,29 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ex_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "plus_cmd",
+          "named": true
+        },
+        {
+          "type": "plus_plus_opt",
           "named": true
         }
       ]
@@ -3885,6 +4098,33 @@
       "types": [
         {
           "type": "body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "find_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "plus_cmd",
+          "named": true
+        },
+        {
+          "type": "plus_plus_opt",
           "named": true
         }
       ]
@@ -4192,11 +4432,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -4337,6 +4593,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -5556,11 +5820,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -5701,6 +5981,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -6116,6 +6404,103 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "plus_cmd",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "plus_plus_opt",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bad",
+            "named": false
+          },
+          {
+            "type": "bin",
+            "named": false
+          },
+          {
+            "type": "binary",
+            "named": false
+          },
+          {
+            "type": "edit",
+            "named": false
+          },
+          {
+            "type": "enc",
+            "named": false
+          },
+          {
+            "type": "encoding",
+            "named": false
+          },
+          {
+            "type": "ff",
+            "named": false
+          },
+          {
+            "type": "fileformat",
+            "named": false
+          },
+          {
+            "type": "nobin",
+            "named": false
+          },
+          {
+            "type": "nobinary",
+            "named": false
+          }
+        ]
+      },
+      "val": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "drop",
+            "named": false
+          },
+          {
+            "type": "encoding",
+            "named": true
+          },
+          {
+            "type": "file_format",
+            "named": true
+          },
+          {
+            "type": "keep",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -6638,11 +7023,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -6779,6 +7180,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -7167,11 +7576,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -7308,6 +7733,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -8495,11 +8928,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -8636,6 +9085,14 @@
         },
         {
           "type": "vertical_statement",
+          "named": true
+        },
+        {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
           "named": true
         },
         {
@@ -9009,11 +9466,27 @@
           "named": true
         },
         {
+          "type": "edit_statement",
+          "named": true
+        },
+        {
+          "type": "enew_statement",
+          "named": true
+        },
+        {
+          "type": "ex_statement",
+          "named": true
+        },
+        {
           "type": "execute_statement",
           "named": true
         },
         {
           "type": "filetype_statement",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -9153,11 +9626,73 @@
           "named": true
         },
         {
+          "type": "view_statement",
+          "named": true
+        },
+        {
+          "type": "visual_statement",
+          "named": true
+        },
+        {
           "type": "while_loop",
           "named": true
         },
         {
           "type": "wincmd_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "view_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "plus_cmd",
+          "named": true
+        },
+        {
+          "type": "plus_plus_opt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "visual_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bang",
+          "named": true
+        },
+        {
+          "type": "filename",
+          "named": true
+        },
+        {
+          "type": "plus_cmd",
+          "named": true
+        },
+        {
+          "type": "plus_plus_opt",
           "named": true
         }
       ]
@@ -9371,6 +9906,10 @@
   },
   {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": "++",
     "named": false
   },
   {
@@ -9662,6 +10201,10 @@
     "named": false
   },
   {
+    "type": "bad",
+    "named": false
+  },
+  {
     "type": "bang",
     "named": true
   },
@@ -9679,6 +10222,14 @@
   },
   {
     "type": "big5",
+    "named": false
+  },
+  {
+    "type": "bin",
+    "named": false
+  },
+  {
+    "type": "binary",
     "named": false
   },
   {
@@ -9990,6 +10541,14 @@
     "named": false
   },
   {
+    "type": "dos",
+    "named": false
+  },
+  {
+    "type": "drop",
+    "named": false
+  },
+  {
     "type": "echo",
     "named": false
   },
@@ -10010,6 +10569,10 @@
     "named": false
   },
   {
+    "type": "edit",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -10019,6 +10582,14 @@
   },
   {
     "type": "enable",
+    "named": false
+  },
+  {
+    "type": "enc",
+    "named": false
+  },
+  {
+    "type": "encoding",
     "named": false
   },
   {
@@ -10050,6 +10621,10 @@
     "named": false
   },
   {
+    "type": "enew",
+    "named": false
+  },
+  {
     "type": "environment",
     "named": false
   },
@@ -10078,6 +10653,10 @@
     "named": false
   },
   {
+    "type": "ex",
+    "named": false
+  },
+  {
     "type": "excludenl",
     "named": false
   },
@@ -10098,15 +10677,23 @@
     "named": true
   },
   {
+    "type": "ff",
+    "named": false
+  },
+  {
     "type": "fg",
     "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file",
+    "named": false
+  },
+  {
+    "type": "file_format",
     "named": true
   },
   {
@@ -10114,7 +10701,7 @@
     "named": false
   },
   {
-    "type": "filetype",
+    "type": "fileformat",
     "named": false
   },
   {
@@ -10122,7 +10709,15 @@
     "named": true
   },
   {
+    "type": "filetype",
+    "named": false
+  },
+  {
     "type": "finally",
+    "named": false
+  },
+  {
+    "type": "find",
     "named": false
   },
   {
@@ -10282,16 +10877,20 @@
     "named": false
   },
   {
+    "type": "keep",
+    "named": false
+  },
+  {
     "type": "keepend",
     "named": false
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "koi8",
@@ -10370,6 +10969,10 @@
     "named": false
   },
   {
+    "type": "mac",
+    "named": false
+  },
+  {
     "type": "macroman",
     "named": false
   },
@@ -10443,6 +11046,14 @@
   },
   {
     "type": "nnoremap",
+    "named": false
+  },
+  {
+    "type": "nobin",
+    "named": false
+  },
+  {
+    "type": "nobinary",
     "named": false
   },
   {
@@ -10798,6 +11409,10 @@
     "named": false
   },
   {
+    "type": "unix",
+    "named": false
+  },
+  {
     "type": "unknown_command_name",
     "named": true
   },
@@ -10854,7 +11469,15 @@
     "named": false
   },
   {
+    "type": "view",
+    "named": false
+  },
+  {
     "type": "vim",
+    "named": false
+  },
+  {
+    "type": "visual",
     "named": false
   },
   {

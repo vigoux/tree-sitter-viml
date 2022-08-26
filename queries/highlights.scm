@@ -92,6 +92,12 @@
   "topleft"
   "botright"
   (unknown_command_name)
+  "edit"
+  "enew"
+  "find"
+  "ex"
+  "visual"
+  "view"
 ] @keyword
 (map_statement cmd: _ @keyword)
 (command_name) @function.macro
@@ -150,6 +156,11 @@
   val: (behavior
     name: _ @constant
     val: (identifier)? @function)?)
+
+;; Edit command
+(plus_plus_opt
+  val: _? @constant) @property
+(plus_cmd "+" @property) @property
 
 ;; Runtime command
 
