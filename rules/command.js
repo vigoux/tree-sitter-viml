@@ -105,7 +105,7 @@ module.exports = {
           seq(
             repeat($.command_attribute),
             field("name", $.command_name),
-            field("repl", alias($._statement, $.command))
+            field("repl", alias(/.*/, $.command))
           )
         )
       )

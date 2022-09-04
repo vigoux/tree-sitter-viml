@@ -38,17 +38,10 @@ command ListCmd Echo error
 (script_file
   (command_statement
     name: (command_name)
-    repl: (command
-      (call_statement
-        (call_expression
-          function: (identifier)))))
+    repl: (command))
   (command_statement
     name: (command_name)
-    repl: (command
-      (user_command
-        (command_name)
-        (arguments
-          (command_argument))))))
+    repl: (command)))
 
 ================================================================================
 Command with attribute
@@ -59,6 +52,8 @@ com -range Test echo ""
 com -range=% Test echo ""
 com -register Test echo ""
 com -nargs=* -bang -complete=customlist,EditFileComplete Test call Test()
+command -nargs=* -complete=file -bang Termdebug call s:StartDebug(<bang>0, <f-args>)
+command -nargs=+ -complete=file -bang TermdebugCommand call s:StartDebugCommand(<bang>0, <f-args>)
 
 --------------------------------------------------------------------------------
 
@@ -66,29 +61,21 @@ com -nargs=* -bang -complete=customlist,EditFileComplete Test call Test()
   (command_statement
     (command_attribute
       val: (integer_literal))
-      name: (command_name)
-      repl: (command
-        (echo_statement
-          (string_literal))))
+    name: (command_name)
+    repl: (command))
   (command_statement
     (command_attribute)
     name: (command_name)
-    repl: (command
-      (echo_statement
-        (string_literal))))
+    repl: (command))
   (command_statement
     (command_attribute
       val: (pattern_multi))
     name: (command_name)
-    repl: (command
-      (echo_statement
-        (string_literal))))
+    repl: (command))
   (command_statement
     (command_attribute)
     name: (command_name)
-    repl: (command
-      (echo_statement
-        (string_literal))))
+    repl: (command))
   (command_statement
     (command_attribute
       val: (pattern_multi))
@@ -97,7 +84,20 @@ com -nargs=* -bang -complete=customlist,EditFileComplete Test call Test()
       val: (behavior
         val: (identifier)))
     name: (command_name)
-    repl: (command
-      (call_statement
-        (call_expression
-          function: (identifier))))))
+    repl: (command))
+  (command_statement
+    (command_attribute
+      val: (pattern_multi))
+    (command_attribute
+      val: (behavior))
+    (command_attribute)
+    name: (command_name)
+    repl: (command))
+  (command_statement
+    (command_attribute
+      val: (pattern_multi))
+    (command_attribute
+      val: (behavior))
+    (command_attribute)
+    name: (command_name)
+    repl: (command)))

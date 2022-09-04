@@ -151,6 +151,8 @@
 
 ;; Command command
 
+(command) @string
+
 (command_attribute
   name: _ @property
   val: (behavior
