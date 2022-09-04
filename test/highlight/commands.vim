@@ -15,15 +15,14 @@ command -complete=buffer UserCommand echo "toto"
 "           ^ property
 "                   ^ constant
 "                           ^ function.macro
-"                                     ^ keyword
-"                                             ^ string
+"                                     ^^^^^^^^^^ string
 
 command -complete=arglist UserCommand echo
 " <- keyword
 "           ^ property
 "                   ^ constant
 "                           ^ function.macro
-"                                     ^ keyword
+"                                     ^ string
 
 command -addr=lines -addr=arguments -addr=buffers -addr=loaded_buffers UserCommand echo
 " <- keyword
@@ -36,7 +35,7 @@ command -addr=lines -addr=arguments -addr=buffers -addr=loaded_buffers UserComma
 "                                                     ^ property
 "                                                         ^ constant
 "                                                                          ^ function.macro
-"                                                                                    ^ keyword
+"                                                                                    ^ string
 "
 command -addr=windows -addr=tabs -addr=quickfix -addr=other  UserCommand echo
 " <- keyword
@@ -49,7 +48,7 @@ command -addr=windows -addr=tabs -addr=quickfix -addr=other  UserCommand echo
 "                                                 ^ property
 "                                                     ^ constant
 "                                                                ^ function.macro
-"                                                                          ^ keyword
+"                                                                          ^ string
 "
 
 command -range=% UserCommand echo
@@ -57,31 +56,31 @@ command -range=% UserCommand echo
 "           ^ property
 "              ^ string.regex
 "                   ^ function.macro
-"                             ^ keyword
+"                             ^ string
 
 command -range=12 UserCommand echo
 " <- keyword
 "           ^ property
 "              ^ number
 "                   ^ function.macro
-"                             ^ keyword
+"                             ^ string
 
 command -range UserCommand echo
 " <- keyword
 "           ^ property
 "                 ^ function.macro
-"                           ^ keyword
+"                           ^ string
 
 command -count UserCommand echo
 " <- keyword
 "           ^ property
 "                 ^ function.macro
-"                           ^ keyword
+"                           ^ string
 command -count UserCommand echo
 " <- keyword
 "           ^ property
 "                 ^ function.macro
-"                           ^ keyword
+"                           ^ string
 
 command -nargs=* -nargs=1 -nargs=? -nargs=+ UserCommand echo
 " <- keyword
@@ -94,7 +93,7 @@ command -nargs=* -nargs=1 -nargs=? -nargs=+ UserCommand echo
 "                                     ^ property
 "                                         ^ string.regex
 "                                               ^ function.macro
-"                                                         ^ keyword
+"                                                         ^ string
 
 command -buffer -bar -bang -keepscript -register UserCommand echo
 " <- keyword
@@ -103,7 +102,7 @@ command -buffer -bar -bang -keepscript -register UserCommand echo
 "                             ^ property
 "                                         ^ property
 "                                                  ^ function.macro
-"                                                            ^ keyword
+"                                                            ^ string
 
 " command UserCommand call Test()
 
