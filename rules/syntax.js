@@ -3,7 +3,6 @@ const {
   sub_cmd,
   commaSep1,
   commaSep,
-  maybe_at,
   command,
 } = require("./utils");
 
@@ -29,7 +28,7 @@ module.exports = {
 
   _syn_hl_pattern: ($) => seq($._separator_first, $.pattern, $._separator),
 
-  hl_groups: ($) => commaSep1(maybe_at($, $.hl_group)),
+  hl_groups: ($) => commaSep1($.hl_group),
 
   _syn_arguments_keyword: ($) =>
     choice(
@@ -190,11 +189,11 @@ module.exports = {
       )
     ),
 
-  _syn_list: ($) => sub_cmd("list", optional(maybe_at($, $.hl_group))),
+  _syn_list: ($) => sub_cmd("list", optional($.hl_group)),
 
-  _syn_clear: ($) => sub_cmd("clear", optional(maybe_at($, $.hl_group))),
+  _syn_clear: ($) => sub_cmd("clear", optional($.hl_group)),
 
-  // :h :syntax
+  // :h :
   syntax_statement: ($) =>
     command(
       $,

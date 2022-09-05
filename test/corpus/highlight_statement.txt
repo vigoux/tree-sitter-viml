@@ -37,6 +37,7 @@ high Foo NONE
 
 (script_file
   (highlight_statement
+    (hl_group)
     (hl_group)))
 
 ================================================================================
@@ -44,9 +45,12 @@ Highlight cterm
 ================================================================================
 
 hi Foo cterm=bold
-hi Foo cterm=bold
+hi Foo term=bold
 hi Foo cterm=underline
 hi Foo cterm=undercurl
+hi Foo cterm=underdouble
+hi Foo cterm=underdotted
+hi Foo cterm=underdashed
 hi Foo cterm=strikethrough
 hi Foo cterm=reverse
 hi Foo cterm=inverse
@@ -55,10 +59,23 @@ hi Foo cterm=standout
 hi Foo cterm=nocombine
 hi Foo cterm=NONE
 hi Foo cterm=standout,italic
+hi Foo cterm=italic,bold,underdotted
 
 --------------------------------------------------------------------------------
 
 (script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute))
   (highlight_statement
     (hl_group)
     (hl_attribute))
@@ -102,6 +119,7 @@ Highlight start stop
 
 hi Foo start=bleh stop=bar
 hi Foo start=<Space>Foo
+hi Foo start=<Esc>[27h;<Esc>[<Space>r;
 
 --------------------------------------------------------------------------------
 
@@ -109,6 +127,9 @@ hi Foo start=<Space>Foo
   (highlight_statement
     (hl_group)
     (hl_attribute)
+    (hl_attribute))
+  (highlight_statement
+    (hl_group)
     (hl_attribute))
   (highlight_statement
     (hl_group)
@@ -134,12 +155,16 @@ highlight Visual ctermfg=bg ctermbg=fg
     (hl_attribute))
   (highlight_statement
     (hl_group)
-    (hl_attribute)
-    (hl_attribute))
+    (hl_attribute
+      (color))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute)
-    (hl_attribute)))
+    (hl_attribute
+      (color))
+    (hl_attribute
+      (color))))
 
 ================================================================================
 Highlight gui
@@ -174,36 +199,63 @@ hi Comment guifg='salmon pink'
 (script_file
   (highlight_statement
     (hl_group)
-    (hl_attribute))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute)
-    (hl_attribute))
+    (hl_attribute
+      (color))
+    (hl_attribute
+      (color)))
   (highlight_statement
     (hl_group)
-    (hl_attribute)))
+    (hl_attribute
+      (color))))
 
 ================================================================================
 Highlight font
 ================================================================================
 
 hi Foo font=-misc-fixed-bold-r-normal--14-130-75-75-c-70-iso8859-1
+hi Foo font='Monospace 10'
 
 --------------------------------------------------------------------------------
 
 (script_file
   (highlight_statement
     (hl_group)
-    (hl_attribute)))
+    (hl_attribute
+      (font)))
+  (highlight_statement
+    (hl_group)
+    (hl_attribute
+      (font))))
+
+================================================================================
+Highlight blend
+================================================================================
+
+hi Foo blend=10
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_attribute
+      (integer_literal))))
 
 ================================================================================
 Highlight link
@@ -229,3 +281,18 @@ highlight default link Foo Bar
   (highlight_statement
     (hl_group)
     (hl_group)))
+
+================================================================================
+Highlight treesitter group
+================================================================================
+
+hi link @string.special String
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (highlight_statement
+    (hl_group)
+    (hl_group)))
+
+

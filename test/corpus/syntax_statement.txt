@@ -136,7 +136,6 @@ syn keyword vimSetting transparent skipwhite skipnl skipempty tag
     (syntax_argument
       (hl_groups
         (hl_group)
-        (at)
         (hl_group))))
   (syntax_statement
     (hl_group)
@@ -281,7 +280,6 @@ syntax cluster group1 add=g4 remove=@g1,g2
     (hl_group)
     (syntax_argument
       (hl_groups
-        (at)
         (hl_group)
         (hl_group)
         (hl_group))))
@@ -292,7 +290,6 @@ syntax cluster group1 add=g4 remove=@g1,g2
         (hl_group)))
     (syntax_argument
       (hl_groups
-        (at)
         (hl_group)
         (hl_group)))))
 
@@ -356,7 +353,6 @@ syntax list @g2
   (syntax_statement
     (hl_group))
   (syntax_statement
-    (at)
     (hl_group)))
 
 ================================================================================
@@ -374,7 +370,6 @@ syntax clear @g1
   (syntax_statement
     (hl_group))
   (syntax_statement
-    (at)
     (hl_group)))
 
 ================================================================================
