@@ -32,10 +32,6 @@ function sep1(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)));
 }
 
-function maybe_at($, rule) {
-  return seq(optional($.at), rule);
-}
-
 function command($, cmd, ...args) {
   return seq(keyword($, cmd), ...args);
 }
@@ -52,7 +48,6 @@ module.exports = {
   commaSep,
   commaSep1,
   sep1,
-  maybe_at,
   command,
   bang_command,
 };
