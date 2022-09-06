@@ -178,7 +178,7 @@
 (string_literal) @string
 (integer_literal) @number
 (float_literal) @float
-(comment) @comment
+(comment) @comment @spell
 (pattern) @string.special
 (pattern_multi) @string.regex
 (filename) @string
