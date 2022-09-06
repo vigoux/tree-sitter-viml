@@ -106,7 +106,13 @@ module.exports = {
     seq(optional(keyword($, "default")), $.hl_group, repeat1($.hl_attribute)),
 
   _hl_body: ($) =>
-    choice($._hl_body_clear, $._hl_body_none, $._hl_body_keys, $._hl_body_link),
+    choice(
+      $.hl_group,
+      $._hl_body_clear,
+      $._hl_body_none,
+      $._hl_body_keys,
+      $._hl_body_link
+    ),
 
   // :h :highlight
   highlight_statement: ($) =>
