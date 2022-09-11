@@ -8,6 +8,17 @@ function maybe_bang($, cmd_name) {
   return seq(cmd_name, optional($.bang));
 }
 
+function _to_case_insensitive(a) {
+  var ca = a.charCodeAt(0);
+  if (ca >= 97 && ca <= 122) return `[${a}${a.toUpperCase()}]`;
+  if (ca >= 65 && ca <= 90) return `[${a.toLowerCase()}${a}]`;
+  return a;
+}
+
+function case_insensitive(keyword) {
+  return new RegExp(keyword.split("").map(_to_case_insensitive).join(""));
+}
+
 function keyword(gram, name) {
   return alias(gram["_" + name], name);
 }
@@ -50,4 +61,5 @@ module.exports = {
   sep1,
   command,
   bang_command,
+  case_insensitive,
 };

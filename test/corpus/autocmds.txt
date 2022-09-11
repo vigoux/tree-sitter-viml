@@ -41,16 +41,155 @@ autocmd! BufNewFile *.html echo "foo"
 No arguments
 ================================================================================
 
+au
+autocmd
 au!
 autocmd!
 
 --------------------------------------------------------------------------------
 
 (script_file
+  (autocmd_statement)
+  (autocmd_statement)
   (autocmd_statement
     (bang))
   (autocmd_statement
     (bang)))
+
+================================================================================
+Autocmd only group
+================================================================================
+
+au SingleGroup
+au! SingleGroup
+autocmd single_group
+autocmd! single_group
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (augroup_name))
+  (autocmd_statement
+    (bang)
+    (augroup_name))
+  (autocmd_statement
+    (augroup_name))
+  (autocmd_statement
+    (bang)
+    (augroup_name)))
+
+================================================================================
+Autocmd with once and nested
+================================================================================
+
+au BufEnter *.html ++once echo "html or json"
+au! BufEnter *.html ++once echo "html or json"
+au BufEnter *.html ++nested echo "html or json"
+au! BufEnter *.html ++nested echo "html or json"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (au_once)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (au_once)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern)
+    (au_nested)
+    (echo_statement
+      (string_literal)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern)
+    (au_nested)
+    (echo_statement
+      (string_literal))))
+
+================================================================================
+Autocmd only event/pattern
+================================================================================
+
+au BufEnter html
+au! BufEnter html
+au bufENTER
+au! BufenTeR
+au html
+au! html
+au augroup BufEnter html
+au! augroup BufEnter html
+au augroup BufEnter
+au! augroup BufEnter
+au augroup html
+au! augroup html
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (autocmd_statement
+    (au_event_list
+      (au_event))
+    (pattern))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event))
+    (pattern))
+  (autocmd_statement
+    (au_event_list
+      (au_event)))
+  (autocmd_statement
+    (bang)
+    (au_event_list
+      (au_event)))
+  (autocmd_statement
+    (augroup_name))
+  (autocmd_statement
+    (bang)
+    (augroup_name))
+  (autocmd_statement
+    (augroup_name)
+    (au_event_list
+      (au_event))
+    (pattern))
+  (autocmd_statement
+    (bang)
+    (augroup_name)
+    (au_event_list
+      (au_event))
+    (pattern))
+  (autocmd_statement
+    (augroup_name)
+    (au_event_list
+      (au_event)))
+  (autocmd_statement
+    (bang)
+    (augroup_name)
+    (au_event_list
+      (au_event)))
+  (autocmd_statement
+    (augroup_name)
+    (pattern))
+  (autocmd_statement
+    (bang)
+    (augroup_name)
+    (pattern)))
 
 ================================================================================
 Multiple events
