@@ -103,6 +103,7 @@ module.exports = grammar({
     [$.binary_operation, $.unary_operation, $.field_expression],
     [$.binary_operation, $.field_expression],
     [$.list, $._pattern_atom],
+    [$._ident, $.lambda_expression],
   ],
 
   externals: ($) =>
@@ -933,7 +934,8 @@ module.exports = grammar({
         seq("(", $._expression, ")"),
         $.unary_operation,
         $.field_expression,
-        $.call_expression
+        $.call_expression,
+        $.method_expression
       ),
 
     ternary_expression: ($) =>
@@ -1055,6 +1057,24 @@ module.exports = grammar({
       ),
 
     eval_statement: ($) => command($, "eval", $._expression),
+
+    _method_call_expression: ($) =>
+      seq(
+        field("function", choice($.identifier, $.lambda_expression)),
+        "(",
+        optional(commaSep1($._expression)),
+        ")"
+      ),
+
+    method_expression: ($) =>
+      prec(
+        PREC.CALL,
+        seq(
+          field("value", $._expression),
+          "->",
+          alias($._method_call_expression, $.call_expression)
+        )
+      ),
 
     // Use default :h isfname
     filename: ($) =>
