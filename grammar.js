@@ -384,30 +384,6 @@ module.exports = grammar({
 
     throw_statement: ($) => command($, "throw", $._expression),
 
-    autocmd_statement: ($) =>
-      seq(
-        maybe_bang($, keyword($, "autocmd")),
-        optional(alias($.identifier, $.augroup_name)),
-        optional(
-          seq(
-            $.au_event_list,
-            commaSep1(alias(/[^ \t\n,]+/, $.pattern)),
-            optional("++once"),
-            optional("++nested"),
-            field("command", $._statement)
-          )
-        )
-      ),
-
-    augroup_statement: ($) =>
-      seq(
-        maybe_bang($, keyword($, "augroup")),
-        alias($.identifier, $.augroup_name)
-      ),
-
-    au_event: ($) => /[A-Z][a-zA-Z]+/,
-    au_event_list: ($) => commaSep1($.au_event),
-
     // :h filter
     _bang_filter_bangs: ($) => seq($.bang, optional($.bang)),
     _bang_filter_command_argument: ($) =>
@@ -1184,6 +1160,7 @@ module.exports = grammar({
         )
       ),
 
+    ...require("./rules/autocmd"),
     ...require("./rules/command"),
     ...require("./rules/highlight"),
     ...require("./rules/syntax"),
