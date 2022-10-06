@@ -67,6 +67,7 @@
   "augroup"
   "return"
   "syntax"
+  "filetype"
   "source"
   "lua"
   "ruby"
