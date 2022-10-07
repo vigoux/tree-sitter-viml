@@ -104,6 +104,16 @@
 (map_statement cmd: _ @keyword)
 (command_name) @function.macro
 
+;; Filetype command
+
+(filetype_statement (keyword) @string)
+(filetype_statement [
+  "plugin"
+  "indent"
+  "on"
+  "off"
+] @keyword)
+
 ;; Syntax command
 
 (syntax_statement (keyword) @string)
