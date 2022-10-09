@@ -1,5 +1,5 @@
 ================================================================================
-Filtypes
+Filetype
 ================================================================================
 
 filetype on
@@ -14,19 +14,11 @@ filetype plugin indent off
 --------------------------------------------------------------------------------
 
 (script_file
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state))
-  (filetype_statement
-    (state)))
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement)
+  (filetype_statement))
