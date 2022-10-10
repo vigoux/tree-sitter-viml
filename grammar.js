@@ -282,8 +282,10 @@ module.exports = grammar({
     _filetype_state: ($) => choice("on", "off"),
     _filetype_enable: ($) => sub_cmd($._filetype_state),
     _filetype_detect: ($) => sub_cmd("detect"),
-    _filetype_plugin: ($) => sub_cmd("plugin", optional("indent"), $._filetype_state),
-    _filetype_indent: ($) => sub_cmd("indent", optional("plugin"), $._filetype_state),
+    _filetype_plugin: ($) =>
+      sub_cmd("plugin", optional("indent"), $._filetype_state),
+    _filetype_indent: ($) =>
+      sub_cmd("indent", optional("plugin"), $._filetype_state),
     filetype_statement: ($) =>
       command(
         $,
