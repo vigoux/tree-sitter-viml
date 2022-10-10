@@ -107,6 +107,7 @@
 ;; Filetype command
 
 (filetype_statement [
+  "detect"
   "plugin"
   "indent"
   "on"
