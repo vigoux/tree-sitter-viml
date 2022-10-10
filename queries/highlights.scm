@@ -106,7 +106,6 @@
 
 ;; Filetype command
 
-(filetype_statement (keyword) @string)
 (filetype_statement [
   "plugin"
   "indent"
