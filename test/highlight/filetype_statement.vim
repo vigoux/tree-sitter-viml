@@ -3,6 +3,11 @@ filetype
 
 filetype on
 " <- keyword
+"        ^ keyword
+
+filet detect
+" <- keyword
+"     ^ keyword
 
 filet plugin off
 " <- keyword
