@@ -43,8 +43,8 @@ typedef enum {
   CMAP = 41,
   TMAP = 42,
   NOREMAP = 43,
-  VNOREMAP = 44,
-  NNOREMAP = 45,
+  NNOREMAP = 44,
+  VNOREMAP = 45,
   XNOREMAP = 46,
   SNOREMAP = 47,
   ONOREMAP = 48,
@@ -316,12 +316,12 @@ keyword keywords[] = {
     .opt = "remap",
     .ignore_comments_after = true
   },
-  [VNOREMAP] = {
+  [NNOREMAP] = {
     .mandat = "nn",
     .opt = "oremap",
     .ignore_comments_after = true
   },
-  [NNOREMAP] = {
+  [VNOREMAP] = {
     .mandat = "vn",
     .opt = "oremap",
     .ignore_comments_after = true

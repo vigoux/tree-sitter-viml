@@ -3796,16 +3796,33 @@
   {
     "type": "filetype_statement",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "state",
-          "named": true
-        }
-      ]
+    "fields": {
+      "sub": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "detect",
+            "named": false
+          },
+          {
+            "type": "indent",
+            "named": false
+          },
+          {
+            "type": "off",
+            "named": false
+          },
+          {
+            "type": "on",
+            "named": false
+          },
+          {
+            "type": "plugin",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -7855,11 +7872,6 @@
     }
   },
   {
-    "type": "state",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "stopinsert_statement",
     "named": true,
     "fields": {}
@@ -10431,11 +10443,11 @@
   },
   {
     "type": "file",
-    "named": true
+    "named": false
   },
   {
     "type": "file",
-    "named": false
+    "named": true
   },
   {
     "type": "file_format",
