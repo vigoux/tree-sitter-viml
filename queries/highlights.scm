@@ -36,7 +36,8 @@
 
 ;; Function related
 (function_declaration name: (_) @function)
-(call_expression function: (identifier) @function)
+(call_expression function: (identifier) @function.call)
+(call_expression function: (scoped_identifier (identifier) @function.call))
 (parameters (identifier) @parameter)
 (default_parameter (identifier) @parameter)
 
@@ -59,10 +60,14 @@
   "execute"
   "normal"
   "set"
+  "setfiletype"
   "setlocal"
   "silent"
   "echo"
+  "echon"
+  "echohl"
   "echomsg"
+  "echoerr"
   "autocmd"
   "augroup"
   "return"
@@ -131,6 +136,8 @@
   "match"
   "cluster"
   "region"
+  "clear"
+  "include"
 ] @keyword)
 
 (syntax_argument name: _ @keyword)
@@ -197,7 +204,9 @@
 (pattern_multi) @string.regex
 (filename) @string
 (heredoc (body) @string)
-((heredoc (parameter) @keyword))
+(heredoc (parameter) @keyword)
+[ (marker_definition) (endmarker) ] @label
+(literal_dictionary (literal_key) @label)
 ((scoped_identifier
   (scope) @_scope . (identifier) @boolean)
  (#eq? @_scope "v:")
@@ -233,11 +242,15 @@
   "%="
   ".="
   "..="
+  "<<"
+  "=<<"
+  (match_case)
 ] @operator
 
 ; Some characters have different meanings based on the context
 (unary_operation "!" @operator)
 (binary_operation "." @operator)
+
 
 ;; Punctuation
 
@@ -248,6 +261,7 @@
   "}"
   "["
   "]"
+  "#{"
 ] @punctuation.bracket
 
 (field_expression "." @punctuation.delimiter)
