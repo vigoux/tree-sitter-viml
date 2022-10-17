@@ -39,6 +39,7 @@ enum TokenType {
   SCOPE,
   STRING,
   COMMENT,
+  LINE_CONTINUATION_COMMENT,
   BANG_FILTER,
   // Many many many many keywords that are impossible to lex otherwise, see
   // src/keywords.h
@@ -386,6 +387,12 @@ bool tree_sitter_vim_external_scanner_scan(void *payload, TSLexer *lexer,
 
       lexer->mark_end(lexer);
       lexer->result_symbol = LINE_CONTINUATION;
+      return true;
+    } else if (s->marker_len == 0 && check_prefix(lexer, "\"\\ ", 3, LINE_CONTINUATION_COMMENT)) {
+      while (lexer->lookahead != '\0' && lexer->lookahead != '\n') {
+        advance(lexer, false);
+      }
+      lexer->mark_end(lexer);
       return true;
     } else if (valid_symbols[CMD_SEPARATOR]) {
       lexer->result_symbol = CMD_SEPARATOR;

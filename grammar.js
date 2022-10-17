@@ -120,10 +120,11 @@ module.exports = grammar({
       $.scope,
       $.string_literal,
       $.comment,
+      $.line_continuation_comment,
       $._bang_filter,
     ].concat(require("./keywords").keywords($)),
 
-  extras: ($) => [$._line_continuation, /[\t ]/],
+  extras: ($) => [$._line_continuation, $.line_continuation_comment, /[\t ]/],
 
   rules: {
     script_file: ($) => optional($._separated_statements),
