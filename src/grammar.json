@@ -3339,15 +3339,36 @@
       ]
     },
     "inv_option": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_inv"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_inv"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "option_name"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "option_name"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "option_name"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": "!"
+              }
+            }
+          ]
         }
       ]
     },

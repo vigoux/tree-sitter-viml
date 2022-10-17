@@ -64,12 +64,22 @@ Set invopt
 ================================================================================
 
 set invfoo
+set foo!
 setlocal invfoo
+setlocal foo!
 
 --------------------------------------------------------------------------------
 
 (script_file
   (set_statement
+    (set_item
+      option: (inv_option
+        (option_name))))
+  (set_statement
+    (set_item
+      option: (inv_option
+        (option_name))))
+  (setlocal_statement
     (set_item
       option: (inv_option
         (option_name))))
