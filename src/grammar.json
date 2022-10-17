@@ -12641,6 +12641,10 @@
       "name": "_line_continuation"
     },
     {
+      "type": "SYMBOL",
+      "name": "line_continuation_comment"
+    },
+    {
       "type": "PATTERN",
       "value": "[\\t ]"
     }
@@ -12713,6 +12717,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "line_continuation_comment"
     },
     {
       "type": "SYMBOL",

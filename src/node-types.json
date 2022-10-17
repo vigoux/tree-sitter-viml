@@ -10643,11 +10643,11 @@
   },
   {
     "type": "keyword",
-    "named": false
+    "named": true
   },
   {
     "type": "keyword",
-    "named": true
+    "named": false
   },
   {
     "type": "koi8",
@@ -10676,6 +10676,10 @@
   {
     "type": "line",
     "named": false
+  },
+  {
+    "type": "line_continuation_comment",
+    "named": true
   },
   {
     "type": "linebreaks",
