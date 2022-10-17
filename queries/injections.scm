@@ -25,3 +25,4 @@
     "charconvert" "ccv"))
 
 (comment) @comment
+(line_continuation_comment) @comment

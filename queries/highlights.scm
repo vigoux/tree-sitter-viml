@@ -191,6 +191,7 @@
 (integer_literal) @number
 (float_literal) @float
 (comment) @comment @spell
+(line_continuation_comment) @comment @spell
 (pattern) @string.special
 (pattern_multi) @string.regex
 (filename) @string
