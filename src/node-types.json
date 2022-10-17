@@ -660,6 +660,11 @@
     }
   },
   {
+    "type": "bang",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "bang_filter_statement",
     "named": true,
     "fields": {
@@ -10097,10 +10102,6 @@
     "named": false
   },
   {
-    "type": "bang",
-    "named": true
-  },
-  {
     "type": "behave",
     "named": false
   },
@@ -10589,6 +10590,10 @@
     "named": true
   },
   {
+    "type": "file",
+    "named": false
+  },
+  {
     "type": "file_format",
     "named": true
   },
@@ -10607,6 +10612,10 @@
   {
     "type": "filetype",
     "named": true
+  },
+  {
+    "type": "filetype",
+    "named": false
   },
   {
     "type": "finally",

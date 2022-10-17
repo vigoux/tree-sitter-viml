@@ -529,7 +529,11 @@ module.exports = grammar({
 
     no_option: ($) => seq($._no, $.option_name),
 
-    inv_option: ($) => seq($._inv, $.option_name),
+    inv_option: ($) =>
+      choice(
+        seq($._inv, $.option_name),
+        seq($.option_name, token.immediate("!"))
+      ),
 
     default_option: ($) =>
       seq($.option_name, "&", optional(choice("vi", "vim"))),
