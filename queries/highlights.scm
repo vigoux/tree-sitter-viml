@@ -263,6 +263,9 @@
 ((set_value) @number
  (#match? @number "^[0-9]+(\.[0-9]+)?$"))
 
+(inv_option "!" @operator)
+(set_item "?" @operator)
+
 ((set_item
    option: (option_name) @_option
    value: (set_value) @function)
