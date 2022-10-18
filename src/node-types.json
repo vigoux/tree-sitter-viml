@@ -2162,7 +2162,18 @@
   {
     "type": "call_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "range": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "range",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
