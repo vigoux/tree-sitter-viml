@@ -273,8 +273,9 @@ module.exports = grammar({
       bang_range_command($, "source", optional(field("file", $.filename))),
 
     global_statement: ($) =>
-      seq(
-        maybe_bang($, keyword($, "global")),
+      bang_range_command(
+        $,
+        "global",
         $._separator_first,
         $.pattern,
         $._separator,

@@ -48,3 +48,20 @@ g:^contain\(edin\|s\)=\("String with spaces and	tabs"\)\+:echo "bar"
       (pattern_multi))
     (echo_statement
       (string_literal))))
+
+================================================================================
+Global with range
+================================================================================
+
+1,+g/abc/echo "foo"
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (global_statement
+    (range
+      (integer_literal)
+      (next_line))
+    (pattern)
+    (echo_statement
+      (string_literal))))
