@@ -202,6 +202,7 @@ module.exports = grammar({
           $.ex_statement,
           $.visual_statement,
           $.view_statement,
+          $.eval_statement,
           $.user_command
         )
       ),
@@ -1047,6 +1048,8 @@ module.exports = grammar({
           ")"
         )
       ),
+
+    eval_statement: ($) => command($, "eval", $._expression),
 
     // Use default :h isfname
     filename: ($) =>

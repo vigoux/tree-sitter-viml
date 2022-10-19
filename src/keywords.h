@@ -92,6 +92,7 @@ typedef enum {
   EX = 90,
   VISUAL = 91,
   VIEW = 92,
+  EVAL = 93,
   UNKNOWN_COMMAND
 } kwid;
 
@@ -559,6 +560,11 @@ keyword keywords[] = {
   [VIEW] = {
     .mandat = "vie",
     .opt = "w",
+    .ignore_comments_after = false
+  },
+  [EVAL] = {
+    .mandat = "ev",
+    .opt = "al",
     .ignore_comments_after = false
   },
 };

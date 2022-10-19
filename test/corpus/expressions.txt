@@ -374,3 +374,21 @@ let s:{a:foo} = 32
           (argument
             (identifier)))))
     (integer_literal)))
+
+================================================================================
+Eval statement
+================================================================================
+
+eval append(Filter(Getlist()), '$')
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (eval_statement
+    (call_expression
+      (identifier)
+      (call_expression
+        (identifier)
+        (call_expression
+          (identifier)))
+      (string_literal))))

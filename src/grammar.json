@@ -322,6 +322,10 @@
             },
             {
               "type": "SYMBOL",
+              "name": "eval_statement"
+            },
+            {
+              "type": "SYMBOL",
               "name": "user_command"
             }
           ]
@@ -7939,6 +7943,24 @@
         ]
       }
     },
+    "eval_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_eval"
+          },
+          "named": false,
+          "value": "eval"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
     "filename": {
       "type": "SEQ",
       "members": [
@@ -13097,6 +13119,10 @@
     {
       "type": "SYMBOL",
       "name": "_view"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_eval"
     },
     {
       "type": "SYMBOL",

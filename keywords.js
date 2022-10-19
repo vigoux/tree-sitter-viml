@@ -464,6 +464,11 @@ const KEYWORDS = {
     opt: "w",
     ignore_comments_after: false,
   },
+  EVAL: {
+    mandat: "ev",
+    opt: "al",
+    ignore_comments_after: false,
+  },
 };
 
 function make_keywords($) {
