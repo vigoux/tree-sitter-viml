@@ -104,10 +104,41 @@ command -buffer -bar -bang -keepscript -register UserCommand echo
 "                                                  ^ function.macro
 "                                                            ^ string
 
-" command UserCommand call Test()
+command UserCommand call Test()
+" <- keyword
+"       ^^^^^^^^^^^ function.macro
+"                   ^^^^^^^^^^^ string
 
-" command -complete=syntax ToggleSyntax if exists("g:syntax_on") | syntax off | else | syntax enable | endif
+command -complete=syntax ToggleSyntax if exists("g:syntax_on") | syntax off | else | syntax enable | endif
+" <- keyword
+"       ^^^^^^^^^ property
+"                ^ operator
+"                 ^^^^^^ constant
+"                        ^^^^^^^^^^^^ function.macro
+"                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string
 
-" command -nargs=1 -complete=mapping Show echo "this is an error message"
+command -nargs=1 -complete=mapping Show echo "this is an error message"
+" <- keyword
+"       ^^^^^^ property
+"             ^ operator
+"              ^ number
+"                ^^^^^^^^^ property
+"                         ^ operator
+"                          ^^^^^^^ constant
+"                                  ^^^^ function.macro
+"                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string
 
-" com -complete=custom,funcName -buffer -addr=tabs -bang ShowFunc execute "echo 'this is another error message'"
+com -complete=custom,funcName -buffer -addr=tabs -bang ShowFunc execute "echo 'this is another error message'"
+" <- keyword
+"   ^^^^^^^^^ property
+"            ^ operator
+"             ^^^^^^ constant
+"                   ^ punctuation.delimiter
+"                    ^^^^^^^^ function
+"                             ^^^^^^^ property
+"                                     ^^^^^ property
+"                                          ^ operator
+"                                           ^^^^ constant
+"                                                ^^^^^ property
+"                                                      ^^^^^^^^ function.macro
+"                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string
