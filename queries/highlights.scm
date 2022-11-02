@@ -1,6 +1,24 @@
-(identifier) @variable
+;; Function related
+(function_declaration name: (_) @function (#set! "priority" 101))
+(call_expression function: (identifier) @function (#set! "priority" 101))
+(parameters (identifier) @parameter (#set! "priority" 101))
+(default_parameter (identifier) @parameter (#set! "priority" 101))
+
+;; Command command
+
+(command) @string
+
+(command_attribute
+  name: _ @property
+  val: (behavior
+    name: _ @constant (#set! "priority" 101)
+    val: (identifier)? @function (#set! "priority" 101))?)
+
+
 ((identifier) @constant
- (#lua-match? @constant "^[A-Z][A-Z_0-9]*$"))
+ (#match? @constant "^[A-Z][A-Z_0-9]*$")
+ (#set! "priority" 101))
+(identifier) @variable
 
 ;; Keywords
 
@@ -33,12 +51,6 @@
   "function"
   "endfunction"
 ] @keyword.function
-
-;; Function related
-(function_declaration name: (_) @function)
-(call_expression function: (identifier) @function)
-(parameters (identifier) @parameter)
-(default_parameter (identifier) @parameter)
 
 [ (bang) (spread) ] @punctuation.special
 
@@ -162,16 +174,6 @@
   "link"
   "clear"
 ] @keyword)
-
-;; Command command
-
-(command) @string
-
-(command_attribute
-  name: _ @property
-  val: (behavior
-    name: _ @constant
-    val: (identifier)? @function)?)
 
 ;; Edit command
 (plus_plus_opt
