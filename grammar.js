@@ -357,6 +357,7 @@ module.exports = grammar({
       seq(
         keyword($, "elseif"),
         field("condition", $._expression),
+        $._cmd_separator,
         alias(optional($._separated_statements), $.body)
       ),
 
