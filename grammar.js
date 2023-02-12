@@ -104,6 +104,7 @@ module.exports = grammar({
     [$.binary_operation, $.field_expression],
     [$.list, $._pattern_atom],
     [$._ident, $.lambda_expression],
+    [$._ident, $._immediate_lambda_expression],
   ],
 
   externals: ($) =>
@@ -471,7 +472,24 @@ module.exports = grammar({
           )
         )
       ),
-    _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
+    _immediate_identifier: ($) =>
+      seq(
+        choice(
+          token.immediate(/[a-zA-Z_]+/),
+          alias($._immediate_curly_braces_name_expression, $.curly_braces_name)
+        ),
+        repeat(
+          choice(
+            token.immediate(/(\w|#)+/),
+            alias(
+              $._immediate_curly_braces_name_expression,
+              $.curly_braces_name
+            )
+          )
+        )
+      ),
+    _ident: ($) =>
+      prec.dynamic(1, choice($.scoped_identifier, $.identifier, $.argument)),
 
     keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
@@ -1060,8 +1078,14 @@ module.exports = grammar({
 
     _method_call_expression: ($) =>
       seq(
-        field("function", choice($.identifier, $.lambda_expression)),
-        "(",
+        field(
+          "function",
+          choice(
+            alias($._immediate_identifier, $.identifier),
+            alias($._immediate_lambda_expression, $.lambda_expression)
+          )
+        ),
+        token.immediate("("),
         optional(commaSep1($._expression)),
         ")"
       ),
@@ -1171,6 +1195,14 @@ module.exports = grammar({
     // :h lambda
     lambda_expression: ($) =>
       seq("{", commaSep($.identifier), "->", $._expression, "}"),
+    _immediate_lambda_expression: ($) =>
+      seq(
+        token.immediate("{"),
+        commaSep($.identifier),
+        "->",
+        $._expression,
+        "}"
+      ),
 
     // :h ++opt
     _plus_plus_opt_bad: ($) =>
