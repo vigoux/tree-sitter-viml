@@ -585,7 +585,8 @@ module.exports = grammar({
     unlet_statement: ($) =>
       seq(maybe_bang($, keyword($, "unlet")), repeat1($._expression)),
 
-    call_statement: ($) => seq(keyword($, "call"), $.call_expression),
+    call_statement: ($) =>
+      seq(keyword($, "call"), choice($.call_expression, $.method_expression)),
 
     echo_statement: ($) => echo_variant($, "echo"),
     echon_statement: ($) => echo_variant($, "echon"),

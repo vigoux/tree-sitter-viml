@@ -3732,8 +3732,17 @@
           "value": "call"
         },
         {
-          "type": "SYMBOL",
-          "name": "call_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "call_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "method_expression"
+            }
+          ]
         }
       ]
     },

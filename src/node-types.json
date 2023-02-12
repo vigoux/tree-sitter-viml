@@ -2186,6 +2186,10 @@
         {
           "type": "call_expression",
           "named": true
+        },
+        {
+          "type": "method_expression",
+          "named": true
         }
       ]
     }
