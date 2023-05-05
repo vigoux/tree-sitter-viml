@@ -1,3 +1,5 @@
+# __This project is not maintained anymore, see [the official nvim fork](https://github.com/neovim/tree-sitter-vim)__
+
 # Tree-sitter VimL parser
 
 A parser for VimL using treesitter.
