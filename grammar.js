@@ -103,6 +103,8 @@ module.exports = grammar({
     [$.binary_operation, $.unary_operation, $.field_expression],
     [$.binary_operation, $.field_expression],
     [$.list, $._pattern_atom],
+    [$._ident, $.lambda_expression],
+    [$._ident, $._immediate_lambda_expression],
   ],
 
   externals: ($) =>
@@ -470,7 +472,24 @@ module.exports = grammar({
           )
         )
       ),
-    _ident: ($) => choice($.scoped_identifier, $.identifier, $.argument),
+    _immediate_identifier: ($) =>
+      seq(
+        choice(
+          token.immediate(/[a-zA-Z_]+/),
+          alias($._immediate_curly_braces_name_expression, $.curly_braces_name)
+        ),
+        repeat(
+          choice(
+            token.immediate(/(\w|#)+/),
+            alias(
+              $._immediate_curly_braces_name_expression,
+              $.curly_braces_name
+            )
+          )
+        )
+      ),
+    _ident: ($) =>
+      prec.dynamic(1, choice($.scoped_identifier, $.identifier, $.argument)),
 
     keyword: ($) => /[a-zA-Z_](\w|#)*/,
 
@@ -566,7 +585,8 @@ module.exports = grammar({
     unlet_statement: ($) =>
       seq(maybe_bang($, keyword($, "unlet")), repeat1($._expression)),
 
-    call_statement: ($) => seq(keyword($, "call"), $.call_expression),
+    call_statement: ($) =>
+      seq(keyword($, "call"), choice($.call_expression, $.method_expression)),
 
     echo_statement: ($) => echo_variant($, "echo"),
     echon_statement: ($) => echo_variant($, "echon"),
@@ -933,7 +953,8 @@ module.exports = grammar({
         seq("(", $._expression, ")"),
         $.unary_operation,
         $.field_expression,
-        $.call_expression
+        $.call_expression,
+        $.method_expression
       ),
 
     ternary_expression: ($) =>
@@ -1056,6 +1077,30 @@ module.exports = grammar({
 
     eval_statement: ($) => command($, "eval", $._expression),
 
+    _method_call_expression: ($) =>
+      seq(
+        field(
+          "function",
+          choice(
+            alias($._immediate_identifier, $.identifier),
+            alias($._immediate_lambda_expression, $.lambda_expression)
+          )
+        ),
+        token.immediate("("),
+        optional(commaSep1($._expression)),
+        ")"
+      ),
+
+    method_expression: ($) =>
+      prec(
+        PREC.CALL,
+        seq(
+          field("value", $._expression),
+          "->",
+          alias($._method_call_expression, $.call_expression)
+        )
+      ),
+
     // Use default :h isfname
     filename: ($) =>
       seq(
@@ -1151,6 +1196,14 @@ module.exports = grammar({
     // :h lambda
     lambda_expression: ($) =>
       seq("{", commaSep($.identifier), "->", $._expression, "}"),
+    _immediate_lambda_expression: ($) =>
+      seq(
+        token.immediate("{"),
+        commaSep($.identifier),
+        "->",
+        $._expression,
+        "}"
+      ),
 
     // :h ++opt
     _plus_plus_opt_bad: ($) =>

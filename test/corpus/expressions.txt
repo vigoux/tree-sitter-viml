@@ -15,6 +15,176 @@ call function(ab, bc, cd)
       (identifier))))
 
 ================================================================================
+Method expression
+================================================================================
+
+call func(a->method(ab, bc, cd))
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (call_statement
+    (call_expression
+      (identifier)
+      (method_expression
+        (identifier)
+        (call_expression
+          (identifier)
+          (identifier)
+          (identifier)
+          (identifier))))))
+
+================================================================================
+Method expression chained
+================================================================================
+
+let a = mylist->filter(filterexpr)->map(mapexpr)->sort()->join()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (method_expression
+      (method_expression
+        (method_expression
+          (method_expression
+            (identifier)
+            (call_expression
+              (identifier)
+              (identifier)))
+          (call_expression
+            (identifier)
+            (identifier)))
+        (call_expression
+          (identifier)))
+      (call_expression
+        (identifier)))))
+
+================================================================================
+Method expression chained newline
+================================================================================
+
+let mylist = mylist
+\ ->filter(filterexpr)
+\ ->map(mapexpr)
+\ ->sort()
+\ ->join()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (method_expression
+      (method_expression
+        (method_expression
+          (method_expression
+            (identifier)
+            (call_expression
+              (identifier)
+              (identifier)))
+          (call_expression
+            (identifier)
+            (identifier)))
+        (call_expression
+          (identifier)))
+      (call_expression
+        (identifier)))))
+
+================================================================================
+lambda expression
+================================================================================
+
+let a = {a -> a + 1}(1)
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (call_expression
+      (lambda_expression
+        (identifier)
+        (binary_operation
+          (identifier)
+          (integer_literal)))
+      (integer_literal))))
+
+================================================================================
+Method lambda expression
+================================================================================
+
+let a = GetPercentage()->{x -> x * 100}()->printf('%d%%')
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (method_expression
+      (method_expression
+        (call_expression
+          (identifier))
+        (call_expression
+          (lambda_expression
+            (identifier)
+            (binary_operation
+              (identifier)
+              (integer_literal)))))
+      (call_expression
+        (identifier)
+        (string_literal)))))
+
+================================================================================
+Lambda expression with name expansion
+================================================================================
+
+call function_{{-> 'name'}()}(ab, bc, cd)
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (call_statement
+    (call_expression
+      (identifier
+        (curly_braces_name
+        (call_expression
+          (lambda_expression
+            (string_literal)))))
+      (identifier)
+      (identifier)
+      (identifier))))
+
+================================================================================
+Lambda expression with name expansion
+================================================================================
+
+let function_100 = {->'hi'}
+echo function_{GetPercentage()->{p-> p*100}()}()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (let_statement
+    (identifier)
+    (lambda_expression
+      (string_literal)))
+  (echo_statement
+    (call_expression
+      (identifier
+        (curly_braces_name
+          (method_expression
+            (call_expression
+              (identifier))
+          (call_expression
+            (lambda_expression
+              (identifier)
+              (binary_operation
+              (identifier)
+              (integer_literal))))))))))
+
+================================================================================
 Call expression with curly-braces
 ================================================================================
 
@@ -31,6 +201,22 @@ call function_{name}(ab, bc, cd)
       (identifier)
       (identifier)
       (identifier))))
+
+================================================================================
+Call statement with method call
+================================================================================
+
+call F()->G()
+
+--------------------------------------------------------------------------------
+
+(script_file
+  (call_statement
+    (method_expression
+      (call_expression
+        (identifier))
+      (call_expression
+        (identifier)))))
 
 ================================================================================
 String arguments
